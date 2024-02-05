@@ -1,0 +1,94 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ProjectWebApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css" />
+    <style>
+        body {
+            background-color: #343a40;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-main {
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            position:center;
+        }
+
+        .nav-container {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top:10px;
+            overflow-y: hidden; /* Add scroll for smaller screens */
+        }
+
+            .nav-container a {
+                color: #fff;
+                margin-bottom: 10px;
+                display: block;
+                text-decoration: none;
+                padding: 8px;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+                .nav-container a:hover {
+                    background-color: #555;
+                    color:white;
+                }
+
+
+
+       
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="nav-container text-center">
+                    <partial name="_ManageNav" />
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="container-main text-center">
+                    <h1 class="h3 font-weight-normal">Manage your account</h1>
+                    @RenderBody()
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

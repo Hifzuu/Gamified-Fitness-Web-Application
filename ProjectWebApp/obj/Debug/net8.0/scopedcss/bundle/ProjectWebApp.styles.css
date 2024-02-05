@@ -1,0 +1,842 @@
+@import '_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css';
+
+/* _content/ProjectWebApp/Views/Challenge/Index.cshtml.rz.scp.css */
+h2[b-s13xhoid61] {
+    color: #007bff;
+}
+
+body[b-s13xhoid61] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.container[b-s13xhoid61] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.challenge-section[b-s13xhoid61] {
+    background-color: #212529;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-title[b-s13xhoid61] {
+    color: #fff;
+    font-size: 24px;
+}
+
+.text-white[b-s13xhoid61] {
+    color: #fff;
+}
+
+.challenge-card[b-s13xhoid61] {
+    background-color: white;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .challenge-card:hover[b-s13xhoid61] {
+        transform: scale(1.05);
+    }
+
+    .challenge-card h6[b-s13xhoid61] {
+        color: #3498db;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .challenge-card p[b-s13xhoid61] {
+        color: #555;
+        font-size: 16px;
+    }
+
+.game-progress[b-s13xhoid61] {
+    margin: 20px 0;
+}
+
+.game-progress-text[b-s13xhoid61] {
+    color: #555;
+    font-size: 16px;
+}
+
+.progress-bar[b-s13xhoid61] {
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.game-progress-bar[b-s13xhoid61] {
+    height: 100%;
+    border-radius: 8px;
+    background-color: #2ecc71;
+}
+
+.game-elements[b-s13xhoid61] {
+    margin-top: 20px;
+}
+
+.game-button[b-s13xhoid61] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.challenge-timer[b-s13xhoid61] {
+    font-size: 18px;
+    color: #fff;
+    background-color: #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Updated styles for the "Claim Reward" button */
+.btn-reward[b-s13xhoid61] {
+    background: #3498db; /* Blue background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+    .btn-reward:hover[b-s13xhoid61] {
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: scale(1.05); /* Scale on hover */
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); /* Enhanced box shadow on hover */
+    }
+
+    .btn-reward.claimed[b-s13xhoid61] {
+        background-color: #95a5a6; /* Gray color for claimed button */
+        cursor: not-allowed;
+        box-shadow: none; /* No box shadow for claimed button */
+    }
+
+/* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
+h2[b-lict9yrgg8] {
+    color: #007bff;
+}
+
+.dashboard-card[b-lict9yrgg8] {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+
+}
+    .container[b-lict9yrgg8] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1200px) {
+    .display-4[b-lict9yrgg8] {
+        font-size: 2rem;
+    }
+
+    .display-2[b-lict9yrgg8] {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .display-4[b-lict9yrgg8] {
+        font-size: 1.5rem;
+    }
+
+    .display-2[b-lict9yrgg8] {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .display-4[b-lict9yrgg8] {
+        font-size: 2rem;
+    }
+
+    .display-2[b-lict9yrgg8] {
+        font-size: 1.5rem;
+    }
+}
+
+/* Custom styling for gamification */
+.box[b-lict9yrgg8] {
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.reward-icon[b-lict9yrgg8] {
+    font-size: 2rem;
+    color: gold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.profile-card[b-lict9yrgg8] {
+    background-color: white;
+    border-radius: 8px; /* Add rounded corners */
+    overflow: hidden; /* Hide overflowing content */
+    transition: box-shadow 0.3s; /* Add smooth transition for box shadow */
+    transition: transform 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+    .profile-card:hover[b-lict9yrgg8] {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+        transform: scale(1.01); /* Add a slight scale effect */
+        text-decoration: none;
+        cursor:pointer;
+    }
+
+.profile-container[b-lict9yrgg8] {
+    width: 60px; /* Set width of the profile container */
+    height: 60px; /* Set height of the profile container */
+    overflow: hidden; /* Hide overflowing content */
+    border-radius: 50%; /* Create a circular shape */
+    margin-right: 15px; /* Add some spacing between the profile picture and text */
+}
+
+.profile-picture[b-lict9yrgg8] {
+    width: 100%; /* Make the profile picture fill the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Ensure the picture remains circular */
+}
+
+.profile-details[b-lict9yrgg8] {
+    flex-grow: 1; /* Allow the details to grow and fill the remaining space */
+}
+
+    .profile-details h5[b-lict9yrgg8] {
+        margin-bottom: 5px; /* Add spacing below the name */
+    }
+
+    .profile-details p[b-lict9yrgg8] {
+        margin: 0; /* Remove default margins for better spacing */
+        color: #555; /* Use a slightly muted color for additional information */
+    }
+
+        .custom-display-4[b-lict9yrgg8] {
+        font-size: 2em; /* Adjust the font size as needed */
+    }
+/* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
+body[b-dix295yned] {
+    font-family: 'Arial', sans-serif;
+    background-color: #343a40;
+    color: white;
+}
+
+.container-full[b-dix295yned] {
+   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/Images/homepage.jpg') center/cover;
+    padding: 40px;
+    color: #fff;
+    height:100%;
+    margin:0px;
+    width:100%;
+}
+
+.welcome-message[b-dix295yned] {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.key-features[b-dix295yned] {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature[b-dix295yned] {
+    max-width: 400px;
+    margin: 20px;
+    text-align: left;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-text[b-dix295yned] {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+.feature p[b-dix295yned] {
+    margin-bottom: 0;
+}
+
+.feature-icon[b-dix295yned] {
+    max-width: 80px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.btn[b-dix295yned] {
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+}
+
+    .btn:hover[b-dix295yned] {
+        background-color: #45a049;
+    }
+
+.app-benefits[b-dix295yned] {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.benefit[b-dix295yned] {
+    width: 45%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    .benefit h2[b-dix295yned] {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+.explore-more[b-dix295yned] {
+    margin-top: 40px;
+}
+
+    .explore-more h2[b-dix295yned] {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    .explore-more p[b-dix295yned] {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .explore-more a[b-dix295yned] {
+        font-size: 20px;
+        border: 2px solid #4CAF50;
+        color: #4CAF50;
+        padding: 15px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: color 0.3s ease, background-color 0.3s ease;
+    }
+
+        .explore-more a:hover[b-dix295yned] {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+/* _content/ProjectWebApp/Views/Raffle/Index.cshtml.rz.scp.css */
+body[b-dub9o406z4] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+h2[b-dub9o406z4] {
+    color: #007bff;
+}
+
+.container[b-dub9o406z4] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+#raffleCarousel[b-dub9o406z4] {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item[b-dub9o406z4] {
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+    .carousel-item:hover[b-dub9o406z4] {
+        transform: scale(1.03);
+    }
+
+.raffle-item[b-dub9o406z4] {
+    display: flex;
+    align-items: stretch;
+}
+
+.raffle-image[b-dub9o406z4] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.raffle-info[b-dub9o406z4] {
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.carousel-controls[b-dub9o406z4] {
+    position: relative;
+    padding-top: 50px;
+}
+
+.carousel-control-prev[b-dub9o406z4],
+.carousel-control-next[b-dub9o406z4] {
+    width: 45px; /* Adjust the width as needed */
+    height: 45px; /* Adjust the height as needed */
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add margin-top for spacing */
+}
+
+    .carousel-control-prev:hover[b-dub9o406z4],
+    .carousel-control-next:hover[b-dub9o406z4] {
+        background-color: #0056b3; /* Hover color */
+    }
+
+.carousel-control-prev[b-dub9o406z4] {
+    position: absolute;
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.carousel-control-next[b-dub9o406z4] {
+    position: absolute;
+    margin-right: 20px; /* Adjust the margin as needed */
+}
+/* _content/ProjectWebApp/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+
+
+
+/*Testing*/ 
+/*.navbar-nav .nav-item.dropdown .dropdown-menu.show {
+    color: red;*/ /* your desired text color *//*;
+}
+
+.navbar-nav{
+    background-color:red;
+}
+
+.nav-item{
+    background-color: green;
+    color: black;
+}
+
+    .nav-item.dropdown{
+        background-color: white;
+        color: black;
+    }*/
+
+/* _content/ProjectWebApp/Views/Workout/Details.cshtml.rz.scp.css */
+video[b-9cvkiois10]::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+video[b-9cvkiois10]::-webkit-media-controls {
+    display: none !important;
+}
+
+video[b-9cvkiois10]::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.container[b-9cvkiois10] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.containerrr[b-9cvkiois10] {
+    background-color: #343a40;
+}
+
+/* Styles specific to Workout Details page */
+.card[b-9cvkiois10] {
+    margin-top: 20px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.embed-responsive[b-9cvkiois10] {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+    .embed-responsive video[b-9cvkiois10] {
+        width: 100%;
+        height: auto;
+    }
+
+.card-body[b-9cvkiois10] {
+    text-align: center;
+    padding: 20px;
+}
+
+#progressBarSection[b-9cvkiois10] {
+    display: none;
+}
+
+#timerSection[b-9cvkiois10] {
+    display: none;
+}
+
+#completionModal[b-9cvkiois10] {
+    color: black;
+}
+
+#completionModalLabel[b-9cvkiois10] {
+    color: #007bff;
+}
+
+section[b-9cvkiois10] {
+    margin-top: 20px;
+    background-color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2[b-9cvkiois10] {
+    color: #007bff;
+}
+
+h3[b-9cvkiois10] {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+#progressBarSection[b-9cvkiois10],
+#timerSection[b-9cvkiois10] {
+    margin-top: 20px;
+}
+
+#timer[b-9cvkiois10] {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#completionModal .modal-content[b-9cvkiois10] {
+    border-radius: 10px;
+}
+/* _content/ProjectWebApp/Views/Workout/Index.cshtml.rz.scp.css */
+body[b-25jdkaz98d] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.container[b-25jdkaz98d] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+/* Section Header Styles */
+.section-header[b-25jdkaz98d] {
+    background-color: #007bff;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+/* Filter Icon Styles */
+.filter-icon[b-25jdkaz98d] {
+    width: 30px;
+    cursor: pointer;
+    filter: invert(100%);
+}
+
+/* Filter Form Styles */
+.filter-form[b-25jdkaz98d] {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    display: none;
+    z-index: 1000;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    transition: opacity 0.6s ease;
+}
+
+    .filter-form.show[b-25jdkaz98d] {
+        opacity: 1;
+    }
+
+    .filter-form label[b-25jdkaz98d],
+    .filter-form select[b-25jdkaz98d] {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .filter-form button[b-25jdkaz98d] {
+        background-color: cornflowerblue;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .filter-form button:hover[b-25jdkaz98d] {
+            background-color: #0056b3;
+        }
+
+/* Filter Option Styles */
+.filter-option[b-25jdkaz98d] {
+    margin-bottom: 15px;
+}
+
+    .filter-option label[b-25jdkaz98d] {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .filter-option select[b-25jdkaz98d] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+/* Scrollable Row Styles */
+.scrollable-row[b-25jdkaz98d] {
+    display: flex;
+    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+    .scrollable-row a[b-25jdkaz98d] {
+        margin-right: 0px;
+    }
+
+/* Card Styles */
+.workout-card[b-25jdkaz98d] {
+    max-width: 300px;
+    margin: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+    .workout-card:hover[b-25jdkaz98d] {
+        transform: scale(1.0);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+/* Info Styles */
+.info[b-25jdkaz98d] {
+    background-color: #e8eefe;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
+
+    .info p[b-25jdkaz98d] {
+        margin: 5px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+/* Category Styles */
+.category[b-25jdkaz98d] {
+    font-weight: bold;
+}
+
+/* Points Styles */
+.points[b-25jdkaz98d] {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.workout-link[b-25jdkaz98d] {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+}
+
+    .workout-link:hover[b-25jdkaz98d] {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: inherit;
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+        .workout-link:hover .info[b-25jdkaz98d] {
+            color: black;
+        }
+
+/*search bar*/
+#searchBar[b-25jdkaz98d] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    width:100%;
+}
+
+#searchInput[b-25jdkaz98d] {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#clearButton[b-25jdkaz98d] {
+    color: #999;
+    background: none;
+    border: none;
+    padding: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.clear-icon[b-25jdkaz98d] {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none; 
+}
+
+    .clear-icon svg[b-25jdkaz98d] {
+        stroke: red;
+    }
+
+/* Show the clear icon when there's input in the search bar */
+#searchInput:not(:placeholder-shown) + .clear-icon[b-25jdkaz98d] {
+    display: block;
+}
+
+section[b-25jdkaz98d] {
+    background-color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2[b-25jdkaz98d] {
+    color: #007bff;
+}
+
+h3[b-25jdkaz98d] {
+    color: white;
+}
+
+.card-title[b-25jdkaz98d]{
+    text-align:center;
+}
+
+@media (max-width: 768px) {
+    #searchBar[b-25jdkaz98d] {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #searchInput[b-25jdkaz98d] {
+        margin-bottom: 10px;
+    }
+
+    .workout-card[b-25jdkaz98d] {
+        /* Adjust the width for smaller screens */
+        width: 100%;
+        font-size: 14px; /* Increase the font size for readability */
+        padding: 15px; /* Add padding for better spacing */
+    }
+
+    #filterForm[b-25jdkaz98d] {
+        width: 100%;
+    }
+}
+
+/*calendar*/
+.fc-toolbar h2[b-25jdkaz98d] {
+    color: white; /* Set the text color for the calendar header */
+}

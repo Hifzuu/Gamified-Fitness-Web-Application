@@ -1,0 +1,103 @@
+video[b-9cvkiois10]::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+video[b-9cvkiois10]::-webkit-media-controls {
+    display: none !important;
+}
+
+video[b-9cvkiois10]::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.container[b-9cvkiois10] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.containerrr[b-9cvkiois10] {
+    background-color: #343a40;
+}
+
+/* Styles specific to Workout Details page */
+.card[b-9cvkiois10] {
+    margin-top: 20px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.embed-responsive[b-9cvkiois10] {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+    .embed-responsive video[b-9cvkiois10] {
+        width: 100%;
+        height: auto;
+    }
+
+.card-body[b-9cvkiois10] {
+    text-align: center;
+    padding: 20px;
+}
+
+#progressBarSection[b-9cvkiois10] {
+    display: none;
+}
+
+#timerSection[b-9cvkiois10] {
+    display: none;
+}
+
+#completionModal[b-9cvkiois10] {
+    color: black;
+}
+
+#completionModalLabel[b-9cvkiois10] {
+    color: #007bff;
+}
+
+section[b-9cvkiois10] {
+    margin-top: 20px;
+    background-color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2[b-9cvkiois10] {
+    color: #007bff;
+}
+
+h3[b-9cvkiois10] {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+#progressBarSection[b-9cvkiois10],
+#timerSection[b-9cvkiois10] {
+    margin-top: 20px;
+}
+
+#timer[b-9cvkiois10] {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#completionModal .modal-content[b-9cvkiois10] {
+    border-radius: 10px;
+}

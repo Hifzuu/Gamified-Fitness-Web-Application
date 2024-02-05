@@ -1,0 +1,140 @@
+﻿@{
+    var current = ViewContext.RouteData.Values["controller"] as string;
+    var actionCurrent = ViewContext.RouteData.Values["action"] as string;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gym Management Web Application</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
+
+</head>
+
+<body>
+    <aside class="sidebar-nav">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <ul class="side-nav nav-pills flex-column">
+                <li class="btn-style @(current == "Dashboard" && actionCurrent == "Index" ? "active" : "")">
+                    <a href="/Dashboard/Index">
+                        <img class="nav-img" src="/Images/dashboard.png" alt="Dashboard Icon" />
+                        <b>Dashboard</b>
+                    </a>
+                </li>
+                <li class="btn-style @(current == "Workout" && (actionCurrent == "Index" || actionCurrent == "Details") ? "active" : "")">
+                    <a href="/Workout/Index">
+                        <img class="nav-img" src="/Images/weights.png" alt="Workout Icon" />
+                        <b>Workouts</b>
+                    </a>
+                </li>
+                <li class="btn-style @(current == "Challenge" && actionCurrent == "Index" ? "active" : "")">
+                    <a href="/Challenge/Index">
+                        <img class="nav-img" src="/Images/target.png" alt="Challenge Icon" />
+                        <b>Challenges</b>
+                    </a>
+                </li>
+                <li class="btn-style @(current == "Raffle" && actionCurrent == "Index" ? "active" : "")">
+                    <a href="/Raffle/Index">
+                        <img class="nav-img" src="/Images/event-ticket.png" alt="Raffle Icon" />
+                        <b>Raffle</b>
+                    </a>
+                </li>
+                <li class="btn-style @(current == "Community" && actionCurrent == "Index" ? "active" : "")">
+                    <a href="/Community/Index">
+                        <img class="nav-img" src="/Images/team.png" alt="Community Icon" />
+                        <b>Community</b>
+                    </a>
+                </li>
+                <li class="btn-style @(current == "Achievement" && actionCurrent == "Index" ? "active" : "")">
+                    <a href="/Achievement/Index">
+                        <img class="nav-img" src="/Images/badge.png" alt="Achievement Icon" />
+                        <b>Achievements</b>
+                    </a>
+                </li>
+
+            </ul>
+            <div style="margin-top: 30px; text-align: center;">
+                <hr style="background-color: #666; height: 1px;">
+                <button id="openFeedbackModal" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal" data-backdrop="static" style="min-width: 150px;">
+                    <img src="/Images/feedback.png" alt="Feedback Icon" class="nav-img" style="margin-right: 10px;">
+                    <b>Give Feedback</b>
+                </button>
+            </div>
+
+
+
+        }
+
+    </aside>
+
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Feedback Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedbackForm">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackType">Feedback Type:</label>
+                            <select class="form-control" id="feedbackType" name="feedbackType">
+                                <option value="bug">Bug Report</option>
+                                <option value="suggestion">Suggestion</option>
+                                <option value="compliment">Compliment</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackDetails">Feedback Details:</label>
+                            <textarea class="form-control" id="feedbackDetails" name="feedbackDetails" rows="3"></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="submitFeedback()">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Function to open the feedback modal
+        document.getElementById('openFeedbackModal').addEventListener('click', function () {
+            document.getElementById('feedbackModal').classList.add('show');
+            document.body.classList.add('modal-open');
+            document.getElementById('feedbackModal').style.display = 'block';
+        });
+
+        // Function to close the feedback modal
+        function closeModal() {
+            document.getElementById('feedbackModal').classList.remove('show');
+            document.body.classList.remove('modal-open');
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        // Function to submit feedback (you can customize this function based on your backend logic)
+        function submitFeedback() {
+            // Get form data and perform submission logic here
+            closeModal(); // Close the modal after submission
+            alert('Feedback submitted successfully!');
+        }
+    </script>
+
+
+</body>
+</html>

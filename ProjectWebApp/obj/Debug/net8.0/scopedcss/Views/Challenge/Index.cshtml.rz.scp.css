@@ -1,0 +1,131 @@
+h2[b-s13xhoid61] {
+    color: #007bff;
+}
+
+body[b-s13xhoid61] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.container[b-s13xhoid61] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.challenge-section[b-s13xhoid61] {
+    background-color: #212529;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-title[b-s13xhoid61] {
+    color: #fff;
+    font-size: 24px;
+}
+
+.text-white[b-s13xhoid61] {
+    color: #fff;
+}
+
+.challenge-card[b-s13xhoid61] {
+    background-color: white;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .challenge-card:hover[b-s13xhoid61] {
+        transform: scale(1.05);
+    }
+
+    .challenge-card h6[b-s13xhoid61] {
+        color: #3498db;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .challenge-card p[b-s13xhoid61] {
+        color: #555;
+        font-size: 16px;
+    }
+
+.game-progress[b-s13xhoid61] {
+    margin: 20px 0;
+}
+
+.game-progress-text[b-s13xhoid61] {
+    color: #555;
+    font-size: 16px;
+}
+
+.progress-bar[b-s13xhoid61] {
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.game-progress-bar[b-s13xhoid61] {
+    height: 100%;
+    border-radius: 8px;
+    background-color: #2ecc71;
+}
+
+.game-elements[b-s13xhoid61] {
+    margin-top: 20px;
+}
+
+.game-button[b-s13xhoid61] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.challenge-timer[b-s13xhoid61] {
+    font-size: 18px;
+    color: #fff;
+    background-color: #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Updated styles for the "Claim Reward" button */
+.btn-reward[b-s13xhoid61] {
+    background: #3498db; /* Blue background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+    .btn-reward:hover[b-s13xhoid61] {
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: scale(1.05); /* Scale on hover */
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); /* Enhanced box shadow on hover */
+    }
+
+    .btn-reward.claimed[b-s13xhoid61] {
+        background-color: #95a5a6; /* Gray color for claimed button */
+        cursor: not-allowed;
+        box-shadow: none; /* No box shadow for claimed button */
+    }
+

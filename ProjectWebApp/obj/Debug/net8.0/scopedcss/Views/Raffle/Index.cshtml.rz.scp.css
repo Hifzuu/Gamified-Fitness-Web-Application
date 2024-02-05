@@ -1,0 +1,89 @@
+body[b-dub9o406z4] {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+h2[b-dub9o406z4] {
+    color: #007bff;
+}
+
+.container[b-dub9o406z4] {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+#raffleCarousel[b-dub9o406z4] {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item[b-dub9o406z4] {
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+    .carousel-item:hover[b-dub9o406z4] {
+        transform: scale(1.03);
+    }
+
+.raffle-item[b-dub9o406z4] {
+    display: flex;
+    align-items: stretch;
+}
+
+.raffle-image[b-dub9o406z4] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.raffle-info[b-dub9o406z4] {
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.carousel-controls[b-dub9o406z4] {
+    position: relative;
+    padding-top: 50px;
+}
+
+.carousel-control-prev[b-dub9o406z4],
+.carousel-control-next[b-dub9o406z4] {
+    width: 45px; /* Adjust the width as needed */
+    height: 45px; /* Adjust the height as needed */
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add margin-top for spacing */
+}
+
+    .carousel-control-prev:hover[b-dub9o406z4],
+    .carousel-control-next:hover[b-dub9o406z4] {
+        background-color: #0056b3; /* Hover color */
+    }
+
+.carousel-control-prev[b-dub9o406z4] {
+    position: absolute;
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.carousel-control-next[b-dub9o406z4] {
+    position: absolute;
+    margin-right: 20px; /* Adjust the margin as needed */
+}

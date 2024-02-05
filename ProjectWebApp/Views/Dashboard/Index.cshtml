@@ -1,0 +1,352 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model ProjectWebApp.Models.DashboardViewModel
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Dashboard";
+    var user = await UserManager.GetUserAsync(User);
+    var firstName = user?.FirstName;
+    var lastName = user?.LastName;
+    var email = user?.Email;
+    var goalWeight = user?.GoalWeight;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ProjectWebApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+
+
+
+<body>
+
+    <div class="container mt-6">
+        <h2>@ViewData["Title"]</h2>
+
+        <section>
+            <!-- User Profile Section - Make it Clickable -->
+            <div class="profile-card">
+                <div class="card-body" onclick="navigateToManage()">
+                    <div class="d-flex align-items-center">
+                        <div class="profile-container mr-2">
+                            <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
+                        </div>
+                        <div class="textProfile">
+                            <h5 class="mb-0 font-weight-bold">@firstName @lastName</h5>
+                            <p class="text-muted mb-0">@email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="h-100 d-flex flex-column">
+            <h3 class="text-white font-size-24">Login Streak</h3>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                        <h3 class="display-4">Current Streak</h3>
+                        @if (Model != null)
+                        {
+                            <p class="display-1">@Model.LoginStreak.CurrentStreak</p>
+                            <i class="reward-icon fas fa-star"></i>
+                        }
+                        else
+                        {
+                            <p>No login streak information available.</p>
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                        <h3 class="display-4">Longest Streak</h3>
+                        @if (Model != null)
+                        {
+                            <p class="display-1">@Model.LoginStreak.LongestStreak</p>
+                        }
+                        else
+                        {
+                            <p>No login streak information available.</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mb-3">
+                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                        <h3 class="font-size-24">Login Streak Rewards (coming soon...)</h3>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F9F9F9;">
+                                <span class="medal-text">🥉 Bronze Medal (7 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">50 Points</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F0F0F0;">
+                                <span class="medal-text">🥈 Silver Medal (14 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">150 Points</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #E0E0E0;">
+                                <span class="medal-text">🥇 Gold Medal (30 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">300 Points</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #D4AF37; color: #fff;">
+                                <span class="medal-text">💎 Platinum Medal (60 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">500 Points</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #B9F2FF;">
+                                <span class="medal-text">💎 Diamond Medal (90 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">750 Points</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #FFD700; color: #fff;">
+                                <span class="medal-text">🌟 Master Medal (180 days)</span>
+                                <span class="badge badge-primary badge-pill point-badge">1000 Points</span>
+                            </li>
+                            <!-- Add more items as needed -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section>
+            <h3 style="color: white;">Weight</h3>
+            <hr />
+
+            <!-- Current Weight -->
+            @if (Model.WeightData.Any())
+            {
+                var currentWeight = Model.WeightData.OrderByDescending(we => we.Date).First().Weight;
+                var formattedCurrentWeight = $"{(decimal)currentWeight:F1} kg";
+                <h8 class=" text-white">Current Weight: <strong>@formattedCurrentWeight</strong></h8>
+            }
+
+            <!-- Progress Bar -->
+            <div class="progress" style="height: 30px; position: relative;">
+                @if (Model.WeightData.Any())
+                {
+                    var firstWeight = Model.WeightData.OrderBy(we => we.Date).First().Weight;
+                    var currentWeight = Model.WeightData.OrderByDescending(we => we.Date).First().Weight;
+
+                    var progress = (firstWeight <= goalWeight && currentWeight >= goalWeight) ? 100 : ((currentWeight - firstWeight) / (goalWeight - firstWeight) * 100);
+
+                    var progressColorClass = (progress < 0) ? "bg-danger" : "bg-success"; // Updated color class
+
+                    var formattedProgress = $"{(decimal)Math.Abs(progress.GetValueOrDefault()):F1}";
+
+                    var textColorClass = (progress < 100) ? "text-black" : "text-white"; // Determine text color class
+
+                    <div class="progress-bar progress-bar-striped progress-bar-animated @progressColorClass" role="progressbar" style="width: @formattedProgress%;" aria-valuenow="@progress" aria-valuemin="0" aria-valuemax="100"></div>
+                    <span class="progress-label-right font-weight-bold @textColorClass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 14px;">@($"Goal: {goalWeight:F1} kg")</span>
+                }
+                else
+                {
+                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        No entries yet
+                    </div>
+                }
+            </div>
+
+            @if (Model.WeightData.Any())
+            {
+                var firstWeight = Model.WeightData.OrderBy(we => we.Date).First().Weight;
+                var currentWeight = Model.WeightData.OrderByDescending(we => we.Date).First().Weight;
+
+                double? progress = 0;
+
+                if (firstWeight < goalWeight)
+                {
+                    progress = (currentWeight - firstWeight) / (goalWeight - firstWeight) * 100;
+                }
+                else if (firstWeight >= goalWeight)
+                {
+                    progress = (firstWeight - currentWeight) / (firstWeight - goalWeight) * 100;
+                }
+
+                <div class="mt-3">
+                    @if (progress >= 100)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <strong>Congratulations!</strong> You've reached your goal!
+                        </div>
+                    }
+                    else if (progress >= 0)
+                    {
+                        <div class="alert alert-info" role="alert">
+                            <strong>Keep going!</strong> You're making excellent progress!
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Challenge yourself, you can do this!</strong> You're below your goal.
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="mt-3">
+                    <div class="alert alert-secondary" role="alert">
+                        <strong>No entries yet.</strong> Start recording your progress!
+                    </div>
+                </div>
+            }
+
+
+
+            <hr />
+
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3></h3>
+                    <button id="openWeightModalBtn" class="btn btn-primary rounded-circle">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <!-- Chart.js Canvas for Weight Tracking Chart -->
+                <div class="chart-container">
+                    <canvas id="weightChart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Weight Entry Modal -->
+                <div class="modal fade" id="weightEntryModal" tabindex="-1" role="dialog" aria-labelledby="weightEntryModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="weightEntryModalLabel">Add Weight Entry</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Form for adding new weight entry -->
+                                <form id="weightEntryForm" method="post" action="@Url.Action("AddWeightEntry", "Dashboard")" class="needs-validation" novalidate>
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
+                                        <label for="newWeight" class="form-label">Weight:</label>
+                                        <div class="input-group">
+                                            <input type="number" step="0.1" class="form-control" id="newWeight" name="newWeight" required />
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">kg</span>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Please enter a valid weight.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Add Entry</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </section>
+
+        <script>
+            // JavaScript to open the weight entry modal
+            document.getElementById('openWeightModalBtn').addEventListener('click', function () {
+                $('#weightEntryModal').modal('show');
+            });
+
+            function navigateToManage() {
+                window.location.href = "/Identity/Account/Manage/Index";
+            }
+        </script>
+
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0"></script>
+</body>
+
+@functions {
+    public string GetProfilePictureUrl()
+    {
+        // Check if the user is authenticated
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            // Retrieve the user from UserManager synchronously
+            var user = UserManager.GetUserAsync(User).GetAwaiter().GetResult();
+
+            // Check if the user has a profile picture
+            if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
+            {
+                return user.ProfileImageUrl;
+            }
+        }
+
+        // Use a default or empty profile picture URL
+        return "/Images/empty-pfp.png";
+    }
+}
+
+</html>
+
+@* weight graph *@
+<script>
+    // Get the chart context
+    var ctx = document.getElementById('weightChart').getContext('2d');
+
+    // Get dates and weights from the server
+    var dates = @Html.Raw(Json.Serialize(Model.WeightData.Select(w => w.Date.ToString("dd-MM-yyyy"))));
+    var weights = @Html.Raw(Json.Serialize(Model.WeightData.Select(w => w.Weight)));
+
+    // Create a line chart with a slight curve
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Weight',
+                data: weights,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                pointRadius: 3,
+                pointHoverRadius: 8,
+                borderWidth: 2,
+                fill: true,
+                lineTension: 0.3 // Adjust the line tension for the curve
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'DD-MM-YYYY'
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Weight (kg)'
+                    }
+                }]
+            }
+        }
+    });
+
+</script>
+

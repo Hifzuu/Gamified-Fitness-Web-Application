@@ -1,0 +1,89 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+h2 {
+    color: #007bff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+#raffleCarousel {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item {
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+    .carousel-item:hover {
+        transform: scale(1.03);
+    }
+
+.raffle-item {
+    display: flex;
+    align-items: stretch;
+}
+
+.raffle-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.raffle-info {
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.carousel-controls {
+    position: relative;
+    padding-top: 50px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 45px; /* Adjust the width as needed */
+    height: 45px; /* Adjust the height as needed */
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add margin-top for spacing */
+}
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        background-color: #0056b3; /* Hover color */
+    }
+
+.carousel-control-prev {
+    position: absolute;
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.carousel-control-next {
+    position: absolute;
+    margin-right: 20px; /* Adjust the margin as needed */
+}

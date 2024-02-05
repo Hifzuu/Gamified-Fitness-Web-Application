@@ -1,0 +1,98 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Personal Data";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Add any additional stylesheets if needed -->
+    <style>
+        body {
+            background-color: #343a40;
+            color: white;
+        }
+
+        section {
+            background-color: #212529;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        p {
+            color: #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+            .btn-danger:hover {
+                background-color: #bd2130;
+                border-color: #bd2130;
+            }
+
+        /* Additional styles for a more professional look */
+        .btn {
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <section>
+                    <h3>@ViewData["Title"]</h3>
+                    <p>Your account contains personal data that you have given us. This page allows you to download or delete that data.</p>
+                    <p>
+                        <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+                    </p>
+                    <form id="download-data" asp-page="DownloadPersonalData" method="post">
+                        <button class="btn btn-primary" type="submit">Download Data</button>
+                    </form>
+                    <form id="delete-data" asp-page="DeletePersonalData" method="post">
+                        <button class="btn btn-danger" type="submit">Delete Account</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Add any additional scripts if needed -->
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

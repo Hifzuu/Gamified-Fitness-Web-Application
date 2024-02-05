@@ -1,0 +1,385 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\ProjectWebApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\ProjectWebApp.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\Logo-big.jpg",
+      "PackagePath": "staticwebassets\\Images\\Logo-big.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\Logo-small.jpg",
+      "PackagePath": "staticwebassets\\Images\\Logo-small.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\badge.png",
+      "PackagePath": "staticwebassets\\Images\\badge.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\dashboard.png",
+      "PackagePath": "staticwebassets\\Images\\dashboard.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\event-ticket.png",
+      "PackagePath": "staticwebassets\\Images\\event-ticket.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\feedback.png",
+      "PackagePath": "staticwebassets\\Images\\feedback.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\filter.png",
+      "PackagePath": "staticwebassets\\Images\\filter.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\home.png",
+      "PackagePath": "staticwebassets\\Images\\home.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\homepage.jpg",
+      "PackagePath": "staticwebassets\\Images\\homepage.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\homepage2.jpg",
+      "PackagePath": "staticwebassets\\Images\\homepage2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\logo-blackbg.png",
+      "PackagePath": "staticwebassets\\Images\\logo-blackbg.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\logo-whitebg.png",
+      "PackagePath": "staticwebassets\\Images\\logo-whitebg.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\medals.png",
+      "PackagePath": "staticwebassets\\Images\\medals.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\newlogo.png",
+      "PackagePath": "staticwebassets\\Images\\newlogo.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\report.png",
+      "PackagePath": "staticwebassets\\Images\\report.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\social.png",
+      "PackagePath": "staticwebassets\\Images\\social.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\target.png",
+      "PackagePath": "staticwebassets\\Images\\target.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\team.png",
+      "PackagePath": "staticwebassets\\Images\\team.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\variety.png",
+      "PackagePath": "staticwebassets\\Images\\variety.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\variety1.png",
+      "PackagePath": "staticwebassets\\Images\\variety1.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\weights.png",
+      "PackagePath": "staticwebassets\\Images\\weights.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\05b9d470-2fd4-4274-b943-6ba80f42c83c_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\05b9d470-2fd4-4274-b943-6ba80f42c83c_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\0c6ec44b-328e-44cf-935c-7d0d367df46b_IMG_4558[272].jpg",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\0c6ec44b-328e-44cf-935c-7d0d367df46b_IMG_4558[272].jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\5d1ad0db-b052-429f-a525-c16d47a9c55f_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\5d1ad0db-b052-429f-a525-c16d47a9c55f_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\63ca5c25-3a5e-4b68-8bee-fb9b74de6eae_IMG_4558[272].jpg",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\63ca5c25-3a5e-4b68-8bee-fb9b74de6eae_IMG_4558[272].jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\6df3aeda-305c-4f63-b6b9-aaf4ded29fe8_IMG_4558[272].jpg",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\6df3aeda-305c-4f63-b6b9-aaf4ded29fe8_IMG_4558[272].jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\b560b489-ec5c-4acf-b35c-715a3bdd07d6_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\b560b489-ec5c-4acf-b35c-715a3bdd07d6_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Videos\\high-knees.mp4",
+      "PackagePath": "staticwebassets\\Videos\\high-knees.mp4"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Videos\\mountain-climb.mp4",
+      "PackagePath": "staticwebassets\\Videos\\mountain-climb.mp4"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Videos\\squats.mp4",
+      "PackagePath": "staticwebassets\\Videos\\squats.mp4"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProjectWebApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ProjectWebApp.props",
+      "PackagePath": "build\\ProjectWebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ProjectWebApp.props",
+      "PackagePath": "buildMultiTargeting\\ProjectWebApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ProjectWebApp.props",
+      "PackagePath": "buildTransitive\\ProjectWebApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,133 @@
+﻿@page
+@model PersonalDetailsModel
+@{
+    ViewData["Title"] = "Personal Details";
+    ViewData["ActivePage"] = ManageNavPages.PersonalDetails;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Add any additional stylesheets if needed -->
+    <style>
+        body {
+            background-color: #343a40;
+            color: white;
+        }
+
+        section {
+            background-color: #212529;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        .form-floating {
+            position: relative;
+        }
+
+            .form-floating label {
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 10px;
+                color: #495057;
+                opacity: 0.5;
+                pointer-events: none;
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            }
+
+            .form-floating input {
+                padding: 10px;
+                background-color: transparent;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                color: white;
+                max-width: 300px; /* Adjusted maximum width */
+            }
+
+                .form-floating input:focus {
+                    border-color: #007bff;
+                }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <section>
+                    <h3>@ViewData["Title"]</h3>
+                    <partial name="_StatusMessage" for="StatusMessage" />
+                    <form id="personal-details-form" method="post">
+                        <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+
+                        <label asp-for="Input.NewHeight" class="mr-2 d-block text-left">Height</label>
+                        <div class="form-group">
+                            <input asp-for="Input.NewHeight" class="form-control" autocomplete="off" placeholder="Enter your new height." />
+                            <span asp-validation-for="Input.NewHeight" class="text-danger"></span>
+                        </div>
+
+                        <label asp-for="Input.NewGender" class="mr-2 d-block text-left">Gender</label>
+                        <div class="form-group">
+                            <select asp-for="Input.NewGender" class="form-control">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span asp-validation-for="Input.NewGender" class="text-danger"></span>
+                        </div>
+
+                        <label asp-for="Input.NewCountry" class="mr-2 d-block text-left">Country</label>
+                        <div class="form-group">
+                            <select asp-for="Input.NewCountry" class="form-control">
+                                <option value="">Select Country</option>
+                                @{
+                                    var uniqueCountries = new HashSet<string>();
+                                }
+
+                                @foreach (var region in System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.SpecificCultures)
+                                .Select(x => new System.Globalization.RegionInfo(x.Name))
+                                .OrderBy(x => x.EnglishName))
+                                {
+                                    if (uniqueCountries.Add(region.EnglishName))
+                                    {
+                                        <option value="@region.Name">@region.EnglishName</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="Input.NewCountry" class="text-danger"></span>
+                        </div>
+
+                        <button id="change-details-button" type="submit" asp-page-handler="ChangePersonalDetails" class="w-100 btn btn-lg btn-primary">Save Changes</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Add any additional scripts if needed -->
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

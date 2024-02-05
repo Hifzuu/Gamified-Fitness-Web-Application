@@ -1,0 +1,103 @@
+﻿video::-webkit-media-controls-panel {
+    display: none !important;
+}
+
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.containerrr {
+    background-color: #343a40;
+}
+
+/* Styles specific to Workout Details page */
+.card {
+    margin-top: 20px;
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.embed-responsive {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+    .embed-responsive video {
+        width: 100%;
+        height: auto;
+    }
+
+.card-body {
+    text-align: center;
+    padding: 20px;
+}
+
+#progressBarSection {
+    display: none;
+}
+
+#timerSection {
+    display: none;
+}
+
+#completionModal {
+    color: black;
+}
+
+#completionModalLabel {
+    color: #007bff;
+}
+
+section {
+    margin-top: 20px;
+    background-color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff;
+}
+
+h3 {
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+#progressBarSection,
+#timerSection {
+    margin-top: 20px;
+}
+
+#timer {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#completionModal .modal-content {
+    border-radius: 10px;
+}

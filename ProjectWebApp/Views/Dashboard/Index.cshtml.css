@@ -1,0 +1,110 @@
+﻿h2 {
+    color: #007bff;
+}
+
+.dashboard-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+
+}
+    .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1200px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .display-2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 950px) {
+    .display-4 {
+        font-size: 1.5rem;
+    }
+
+    .display-2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 750px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .display-2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Custom styling for gamification */
+.box {
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.reward-icon {
+    font-size: 2rem;
+    color: gold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.profile-card {
+    background-color: white;
+    border-radius: 8px; /* Add rounded corners */
+    overflow: hidden; /* Hide overflowing content */
+    transition: box-shadow 0.3s; /* Add smooth transition for box shadow */
+    transition: transform 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+    .profile-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+        transform: scale(1.01); /* Add a slight scale effect */
+        text-decoration: none;
+        cursor:pointer;
+    }
+
+.profile-container {
+    width: 60px; /* Set width of the profile container */
+    height: 60px; /* Set height of the profile container */
+    overflow: hidden; /* Hide overflowing content */
+    border-radius: 50%; /* Create a circular shape */
+    margin-right: 15px; /* Add some spacing between the profile picture and text */
+}
+
+.profile-picture {
+    width: 100%; /* Make the profile picture fill the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Ensure the picture remains circular */
+}
+
+.profile-details {
+    flex-grow: 1; /* Allow the details to grow and fill the remaining space */
+}
+
+    .profile-details h5 {
+        margin-bottom: 5px; /* Add spacing below the name */
+    }
+
+    .profile-details p {
+        margin: 0; /* Remove default margins for better spacing */
+        color: #555; /* Use a slightly muted color for additional information */
+    }
+
+        .custom-display-4 {
+        font-size: 2em; /* Adjust the font size as needed */
+    }

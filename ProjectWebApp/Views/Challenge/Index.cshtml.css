@@ -1,0 +1,131 @@
+﻿h2 {
+    color: #007bff;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.challenge-section {
+    background-color: #212529;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.game-title {
+    color: #fff;
+    font-size: 24px;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.challenge-card {
+    background-color: white;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .challenge-card:hover {
+        transform: scale(1.05);
+    }
+
+    .challenge-card h6 {
+        color: #3498db;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .challenge-card p {
+        color: #555;
+        font-size: 16px;
+    }
+
+.game-progress {
+    margin: 20px 0;
+}
+
+.game-progress-text {
+    color: #555;
+    font-size: 16px;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 10px;
+}
+
+.game-progress-bar {
+    height: 100%;
+    border-radius: 8px;
+    background-color: #2ecc71;
+}
+
+.game-elements {
+    margin-top: 20px;
+}
+
+.game-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.challenge-timer {
+    font-size: 18px;
+    color: #fff;
+    background-color: #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Updated styles for the "Claim Reward" button */
+.btn-reward {
+    background: #3498db; /* Blue background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+    .btn-reward:hover {
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: scale(1.05); /* Scale on hover */
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); /* Enhanced box shadow on hover */
+    }
+
+    .btn-reward.claimed {
+        background-color: #95a5a6; /* Gray color for claimed button */
+        cursor: not-allowed;
+        box-shadow: none; /* No box shadow for claimed button */
+    }
+

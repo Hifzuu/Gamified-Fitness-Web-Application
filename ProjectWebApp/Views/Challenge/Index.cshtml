@@ -1,0 +1,265 @@
+﻿@model ProjectWebApp.ViewModels.ChallengeViewModel
+@{
+    ViewData["Title"] = "Challenges";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ProjectWebApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+
+<body>
+
+    <div class="container mt-6">
+        <h2>@ViewData["Title"]</h2>
+
+        <section class="challenge-section">
+            <h2 class="game-title">🌟 Daily Challenges</h2>
+
+            @if (Model.DailyChallenge != null)
+            {
+                <h5 class="challenge-timer" id="dailyTimer">
+                    Time remaining: @Model.DailyTime
+                </h5>
+
+                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
+
+                    <h6>@Model.DailyChallenge.Challenge.Name</h6>
+                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 20 points!</p>
+                    <p><strong>@Model.DailyChallenge.Challenge.Description</strong></p>
+
+
+                    <div class="game-progress">
+                        <p class="game-progress-text">Progress: @Math.Min(Model.DailyProgressPercentage, 100).ToString("0.##")%</p>
+                        <div class="progress">
+                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.DailyProgressPercentage%" aria-valuenow="@Model.DailyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-elements">
+                    @if (Model.DailyProgressPercentage >= 100 && !Model.DailyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Daily',@Model.DailyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                    }
+                    else if (Model.DailyProgressPercentage >= 100 && Model.DailyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No daily challenges available for today.</p>
+            }
+        </section>
+
+        <section class="challenge-section">
+            <h2 class="game-title">🌟 Weekly Challenges</h2>
+
+            @if (Model.WeeklyChallenge != null)
+            {
+                <h5 class="challenge-timer" id="weeklyTimer">
+                    Time remaining: @Model.WeeklyTime
+                </h5>
+
+                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
+                    <h6>@Model.WeeklyChallenge.Challenge.Name</h6>
+                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 50 points!</p>
+                    <p><strong>@Model.WeeklyChallenge.Challenge.Description</strong></p>
+
+                    <div class="game-progress">
+                        <p class="game-progress-text">Progress: @Math.Min(Model.WeeklyProgressPercentage, 100).ToString("0.##")%</p>
+                        <div class="progress">
+                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.WeeklyProgressPercentage%" aria-valuenow="@Model.WeeklyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-elements">
+                    @if (Model.WeeklyProgressPercentage >= 100 && !Model.WeeklyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Weekly',@Model.WeeklyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                    }
+                    else if (Model.WeeklyProgressPercentage >= 100 && Model.WeeklyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No daily challenges available for today.</p>
+            }
+        </section>
+
+        <section class="challenge-section">
+            <h2 class="game-title">🌟 Monthly Challenges</h2>
+
+            @if (Model.MonthlyChallenge != null)
+            {
+                <h5 class="challenge-timer" id="monthlyTimer">
+                    Time remaining: @Model.MonthlyTime
+                </h5>
+
+                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
+                    <h6>@Model.MonthlyChallenge.Challenge.Name</h6>
+                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 150 points!</p>
+                    <p><strong>@Model.MonthlyChallenge.Challenge.Description</strong></p>
+
+                    <div class="game-progress">
+                        <p class="game-progress-text">Progress: @Math.Min(Model.MonthlyProgressPercentage, 100).ToString("0.##")%</p>
+                        <div class="progress">
+                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.MonthlyProgressPercentage%" aria-valuenow="@Model.MonthlyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-elements">
+                    @if (Model.MonthlyProgressPercentage >= 100 && !Model.MonthlyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Monthly',@Model.MonthlyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                    }
+                    else if (Model.MonthlyProgressPercentage >= 100 && Model.MonthlyChallenge.IsRewardClaimed)
+                    {
+                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
+                    }
+                </div>
+            }
+            else
+            {
+                <p>No daily challenges available for today.</p>
+            }
+        </section>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+
+        function claimReward(challengeType, userChallengeId) {
+            // Add logic to award points based on the challenge type
+            console.log('Claim reward button clicked.');
+            var pointsToAward = 0;
+
+            switch (challengeType) {
+                case 'Daily':
+                    pointsToAward = 20;
+                    break;
+                case 'Weekly':
+                    pointsToAward = 50;
+                    break;
+                case 'Monthly':
+                    pointsToAward = 150;
+                    break;
+                // Add more cases for other challenge types if needed
+
+                default:
+                    break;
+            }
+
+
+            // Display the rewarded points in the SweetAlert modal
+            Swal.fire({
+                title: 'Congratulations!',
+                html: `<p>Well Done! You have earned <strong>${pointsToAward} points!</strong></p>`,
+                icon: 'success',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                // Reload the page after the modal is closed
+                if (result.isConfirmed || result.isDismissed) {
+                    location.reload();
+                }
+            });
+
+
+            // Update user's points on the server side
+            updatePointsChallenge(pointsToAward, userChallengeId);
+
+            // setTimeout(function () {
+            //     $('#rewardModal').modal('hide');
+
+            //     // Refresh the page after hiding the modal
+            //     location.reload();
+            // }, 3000);
+
+        }
+
+        function updatePointsChallenge(points, userChallengeId) {
+            console.log("Adding points to db");
+            $.ajax({
+                url: '@Url.Action("updatePointsChallenge", "Challenge")',
+                type: 'POST',
+                data: { points: points, userChallengeId: userChallengeId },
+                success: function (response) {
+                    // Handle success
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error occurred while updating user's points:");
+                    console.error("XHR object:", xhr);
+                    console.log("XHR response:", xhr.responseText);
+                    console.error("Status:", status);
+                    console.error("Error:", error);
+                }
+            });
+        }
+
+        function navigateToWorkouts() {
+            window.location.href = "/Workout/Index";
+        }
+    </script>
+
+    <script>
+        function updateTimer(endDate, timerElementId) {
+            var timerElement = document.getElementById(timerElementId);
+            var currentUtcTime = new Date('@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")');
+
+            // Append a default date to endDate (assuming today's date)
+            var endChallengeTime = new Date(endDate);
+
+            // Calculate total seconds remaining until the end of the challenge
+            var totalSecondsRemaining = Math.max(0, Math.floor((endChallengeTime - currentUtcTime) / 1000));
+
+            // Update the timer display
+            function updateDisplay() {
+                var hours = Math.floor(totalSecondsRemaining / 3600);
+                var minutes = Math.floor((totalSecondsRemaining % 3600) / 60);
+                var seconds = totalSecondsRemaining % 60;
+
+                timerElement.textContent = 'Time remaining: ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+            }
+
+            // Initial update
+            updateDisplay();
+
+            // Update the display every second
+            var timerInterval = setInterval(function () {
+                if (totalSecondsRemaining > 0) {
+                    totalSecondsRemaining--;
+                    updateDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = 'Challenge ended';
+                }
+            }, 1000);
+        }
+
+        // Call the updateTimer function when the page is loaded
+        window.onload = function () {
+            updateTimer('@Model.DailyTime', 'dailyTimer');
+            updateTimer('@Model.WeeklyTime', 'weeklyTimer');
+            updateTimer('@Model.MonthlyTime', 'monthlyTimer');
+        };
+    </script>
+
+
+
+
+</body>
+</html>
+

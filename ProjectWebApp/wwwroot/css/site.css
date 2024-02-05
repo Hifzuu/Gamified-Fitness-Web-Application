@@ -1,0 +1,350 @@
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+body, html {
+    width: 100%;
+    min-height: 100%;
+    background-color: #343a40;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 12px; /* Adjust the font size for smaller screens */
+    }
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent; /* Make the track invisible */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: cornflowerblue; /* Set the color for the thumb */
+    border-radius: 15px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: royalblue; /* Change color on hover if needed */
+    }
+
+/*_Layout.cshtml.css*/
+.main-content {
+    margin-left: 200px;
+}
+
+.main-Background {
+    height: 100%;
+}
+
+nav {
+    margin: 0 !important;
+}
+
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.container-body {
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+}
+
+.containerrr {
+    height: 100%;
+    width: 100%;
+}
+
+.navbar {
+    background-color: #222;
+    color: white;
+    border-bottom: 1px solid #111; 
+}
+
+/* Hide dropdown menu by default */
+.navbar-nav .dropdown-menu {
+    display: none;
+}
+
+
+.navbar-nav .nav-item:hover .dropdown-menu { /* Show dropdown menu on hover */
+    display: block;
+}
+
+.nav-loggedout{
+    color:white;
+}
+
+.custom-toggler {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+    .custom-toggler:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+.icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin-bottom: 5px;
+    position: relative;
+    background-color: #007bff;
+}
+
+/*Sidebar*/
+.sidebar-nav {
+    width: 200px;
+    background-color: #222;
+    padding: 15px;
+    overflow-y: hidden;
+    height: 100vh; /* Set height to 100% of the viewport height */
+    position: fixed; /* Fix the sidebar position */
+    top: 0; /* Align the top of the sidebar to the top of the viewport */
+    left: 0; /* Align the left of the sidebar to the left of the viewport */
+    border-right: 1px solid #111;
+}
+
+    .sidebar-nav a {
+        color: #fff;
+        margin-top: 20px;
+        display: block;
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .sidebar-nav a:hover {
+            background-color: cornflowerblue;
+            color: white;
+            text-decoration: none;
+        }
+
+.side-nav {
+    color: #222;
+    margin-top: 80px;
+    padding-left:0;
+}
+
+.nav-img {
+    max-width: 24px; /* Adjust the max-width to your desired size */
+    max-height: 25px; /* Adjust the max-height to your desired size */
+    margin-right: 5px;
+    filter: invert(100%);
+}
+
+.side-nav .btn-style.active a {
+    background-color: #258cfb;
+    color: white;
+}
+
+/* Style the modal */
+#feedbackModal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content {
+    width: 80%;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+#openFeedbackModal {
+    color: #fff;
+    margin-top: 20px;
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    background-color: transparent;
+    border: 1px solid #222;
+    font-size: 16px;
+}
+
+    #openFeedbackModal:hover {
+        background-color: cornflowerblue;
+        color: white;
+        text-decoration: none;
+        border-color: cornflowerblue;
+        cursor: pointer;
+    }
+
+
+/*_LoginPartial*/
+.logout-nav {
+    display: flex;
+    align-items: center;
+}
+
+    .logout-nav a {
+        color: white; /* Change this to your desired default color */
+        text-decoration: none; /* Remove underline */
+    }
+
+        /* Define the hover color for the links */
+        .logout-nav a:hover {
+            color: #007bff; /* Change this to your desired hover color */
+        }
+
+.gold-coin-icon {
+    color: gold;
+    margin-right:5px;
+}
+
+.dropdown-menu a {
+    color: black; /* Change this to your desired color for dropdown links */
+}
+
+    .dropdown-menu a:hover {
+        color: #007bff; /* Change this to your desired hover color for dropdown links */
+    }
+
+.nav-itemLP {
+    margin-right: 10px; /* Adjust spacing between menu items */
+}
+
+
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 40px; /* Set the desired width */
+    height: 40px; /* Set the desired height */
+    border-radius: 50%; /* Make it a circle */
+}
+
+/* Position the dropdown menu to the right */
+#userDropdownContainer .dropdown-menu {
+    right: 0;
+    left: auto;
+    border: 1px solid #111; /* Add a border for separation */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    border-radius: 8px; /* Add rounded corners */
+    background-color: #222; /* Set background color */
+    width: 250px; /* Adjust the width as needed */
+    padding: 15px; /* Add padding inside the dropdown */
+}
+
+/* Hide dropdown menu by default */
+#userDropdownContainer .dropdown-menu {
+    display: none;
+}
+
+/* Show dropdown menu on hover */
+#userDropdownContainer:hover .dropdown-menu {
+    display: block;
+}
+
+/* Style individual dropdown items */
+#userDropdownContainer .dropdown-menu a {
+    display: block;
+    padding: 10px;
+    color: white; /* Text color */
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    border-bottom: 1px solid #555; /* Add a subtle border between items */
+}
+
+    #userDropdownContainer .dropdown-menu a:last-child {
+        border-bottom: none; /* Remove border from the last item */
+    }
+
+    #userDropdownContainer .dropdown-menu a:hover {
+        background-color: #555; /* Hover background color */
+    }
+
+/* Style for the log out button inside the dropdown menu */
+#userDropdownContainer .dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px; /* Adjust the padding for the button */
+    color: #fff; /* Text color */
+    background-color: #e74c3c; /* Button background color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    margin-top: 15px; /* Add some spacing between items */
+}
+
+    #userDropdownContainer .dropdown-menu button:hover {
+        background-color: #c0392b; /* Hover background color */
+    }
+
+ul {
+    list-style-type: none;
+}
+
+section {
+    background-color: #212529;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*register*/
+.btn-group-toggle .btn {
+    color: black; /* Set default text color to white */
+    background-color: #fff; /* Set default background color to white */
+}
+
+    .btn-group-toggle .btn.active {
+        color: black; /* Set active (toggled) text color to white */
+        background-color: #007bff; /* Set active (toggled) background color to blue */
+        border-color: #007bff; /* Set active (toggled) border color to blue */
+    }
+
+.section-label {
+    font-size: 16px; /* Adjusted font size to be a little smaller */
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduced margin at the bottom */
+    color: #007bff; /* Dark color for better visibility */
+    text-align: left; /* Align the text to the left */
+}
+
+/*dashboard*/
+.dashboard-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
