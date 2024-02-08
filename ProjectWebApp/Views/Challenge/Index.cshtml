@@ -15,10 +15,9 @@
 
 <body>
 
-    <div class="container mt-6">
-        <h2>@ViewData["Title"]</h2>
+    <div class="page-container">
 
-        <section class="challenge-section">
+        <section>
             <h2 class="game-title">🌟 Daily Challenges</h2>
 
             @if (Model.DailyChallenge != null)
@@ -30,7 +29,9 @@
                 <div class="challenge-card game-card" onclick="navigateToWorkouts()">
 
                     <h6>@Model.DailyChallenge.Challenge.Name</h6>
-                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 20 points!</p>
+                    <p class="reward-text">
+                        <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 20 points!
+                    </p>
                     <p><strong>@Model.DailyChallenge.Challenge.Description</strong></p>
 
 
@@ -59,7 +60,7 @@
             }
         </section>
 
-        <section class="challenge-section">
+        <section>
             <h2 class="game-title">🌟 Weekly Challenges</h2>
 
             @if (Model.WeeklyChallenge != null)
@@ -97,7 +98,7 @@
             }
         </section>
 
-        <section class="challenge-section">
+        <section>
             <h2 class="game-title">🌟 Monthly Challenges</h2>
 
             @if (Model.MonthlyChallenge != null)
@@ -180,13 +181,6 @@
 
             // Update user's points on the server side
             updatePointsChallenge(pointsToAward, userChallengeId);
-
-            // setTimeout(function () {
-            //     $('#rewardModal').modal('hide');
-
-            //     // Refresh the page after hiding the modal
-            //     location.reload();
-            // }, 3000);
 
         }
 

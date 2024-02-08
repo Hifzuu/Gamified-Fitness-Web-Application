@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -56,8 +57,9 @@
                     var firstName = User.Claims.FirstOrDefault(c => c.Type == "FirstName")?.Value;
                     var points = GetCurrentUserPoints(); // Function to get user points
 
-                    <span class="user-details">
-                        <i class="fas fa-coins gold-coin-icon"></i> @points points | Welcome back, @firstName!&nbsp;
+                    <span class="user-details" style="font-family: 'Roboto', sans-serif;">
+                        <i class="fas fa-coins gold-coin-icon"></i> <strong style="font-size: 1.1em; letter-spacing: 1px;">@points points | Welcome back, @firstName!&nbsp;
+                            </strong>
                     </span>
                 }
                 else
@@ -67,20 +69,28 @@
                     </span>
                 }
             </li>
-            <li class="nav-itemLP dropdown" id="userDropdownContainer">
-                <a class="nav-link " id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown" id="userDropdownContainer">
+                <a class="nav-link" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="profile-container">
                         <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
                     </div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 0;">
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+                        <i class="fas fa-user-cog mr-2"></i> Manage Account
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <i class="fas fa-shield-alt mr-2"></i> Privacy
+                    </a>
+                    <div class="dropdown-divider"></div>
                     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
-                        <button type="submit" class="dropdown-item">Log Out</button>
+                        <button type="submit" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                        </button>
                     </form>
                 </div>
             </li>
+
         </ul>
 
     }

@@ -15,23 +15,18 @@
 
 /* Section Header Styles */
 .section-header {
-    background-color: #007bff;
-    padding: 10px;
     font-size: 24px;
     font-weight: bold;
     text-align: left;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 10px;
 }
 
 /* Filter Icon Styles */
 .filter-icon {
     width: 30px;
     cursor: pointer;
-    filter: invert(100%);
 }
 
 /* Filter Form Styles */
@@ -210,20 +205,13 @@
     display: block;
 }
 
-section {
-    background-color: #212529;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 h2 {
     color: #007bff;
 }
 
 h3 {
-    color: white;
+    color: black;
 }
 
 .card-title{
@@ -243,8 +231,8 @@ h3 {
     .workout-card {
         /* Adjust the width for smaller screens */
         width: 100%;
-        font-size: 14px; /* Increase the font size for readability */
-        padding: 15px; /* Add padding for better spacing */
+        font-size: 12px; /* Increase the font size for readability */
+        padding: 5px; /* Add padding for better spacing */
     }
 
     #filterForm {
@@ -256,3 +244,14 @@ h3 {
 .fc-toolbar h2 {
     color: white; /* Set the text color for the calendar header */
 }
+
+.calendar-section {
+    background-color: #222;
+    margin-bottom: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+

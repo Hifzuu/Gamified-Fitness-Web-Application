@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
+
 
 </head>
 
@@ -20,55 +22,68 @@
     <aside class="sidebar-nav">
         @if (User.Identity.IsAuthenticated)
         {
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="/Images/newlogo.png" alt="Fit.Me Logo" style="max-width: 200px; max-height: 50px;" />
+            </a>
             <ul class="side-nav nav-pills flex-column">
+                <li class="nav-item">
+                    <span class="nav-heading" style="font-family: 'Roboto', sans-serif;">
+                        <strong style="font-size: 1.2em; color: #fff; text-transform: uppercase; letter-spacing: 1px;">
+                            General
+                        </strong>
+                    </span>
+                </li>
                 <li class="btn-style @(current == "Dashboard" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Dashboard/Index">
                         <img class="nav-img" src="/Images/dashboard.png" alt="Dashboard Icon" />
-                        <b>Dashboard</b>
+                        <span class="icon-text">Dashboard</span>
                     </a>
                 </li>
                 <li class="btn-style @(current == "Workout" && (actionCurrent == "Index" || actionCurrent == "Details") ? "active" : "")">
                     <a href="/Workout/Index">
                         <img class="nav-img" src="/Images/weights.png" alt="Workout Icon" />
-                        <b>Workouts</b>
+                        <span class="icon-text">Workouts</span>
                     </a>
                 </li>
                 <li class="btn-style @(current == "Challenge" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Challenge/Index">
                         <img class="nav-img" src="/Images/target.png" alt="Challenge Icon" />
-                        <b>Challenges</b>
+                        <span class="icon-text">Challenges</span>
                     </a>
                 </li>
                 <li class="btn-style @(current == "Raffle" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Raffle/Index">
                         <img class="nav-img" src="/Images/event-ticket.png" alt="Raffle Icon" />
-                        <b>Raffle</b>
+                        <span class="icon-text">Raffles</span>
                     </a>
                 </li>
                 <li class="btn-style @(current == "Community" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Community/Index">
                         <img class="nav-img" src="/Images/team.png" alt="Community Icon" />
-                        <b>Community</b>
+                        <span class="icon-text">Community</span>
                     </a>
                 </li>
                 <li class="btn-style @(current == "Achievement" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Achievement/Index">
                         <img class="nav-img" src="/Images/badge.png" alt="Achievement Icon" />
-                        <b>Achievements</b>
+                        <span class="icon-text">Achievements</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-top:50px;">
+                    <span class="nav-heading" style="font-family: 'Roboto', sans-serif;">
+                        <strong style="font-size: 1.2em; color: #fff; text-transform: uppercase; letter-spacing: 1px;">
+                            More
+                        </strong>
+                    </span>
+                </li>
+                <li class="btn-style">
+                    <a id="openFeedbackModal" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal" data-backdrop="static">
+                        <img src="/Images/feedback.png" alt="Feedback Icon" class="nav-img" style="margin-right: 10px;">
+                        <span class="icon-text">Give Feedback</span>
                     </a>
                 </li>
 
             </ul>
-            <div style="margin-top: 30px; text-align: center;">
-                <hr style="background-color: #666; height: 1px;">
-                <button id="openFeedbackModal" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal" data-backdrop="static" style="min-width: 150px;">
-                    <img src="/Images/feedback.png" alt="Feedback Icon" class="nav-img" style="margin-right: 10px;">
-                    <b>Give Feedback</b>
-                </button>
-            </div>
-
-
-
         }
 
     </aside>

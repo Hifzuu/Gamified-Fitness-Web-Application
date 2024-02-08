@@ -66,16 +66,17 @@ h2[b-lict9yrgg8] {
     background-color: white;
     border-radius: 8px; /* Add rounded corners */
     overflow: hidden; /* Hide overflowing content */
-    transition: box-shadow 0.3s; /* Add smooth transition for box shadow */
-    transition: transform 0.3s ease-in-out;
+    transition: box-shadow 0.3s, transform 0.3s ease-in-out;
     text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom:20px;
 }
 
     .profile-card:hover[b-lict9yrgg8] {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         transform: scale(1.01); /* Add a slight scale effect */
         text-decoration: none;
-        cursor:pointer;
+        cursor: pointer;
     }
 
 .profile-container[b-lict9yrgg8] {
@@ -108,3 +109,21 @@ h2[b-lict9yrgg8] {
         .custom-display-4[b-lict9yrgg8] {
         font-size: 2em; /* Adjust the font size as needed */
     }
+
+
+.leftBox[b-lict9yrgg8] {
+    display: grid;
+}
+
+.fullBox[b-lict9yrgg8] {
+    width: 100%;
+}
+
+.fullLeft[b-lict9yrgg8] {
+    width: 25%;
+}
+
+.fullRight[b-lict9yrgg8] {
+    width: 75%;
+    max-width: 75%;
+}

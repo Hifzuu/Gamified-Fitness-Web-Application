@@ -123,7 +123,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
                 // Update the user's profile picture URL
                 user.ProfileImageUrl = "/UserPfpUploads/" + fileName; // Adjust the path as needed
 
-                if (!string.IsNullOrEmpty(oldProfilePicturePath))
+                if (!string.IsNullOrEmpty(oldProfilePicturePath) && oldProfilePicturePath != "/Images/empty-pfp.png")
                 {
                     var oldFilePath = Path.Combine(_hostingEnvironment.WebRootPath, oldProfilePicturePath.TrimStart('/'));
                     if (System.IO.File.Exists(oldFilePath))

@@ -61,31 +61,13 @@ video::-webkit-media-controls-enclosure {
     color: #007bff;
 }
 
-section {
-    margin-top: 20px;
-    background-color: #212529;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h2 {
     color: #007bff;
 }
 
 h3 {
-    color: white;
+    color: black;
 }
-
-
-
-
-
-
-
-
-
 
 
 #progressBarSection,

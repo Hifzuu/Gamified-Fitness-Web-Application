@@ -20,108 +20,97 @@
     <link rel="stylesheet" href="/css/site.css" />
 </head>
 
-
-
 <body>
 
-    <div class="container mt-6">
-        <h2>@ViewData["Title"]</h2>
+    <div class="page-container">
 
-        <section>
-            <!-- User Profile Section - Make it Clickable -->
-            <div class="profile-card">
-                <div class="card-body" onclick="navigateToManage()">
-                    <div class="d-flex align-items-center">
-                        <div class="profile-container mr-2">
-                            <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
-                        </div>
-                        <div class="textProfile">
-                            <h5 class="mb-0 font-weight-bold">@firstName @lastName</h5>
-                            <p class="text-muted mb-0">@email</p>
-                        </div>
+        <div class="profile-card" onclick="navigateToManage()">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="profile-container">
+                        <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
+                    </div>
+                    <div class="textProfile">
+                        <h5 class="mb-0 font-weight-bold">@firstName @lastName</h5>
+                        <p class="text-muted mb-0">@email</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="d-flex flex-wrap box">
 
-        <section class="h-100 d-flex flex-column">
-            <h3 class="text-white font-size-24">Login Streak</h3>
-            <div class="row">
-                <div class="col-sm-6 mb-3">
-                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-                        <h3 class="display-4">Current Streak</h3>
-                        @if (Model != null)
-                        {
-                            <p class="display-1">@Model.LoginStreak.CurrentStreak</p>
-                            <i class="reward-icon fas fa-star"></i>
-                        }
-                        else
-                        {
-                            <p>No login streak information available.</p>
-                        }
-                    </div>
-                </div>
-                <div class="col-sm-6 mb-3">
-                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-                        <h3 class="display-4">Longest Streak</h3>
-                        @if (Model != null)
-                        {
-                            <p class="display-1">@Model.LoginStreak.LongestStreak</p>
-                        }
-                        else
-                        {
-                            <p>No login streak information available.</p>
-                        }
-                    </div>
+            <div class="leftBox fullLeft">
+                <!-- Streak Boxes (Left Side) -->
+                <div style="width: 100%; background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 100%; margin-right: 10px; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.2em;">Current Streak</h3>
+                    @if (Model != null)
+                    {
+                        <p style="font-size: 3em; margin: 10px 0;">@Model.LoginStreak.CurrentStreak</p>
+                    }
+                    else
+                    {
+                        <p style="font-size: 1em; margin: 10px 0;">No login streak information available.</p>
+                    }
                 </div>
 
-                <div class="col-sm-12 mb-3">
-                    <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-                        <h3 class="font-size-24">Login Streak Rewards (coming soon...)</h3>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F9F9F9;">
-                                <span class="medal-text">🥉 Bronze Medal (7 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">50 Points</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F0F0F0;">
-                                <span class="medal-text">🥈 Silver Medal (14 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">150 Points</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #E0E0E0;">
-                                <span class="medal-text">🥇 Gold Medal (30 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">300 Points</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #D4AF37; color: #fff;">
-                                <span class="medal-text">💎 Platinum Medal (60 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">500 Points</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #B9F2FF;">
-                                <span class="medal-text">💎 Diamond Medal (90 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">750 Points</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #FFD700; color: #fff;">
-                                <span class="medal-text">🌟 Master Medal (180 days)</span>
-                                <span class="badge badge-primary badge-pill point-badge">1000 Points</span>
-                            </li>
-                            <!-- Add more items as needed -->
-                        </ul>
-                    </div>
+                <div style="width: 100%; background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 100%; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.2em;">Longest Streak</h3>
+                    @if (Model != null)
+                    {
+                        <p style="font-size: 3em; margin: 10px 0;">@Model.LoginStreak.LongestStreak</p>
+                    }
+                    else
+                    {
+                        <p style="font-size: 1em; margin: 10px 0;">No login streak information available.</p>
+                    }
+                </div>
+
+            </div>
+
+            <!-- Rewards Box (Right Side) -->
+            <div class="col-sm-12 mb-3 fullRight" style="flex-grow: 1;">
+                <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                    <h3 class="font-size-24">Login Streak Rewards (coming soon...)</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F9F9F9;">
+                            <span class="medal-text">🥉 Bronze Medal (7 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">50 Points</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F0F0F0;">
+                            <span class="medal-text">🥈 Silver Medal (14 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">150 Points</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #E0E0E0;">
+                            <span class="medal-text">🥇 Gold Medal (30 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">300 Points</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #D4AF37; color: #fff;">
+                            <span class="medal-text">💎 Platinum Medal (60 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">500 Points</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #B9F2FF;">
+                            <span class="medal-text">💎 Diamond Medal (90 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">750 Points</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #FFD700; color: #fff;">
+                            <span class="medal-text">🌟 Master Medal (180 days)</span>
+                            <span class="badge badge-primary badge-pill point-badge">1000 Points</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
-
+        </div>
 
         <section>
-            <h3 style="color: white;">Weight</h3>
-            <hr />
+            <h3>Weight</h3>
 
             <!-- Current Weight -->
             @if (Model.WeightData.Any())
             {
                 var currentWeight = Model.WeightData.OrderByDescending(we => we.Date).First().Weight;
                 var formattedCurrentWeight = $"{(decimal)currentWeight:F1} kg";
-                <h8 class=" text-white">Current Weight: <strong>@formattedCurrentWeight</strong></h8>
+                <h8>Current Weight: <strong>@formattedCurrentWeight</strong></h8>
             }
 
             <!-- Progress Bar -->
@@ -195,10 +184,6 @@
                     </div>
                 </div>
             }
-
-
-
-            <hr />
 
             <div class="dashboard-card">
                 <div class="d-flex justify-content-between align-items-center">

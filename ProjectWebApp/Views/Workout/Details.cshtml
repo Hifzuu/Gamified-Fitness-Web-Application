@@ -44,22 +44,20 @@
 
 <body>
 
-    <div class="container mt-6">
+    <div class="page-container">
         
-        <section>
+        <section class="container mt-4">
             <a href="@Url.Action("Index", "Workout")" class="btn btn-primary mb-3">Back to Workouts</a>
-            <h2>@ViewData["Title"]</h2>
 
             <div class="card">
-
                 <div class="embed-responsive embed-responsive-16by9">
                     <video class="embed-responsive-item" src="/Videos/@Model.VideoUrl" autoplay loop muted playsinline controls></video>
                 </div>
 
-                <hr style="background-color: #666; height: 1px;">
+                <hr class="my-4">
 
                 <div class="card-body text-center">
-                    <h5 class="card-title">@Model.Name</h5>
+                    <h3 class="card-title">@Model.Name</h3>
                     <p class="card-text">@Model.Description</p>
                     <p class="card-text"><strong>Category:</strong> @Model.Category</p>
 
@@ -69,24 +67,23 @@
                         </div>
                     </div>
 
-                    <div id="workoutButtons">
+                    <div id="workoutButtons" class="mt-3">
                         <button id="startButton" class="btn btn-success" onclick="startWorkout(@Model.WorkoutId, @Model.DurationMinutes)">
                             Start Workout
                         </button>
 
-                        <button id="favouriteButton" type="button" class="btn btn-link btn-favorite" onclick="addToFavourites(@Model.WorkoutId)">
+                        <button id="favouriteButton" type="button" class="btn btn-link btn-favorite ml-3" onclick="addToFavourites(@Model.WorkoutId)">
                             <i class="far fa-heart fa-2x"></i>
                         </button>
                     </div>
 
-                    <div id="timerSection" style="display: none;">
-                        <p id="timer" class="mt-3"></p>
+                    <div id="timerSection" style="display: none;" class="mt-3">
+                        <p id="timer"></p>
                     </div>
                 </div>
             </div>
-
-            
         </section>
+
 
         <section>
             <div class="row">

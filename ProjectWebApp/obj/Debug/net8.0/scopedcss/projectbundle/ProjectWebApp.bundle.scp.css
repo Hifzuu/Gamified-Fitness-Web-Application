@@ -1,7 +1,4 @@
 /* _content/ProjectWebApp/Views/Challenge/Index.cshtml.rz.scp.css */
-h2[b-s13xhoid61] {
-    color: #007bff;
-}
 
 body[b-s13xhoid61] {
     font-family: 'Arial', sans-serif;
@@ -28,7 +25,7 @@ body[b-s13xhoid61] {
 }
 
 .game-title[b-s13xhoid61] {
-    color: #fff;
+    color: black;
     font-size: 24px;
 }
 
@@ -47,7 +44,7 @@ body[b-s13xhoid61] {
 }
 
     .challenge-card:hover[b-s13xhoid61] {
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
 
     .challenge-card h6[b-s13xhoid61] {
@@ -199,16 +196,17 @@ h2[b-lict9yrgg8] {
     background-color: white;
     border-radius: 8px; /* Add rounded corners */
     overflow: hidden; /* Hide overflowing content */
-    transition: box-shadow 0.3s; /* Add smooth transition for box shadow */
-    transition: transform 0.3s ease-in-out;
+    transition: box-shadow 0.3s, transform 0.3s ease-in-out;
     text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom:20px;
 }
 
     .profile-card:hover[b-lict9yrgg8] {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         transform: scale(1.01); /* Add a slight scale effect */
         text-decoration: none;
-        cursor:pointer;
+        cursor: pointer;
     }
 
 .profile-container[b-lict9yrgg8] {
@@ -241,6 +239,24 @@ h2[b-lict9yrgg8] {
         .custom-display-4[b-lict9yrgg8] {
         font-size: 2em; /* Adjust the font size as needed */
     }
+
+
+.leftBox[b-lict9yrgg8] {
+    display: grid;
+}
+
+.fullBox[b-lict9yrgg8] {
+    width: 100%;
+}
+
+.fullLeft[b-lict9yrgg8] {
+    width: 25%;
+}
+
+.fullRight[b-lict9yrgg8] {
+    width: 75%;
+    max-width: 75%;
+}
 /* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
 body[b-dix295yned] {
     font-family: 'Arial', sans-serif;
@@ -248,7 +264,7 @@ body[b-dix295yned] {
     color: white;
 }
 
-.container-full[b-dix295yned] {
+.container-one[b-dix295yned] {
    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/Images/homepage.jpg') center/cover;
     padding: 40px;
     color: #fff;
@@ -256,6 +272,49 @@ body[b-dix295yned] {
     margin:0px;
     width:100%;
 }
+
+.container-two[b-dix295yned] {
+    background: linear-gradient(rgba(50, 50, 50, 0.8), rgba(0, 123, 255, 0.9));
+    color: #fff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+    .container-two .content-container[b-dix295yned] {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .container-two .app-benefits[b-dix295yned] {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .container-two .benefit[b-dix295yned] {
+        flex: 1;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        background: #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+        .container-two .benefit h2[b-dix295yned] {
+            color: #007bff;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .container-two .benefit p[b-dix295yned] {
+            font-size: 1.1rem;
+            color: black;
+            line-height: 1.6;
+        }
 
 .welcome-message[b-dix295yned] {
     font-size: 36px;
@@ -539,31 +598,13 @@ video[b-9cvkiois10]::-webkit-media-controls-enclosure {
     color: #007bff;
 }
 
-section[b-9cvkiois10] {
-    margin-top: 20px;
-    background-color: #212529;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h2[b-9cvkiois10] {
     color: #007bff;
 }
 
 h3[b-9cvkiois10] {
-    color: white;
+    color: black;
 }
-
-
-
-
-
-
-
-
-
 
 
 #progressBarSection[b-9cvkiois10],
@@ -597,23 +638,18 @@ body[b-25jdkaz98d] {
 
 /* Section Header Styles */
 .section-header[b-25jdkaz98d] {
-    background-color: #007bff;
-    padding: 10px;
     font-size: 24px;
     font-weight: bold;
     text-align: left;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 10px;
 }
 
 /* Filter Icon Styles */
 .filter-icon[b-25jdkaz98d] {
     width: 30px;
     cursor: pointer;
-    filter: invert(100%);
 }
 
 /* Filter Form Styles */
@@ -792,20 +828,13 @@ body[b-25jdkaz98d] {
     display: block;
 }
 
-section[b-25jdkaz98d] {
-    background-color: #212529;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 h2[b-25jdkaz98d] {
     color: #007bff;
 }
 
 h3[b-25jdkaz98d] {
-    color: white;
+    color: black;
 }
 
 .card-title[b-25jdkaz98d]{
@@ -825,8 +854,8 @@ h3[b-25jdkaz98d] {
     .workout-card[b-25jdkaz98d] {
         /* Adjust the width for smaller screens */
         width: 100%;
-        font-size: 14px; /* Increase the font size for readability */
-        padding: 15px; /* Add padding for better spacing */
+        font-size: 12px; /* Increase the font size for readability */
+        padding: 5px; /* Add padding for better spacing */
     }
 
     #filterForm[b-25jdkaz98d] {
@@ -838,3 +867,14 @@ h3[b-25jdkaz98d] {
 .fc-toolbar h2[b-25jdkaz98d] {
     color: white; /* Set the text color for the calendar header */
 }
+
+.calendar-section[b-25jdkaz98d] {
+    background-color: #222;
+    margin-bottom: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+

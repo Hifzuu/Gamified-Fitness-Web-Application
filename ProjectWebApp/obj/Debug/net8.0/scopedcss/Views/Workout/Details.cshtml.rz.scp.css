@@ -61,31 +61,13 @@ video[b-9cvkiois10]::-webkit-media-controls-enclosure {
     color: #007bff;
 }
 
-section[b-9cvkiois10] {
-    margin-top: 20px;
-    background-color: #212529;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 h2[b-9cvkiois10] {
     color: #007bff;
 }
 
 h3[b-9cvkiois10] {
-    color: white;
+    color: black;
 }
-
-
-
-
-
-
-
-
-
 
 
 #progressBarSection[b-9cvkiois10],

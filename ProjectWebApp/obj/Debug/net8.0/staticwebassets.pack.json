@@ -17,8 +17,16 @@
       "PackagePath": "staticwebassets\\Images\\badge.png"
     },
     {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\bg.jpg",
+      "PackagePath": "staticwebassets\\Images\\bg.jpg"
+    },
+    {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\dashboard.png",
       "PackagePath": "staticwebassets\\Images\\dashboard.png"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\empty-pfp.png",
+      "PackagePath": "staticwebassets\\Images\\empty-pfp.png"
     },
     {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\event-ticket.png",
@@ -69,6 +77,10 @@
       "PackagePath": "staticwebassets\\Images\\social.png"
     },
     {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\streak.png",
+      "PackagePath": "staticwebassets\\Images\\streak.png"
+    },
+    {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\target.png",
       "PackagePath": "staticwebassets\\Images\\target.png"
     },
@@ -111,6 +123,14 @@
     {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\b560b489-ec5c-4acf-b35c-715a3bdd07d6_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG",
       "PackagePath": "staticwebassets\\UserPfpUploads\\b560b489-ec5c-4acf-b35c-715a3bdd07d6_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\c301d64c-02e7-4aeb-945e-af1d87f4cf70_IMG_4558[272].jpg",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\c301d64c-02e7-4aeb-945e-af1d87f4cf70_IMG_4558[272].jpg"
+    },
+    {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\UserPfpUploads\\ea3bdcfc-a56a-4433-88a6-e09719eec22c_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG",
+      "PackagePath": "staticwebassets\\UserPfpUploads\\ea3bdcfc-a56a-4433-88a6-e09719eec22c_a9ff54b4-cfb5-4e03-9eeb-f3639e674cf3[783].JPG"
     },
     {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Videos\\high-knees.mp4",

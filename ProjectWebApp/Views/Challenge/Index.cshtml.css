@@ -1,7 +1,4 @@
-﻿h2 {
-    color: #007bff;
-}
-
+﻿
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -27,7 +24,7 @@ body {
 }
 
 .game-title {
-    color: #fff;
+    color: black;
     font-size: 24px;
 }
 
@@ -46,7 +43,7 @@ body {
 }
 
     .challenge-card:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
 
     .challenge-card h6 {
