@@ -2,7 +2,7 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
-        Layout = "_HomeLayout";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -13,220 +13,273 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" integrity="sha384-2CuY+hAvY/RTFXF+LPKxRYga+7RvWwnkydUXoFCoOliNUTUjTVODcuDW1rVo8Lsf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="your-updated-integrity-value" crossorigin="anonymous" />
+
+    <style>
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .bg-img {
+            position: relative;
+            -webkit-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .h-p100 {
+            height: 100% !important;
+        }
+
+        .register-container {
+            --bs-gutter-x: 1.5rem;
+            --bs-gutter-y: 0;
+            width: 100%;
+            padding-right: calc(var(--bs-gutter-x) * 0.5);
+            padding-left: calc(var(--bs-gutter-x) * 0.5);
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        section {
+            background-color: #fff;
+            color: #333;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
-<body class="register-page text-white">
+<body class="hold-transition theme-primary bg-img" style="background-image: url(/Images/logreg.jpg)">
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12 col-lg-4">
-                <section>
-                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <h2 class="text-center mb-4">Create an account</h2>
-                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                        @if (Request.Query.ContainsKey("error"))
-                        {
-                            var errorType = Request.Query["error"];
-                            switch (errorType)
-                            {
-                                case "email":
-                                    <div class="alert alert-danger">
-                                        The email address is already registered. Please use a different email.
-                                    </div>
-                                    break;
-                                case "other":
-                                    <div class="alert alert-danger">
-                                        There was an error with your submission. Please check the form and try again.
-                                    </div>
-                                    break;
-                                case "exception":
-                                    <div class="alert alert-danger">
-                                        An unexpected error occurred. Please try again later.
-                                    </div>
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        <!-- Personal Information Section -->
-                        <div class="section-label">Personal Information</div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="Input.FirstName">First Name</label>
-                                    <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="First Name" />
-                                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="Input.LastName">Last Name</label>
-                                    <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Last Name" />
-                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
+    <div class="register-container h-p100">
+        <div class="row align-items-center justify-content-md-center h-p100">
 
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Gender</label>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-outline-secondary">
-                                            <input type="radio" asp-for="Input.Gender" value="Male" id="maleOption" aria-required="true"> Male
-                                        </label>
-                                        <label class="btn btn-outline-secondary">
-                                            <input type="radio" asp-for="Input.Gender" value="Female" id="femaleOption" aria-required="true"> Female
-                                        </label>
-                                    </div>
-                                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+            <div class="col-12">
+                <div class="row justify-content-center g-0">
+                    <div class="col-lg-5 col-md-5 col-12">
+                        <div>
+                            <section>
+                                <div class="content-top-agile p-20 pb-0 text-center mb-4">
+                                    <h2 class="text-primary fw-600">Start Your Fitness Journey</h2>
+                                    <p class="mb-0 text-fade">Register a new account</p>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label asp-for="Input.DateOfBirth">Date of Birth</label>
-                                    <input asp-for="Input.DateOfBirth" class="form-control" type="date" aria-required="true" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
-                                    <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label asp-for="Input.Country">Country</label>
-                            <select asp-for="Input.Country" class="form-control" aria-required="true" id="selectedCountry">
-                                <option value="" disabled selected>Select Country</option>
-                                @{
-                                    var uniqueCountries = new HashSet<string>();
-                                }
-
-                                @foreach (var region in System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.SpecificCultures)
-                                .Select(x => new System.Globalization.RegionInfo(x.Name))
-                                .OrderBy(x => x.EnglishName))
-                                {
-                                    if (uniqueCountries.Add(region.EnglishName))
+                                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger alert alert-danger text-center" role="alert"></div>
+                                    @if (Request.Query.ContainsKey("error"))
                                     {
-                                        <option value="@region.Name">@region.EnglishName</option>
-                                    }
-                                }
-                            </select>
-                            <span asp-validation-for="Input.Country" class="text-danger"></span>
-                        </div>
-
-                        <!-- Goals and Exercise Focus Section -->
-                        <div class="form-group">
-                            <label>Select Goals</label>
-                            @if (Model.Input.Goals != null)
-                            {
-                                @Html.DropDownListFor(m => m.Input.SelectedGoals,
-                                         new SelectList(Model.Input.Goals, "Value", "Text"),
-                                         "Select Goals",
-                                         new { @class = "form-control", id = "selectedGoals" })
-                            }
-                        </div>
-
-                        <div class="form-group">
-                            <label>Select Exercise Focus</label>
-                            @if (Model.Input.ExerciseFocusOptions != null)
-                            {
-                                @Html.DropDownListFor(m => m.Input.ExerciseFocus,
-                                         new SelectList(Model.Input.ExerciseFocusOptions, "Value", "Text"),
-                                         "Select Exercise Focus",
-                                         new { @class = "form-control", id = "selectedExerciseFocus" })
-                            }
-                        </div>
-
-
-                        <!-- Account Information Section -->
-                        <div class="section-label">Account Information</div>
-                        <div class="form-group">
-                            <label>Height (cm)</label>
-                            <input asp-for="Input.Height" class="form-control" aria-required="true" placeholder="Height (cm)" />
-                            <span asp-validation-for="Input.Height" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Current Weight (kg)</label>
-                            <input asp-for="Input.InitialWeightEntry" class="form-control" aria-required="true" placeholder="Current Weight (kg)" />
-                            <span asp-validation-for="Input.InitialWeightEntry" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Goal Weight (kg)</label>
-                            <input asp-for="Input.GoalWeight" class="form-control" aria-required="true" placeholder="Goal Weight (kg)" />
-                            <span asp-validation-for="Input.GoalWeight" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Input.CustomUserName">Username</label>
-                            <input asp-for="Input.CustomUserName" class="form-control" aria-required="true" placeholder="Username" />
-                            <span asp-validation-for="Input.CustomUserName" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Input.Email">Email</label>
-                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
-                            <span asp-validation-for="Input.Email" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Input.Password">Password</label>
-                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
-                            <span asp-validation-for="Input.Password" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                        </div>
-
-                        <button id="registerSubmit" type="submit" class="btn btn-primary btn-block">Register</button>
-
-                        <div class="text-center mt-3">
-                            <p>
-                                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log in here.</a>
-                            </p>
-                        </div>
-                    </form>
-                </section>
-            </div>
-            <div class="col-md-12 col-lg-6 offset-lg-2">
-                <section>
-                    <h3 class="text-center mb-4">Use another service to register.</h3>
-                    @{
-                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                        {
-                            <div>
-                                <p>
-                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article about setting up this ASP.NET application to support logging in via external services</a>.
-                                </p>
-                            </div>
-                        }
-                        else
-                        {
-                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                                <div>
-                                    <p>
-                                        @foreach (var provider in Model.ExternalLogins!)
+                                        var errorType = Request.Query["error"];
+                                        switch (errorType)
                                         {
-                                            <button type="submit" class="btn btn-primary mb-2" name="provider" value="@provider.Name" title="Register using your @provider.DisplayName account">@provider.DisplayName</button>
+                                            case "email":
+                                                <div class="alert alert-danger">
+                                                    The email address is already registered. Please use a different email.
+                                                </div>
+                                                break;
+                                            case "other":
+                                                <div class="alert alert-danger">
+                                                    <p>There was an error with your submission. Please ensure the following:</p>
+                                                    <ul>
+                                                        <li>All fields are entered correctly.</li>
+                                                        <li>Gender is selected.</li>
+                                                        <li>Date of Birth is provided and in the correct format.</li>
+                                                        <li>Country is selected.</li>
+                                                        <li>Height is entered.</li>
+                                                        <li>Starting Weight is entered.</li>
+                                                        <li>Goal Weight is entered.</li>
+                                                        <li>Username is between 3 and 25 characters, using only alphanumeric characters.</li>
+                                                        <li>Password is at least 6 characters long and includes at least one uppercase letter and one special character.</li>
+                                                    </ul>
+                                                    <p>Try again after checking the above.</p>
+                                                </div>
+
+                                                break;
+                                            case "exception":
+                                                <div class="alert alert-danger">
+                                                    An unexpected error occurred. Please try again later.
+                                                </div>
+                                                break;
+                                            default:
+                                                break;
                                         }
-                                    </p>
-                                </div>
-                            </form>
-                        }
-                    }
-                </section>
+                                    }
+                                    <!-- Personal Information Section -->
+                                    <div class="section-label">Personal Information</div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="First Name" />
+                                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="Last Name" />
+                                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+                                                    <label class="btn btn-outline-secondary w-50">
+                                                        <input type="radio" asp-for="Input.Gender" value="Male" id="maleOption" aria-required="true"> Male
+                                                    </label>
+                                                    <label class="btn btn-outline-secondary w-50">
+                                                        <input type="radio" asp-for="Input.Gender" value="Female" id="femaleOption" aria-required="true"> Female
+                                                    </label>
+                                                </div>
+                                                <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <input asp-for="Input.DateOfBirth" class="form-control" type="date" aria-required="true" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                                                <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select asp-for="Input.Country" class="form-control" aria-required="true" id="selectedCountry">
+                                            <option value="" disabled selected>Select Country</option>
+                                            @{
+                                                var uniqueCountries = new HashSet<string>();
+                                            }
+
+                                            @foreach (var region in System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes.SpecificCultures)
+                                            .Select(x => new System.Globalization.RegionInfo(x.Name))
+                                            .OrderBy(x => x.EnglishName))
+                                            {
+                                                if (uniqueCountries.Add(region.EnglishName))
+                                                {
+                                                    <option value="@region.Name">@region.EnglishName</option>
+                                                }
+                                            }
+                                        </select>
+                                        <span asp-validation-for="Input.Country" class="text-danger"></span>
+                                    </div>
+
+                                    <!-- Goals and Exercise Focus Section -->
+                                    <div class="form-group">
+                                        @if (Model.Input.Goals != null)
+                                        {
+                                            @Html.DropDownListFor(m => m.Input.SelectedGoals,
+                                                     new SelectList(Model.Input.Goals, "Value", "Text"),
+                                                     "Select Goals",
+                                                     new { @class = "form-control", id = "selectedGoals" })
+                                        }
+                                    </div>
+
+                                    <div class="form-group">
+                                        @if (Model.Input.ExerciseFocusOptions != null)
+                                        {
+                                            @Html.DropDownListFor(m => m.Input.ExerciseFocus,
+                                                     new SelectList(Model.Input.ExerciseFocusOptions, "Value", "Text"),
+                                                     "Select Exercise Focus",
+                                                     new { @class = "form-control", id = "selectedExerciseFocus" })
+                                        }
+                                    </div>
+
+
+                                    <!-- Health Information Section -->
+                                    <div class="section-label">Health Information</div>
+
+                                    <div class="form-group">
+                                        <label>Height (cm)</label>
+                                        <input asp-for="Input.Height" class="form-control" aria-required="true" placeholder="Height (cm)" />
+                                        <span asp-validation-for="Input.Height" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Current Weight (kg)</label>
+                                        <input asp-for="Input.InitialWeightEntry" class="form-control" aria-required="true" placeholder="Current Weight (kg)" />
+                                        <span asp-validation-for="Input.InitialWeightEntry" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Goal Weight (kg)</label>
+                                        <input asp-for="Input.GoalWeight" class="form-control" aria-required="true" placeholder="Goal Weight (kg)" />
+                                        <span asp-validation-for="Input.GoalWeight" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="section-label">Account Information</div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text bg-transparent"><i class="text-fade ti-user"></i></span>
+                                            <input asp-for="Input.CustomUserName" class="form-control" aria-required="true" placeholder="Username" />
+                                        </div>
+                                        <span asp-validation-for="Input.CustomUserName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text bg-transparent"><i class="text-fade ti-email"></i></span>
+                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                                           
+                                        </div>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text bg-transparent"><i class="text-fade ti-lock"></i></span>
+                                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                                        </div>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text bg-transparent"><i class="text-fade ti-lock"></i></span>
+                                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                                        </div>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="row d-flex align-items-center mb-4">
+                                        <div class="col-12 text-center">
+                                            <button id="registerSubmit" type="submit" class="btn btn-primary btn-block">REGISTER</button>
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div class="text-center">
+                                        <p class="mt-15 mb-0 text-fade">Already have an account?<a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-primary ms-5">Sign In</a></p>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+   
 </body>
 </html>
 
@@ -242,3 +295,32 @@
     </script>
 
 }
+
+@* <div class="col-md-12 col-lg-6 offset-lg-2">
+    <section>
+        <h3 class="text-center mb-4">Use another service to register.</h3>
+        @{
+            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+                <div>
+                    <p>
+                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article about setting up this ASP.NET application to support logging in via external services</a>.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="btn btn-primary mb-2" name="provider" value="@provider.Name" title="Register using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            }
+        }
+    </section>
+</div> *@

@@ -2,24 +2,108 @@
 @model ResendEmailConfirmationModel
 @{
     ViewData["Title"] = "Resend email confirmation";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2>Enter your email.</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email" class="form-label"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" integrity="sha384-2CuY+hAvY/RTFXF+LPKxRYga+7RvWwnkydUXoFCoOliNUTUjTVODcuDW1rVo8Lsf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="your-updated-integrity-value" crossorigin="anonymous" />
+
+
+</head>
+
+<style>
+    body {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    html {
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .bg-img {
+        position: relative;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: 0;
+    }
+
+    .h-p100 {
+        height: 100% !important;
+    }
+
+    .login-container {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 0;
+        width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    section {
+        background-color: #fff;
+        color: #333;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        margin-bottom: 20px;
+    }
+</style>
+
+<body class="hold-transition theme-primary bg-img" style="background-image: url(/Images/logreg.jpg)">
+
+    <div class="login-container h-p100">
+        <div class="row align-items-center justify-content-md-center h-p100">
+
+            <div class="col-12">
+                <div class="row justify-content-center g-0">
+                    <div class="col-lg-5 col-md-5 col-12">
+                        <div>
+                            <section>
+                                <div class="container text-center">
+                                    <div class="content-top-agile p-20 pb-0 text-center mb-4">
+                                        <h2 class="text-primary fw-600">@ViewData["Title"]</h2>
+                                    </div>
+                                    <form method="post">
+                                        <div class="form-floating mb-3">
+                                            <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                        <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
-        </form>
+        </div>
     </div>
-</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

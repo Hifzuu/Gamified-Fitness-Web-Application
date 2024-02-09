@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using ProjectWebApp.Models;
 
 namespace ProjectWebApp.Areas.Identity.Pages.Account
@@ -199,6 +200,14 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, "The email address is already registered. Please use a different email.");
                 return RedirectToPage(new { returnUrl, error = "email" });
             }
+
+            if (Input.SelectedGoals == null || Input.ExerciseFocus == null ||
+     Input.SelectedGoals.Any(string.IsNullOrEmpty) || Input.ExerciseFocus.Any(string.IsNullOrEmpty))
+            {
+                ModelState.AddModelError(string.Empty, "Please select goals and exercise focus.");
+                return RedirectToPage(new { returnUrl, error = "other" });
+            }
+
 
             try
             {

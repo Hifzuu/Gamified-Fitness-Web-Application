@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4SaXOUHbVVX1R9Y1oIskQNYmc/B8vJ8oK9VcH3N3XcE=",
+  "Hash": "YRqN21YiobCEEvIgV58LvF8u1tPGdu+MPjB3hMuR3VQ=",
   "Source": "ProjectWebApp",
   "BasePath": "_content/ProjectWebApp",
   "Mode": "Default",
@@ -1535,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\logo-whitebg.png"
+    },
+    {
+      "Identity": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\logreg.jpg",
+      "SourceId": "ProjectWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\",
+      "BasePath": "_content/ProjectWebApp",
+      "RelativePath": "Images/logreg.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\logreg.jpg"
     },
     {
       "Identity": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\medals.png",
