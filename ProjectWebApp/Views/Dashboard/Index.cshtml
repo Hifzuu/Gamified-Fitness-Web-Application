@@ -18,7 +18,9 @@
     <title>@ViewData["Title"] - ProjectWebApp</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
+
 </head>
+
 
 <body>
 
@@ -298,7 +300,7 @@
                 label: 'Weight',
                 data: weights,
                 borderColor: 'rgba(54, 162, 235, 1)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: gradientFill(ctx, 'rgba(54, 162, 235, 0.6)', 'rgba(255, 255, 255, 0)'),
                 pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                 pointRadius: 3,
                 pointHoverRadius: 8,
@@ -318,7 +320,7 @@
                     scaleLabel: {
                         display: true,
                         labelString: 'Date'
-                    }
+                    },
                 }],
                 yAxes: [{
                     ticks: {
@@ -332,6 +334,15 @@
             }
         }
     });
+
+    // Function to create gradient fill
+    function gradientFill(ctx, startColor, endColor) {
+        var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, startColor);
+        gradient.addColorStop(1, endColor);
+        return gradient;
+    }
+
 
 </script>
 

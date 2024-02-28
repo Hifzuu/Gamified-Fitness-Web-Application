@@ -267,56 +267,14 @@ body[b-dix295yned] {
 }
 
 .container-one[b-dix295yned] {
-   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/Images/homepage.jpg') center/cover;
+    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/Images/homepage.jpg') center/cover;*/
+    background: url('/Images/logreg.jpg') center/cover;
     padding: 40px;
     color: #fff;
-    height:100%;
-    margin:0px;
-    width:100%;
+    height: 100%;
+    margin: 0px;
+    width: 100%;
 }
-
-.container-two[b-dix295yned] {
-    background: linear-gradient(rgba(50, 50, 50, 0.8), rgba(0, 123, 255, 0.9));
-    color: #fff;
-    padding: 40px 20px;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-}
-
-    .container-two .content-container[b-dix295yned] {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .container-two .app-benefits[b-dix295yned] {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-top: 30px;
-    }
-
-    .container-two .benefit[b-dix295yned] {
-        flex: 1;
-        margin: 20px;
-        padding: 20px;
-        border-radius: 8px;
-        background: #ccc;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: left;
-    }
-
-        .container-two .benefit h2[b-dix295yned] {
-            color: #007bff;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-
-        .container-two .benefit p[b-dix295yned] {
-            font-size: 1.1rem;
-            color: black;
-            line-height: 1.6;
-        }
 
 .welcome-message[b-dix295yned] {
     font-size: 36px;
@@ -870,13 +828,20 @@ h3[b-25jdkaz98d] {
     color: white; /* Set the text color for the calendar header */
 }
 
+
 .calendar-section[b-25jdkaz98d] {
-    background-color: #222;
+    background-color: white;
     margin-bottom: 10px;
     padding: 20px;
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+#searchInput[b-25jdkaz98d] {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat 95% center;
+    background-size: 20px; /* Adjust the size as needed */
+    padding-right: 30px; /* Ensure there is space for the icon */
 }
 

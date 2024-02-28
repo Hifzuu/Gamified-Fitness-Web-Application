@@ -245,13 +245,20 @@ h3[b-25jdkaz98d] {
     color: white; /* Set the text color for the calendar header */
 }
 
+
 .calendar-section[b-25jdkaz98d] {
-    background-color: #222;
+    background-color: white;
     margin-bottom: 10px;
     padding: 20px;
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+#searchInput[b-25jdkaz98d] {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat 95% center;
+    background-size: 20px; /* Adjust the size as needed */
+    padding-right: 30px; /* Ensure there is space for the icon */
 }
 

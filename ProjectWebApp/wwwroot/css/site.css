@@ -8,6 +8,7 @@ body, html {
     min-height: 100%;
     background-color: #e5eeff;
     font-size: 16px;
+    overflow-x:hidden;
 }
 
 @media only screen and (max-width: 768px) {
@@ -92,6 +93,7 @@ button.accept-policy {
     /*#e5eeff*/
     color: black;
     border-bottom: 0px solid white;
+    padding: 10px;
 }
 
 .customHeader {
@@ -429,3 +431,22 @@ section {
     padding: 20px;
     margin-bottom: 20px;
 }
+
+.container-dashboard {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.box-dashboard {
+    background-color: #fff;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+

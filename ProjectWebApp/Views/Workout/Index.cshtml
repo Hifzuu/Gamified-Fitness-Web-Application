@@ -33,18 +33,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha384-Uz1UHyakAAz121kPY0Nx6ZGzYeUTy9zAtcpdwVmFCEwiTGPA2K6zSGgkKJEQfMhK" crossorigin="anonymous"></script>
 
     <style>
-        .fc-toolbar h2,
-        .fc-day-header,
-        .fc-day,
-        .fc-day-number,
-        .fc-timegrid .fc-slats,
-        .fc-timegrid-slot-label-cushion,
-        .fc-timegrid-axis-cushion {
+
+        .fc .fc-toolbar-title,
+        .fc .fc-day-header,
+        .fc .fc-day,
+        .fc .fc-day-number,
+        .fc .fc-timegrid .fc-slats,
+        .fc .fc-timegrid-slot-label-cushion,
+        .fc .fc-timegrid-axis-cushion {
             color: white !important;
         }
 
-        .fc-event {
-            background-color: blue; /* Set the background color for events */
+        .fc .fc-event {
+            background-color: #007bff; /* Set the background color for events */
             color: white !important; /* Set the text color for events */
             cursor: pointer;
         }
@@ -52,12 +53,52 @@
         .event-tooltip {
             position: absolute;
             z-index: 1000;
-            background-color: #fff;
+            background-color: #007bff;
             border: 1px solid #ccc;
             padding: 10px;
             max-width: 200px;
+            color:white;
         }
 
+        .fc .fc-toolbar-title {
+            font-size: 18px; /* Adjust the font size as needed */
+            font-weight: bold; /* Optionally adjust the font weight */
+            text-transform:uppercase;
+        }
+
+        .fc .fc-prev-button,
+        .fc .fc-next-button,
+        .fc .fc-dayGridMonth-button,
+        .fc .fc-timeGridWeek-button,
+        .fc .fc-timeGridDay-button,
+        .fc .fc-customTitle-button {
+            background-color: white;
+            color: #333;
+            border: 1px solid #ddd;
+            font-size: 12px; /* Adjust the font size for smaller screens */
+            padding: 4px 12px; /* Adjust padding for smaller screens */
+            text-transform:uppercase;
+        }
+
+            /* Default hover styles */
+            .fc .fc-button:hover,
+            .fc .fc-customTitle-button:hover {
+                background-color: #007bff;
+            }
+
+        .fc-dayGridMonth-view .fc-day-header {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .fc-dayGridMonth-view .fc-day {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .fc .fc-daygrid-day.fc-day-today {
+            background-color: #001f3f; /* Dark blue color */
+        }
 
     </style>
 </head>
@@ -96,8 +137,12 @@
             <div class="col-lg-6" style="display: flex; flex-direction: column; height: 100%;">
                 <section class="calendar-section" style="flex: 1;">
                     <div id="calendarSection" style="text-align: center;">
-                        <h3 style="color: #007bff; font-weight: bold; margin-bottom: 20px;">My Calendar</h3>
+                        <div class="section-header favourite-section">
+                            <h3>My Calendar</h3>
+                        </div>
+                        <section class="box" style="background-color:#333333;">
                         <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
+                        </section>
                     </div>
                 </section>
             </div>
@@ -512,7 +557,7 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 headerToolbar: {
-                    left: 'prev,next today',
+                    left: 'prev,next',
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
@@ -552,6 +597,7 @@
                         document.body.removeChild(tooltip);
                     }
                 }
+
             });
 
             // Render the calendar

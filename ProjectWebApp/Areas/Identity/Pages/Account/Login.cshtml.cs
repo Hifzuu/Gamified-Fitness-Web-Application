@@ -113,16 +113,18 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
 
         private async Task UpdateLoginStreakAsync(string userId)
         {
+            var currentDate = DateTime.UtcNow.Date;
+
             // Check if the user has already logged in today
             var hasLoggedToday = await _dbContext.LoginStreaks
-                .AnyAsync(ls => ls.UserId == userId && ls.LastLoginTime.Date == DateTime.UtcNow.Date);
+                .AnyAsync(ls => ls.UserId == userId && ls.LastLoginTime.Date == currentDate);
 
             if (!hasLoggedToday)
             {
-                var userLoginStreak = await _dbContext.LoginStreaks
+                var userLoginStreaks = await _dbContext.LoginStreaks
                     .Where(ls => ls.UserId == userId)
                     .OrderByDescending(ls => ls.LastLoginTime)
-                    .FirstOrDefaultAsync();
+                    .ToListAsync();
 
                 // Create a new instance of LoginStreak with updated values
                 var newLoginStreak = new LoginStreak
@@ -132,33 +134,36 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                     LastLoginTime = DateTime.UtcNow
                 };
 
-                if (userLoginStreak != null)
+                if (userLoginStreaks.Any())
                 {
+                    var previousStreak = userLoginStreaks.First();
+
                     // Check if the user logged in on a different day
-                    var daysBetween = (DateTime.UtcNow - userLoginStreak.LastLoginTime.Date).Days;
+                    var daysBetween = (currentDate - previousStreak.LastLoginTime.Date).Days;
 
                     if (daysBetween == 0)
                     {
                         // Increment the current streak
-                        newLoginStreak.CurrentStreak = userLoginStreak.CurrentStreak + 1;
-                        newLoginStreak.LongestStreak = Math.Max(userLoginStreak.LongestStreak, newLoginStreak.CurrentStreak);
+                        newLoginStreak.CurrentStreak = previousStreak.CurrentStreak + 1;
 
-                        // Detach the existing entity to avoid key conflicts
-                        _dbContext.Entry(userLoginStreak).State = EntityState.Detached;
+                        // Check if today's streak is greater than the historical longest streak
+                        if (newLoginStreak.CurrentStreak > previousStreak.LongestStreak)
+                        {
+                            // Update the longest streak
+                            newLoginStreak.LongestStreak = newLoginStreak.CurrentStreak;
+                        }
+                        else
+                        {
+                            // Keep the historical longest streak
+                            newLoginStreak.LongestStreak = previousStreak.LongestStreak;
+                        }
                     }
                     else if (daysBetween == 1)
                     {
                         // Increment the current streak if there's a login from the previous day
-                        newLoginStreak.CurrentStreak = userLoginStreak.CurrentStreak + 1;
+                        newLoginStreak.CurrentStreak = previousStreak.CurrentStreak + 1;
                     }
                     // else: Reset streak if the user didn't log in consecutively
-                }
-
-                // Check if the new current streak is greater than the previous longest streak
-                if (userLoginStreak == null || newLoginStreak.CurrentStreak > userLoginStreak.LongestStreak)
-                {
-                    // Update the new streak to be the longest streak
-                    newLoginStreak.LongestStreak = newLoginStreak.CurrentStreak;
                 }
 
                 // Add the new entity to the context
@@ -168,6 +173,8 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+
 
 
 
