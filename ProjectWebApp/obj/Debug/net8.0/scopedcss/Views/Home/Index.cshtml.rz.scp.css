@@ -5,9 +5,8 @@ body[b-dix295yned] {
 }
 
 .container-one[b-dix295yned] {
-    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('/Images/homepage.jpg') center/cover;*/
     background: url('/Images/logreg.jpg') center/cover;
-    padding: 40px;
+    padding: 80px;
     color: #fff;
     height: 100%;
     margin: 0px;
@@ -53,7 +52,7 @@ body[b-dix295yned] {
 
 .btn[b-dix295yned] {
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 25px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
     background-color: #4CAF50;
@@ -61,9 +60,9 @@ body[b-dix295yned] {
     cursor: pointer;
 }
 
-    .btn:hover[b-dix295yned] {
-        background-color: #45a049;
-    }
+.btn:hover[b-dix295yned] {
+    background-color: #45a049;
+}
 
 .app-benefits[b-dix295yned] {
     margin-top: 40px;
@@ -82,36 +81,41 @@ body[b-dix295yned] {
     text-align: left;
 }
 
-    .benefit h2[b-dix295yned] {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+.benefit h2[b-dix295yned] {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
 .explore-more[b-dix295yned] {
     margin-top: 40px;
 }
 
-    .explore-more h2[b-dix295yned] {
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
+.explore-more h2[b-dix295yned] {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
 
-    .explore-more p[b-dix295yned] {
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
+.explore-more p[b-dix295yned] {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
 
-    .explore-more a[b-dix295yned] {
-        font-size: 20px;
-        border: 2px solid #4CAF50;
-        color: #4CAF50;
-        padding: 15px 30px;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: color 0.3s ease, background-color 0.3s ease;
-    }
+.explore-more a[b-dix295yned] {
+    font-size: 20px;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
 
-        .explore-more a:hover[b-dix295yned] {
-            background-color: #4CAF50;
-            color: #fff;
-        }
+.explore-more a:hover[b-dix295yned] {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.or-divider[b-dix295yned]{
+    font-size: 15px;
+}
+

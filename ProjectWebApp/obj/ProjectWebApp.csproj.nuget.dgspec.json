@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj": {}
+    "c:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj": {
+    "c:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj",
+        "projectUniqueName": "c:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj",
         "projectName": "ProjectWebApp",
-        "projectPath": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj",
+        "projectPath": "c:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\ProjectWebApp.csproj",
         "packagesPath": "C:\\Users\\hifzm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\obj\\",
+        "outputPath": "c:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

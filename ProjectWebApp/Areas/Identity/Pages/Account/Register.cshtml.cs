@@ -252,7 +252,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                         await _userManager.AddClaimAsync(user, new Claim("FirstName", Input.FirstName));
                         await _userManager.AddClaimAsync(user, new Claim("LastName", Input.LastName));
                         await _userManager.AddClaimAsync(user, new Claim("Email", Input.Email));
-
+                        
                         _logger.LogInformation("User created a new account with password.");
 
                         var userId = await _userManager.GetUserIdAsync(user);

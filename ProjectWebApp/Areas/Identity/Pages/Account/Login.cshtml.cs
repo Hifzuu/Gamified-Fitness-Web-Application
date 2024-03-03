@@ -130,7 +130,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 var newLoginStreak = new LoginStreak
                 {
                     UserId = userId,
-                    CurrentStreak = 1,
+                    //CurrentStreak = 1,
                     LastLoginTime = DateTime.UtcNow
                 };
 
@@ -141,29 +141,20 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                     // Check if the user logged in on a different day
                     var daysBetween = (currentDate - previousStreak.LastLoginTime.Date).Days;
 
-                    if (daysBetween == 0)
-                    {
-                        // Increment the current streak
-                        newLoginStreak.CurrentStreak = previousStreak.CurrentStreak + 1;
-
-                        // Check if today's streak is greater than the historical longest streak
-                        if (newLoginStreak.CurrentStreak > previousStreak.LongestStreak)
-                        {
-                            // Update the longest streak
-                            newLoginStreak.LongestStreak = newLoginStreak.CurrentStreak;
-                        }
-                        else
-                        {
-                            // Keep the historical longest streak
-                            newLoginStreak.LongestStreak = previousStreak.LongestStreak;
-                        }
-                    }
-                    else if (daysBetween == 1)
+                    if (daysBetween == 1)
                     {
                         // Increment the current streak if there's a login from the previous day
                         newLoginStreak.CurrentStreak = previousStreak.CurrentStreak + 1;
+
+                        // Update the longest streak if today's streak is greater
+                        newLoginStreak.LongestStreak = Math.Max(previousStreak.LongestStreak, newLoginStreak.CurrentStreak);
                     }
-                    // else: Reset streak if the user didn't log in consecutively
+                    else
+                    {
+                        newLoginStreak.CurrentStreak = 1;
+                        // Reset streak if the user didn't log in consecutively
+                        newLoginStreak.LongestStreak = previousStreak.LongestStreak;
+                    }
                 }
 
                 // Add the new entity to the context
@@ -173,6 +164,9 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+
+
 
 
 

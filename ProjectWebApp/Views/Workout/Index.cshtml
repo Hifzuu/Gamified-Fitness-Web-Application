@@ -11,31 +11,37 @@
     ViewData["Title"] = "Workouts";
     var currentUser = await UserManager.GetUserAsync(User);
     var favoritedWorkoutIds = _context.UserFavouriteWorkouts
-        .Where(w => w.UserId == currentUser.Id)
-        .Select(w => w.WorkoutId)
-        .ToList();
+    .Where(w => w.UserId == currentUser.Id)
+    .Select(w => w.WorkoutId)
+    .ToList();
     var userCalendars = ViewData["UserCalendars"] as List<UserCalendar>;
 }
 
-@* add tabs for weeks 1-4- allow adding and removing of workouts - send email reminders to do workout / progress bar for completion of workouts *@
+@* add tabs for weeks 1-4- allow adding and removing of workouts - send email reminders to do workout / progress bar for
+completion of workouts *@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - ProjectWebApp</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
     <!-- Update the version number in the URLs -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" integrity="sha384-39yVKLsD9lMelmY+ij49KZgE+Mfk6hjdUPNE8yKHqdMPceLXzhlCJAK81xlD5jDj" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js" integrity="sha384-ADWbxM16+9IIGUQa99OrbbxWmd97OnAWtGmPKU3jIEJbABR44F0exAvDSCmFPXfZ" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha384-Uz1UHyakAAz121kPY0Nx6ZGzYeUTy9zAtcpdwVmFCEwiTGPA2K6zSGgkKJEQfMhK" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"
+        integrity="sha384-39yVKLsD9lMelmY+ij49KZgE+Mfk6hjdUPNE8yKHqdMPceLXzhlCJAK81xlD5jDj" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"
+        integrity="sha384-ADWbxM16+9IIGUQa99OrbbxWmd97OnAWtGmPKU3jIEJbABR44F0exAvDSCmFPXfZ"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha384-Uz1UHyakAAz121kPY0Nx6ZGzYeUTy9zAtcpdwVmFCEwiTGPA2K6zSGgkKJEQfMhK"
+        crossorigin="anonymous"></script>
 
     <style>
-
-        .fc .fc-toolbar-title,
-        .fc .fc-day-header,
+        @*.fc.fc-toolbar-title,*@.fc .fc-day-header,
         .fc .fc-day,
         .fc .fc-day-number,
         .fc .fc-timegrid .fc-slats,
@@ -45,8 +51,10 @@
         }
 
         .fc .fc-event {
-            background-color: #007bff; /* Set the background color for events */
-            color: white !important; /* Set the text color for events */
+            background-color: #007bff;
+            /* Set the background color for events */
+            color: white !important;
+            /* Set the text color for events */
             cursor: pointer;
         }
 
@@ -57,13 +65,15 @@
             border: 1px solid #ccc;
             padding: 10px;
             max-width: 200px;
-            color:white;
+            color: white;
         }
 
         .fc .fc-toolbar-title {
-            font-size: 18px; /* Adjust the font size as needed */
-            font-weight: bold; /* Optionally adjust the font weight */
-            text-transform:uppercase;
+            font-size: 18px;
+            /* Adjust the font size as needed */
+            font-weight: bold;
+            /* Optionally adjust the font weight */
+            text-transform: uppercase;
         }
 
         .fc .fc-prev-button,
@@ -75,18 +85,20 @@
             background-color: white;
             color: #333;
             border: 1px solid #ddd;
-            font-size: 12px; /* Adjust the font size for smaller screens */
-            padding: 4px 12px; /* Adjust padding for smaller screens */
-            text-transform:uppercase;
+            font-size: 12px;
+            /* Adjust the font size for smaller screens */
+            padding: 4px 12px;
+            /* Adjust padding for smaller screens */
+            text-transform: uppercase;
         }
 
-            /* Default hover styles */
-            .fc .fc-button:hover,
-            .fc .fc-customTitle-button:hover {
-                background-color: #007bff;
-            }
+        /* Default hover styles */
+        .fc .fc-button:hover,
+        .fc .fc-customTitle-button:hover {
+            background-color: #007bff;
+        }
 
-        .fc-dayGridMonth-view .fc-day-header {
+        @* .fc-dayGridMonth-view .fc-day-header {
             background-color: #333333;
             color: #ffffff;
         }
@@ -94,12 +106,21 @@
         .fc-dayGridMonth-view .fc-day {
             background-color: #333333;
             color: #ffffff;
-        }
+        } *@
 
         .fc .fc-daygrid-day.fc-day-today {
-            background-color: #001f3f; /* Dark blue color */
+            background-color: #b8dbff;
+            /* Dark blue color */
         }
 
+        .fc .fc-day-header,
+        .fc .fc-day,
+        .fc .fc-day-number,
+        .fc .fc-timegrid .fc-slats,
+        .fc .fc-timegrid-slot-label-cushion,
+        .fc .fc-timegrid-axis-cushion {
+            color: black !important;
+        }
     </style>
 </head>
 
@@ -111,9 +132,12 @@
                 <!-- Search Bar Section -->
                 <div class="col-md-12">
                     <div id="searchBar" class="d-flex">
-                        <input type="text" id="searchInput" class="form-control flex-grow-1" placeholder="Search workouts by name..." oninput="updateSearchResults()">
+                        <input type="text" id="searchInput" class="form-control flex-grow-1"
+                            placeholder="Search workouts by name..." oninput="updateSearchResults()">
                         <div class="clear-icon" id="clearButton" onclick="clearSearch()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -140,8 +164,8 @@
                         <div class="section-header favourite-section">
                             <h3>My Calendar</h3>
                         </div>
-                        <section class="box" style="background-color:#333333;">
-                        <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
+                        <section class="box" style="background-color:white;">
+                            <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
                         </section>
                     </div>
                 </section>
@@ -166,7 +190,8 @@
                                     if (workout != null)
                                     {
                                         <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category">
-                                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
+                                                class="card workout-link">
                                                 <img src="https://placekitten.com/300/200" class="card-img-top" alt="Workout Image">
                                                 <div class="card-body">
                                                     <h5 class="card-title">@workout.Name</h5>
@@ -203,7 +228,8 @@
                         @foreach (var workout in workouts.Where(w => w.IsFeatured))
                         {
                             <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category">
-                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
+                                    class="card workout-link">
                                     <img src="https://placekitten.com/300/200" class="card-img-top" alt="Workout Image">
                                     <div class="card-body">
                                         <h5 class="card-title">@workout.Name</h5>
@@ -228,7 +254,8 @@
             <!-- All Exercises Section -->
             <div class="section-header all-workouts-section" style="position: relative;">
                 <h3 style="float: left; margin-right: 10px;">All Workouts</h3>
-                <img id="filterIcon" class="filter-icon" src="/Images/filter.png" alt="Filter Icon" onclick="toggleFilterForm()">
+                <img id="filterIcon" class="filter-icon" src="/Images/filter.png" alt="Filter Icon"
+                    onclick="toggleFilterForm()">
                 <div id="filterForm" class="filter-form">
                     <div class="filter-option">
                         <label for="categoryFilter">Category:</label>
@@ -298,8 +325,11 @@
                     @foreach (var workout in ViewData["Workouts"] as List<Workout>)
                     {
                         <!-- Workout Card Markup -->
-                        <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category" data-difficulty="@workout.difficulty" data-muscle="@workout.TargetMuscle" data-points="@workout.rewardPoints">
-                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                        <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category"
+                            data-difficulty="@workout.difficulty" data-muscle="@workout.TargetMuscle"
+                            data-points="@workout.rewardPoints">
+                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
+                                class="card workout-link">
                                 <img src="https://placekitten.com/300/200" class="card-img-top" alt="Workout Image">
                                 <div class="card-body">
                                     <h5 class="card-title">@workout.Name</h5>
@@ -322,233 +352,233 @@
 
     </div>
 
-        <script>
+    <script>
 
-            var filterForm = document.getElementById('filterForm');
-            var filterInfo = document.getElementById('filterInfo');
+        var filterForm = document.getElementById('filterForm');
+        var filterInfo = document.getElementById('filterInfo');
 
-            function toggleFilterForm() {
-                filterForm.style.display = (filterForm.style.display === 'none' || filterForm.style.display === '') ? 'block' : 'none';
+        function toggleFilterForm() {
+            filterForm.style.display = (filterForm.style.display === 'none' || filterForm.style.display === '') ? 'block' : 'none';
+        }
+
+        function applyFilter() {
+            console.log("Applying filter...");
+
+            var categoryFilter = document.getElementById('categoryFilter').value;
+            var difficultyFilter = document.getElementById('difficultyFilter').value;
+            var muscleFilter = document.getElementById('muscleFilter').value.toLowerCase();
+            var pointsFilter = document.getElementById('pointsFilter').value;
+
+            console.log("Category:", categoryFilter);
+            console.log("Difficulty:", difficultyFilter);
+            console.log("Muscle:", muscleFilter);
+            console.log("Points:", pointsFilter);
+
+            // Set minPoints to null if pointsFilter is not specified
+            var minPoints = pointsFilter !== '0' ? parseInt(pointsFilter, 10) : null;
+
+            filterWorkouts(categoryFilter, difficultyFilter, muscleFilter, minPoints);
+            filterForm.style.display = 'none';
+        }
+
+        function filterWorkouts(category, difficulty, muscle, minPoints) {
+            var allWorkoutsSection = document.getElementById('allWorkouts');
+            var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
+            var filterResultText = document.getElementById('filterResultText');
+
+            console.log(`Applying filter...`);
+            console.log(`Category: ${category}`);
+            console.log(`Difficulty: ${difficulty}`);
+            console.log(`Muscle: ${muscle}`);
+            console.log(`Points: ${minPoints}`);
+
+            var resultsCount = 0;
+
+            for (var i = 0; i < workoutCards.length; i++) {
+                var workoutCard = workoutCards[i];
+                var workoutCategory = workoutCard.getAttribute('data-category');
+                var workoutDifficulty = workoutCard.getAttribute('data-difficulty');
+                var workoutMuscle = workoutCard.getAttribute('data-muscle');
+                var workoutPoints = workoutCard.getAttribute('data-points');
+
+                // Check if the workout card is part of the "All Workouts" section
+                if (workoutCard.closest('#allWorkouts')) {
+                    console.log(`Card ${i + 1}: Category: ${workoutCategory}, Difficulty: ${workoutDifficulty}, Muscle: ${workoutMuscle}, Points: ${workoutPoints}`);
+
+                    var displayCard = true;
+
+                    if (category !== 'All' && workoutCategory !== category) {
+                        displayCard = false;
+                    }
+
+                    if (difficulty !== 'All' && workoutDifficulty !== difficulty) {
+                        displayCard = false;
+                    }
+
+                    if (muscle !== 'all' && (workoutMuscle === null || workoutMuscle.toLowerCase().indexOf(muscle.toLowerCase()) === -1)) {
+                        displayCard = false;
+                    }
+
+                    if (minPoints !== null && (workoutPoints === null || parseInt(workoutPoints, 10) < minPoints)) {
+                        displayCard = false;
+                    }
+
+                    console.log(`Display Card: ${displayCard}`);
+
+                    workoutCard.style.display = displayCard ? 'block' : 'none';
+
+                    if (displayCard) {
+                        resultsCount++;
+                    }
+                }
             }
 
-            function applyFilter() {
-                console.log("Applying filter...");
+            // Adjust layout after applying the filter
+            adjustLayout();
 
-                var categoryFilter = document.getElementById('categoryFilter').value;
-                var difficultyFilter = document.getElementById('difficultyFilter').value;
-                var muscleFilter = document.getElementById('muscleFilter').value.toLowerCase();
-                var pointsFilter = document.getElementById('pointsFilter').value;
+            // Display filter information
+            if (category !== 'All' || difficulty !== 'All' || muscle !== 'all' || minPoints !== null) {
+                filterInfo.style.display = 'block';
+                filterResultText.textContent = resultsCount > 0 ? `Showing ${resultsCount} result(s) for applied filter.` : 'No results found for applied filter.';
+            } else {
+                filterInfo.style.display = 'none';
+            }
+        }
 
-                console.log("Category:", categoryFilter);
-                console.log("Difficulty:", difficultyFilter);
-                console.log("Muscle:", muscleFilter);
-                console.log("Points:", pointsFilter);
+        function adjustLayout() {
+            var scrollableRow = document.getElementById('allWorkouts');
+            scrollableRow.style.justifyContent = 'flex-start';
+        }
 
-                // Set minPoints to null if pointsFilter is not specified
-                var minPoints = pointsFilter !== '0' ? parseInt(pointsFilter, 10) : null;
+        function shuffleWorkoutCards() {
+            var allWorkoutsSection = document.getElementById('allWorkouts');
+            var workoutCards = Array.from(allWorkoutsSection.getElementsByClassName('workout-card'));
 
-                filterWorkouts(categoryFilter, difficultyFilter, muscleFilter, minPoints);
-                filterForm.style.display = 'none';
+            // Shuffle the array of workout cards using Fisher-Yates algorithm
+            for (var i = workoutCards.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = workoutCards[i];
+                workoutCards[i] = workoutCards[j];
+                workoutCards[j] = temp;
             }
 
-            function filterWorkouts(category, difficulty, muscle, minPoints) {
-                var allWorkoutsSection = document.getElementById('allWorkouts');
-                var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
-                var filterResultText = document.getElementById('filterResultText');
+            // Append the shuffled cards back to the DOM
+            workoutCards.forEach(function (card) {
+                allWorkoutsSection.appendChild(card);
+            });
+        }
 
-                console.log(`Applying filter...`);
-                console.log(`Category: ${category}`);
-                console.log(`Difficulty: ${difficulty}`);
-                console.log(`Muscle: ${muscle}`);
-                console.log(`Points: ${minPoints}`);
+        // Shuffle the cards once the page finishes loading
+        window.addEventListener('load', shuffleWorkoutCards);
 
-                var resultsCount = 0;
+        function searchWorkouts() {
+            var searchInput = document.getElementById('searchInput');
+            var filter = searchInput.value.toLowerCase();
+
+            var allWorkoutsSection = document.getElementById('allWorkouts');
+            var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
+
+            var searchResultsSection = document.getElementById('searchResults');
+            var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
+            searchResultsWorkouts.innerHTML = ''; // Clear previous search results
+
+            var resultsCount = 0;
+
+            if (filter.trim() === '') {
+                // If the search bar is empty, hide the search results section and show all original workout cards
+                searchResultsSection.style.display = 'none';
 
                 for (var i = 0; i < workoutCards.length; i++) {
                     var workoutCard = workoutCards[i];
-                    var workoutCategory = workoutCard.getAttribute('data-category');
-                    var workoutDifficulty = workoutCard.getAttribute('data-difficulty');
-                    var workoutMuscle = workoutCard.getAttribute('data-muscle');
-                    var workoutPoints = workoutCard.getAttribute('data-points');
-
-                    // Check if the workout card is part of the "All Workouts" section
-                    if (workoutCard.closest('#allWorkouts')) {
-                        console.log(`Card ${i + 1}: Category: ${workoutCategory}, Difficulty: ${workoutDifficulty}, Muscle: ${workoutMuscle}, Points: ${workoutPoints}`);
-
-                        var displayCard = true;
-
-                        if (category !== 'All' && workoutCategory !== category) {
-                            displayCard = false;
-                        }
-
-                        if (difficulty !== 'All' && workoutDifficulty !== difficulty) {
-                            displayCard = false;
-                        }
-
-                        if (muscle !== 'all' && (workoutMuscle === null || workoutMuscle.toLowerCase().indexOf(muscle.toLowerCase()) === -1)) {
-                            displayCard = false;
-                        }
-
-                        if (minPoints !== null && (workoutPoints === null || parseInt(workoutPoints, 10) < minPoints)) {
-                            displayCard = false;
-                        }
-
-                        console.log(`Display Card: ${displayCard}`);
-
-                        workoutCard.style.display = displayCard ? 'block' : 'none';
-
-                        if (displayCard) {
-                            resultsCount++;
-                        }
-                    }
+                    workoutCard.style.display = 'block';
                 }
 
-                // Adjust layout after applying the filter
+                // Adjust layout after clearing the search
                 adjustLayout();
 
-                // Display filter information
-                if (category !== 'All' || difficulty !== 'All' || muscle !== 'all' || minPoints !== null) {
-                    filterInfo.style.display = 'block';
-                    filterResultText.textContent = resultsCount > 0 ? `Showing ${resultsCount} result(s) for applied filter.` : 'No results found for applied filter.';
-                } else {
-                    filterInfo.style.display = 'none';
+                // Clear filter information
+                filterInfo.style.display = 'none';
+
+                return;
+            }
+
+            for (var i = 0; i < workoutCards.length; i++) {
+                var workoutCard = workoutCards[i];
+                var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
+
+                // Check if the workout name contains the search term
+                var displayCard = workoutName.includes(filter);
+
+                workoutCard.style.display = displayCard ? 'none' : 'block'; // Hide the card in the original section
+
+                if (displayCard) {
+                    resultsCount++;
+
+                    // Create a copy of the card and append it to the search results section
+                    var clonedCard = workoutCard.cloneNode(true);
+                    clonedCard.style.display = 'block';
+                    searchResultsWorkouts.appendChild(clonedCard);
                 }
             }
 
-            function adjustLayout() {
-                var scrollableRow = document.getElementById('allWorkouts');
-                scrollableRow.style.justifyContent = 'flex-start';
-            }
+            // Display or hide the search results section based on the number of results
+            searchResultsSection.style.display = resultsCount > 0 ? 'block' : 'none';
 
-            function shuffleWorkoutCards() {
-                var allWorkoutsSection = document.getElementById('allWorkouts');
-                var workoutCards = Array.from(allWorkoutsSection.getElementsByClassName('workout-card'));
+            // Adjust layout after applying the search
+            adjustLayout();
 
-                // Shuffle the array of workout cards using Fisher-Yates algorithm
-                for (var i = workoutCards.length - 1; i > 0; i--) {
-                    var j = Math.floor(Math.random() * (i + 1));
-                    var temp = workoutCards[i];
-                    workoutCards[i] = workoutCards[j];
-                    workoutCards[j] = temp;
-                }
+            // Clear filter information
+            filterInfo.style.display = 'none';
+        }
 
-                // Append the shuffled cards back to the DOM
-                workoutCards.forEach(function (card) {
-                    allWorkoutsSection.appendChild(card);
-                });
-            }
+        function updateSearchResults() {
+            var searchInput = document.getElementById('searchInput').value.trim();
+            var clearButton = document.getElementById('clearButton');
+            var searchResultsSection = document.getElementById('searchResults');
+            var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
+            var allWorkoutsSection = document.getElementById('allWorkouts');
+            var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
 
-            // Shuffle the cards once the page finishes loading
-            window.addEventListener('load', shuffleWorkoutCards);
+            // Show or hide the clear button based on the search input
+            clearButton.style.display = searchInput.length > 0 ? 'block' : 'none';
 
-            function searchWorkouts() {
-                var searchInput = document.getElementById('searchInput');
-                var filter = searchInput.value.toLowerCase();
+            // If there are search results, adjust the layout and display them
+            if (searchInput.length > 0) {
+                adjustLayout();
+                searchResultsSection.style.display = 'block';
 
-                var allWorkoutsSection = document.getElementById('allWorkouts');
-                var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
+                // Clear previous search results
+                searchResultsWorkouts.innerHTML = '';
 
-                var searchResultsSection = document.getElementById('searchResults');
-                var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
-                searchResultsWorkouts.innerHTML = ''; // Clear previous search results
-
-                var resultsCount = 0;
-
-                if (filter.trim() === '') {
-                    // If the search bar is empty, hide the search results section and show all original workout cards
-                    searchResultsSection.style.display = 'none';
-
-                    for (var i = 0; i < workoutCards.length; i++) {
-                        var workoutCard = workoutCards[i];
-                        workoutCard.style.display = 'block';
-                    }
-
-                    // Adjust layout after clearing the search
-                    adjustLayout();
-
-                    // Clear filter information
-                    filterInfo.style.display = 'none';
-
-                    return;
-                }
-
+                // Iterate through workout cards to find matches
                 for (var i = 0; i < workoutCards.length; i++) {
                     var workoutCard = workoutCards[i];
                     var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
 
                     // Check if the workout name contains the search term
-                    var displayCard = workoutName.includes(filter);
-
-                    workoutCard.style.display = displayCard ? 'none' : 'block'; // Hide the card in the original section
+                    var displayCard = workoutName.includes(searchInput);
 
                     if (displayCard) {
-                        resultsCount++;
-
                         // Create a copy of the card and append it to the search results section
                         var clonedCard = workoutCard.cloneNode(true);
                         clonedCard.style.display = 'block';
                         searchResultsWorkouts.appendChild(clonedCard);
                     }
                 }
-
-                // Display or hide the search results section based on the number of results
-                searchResultsSection.style.display = resultsCount > 0 ? 'block' : 'none';
-
-                // Adjust layout after applying the search
-                adjustLayout();
-
-                // Clear filter information
-                filterInfo.style.display = 'none';
+            } else {
+                // If the search bar is empty, hide the search results section
+                searchResultsSection.style.display = 'none';
             }
+        }
 
-            function updateSearchResults() {
-                var searchInput = document.getElementById('searchInput').value.trim();
-                var clearButton = document.getElementById('clearButton');
-                var searchResultsSection = document.getElementById('searchResults');
-                var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
-                var allWorkoutsSection = document.getElementById('allWorkouts');
-                var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
-
-                // Show or hide the clear button based on the search input
-                clearButton.style.display = searchInput.length > 0 ? 'block' : 'none';
-
-                // If there are search results, adjust the layout and display them
-                if (searchInput.length > 0) {
-                    adjustLayout();
-                    searchResultsSection.style.display = 'block';
-
-                    // Clear previous search results
-                    searchResultsWorkouts.innerHTML = '';
-
-                    // Iterate through workout cards to find matches
-                    for (var i = 0; i < workoutCards.length; i++) {
-                        var workoutCard = workoutCards[i];
-                        var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
-
-                        // Check if the workout name contains the search term
-                        var displayCard = workoutName.includes(searchInput);
-
-                        if (displayCard) {
-                            // Create a copy of the card and append it to the search results section
-                            var clonedCard = workoutCard.cloneNode(true);
-                            clonedCard.style.display = 'block';
-                            searchResultsWorkouts.appendChild(clonedCard);
-                        }
-                    }
-                } else {
-                    // If the search bar is empty, hide the search results section
-                    searchResultsSection.style.display = 'none';
-                }
-            }
-
-            function clearSearch() {
-                var searchInput = document.getElementById('searchInput');
-                searchInput.value = ''; // Clear the search input
-                updateSearchResults(); // Update search results (show/hide) based on the cleared input
-            }
+        function clearSearch() {
+            var searchInput = document.getElementById('searchInput');
+            searchInput.value = ''; // Clear the search input
+            updateSearchResults(); // Update search results (show/hide) based on the cleared input
+        }
 
 
-        </script>
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -606,4 +636,5 @@
     </script>
 
 </body>
+
 </html>

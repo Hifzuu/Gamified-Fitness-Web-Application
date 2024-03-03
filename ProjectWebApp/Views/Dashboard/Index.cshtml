@@ -43,66 +43,69 @@
 
             <div class="leftBox fullLeft">
                 <!-- Streak Boxes (Left Side) -->
-                <div style="width: 100%; background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 100%; margin-right: 10px; margin-bottom: 20px;">
-                    <h3 style="font-size: 1.2em;">Current Streak</h3>
+                <div class="streak-box">
+                    <h3>Current Streak</h3>
                     @if (Model != null)
                     {
-                        <p style="font-size: 3em; margin: 10px 0;">@Model.LoginStreak.CurrentStreak</p>
+                        <p>@Model.LoginStreak.CurrentStreak</p>
                     }
                     else
                     {
-                        <p style="font-size: 1em; margin: 10px 0;">No login streak information available.</p>
+                        <p class="no-info">No login streak information available.</p>
                     }
                 </div>
 
-                <div style="width: 100%; background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden; max-width: 100%; margin-bottom: 20px;">
-                    <h3 style="font-size: 1.2em;">Longest Streak</h3>
+                <div class="streak-box">
+                    <h3>Longest Streak</h3>
                     @if (Model != null)
                     {
-                        <p style="font-size: 3em; margin: 10px 0;">@Model.LoginStreak.LongestStreak</p>
+                        <p>@Model.LoginStreak.LongestStreak</p>
                     }
                     else
                     {
-                        <p style="font-size: 1em; margin: 10px 0;">No login streak information available.</p>
+                        <p class="no-info">No login streak information available.</p>
                     }
                 </div>
 
             </div>
 
+
             <!-- Rewards Box (Right Side) -->
-            <div class="col-sm-12 mb-3 fullRight" style="flex-grow: 1;">
-                <div class="box" style="background-color: #fff; color: #333; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-                    <h3 class="font-size-24">Login Streak Rewards (coming soon...)</h3>
+            <div class="col-sm-12 mb-4 fullRight" style="flex-grow: 1;">
+                <div class="box" style="background-color: #f8f9fa; color: #495057; padding: 30px; text-align: center; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <h3 class="font-size-24 mb-4" style="color: black;">Login Streak Rewards (Coming Soon)</h3>
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F9F9F9;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #edf2f9; border: none;">
                             <span class="medal-text">🥉 Bronze Medal (7 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">50 Points</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #F0F0F0;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #dae7f3; border: none;">
                             <span class="medal-text">🥈 Silver Medal (14 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">150 Points</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #E0E0E0;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #f0c265; border: none;">
                             <span class="medal-text">🥇 Gold Medal (30 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">300 Points</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #D4AF37; color: #fff;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #7df0ff; border: none;">
                             <span class="medal-text">💎 Platinum Medal (60 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">500 Points</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #B9F2FF;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #1d8cd0; color: #ffffff; border: none;">
                             <span class="medal-text">💎 Diamond Medal (90 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">750 Points</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #FFD700; color: #fff;">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: #dd54ff; color: #ffffff; border: none;">
                             <span class="medal-text">🌟 Master Medal (180 days)</span>
                             <span class="badge badge-primary badge-pill point-badge">1000 Points</span>
                         </li>
                     </ul>
-                </div>
             </div>
-
         </div>
+
+
+
+       
 
         <section>
             <h3>Weight</h3>

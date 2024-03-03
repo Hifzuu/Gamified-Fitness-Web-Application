@@ -9,17 +9,34 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        crossorigin="anonymous">
 
 </head>
 
 <style>
     .main-content {
         margin-left: 0px;
+    }
+
+    .btn.btn-lg {
+        padding: 10px 30px;
+        font-size: 25px;
+    }
+
+    .btn.btn-outline-primary.btn-lg {
+        padding: 10px 30px;
+        font-size: 25px;
+    }
+
+    .or-divider {
+        font-size: 16px;
+        /* Adjust the font size to your preference */
     }
 </style>
 
@@ -31,7 +48,8 @@
 
             <div class="welcome-message text-center">
                 <h1 class="display-4">Welcome to Fit.Me</h1>
-                <p>Your personalised fitness journey starts here! Unlock achievements, conquer challenges, and earn exciting rewards on your path to a healthier you.</p>
+                <p>Your personalised fitness journey starts here! Unlock achievements, conquer challenges, and earn
+                    exciting rewards on your path to a healthier you.</p>
             </div>
 
             <!-- Key Features Section -->
@@ -41,7 +59,12 @@
                     <div class="feature-text">
                         <h3>Unlock Achievements and Rewards</h3>
                         <p>
-                            Elevate your workout experience by unlocking achievements, conquering challenges, and earning rewards. Our AI-driven platform tailors workout plans to fit your goals, ensuring a personalized fitness journey. Connect with a vibrant community of like-minded individuals, share your achievements, and find inspiration. Fit.Me transforms each exercise into an exciting adventure, making fitness goals more achievable and enjoyable. Join us for a gamified fitness experience that turns every workout into a rewarding accomplishment.
+                            Elevate your workout experience by unlocking achievements, conquering challenges, and
+                            earning rewards. Our AI-driven platform tailors workout plans to fit your goals, ensuring a
+                            personalized fitness journey. Connect with a vibrant community of like-minded individuals,
+                            share your achievements, and find inspiration. Fit.Me transforms each exercise into an
+                            exciting adventure, making fitness goals more achievable and enjoyable. Join us for a
+                            gamified fitness experience that turns every workout into a rewarding accomplishment.
                         </p>
                     </div>
                 </div>
@@ -50,7 +73,12 @@
                     <div class="feature-text">
                         <h3>Diverse Range of Workouts</h3>
                         <p>
-                            At Fit.Me, we believe in keeping your fitness journey exciting and dynamic. Explore a diverse range of workouts that cater to all fitness levels and preferences. Whether you're into high-intensity training, yoga, strength-building, or cardio, our platform offers a variety of engaging workouts. Discover new exercises, challenge yourself with different routines, and keep things fresh to make every workout a thrilling experience. Your fitness journey with us is not just effective; it's an adventure with endless possibilities.
+                            At Fit.Me, we believe in keeping your fitness journey exciting and dynamic. Explore a
+                            diverse range of workouts that cater to all fitness levels and preferences. Whether you're
+                            into high-intensity training, yoga, strength-building, or cardio, our platform offers a
+                            variety of engaging workouts. Discover new exercises, challenge yourself with different
+                            routines, and keep things fresh to make every workout a thrilling experience. Your fitness
+                            journey with us is not just effective; it's an adventure with endless possibilities.
                         </p>
                     </div>
                 </div>
@@ -59,7 +87,10 @@
                     <div class="feature-text">
                         <h3>Connect and Share</h3>
                         <p>
-                            Connect with friends, share achievements, and inspire each other on your fitness journey. Fitness is more fun when it's a shared adventure! Join fitness challenges together, celebrate milestones, and motivate each other to reach new heights. Fit.Me fosters a supportive community that makes every step of your journey enjoyable and rewarding.
+                            Connect with friends, share achievements, and inspire each other on your fitness journey.
+                            Fitness is more fun when it's a shared adventure! Join fitness challenges together,
+                            celebrate milestones, and motivate each other to reach new heights. Fit.Me fosters a
+                            supportive community that makes every step of your journey enjoyable and rewarding.
                         </p>
                     </div>
                 </div>
@@ -77,14 +108,15 @@
                 else
                 {
                     <!-- User is signed in, show My Dashboard button -->
-                    <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="btn btn-primary btn-lg">Visit Your Dashboard</a>
+                    <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="btn btn-primary btn-lg">Visit Your
+                        Dashboard</a>
                 }
             </div>
 
             <!-- App Benefits Section -->
             <div class="app-benefits">
                 <div class="benefit">
-                    <h2>Personalized Plans</h2>
+                    <h2>Personalised Plans</h2>
                     <p>Tailored workouts designed to meet your unique fitness goals and preferences.</p>
                 </div>
                 <div class="benefit">
@@ -93,7 +125,8 @@
                 </div>
                 <div class="benefit">
                     <h2>Rewards and Achievements</h2>
-                    <p>Earn exciting rewards, unlock achievements, and level up your fitness game with every workout.</p>
+                    <p>Earn exciting rewards, unlock achievements, and level up your fitness game with every workout.
+                    </p>
                 </div>
             </div>
 
@@ -103,4 +136,5 @@
 
 
 </body>
+
 </html>
