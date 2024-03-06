@@ -458,7 +458,19 @@ section {
 }
 
 
+/*section rows margin*/
+.row-equal-height {
+    display: flex;
+}
 
+    .row-equal-height > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .row-equal-height > [class*='col-'] > section {
+            flex: 1;
+        }
 
 
 
