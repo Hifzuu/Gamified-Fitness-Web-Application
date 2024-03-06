@@ -376,24 +376,6 @@ namespace ProjectWebApp.Data.Migrations
                     b.ToTable("Raffles");
                 });
 
-            modelBuilder.Entity("ProjectWebApp.Models.RaffleEntry", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("RaffleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RaffleEntryId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RaffleId");
-
-                    b.HasIndex("RaffleId");
-
-                    b.ToTable("RaffleEntries");
-                });
-
             modelBuilder.Entity("ProjectWebApp.Models.UserCalendar", b =>
                 {
                     b.Property<int>("UserCalendarId")
@@ -477,6 +459,36 @@ namespace ProjectWebApp.Data.Migrations
                     b.HasIndex("WorkoutId");
 
                     b.ToTable("UserFavouriteWorkouts");
+                });
+
+            modelBuilder.Entity("ProjectWebApp.Models.UserRaffleEntry", b =>
+                {
+                    b.Property<int>("RaffleEntryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RaffleEntryId"));
+
+                    b.Property<DateTime>("EntryTimestamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsWinner")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RaffleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RaffleEntryId");
+
+                    b.HasIndex("RaffleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRaffleEntries");
                 });
 
             modelBuilder.Entity("ProjectWebApp.Models.WeightEntry", b =>
@@ -636,25 +648,6 @@ namespace ProjectWebApp.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProjectWebApp.Models.RaffleEntry", b =>
-                {
-                    b.HasOne("ProjectWebApp.Models.Raffle", "Raffle")
-                        .WithMany("RaffleEntries")
-                        .HasForeignKey("RaffleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
-                        .WithMany("RaffleEntries")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Raffle");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ProjectWebApp.Models.UserCalendar", b =>
                 {
                     b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
@@ -712,6 +705,25 @@ namespace ProjectWebApp.Data.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("ProjectWebApp.Models.UserRaffleEntry", b =>
+                {
+                    b.HasOne("ProjectWebApp.Models.Raffle", "Raffle")
+                        .WithMany("UserRaffleEntries")
+                        .HasForeignKey("RaffleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
+                        .WithMany("UserRaffleEntries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Raffle");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ProjectWebApp.Models.WeightEntry", b =>
                 {
                     b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
@@ -744,18 +756,18 @@ namespace ProjectWebApp.Data.Migrations
 
                     b.Navigation("LoginStreaks");
 
-                    b.Navigation("RaffleEntries");
-
                     b.Navigation("UserCalendars");
 
                     b.Navigation("UserChallenges");
+
+                    b.Navigation("UserRaffleEntries");
 
                     b.Navigation("WeightEntries");
                 });
 
             modelBuilder.Entity("ProjectWebApp.Models.Raffle", b =>
                 {
-                    b.Navigation("RaffleEntries");
+                    b.Navigation("UserRaffleEntries");
                 });
 
             modelBuilder.Entity("ProjectWebApp.Models.Workout", b =>

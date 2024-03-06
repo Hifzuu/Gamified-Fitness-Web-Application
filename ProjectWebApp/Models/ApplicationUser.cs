@@ -38,6 +38,6 @@ namespace ProjectWebApp.Models
         public string ProfileImageUrl { get; set; }
         public List<LoginStreak> LoginStreaks { get; set; } = new List<LoginStreak>();
         public List<UserChallenge> UserChallenges { get; set; } = new List<UserChallenge>();
-        public List<RaffleEntry> RaffleEntries { get; set; } = new List<RaffleEntry>();
+        public List<UserRaffleEntry> UserRaffleEntries { get; set; } = new List<UserRaffleEntry>();
     }
 }

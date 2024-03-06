@@ -9,6 +9,12 @@
         public DateTime EndDate { get; set; }
         public decimal Cost { get; set; }
         public string ImageUrl { get; set; }
+
+        public List<RaffleViewModel> Raffles { get; set; }
+
+        public List<RaffleViewModel> UserEnteredRaffles { get; set; }
+        public DateTime EntryTimestamp { get; set; }
+
     }
 
 }

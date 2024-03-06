@@ -436,6 +436,7 @@ h2[b-dub9o406z4] {
     text-align: center;
     transition: transform 0.5s ease;
 }
+
     .carousel-item:hover[b-dub9o406z4] {
         transform: scale(1.03);
     }
@@ -451,14 +452,12 @@ h2[b-dub9o406z4] {
     object-fit: cover;
 }
 
-
 .raffle-info[b-dub9o406z4] {
+    flex: 1;
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .carousel-controls[b-dub9o406z4] {
     position: relative;
@@ -467,35 +466,98 @@ h2[b-dub9o406z4] {
 
 .carousel-control-prev[b-dub9o406z4],
 .carousel-control-next[b-dub9o406z4] {
-    width: 45px; /* Adjust the width as needed */
-    height: 45px; /* Adjust the height as needed */
-
+    width: 45px;
+    height: 45px;
+    background-color: #222;
+    opacity: 0.5;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff; /* Text color */
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    margin-top: 20px; /* Add margin-top for spacing */
+    margin-top: 10px;
 }
 
     .carousel-control-prev:hover[b-dub9o406z4],
     .carousel-control-next:hover[b-dub9o406z4] {
-        background-color: #0056b3; /* Hover color */
+        background-color: #0056b3;
+        color: white;
     }
 
 .carousel-control-prev[b-dub9o406z4] {
     position: absolute;
-    margin-left: 20px; /* Adjust the margin as needed */
+    margin-left: 20px;
 }
 
 .carousel-control-next[b-dub9o406z4] {
     position: absolute;
-    margin-right: 20px; /* Adjust the margin as needed */
+    margin-right: 20px;
 }
+
+
+.list-group-item[b-dub9o406z4] {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+    .list-group-item h5[b-dub9o406z4] {
+        color: #333;
+    }
+
+    .list-group-item p[b-dub9o406z4] {
+        color: #777;
+    }
+
+.badge-info[b-dub9o406z4] {
+    background-color: #17a2b8;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.badge-danger[b-dub9o406z4] {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Additional styling for responsiveness */
+@media (max-width: 576px) {
+    .list-group-item[b-dub9o406z4] {
+        padding: 10px;
+    }
+
+    .badge-info[b-dub9o406z4], .badge-danger[b-dub9o406z4] {
+        padding: 6px 10px;
+    }
+}
+
+.raffle-status-box[b-dub9o406z4] {
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 6px; /* Add rounded corners */
+    padding: 10px; /* Add padding */
+    display: flex; /* Use flexbox to align items */
+    justify-content: flex-start; /* Align items to the start */
+}
+
+.expired-status[b-dub9o406z4] {
+    color: #dc3545; /* Red text color for expired status */
+    font-weight: bold;
+}
+
+.active-status[b-dub9o406z4] {
+    color: #28a745; /* Green text color for active status */
+    font-weight: bold;
+}
+
+
+
 /* _content/ProjectWebApp/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

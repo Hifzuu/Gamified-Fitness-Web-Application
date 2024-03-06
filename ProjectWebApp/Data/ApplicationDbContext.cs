@@ -15,7 +15,7 @@ namespace ProjectWebApp.Data
         public DbSet<Challenge> Challenges { get; set; }
         public DbSet<UserChallenge> UserChallenges { get; set; }
         public DbSet<Raffle> Raffles { get; set; }
-        public DbSet<RaffleEntry> RaffleEntries { get; set; }
+        public DbSet<UserRaffleEntry> UserRaffleEntries { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -115,19 +115,18 @@ namespace ProjectWebApp.Data
                 .UsingEntity(j => j.ToTable("UserChallengeWorkout"));
 
             // raffles
-            modelBuilder.Entity<RaffleEntry>()
-                .HasKey(re => new { re.UserId, re.RaffleId });
+            modelBuilder.Entity<UserRaffleEntry>()
+             .HasKey(re => re.RaffleEntryId);
 
-            modelBuilder.Entity<RaffleEntry>()
+            modelBuilder.Entity<UserRaffleEntry>()
                 .HasOne(re => re.User)
-                .WithMany(u => u.RaffleEntries)
+                .WithMany(u => u.UserRaffleEntries)
                 .HasForeignKey(re => re.UserId);
 
-            modelBuilder.Entity<RaffleEntry>()
+            modelBuilder.Entity<UserRaffleEntry>()
                 .HasOne(re => re.Raffle)
-                .WithMany(r => r.RaffleEntries)
+                .WithMany(r => r.UserRaffleEntries)
                 .HasForeignKey(re => re.RaffleId);
-
         }
     }
 }

@@ -16,6 +16,6 @@ namespace ProjectWebApp.Models
         public string ImageUrl { get; set; }
 
         // Navigation property for users who entered this raffle
-        public List<RaffleEntry> RaffleEntries { get; set; } = new List<RaffleEntry>();
+        public List<UserRaffleEntry> UserRaffleEntries { get; set; } = new List<UserRaffleEntry>();
     }
 }
