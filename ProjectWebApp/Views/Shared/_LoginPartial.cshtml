@@ -40,6 +40,28 @@
     </script>
 </head>
 
+<style>
+    .logo {
+        width: 100%;
+        display: flex;
+/*         background-color: green; */
+        margin-left:0;
+        padding-left:0;
+    }
+    .logg {
+        text-align: left;
+/*         background-color: yellow;  */
+        margin-left: 0px;
+        padding-left: 0;
+    }
+    .loggin {
+        text-align: right;
+/*         background-color: red; */
+        margin-left: 0;
+        padding-left: 0;
+    }
+</style>
+
 <body>
     @if (SignInManager.IsSignedIn(User))
     {
@@ -49,55 +71,56 @@
         var email = user?.Email;
         var points = GetCurrentUserPoints(); // Function to get user points
 
-         <ul class="logout-nav">
-            <li class="nav-itemLP">
+        <ul class="logout-nav logo">
+            <li class="nav-itemLP logo">
                 @if (User.Identity?.IsAuthenticated ?? false)
                 {
+                    <div class="card-bodyyyy d-flex align-items-center logg d-flex align-items-center justify-content-center">
+                        <ul class="list-unstyled m-0 p-0">
+                            <li class="nav-item dropdown" id="userDropdownContainer">
+                                <a class="nav-link" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="profile-container">
+                                        <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+                                        <i class="fas fa-user-cog mr-2"></i> Manage Account
+                                    </a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                        <i class="fas fa-shield-alt mr-2"></i> Privacy
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
 
-                    <div class="card-body">
-
-                        <div class="d-flex align-items-center">
-                            <div class="textProfile">
-                                <h5 class="mb-0 font-weight-bold">@firstName @lastName</h5>
-
-                                <p class="text-muted mb-0">@email</p>
-                                <span class="user-details" style="font-family: 'Roboto', sans-serif;">
-                                    <i class="fas fa-coins gold-coin-icon"></i> <strong style="font-size: 1.1em; letter-spacing: 1px;">
-                                        @points points
-                                    </strong>
-                                </span>
-                            </div>
+                        <div class="textProfile">
+                            <h5 class="mb-0 font-weight-bold">@firstName @lastName</h5>
+                            <p class="text-muted mb-0">@email</p>
                         </div>
+
                     </div>
+                    <div class="ml-auto loggin d-flex align-items-center justify-content-center">
+                        <span class="user-details" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                            <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                            <strong>@points</strong> <strong style="font-size: 0.7em;">points</strong>
+                        </span>
+                    </div>
+
+
                 }
                 else
                 {
-                    <span class="user-details">
-                        Guest
-                    </span>
+                    <span class="user-details">Guest</span>
                 }
             </li>
-            <li class="nav-item dropdown" id="userDropdownContainer">
-                <a class="nav-link" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="profile-container">
-                        <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
-                        <i class="fas fa-user-cog mr-2"></i> Manage Account
-                    </a>
-                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
-                        <i class="fas fa-shield-alt mr-2"></i> Privacy
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
-                        <button type="submit" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Log Out
-                        </button>
-                    </form>
-                </div>
-            </li>
+           
 
         </ul> 
 

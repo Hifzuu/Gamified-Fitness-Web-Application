@@ -15,9 +15,9 @@
 
 <body>
     <div class="page-container">
-        <div class="row">
+        <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section class="d-flex flex-column h-100 mb-4 style=" background-color: lightgray;"">
+                <section class="d-flex flex-column h-100">
                     <div id="raffleCarousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             @foreach (var raffle in Model.Raffles)
@@ -56,7 +56,7 @@
             </div>
 
             <div class="col-md-12 col-lg-6">
-                <section class="d-flex flex-column h-100 mb-4">
+                <section class="d-flex flex-column h-100">
                     <h3>My Entries</h3>
                     @if (Model.UserEnteredRaffles.Any())
                     {
@@ -104,7 +104,7 @@
             <div class="col-md-12 col-lg-6">
                 <section>
                     <h3>Winners</h3>
-                    <!-- Add winners content here -->
+                    <p class="text-muted">There are no winners yet.</p>
                 </section>
             </div>
         </div>

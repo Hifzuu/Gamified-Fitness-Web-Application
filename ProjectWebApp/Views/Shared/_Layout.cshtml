@@ -20,8 +20,25 @@
 
 <style>
     .navbar {
-        background-color: yellow;
+        background-color: pink;
     }
+    .log {
+        width: 100%;
+        align-items: center;
+        /* background-color: red; */
+        text-align: center;
+        padding:0px;
+        margin: 0px;
+                      
+    }
+
+    .navbar-navv {
+        /* background-color: blue; */
+        justify-content: center;
+        padding:8px;
+        margin:0px;
+    }
+
 </style>
 
 <body>
@@ -30,16 +47,17 @@
 
 
     <div class="Topprofile-container">
-        <div class="main-content" style="text-align: right;">
-            <nav class="navbar-expand-lg  navbar customHeader">            
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+        <div class="main-content">
+            <nav class="navbar-expand-lgg navbar">
+                <ul class="navbar-navv log">
+                    <li class="nav-itemm d-flex align-items-center justify-content-center">
                         <partial name="_LoginPartial" />
                     </li>
-                </ul> 
+                </ul>
             </nav>
         </div>
     </div>
+
 
     <div class="main-content">
         <main role="main" >

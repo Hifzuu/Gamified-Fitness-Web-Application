@@ -99,7 +99,7 @@ button.accept-policy {
     /*#e5eeff------------------------------------------------------------------------------*/
     color: black;
     border-bottom: 0px solid white;
-    padding: 10px;
+    padding: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -339,21 +339,26 @@ button.accept-policy {
 }
 
 .profile-picture {
-    width: 50px; /* Set the desired width */
-    height: 50px; /* Set the desired height */
+    width: 60px; /* Set the desired width */
+    height: 60px; /* Set the desired height */
     border-radius: 50%; /* Make it a circle */
 }
 
 #userDropdownContainer .dropdown-menu {
-    right: 0;
-    left: auto;
-    border: 1px solid #ddd; /* Light gray border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #fff; /* Light background color */
+    background-color: #fff;
     width: 250px;
+    position: absolute;
+    top: 100%;
+    margin-top: 8px; /* Adjusted margin for better spacing */
     padding: 15px;
+    z-index: 999999; /* Set a higher z-index value */
 }
+
+
+
 
 #userDropdownContainer .dropdown-menu {
     display: none;
