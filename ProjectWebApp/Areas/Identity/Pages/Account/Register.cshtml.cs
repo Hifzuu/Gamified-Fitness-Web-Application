@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -183,11 +184,15 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            // Validate model state before proceeding
+            if (!ModelState.IsValid)
+            {
+                // Model state is not valid, return the page with an error message
+                return RedirectToPage(new { returnUrl, error = "incomplete" });
+            }
+
             // Check if the email is already registered
             var existingUsers = await _userManager.Users.Where(u => u.NormalizedEmail == Input.Email.ToUpper()).ToListAsync();
-
-            _logger.LogInformation($"Found {existingUsers.Count} users with email: {Input.Email}");
-
             if (existingUsers.Count > 0)
             {
                 // Log the details of existing users for investigation
@@ -201,12 +206,73 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 return RedirectToPage(new { returnUrl, error = "email" });
             }
 
+            // Check if goals and exercise focus are selected
             if (Input.SelectedGoals == null || Input.ExerciseFocus == null ||
-     Input.SelectedGoals.Any(string.IsNullOrEmpty) || Input.ExerciseFocus.Any(string.IsNullOrEmpty))
+                Input.SelectedGoals.Any(string.IsNullOrEmpty) || Input.ExerciseFocus.Any(string.IsNullOrEmpty))
             {
                 ModelState.AddModelError(string.Empty, "Please select goals and exercise focus.");
-                return RedirectToPage(new { returnUrl, error = "other" });
+                return RedirectToPage(new { returnUrl, error = "goals/exercise" });
             }
+
+            // Check gender
+            if (string.IsNullOrEmpty(Input.Gender))
+            {
+                ModelState.AddModelError(string.Empty, "Please select a gender.");
+                return RedirectToPage(new { returnUrl, error = "gender" });
+            }
+
+            // Check DOB
+            if (Input.DateOfBirth == DateTime.MinValue || Input.DateOfBirth > DateTime.Now.AddYears(-18))
+            {
+                ModelState.AddModelError(string.Empty, "Please provide a valid date of birth.");
+                return RedirectToPage(new { returnUrl, error = "DOB" });
+            }
+
+            // Check country
+            if (string.IsNullOrEmpty(Input.Country))
+            {
+                ModelState.AddModelError(string.Empty, "Please select a country.");
+                return RedirectToPage(new { returnUrl, error = "country" });
+            }
+
+            // Check height
+            if (Input.Height <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Please enter a valid height.");
+                return RedirectToPage(new { returnUrl, error = "height" });
+            }
+
+            // Check start weight
+            if (Input.InitialWeightEntry <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Please enter a valid starting weight.");
+                return RedirectToPage(new { returnUrl, error = "startWeight" });
+            }
+
+            // Check goal weight
+            if (Input.GoalWeight <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Please enter a valid goal weight.");
+                return RedirectToPage(new { returnUrl, error = "goalWeight" });
+            }
+
+            // Check Username
+            if (string.IsNullOrEmpty(Input.CustomUserName) || !Regex.IsMatch(Input.CustomUserName, "^[a-zA-Z0-9]*$"))
+            {
+                ModelState.AddModelError(string.Empty, "Username must be between 3 and 25 characters, using only alphanumeric characters.");
+                return RedirectToPage(new { returnUrl, error = "username" });
+            }
+
+            // Check password
+            if (string.IsNullOrEmpty(Input.Password) || Input.Password.Length < 6 ||
+                !Input.Password.Any(char.IsUpper) ||
+                !Input.Password.Any(char.IsDigit) ||
+                !Input.Password.Any(c => char.IsSymbol(c) || char.IsPunctuation(c)))
+            {
+                ModelState.AddModelError(string.Empty, "Password must be at least 6 characters long and include at least one uppercase letter, one digit, and one special character.");
+                return RedirectToPage(new { returnUrl, error = "password" });
+            }
+
 
 
             try

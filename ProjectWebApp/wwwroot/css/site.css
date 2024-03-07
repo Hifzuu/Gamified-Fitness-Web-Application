@@ -357,9 +357,6 @@ button.accept-policy {
     z-index: 999999; /* Set a higher z-index value */
 }
 
-
-
-
 #userDropdownContainer .dropdown-menu {
     display: none;
 }

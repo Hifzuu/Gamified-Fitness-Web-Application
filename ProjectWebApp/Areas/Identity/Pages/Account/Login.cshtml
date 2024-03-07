@@ -106,8 +106,8 @@
                                     <p class="mb-0 text-fade">Sign in to continue to your dashboard</p>
                                 </div>
 
-                            
-                                <form id="account" method="post">
+
+                                <form id="account" method="post" autocomplete="off">
                                     <h2 class="text-center mb-4">Log in</h2>
                                     <div asp-validation-summary="ModelOnly" class="text-danger alert alert-danger text-center" role="alert"></div>
 
@@ -130,20 +130,19 @@
                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                                     </div>
 
-
-
                                     <div class="row d-flex align-items-center justify-content-between mb-4">
                                         <div class="col-auto">
                                             <div class="checkbox">
-                                                <input type="checkbox" asp-for="Input.RememberMe" />
-                                                <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
+                                                <input type="checkbox" asp-for="Input.RememberMeToggle" />
+                                                <label class="form-check-label" asp-for="Input.RememberMeToggle">Remember me</label>
                                             </div>
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-auto">
                                             <div class="fog-pwd text-end">
                                                 <a id="forgot-password" asp-page="./ForgotPassword" class="text-primary fw-500 hover-primary">
-                                                    <i class="fas fa-lock"></i> Forgot password?</a><br>
+                                                    <i class="fas fa-lock"></i> Forgot password?
+                                                </a><br>
                                             </div>
                                         </div>
                                         <!-- /.col -->
@@ -152,9 +151,8 @@
                                         </div>
                                         <!-- /.col -->
                                     </div>
-
-
                                 </form>
+
                                 <div class="text-center mb-3">
                                     <p class="mt-15 mb-0 text-fade">Don't have an account? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-primary ms-5">Sign Up</a></p>
                                 </div>

@@ -90,27 +90,59 @@
                                                     The email address is already registered. Please use a different email.
                                                 </div>
                                                 break;
-                                            case "other":
+                                            case "goals/exercise":
                                                 <div class="alert alert-danger">
-                                                    <p>There was an error with your submission. Please ensure the following:</p>
-                                                    <ul>
-                                                        <li>All fields are entered correctly.</li>
-                                                        <li>Gender is selected.</li>
-                                                        <li>Date of Birth is provided and in the correct format.</li>
-                                                        <li>Country is selected.</li>
-                                                        <li>Height is entered.</li>
-                                                        <li>Starting Weight is entered.</li>
-                                                        <li>Goal Weight is entered.</li>
-                                                        <li>Username is between 3 and 25 characters, using only alphanumeric characters.</li>
-                                                        <li>Password is at least 6 characters long and includes at least one uppercase letter and one special character.</li>
-                                                    </ul>
-                                                    <p>Try again after checking the above.</p>
+                                                    Please ensure goals and exercise focus are selected.
                                                 </div>
-
+                                                break;
+                                            case "gender":
+                                                <div class="alert alert-danger">
+                                                    Please ensure a gender is selected.
+                                                </div>
+                                                break;
+                                            case "DOB":
+                                                <div class="alert alert-danger">
+                                                    Please ensure you have provided a valid date of birth.
+                                                </div>
+                                                break;
+                                            case "country":
+                                                <div class="alert alert-danger">
+                                                    Please ensure you have selected a country.
+                                                </div>
+                                                break;
+                                            case "height":
+                                                <div class="alert alert-danger">
+                                                    Please enter a valid height.
+                                                </div>
+                                                break;
+                                            case "startWeight":
+                                                <div class="alert alert-danger">
+                                                    Please enter a valid starting weight.
+                                                </div>
+                                                break;
+                                            case "goalWeight":
+                                                <div class="alert alert-danger">
+                                                    Please enter a valid goal weight.
+                                                </div>
+                                                break;
+                                            case "username":
+                                                <div class="alert alert-danger">
+                                                    Please ensure your Username is between 3 and 25 characters, using only alphanumeric characters.
+                                                </div>
+                                                break;
+                                            case "password":
+                                                <div class="alert alert-danger">
+                                                    Please ensure your Password is at least 6 characters long and includes at least one uppercase letter and one special character.
+                                                </div>
                                                 break;
                                             case "exception":
                                                 <div class="alert alert-danger">
                                                     An unexpected error occurred. Please try again later.
+                                                </div>
+                                                break;
+                                            case "incomplete":
+                                                <div class="alert alert-danger">
+                                                    Please ensure all fields are completed.
                                                 </div>
                                                 break;
                                             default:
@@ -296,31 +328,3 @@
 
 }
 
-@* <div class="col-md-12 col-lg-6 offset-lg-2">
-    <section>
-        <h3 class="text-center mb-4">Use another service to register.</h3>
-        @{
-            if ((Model.ExternalLogins?.Count ?? 0) == 0)
-            {
-                <div>
-                    <p>
-                        There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article about setting up this ASP.NET application to support logging in via external services</a>.
-                    </p>
-                </div>
-            }
-            else
-            {
-                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                    <div>
-                        <p>
-                            @foreach (var provider in Model.ExternalLogins!)
-                            {
-                                <button type="submit" class="btn btn-primary mb-2" name="provider" value="@provider.Name" title="Register using your @provider.DisplayName account">@provider.DisplayName</button>
-                            }
-                        </p>
-                    </div>
-                </form>
-            }
-        }
-    </section>
-</div> *@
