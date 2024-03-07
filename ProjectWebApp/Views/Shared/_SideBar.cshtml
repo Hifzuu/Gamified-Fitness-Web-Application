@@ -132,10 +132,32 @@
         }
 
         // Function to submit feedback (you can customize this function based on your backend logic)
-        function submitFeedback() {
-            // Get form data and perform submission logic here
-            closeModal(); // Close the modal after submission
-            alert('Feedback submitted successfully!');
+        async function submitFeedback() {
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                feedbackType: document.getElementById('feedbackType').value,
+                feedbackDetails: document.getElementById('feedbackDetails').value,
+            };
+
+            try {
+                const response = await fetch('/Feedback/SubmitFeedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    closeModal(); // Close the modal after successful submission
+                    alert('Feedback submitted successfully!');
+                } else {
+                    console.error('Failed to submit feedback');
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     </script>
 

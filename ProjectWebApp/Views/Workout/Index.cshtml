@@ -178,12 +178,12 @@ completion of workouts *@
                                     if (workout != null)
                                     {
                                         <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <div class="fav-workout-card" data-category="@workout.Category">
+                                            <div class="workout-card" data-category="@workout.Category">
                                                 <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
                                                 class="card workout-link">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">@workout.Name</h5>
-                                                        <div class="info" style="text-align:center;">
+                                                   <div class="card-body" style="background-image: url('https://placekitten.com/800/400'); background-size: cover; background-position: center;">
+                                                        <h5 class="card-title text-white">@workout.Name</h5>
+                                                        <div class="info" style="text-align:center; background-color:white;">
                                                             <p class="category">Category: @workout.Category</p>
                                                             <p class="duration">Duration: @workout.DurationMinutes minutes</p>
                                                             <p class="difficulty">Difficulty: @workout.difficulty</p>
@@ -191,6 +191,7 @@ completion of workouts *@
                                                             <p class="points">Points: @workout.rewardPoints</p>
                                                         </div>
                                                     </div>
+
                                                 </a>
                                             </div>
                                         </div>

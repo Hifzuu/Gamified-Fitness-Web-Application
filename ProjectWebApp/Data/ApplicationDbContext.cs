@@ -16,6 +16,7 @@ namespace ProjectWebApp.Data
         public DbSet<UserChallenge> UserChallenges { get; set; }
         public DbSet<Raffle> Raffles { get; set; }
         public DbSet<UserRaffleEntry> UserRaffleEntries { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
