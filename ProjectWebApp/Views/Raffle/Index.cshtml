@@ -1,6 +1,8 @@
 ﻿@model ProjectWebApp.Models.RaffleViewModel
+@inject ProjectWebApp.Data.ApplicationDbContext dbContext
 @{
     ViewData["Title"] = "Raffle";
+    var sortedRaffles = Model.UserEnteredRaffles.OrderByDescending(r => r.EntryTimestamp).ToList();
 }
 @* "https://via.placeholder.com/800x400" *@
 <!DOCTYPE html>
@@ -62,13 +64,36 @@
                     {
                         <div class="card">
                             <ul class="list-group list-group-flush">
-                                @foreach (var enteredRaffle in Model.UserEnteredRaffles)
+                                @foreach (var enteredRaffle in sortedRaffles)
                                 {
                                     <li class="list-group-item">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex flex-column">
                                                 <h5 class="mb-1 font-weight-bold">@enteredRaffle.Name</h5>
-                                                <p class="mb-0 text-muted">@enteredRaffle.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
+                                                <p class="mb-0 text-muted">Entered: @enteredRaffle.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
+                                                <!-- Check if the raffle has ended -->
+                                                @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
+                                                {
+                                                    <!-- Check if the user is a winner -->
+                                                    @if (enteredRaffle.isWinner)
+                                                    {
+                                                        <div class="congratulations-message text-success">
+                                                            Congratulations! You won this raffle!
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="motivational-message text-muted">
+                                                            Better luck next time! Keep participating!
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="active-raffle-message" style="color: #258cfb;">
+                                                        Raffle is still active. Check back after it ends.
+                                                    </div>
+                                                }
                                             </div>
                                             <div class="text-left">
                                                 <div class="raffle-status-box">
@@ -99,13 +124,53 @@
                         <p class="text-muted">You have not entered any raffles yet.</p>
                     }
                 </section>
+
             </div>
 
             <div class="col-md-12 col-lg-6">
                 <section>
                     <h3>Winners</h3>
-                    <p class="text-muted">There are no winners yet.</p>
+
+                    @if (Model.winners.Any())
+                    {
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                @foreach (var winner in Model.winners.Where(entry => entry.isWinner))
+                                {
+                                    // Fetch user information based on UserId
+                                    var user = dbContext.GetUserById(winner.userId);
+
+                                    <li class="list-group-item">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex flex-column">
+                                                <h5 class="mb-1 font-weight-bold">@winner.Name</h5>
+                                                <p class="mb-0 text-muted">Winner: @(user != null ? user.UserName : "User not found")</p>
+                                                <p class="mb-0 text-muted">Entry Timestamp: @winner.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
+                                            </div>
+                                            <div class="text-left">
+                                                <div class="raffle-status-box">
+                                                    <div class="expired-status">
+                                                        Raffle ended on <br>
+                                                        @winner.EndDate.ToString("MMMM dd, yyyy")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No winners have been selected yet.</p>
+                    }
                 </section>
+
+                <form method="post" action="@Url.Action("SelectWinners", "Raffle")">
+                    <button type="submit" class="btn btn-primary">Select Winners</button>
+                </form>
             </div>
         </div>
     </div>

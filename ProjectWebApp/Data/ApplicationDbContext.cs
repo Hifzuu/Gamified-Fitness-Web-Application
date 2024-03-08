@@ -129,5 +129,11 @@ namespace ProjectWebApp.Data
                 .WithMany(r => r.UserRaffleEntries)
                 .HasForeignKey(re => re.RaffleId);
         }
+
+        public ApplicationUser GetUserById(string userId)
+        {
+            // Assuming you have a User DbSet in your DbContext
+            return Users.FirstOrDefault(u => u.Id == userId);
+        }
     }
 }

@@ -14,6 +14,7 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/writing-signature" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
@@ -129,6 +130,12 @@
             document.getElementById('feedbackModal').classList.remove('show');
             document.body.classList.remove('modal-open');
             document.getElementById('feedbackModal').style.display = 'none';
+
+            // Remove the modal backdrop
+            const modalBackdrops = document.getElementsByClassName('modal-backdrop');
+            while (modalBackdrops.length > 0) {
+                modalBackdrops[0].parentNode.removeChild(modalBackdrops[0]);
+            }
         }
 
         // Function to submit feedback (you can customize this function based on your backend logic)
@@ -151,12 +158,29 @@
 
                 if (response.ok) {
                     closeModal(); // Close the modal after successful submission
-                    alert('Feedback submitted successfully!');
+                    // Display SweetAlert success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Feedback Submitted!',
+                        text: 'Thank you for your feedback.',
+                    });
                 } else {
                     console.error('Failed to submit feedback');
+                    // Display SweetAlert error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Submission Failed',
+                        text: 'Failed to submit feedback. Please try again.',
+                    });
                 }
             } catch (error) {
                 console.error(error);
+                // Display SweetAlert error message for unexpected errors
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred. Please try again.',
+                });
             }
         }
     </script>

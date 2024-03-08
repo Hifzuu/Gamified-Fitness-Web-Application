@@ -275,7 +275,10 @@
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text bg-transparent"><i class="text-fade ti-lock"></i></span>
-                                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                                            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" type="password" id="password-input" />
+                                            <span class="input-group-text bg-transparent" onmousedown="togglePasswordVisibility('password-input', 'toggle-password-icon')">
+                                                <i class="fas fa-eye" id="toggle-password-icon"></i>
+                                            </span>
                                         </div>
                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                                     </div>
@@ -283,10 +286,14 @@
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <span class="input-group-text bg-transparent"><i class="text-fade ti-lock"></i></span>
-                                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                                            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" type="password" id="confirm-password-input" />
+                                            <span class="input-group-text bg-transparent" onmousedown="togglePasswordVisibility('confirm-password-input', 'toggle-confirm-password-icon')">
+                                                <i class="fas fa-eye" id="toggle-confirm-password-icon"></i>
+                                            </span>
                                         </div>
                                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                     </div>
+
 
                                     <div class="row d-flex align-items-center mb-4">
                                         <div class="col-12 text-center">
@@ -313,18 +320,32 @@
 
    
 </body>
-</html>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 
     <script>
         $(document).ready(function () {
             $('#selectedGoals option:first').prop('disabled', true);
-            $('#selectedGoals option:first').prop('disabled', true);
             $('#selectedExerciseFocus option:first').prop('disabled', true);
         });
+
+        function togglePasswordVisibility(passwordInputId, toggleIconId) {
+            var passwordInput = $("#" + passwordInputId);
+            var toggleIcon = $("#" + toggleIconId);
+
+            if (passwordInput.attr('type') === "password") {
+                passwordInput.attr('type', 'text');
+                toggleIcon.removeClass("fa-eye").addClass("fa-eye-slash");
+            } else {
+                passwordInput.attr('type', 'password');
+                toggleIcon.removeClass("fa-eye-slash").addClass("fa-eye");
+            }
+        }
     </script>
 
-}
+</html>
 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

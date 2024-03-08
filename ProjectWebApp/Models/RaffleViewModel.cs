@@ -13,7 +13,10 @@
         public List<RaffleViewModel> Raffles { get; set; }
 
         public List<RaffleViewModel> UserEnteredRaffles { get; set; }
+        public List<RaffleViewModel> winners { get; set; }
         public DateTime EntryTimestamp { get; set; }
+        public bool isWinner {  get; set; }
+        public string userId { get; set; }
 
     }
 

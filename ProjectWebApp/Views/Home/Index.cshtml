@@ -34,10 +34,24 @@
         font-size: 25px;
     }
 
+
     .or-divider {
-        font-size: 16px;
-        /* Adjust the font size to your preference */
+        font-size: 18px!important;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        color: white;
     }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: '';
+            flex: 1;
+            border-top: 1px solid white;
+            margin: 0 10px;
+        }
+
 </style>
 
 <body>
@@ -103,8 +117,8 @@
                 {
                     <!-- User not signed in, show log in and sign up buttons -->
                     <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg">Sign Up</a>
-                    <span class="or-divider">or</span>
-                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-lg">Log In</a>
+                    <span class="or-divider">OR</span>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg">Log In</a>
                 }
                 else
                 {
