@@ -94,9 +94,8 @@ body {
 
 .challenge-timer {
     font-size: 18px;
-    color: #fff;
-    background-color: #3498db;
-    padding: 10px;
+    color: black;
+    padding: 0px;
     border-radius: 5px;
     display: inline-block;
 }

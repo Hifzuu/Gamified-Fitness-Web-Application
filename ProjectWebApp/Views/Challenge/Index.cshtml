@@ -16,13 +16,22 @@
 <body>
     <div class="page-container">
         <section>
-            <h2 class="game-title">🌟 Daily Challenges</h2>
+            
 
             @if (Model.DailyChallenge != null)
             {
-                <h5 class="challenge-timer" id="dailyTimer">
-                    Time remaining: @Model.DailyTime
-                </h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="game-title">🌟 Daily Challenges</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <h5 class="challenge-timer" id="dailyTimer">
+                            Time remaining: @Model.DailyTime
+                        </h5>
+                    </div>
+                </div>
+
+               
 
                 <div class="challenge-card game-card" onclick="navigateToWorkouts()">
 
@@ -54,18 +63,26 @@
             }
             else
             {
-                <p>No daily challenges available for today.</p>
+                <h2 class="game-title">🌟 Daily Challenges</h2>
+                <p class="text-muted">No daily challenges available for today.</p>
             }
         </section>
 
         <section>
-            <h2 class="game-title">🌟 Weekly Challenges</h2>
 
             @if (Model.WeeklyChallenge != null)
             {
-                <h5 class="challenge-timer" id="weeklyTimer">
-                    Time remaining: @Model.WeeklyTime
-                </h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="game-title">🌟 Weekly Challenges</h2>
+                    </div>
+                    <div class="col-6 text-right">
+
+                        <h5 class="challenge-timer" id="weeklyTimer">
+                            Time remaining: @Model.WeeklyTime
+                        </h5>
+                    </div>
+                </div>
 
                 <div class="challenge-card game-card" onclick="navigateToWorkouts()">
                     <h6>@Model.WeeklyChallenge.Challenge.Name</h6>
@@ -92,18 +109,27 @@
             }
             else
             {
-                <p>No daily challenges available for today.</p>
+                <h2 class="game-title">🌟 Weekly Challenges</h2>
+                <p class="text-muted">No weekly challenges available.</p>
             }
         </section>
 
         <section>
-            <h2 class="game-title">🌟 Monthly Challenges</h2>
 
             @if (Model.MonthlyChallenge != null)
             {
-                <h5 class="challenge-timer" id="monthlyTimer">
-                    Time remaining: @Model.MonthlyTime
-                </h5>
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="game-title">🌟 Monthly Challenges</h2>
+                    </div>
+                    <div class="col-6 text-right">
+                        <h5 class="challenge-timer" id="monthlyTimer">
+                            Time remaining: @Model.MonthlyTime
+                        </h5>
+                    </div>
+                </div>
+
+                
 
                 <div class="challenge-card game-card" onclick="navigateToWorkouts()">
                     <h6>@Model.MonthlyChallenge.Challenge.Name</h6>
@@ -130,7 +156,8 @@
             }
             else
             {
-                <p>No daily challenges available for today.</p>
+                <h2 class="game-title">🌟 Monthly Challenges</h2>
+                <p class="text-muted">No monthly challenges available.</p>
             }
         </section>
 

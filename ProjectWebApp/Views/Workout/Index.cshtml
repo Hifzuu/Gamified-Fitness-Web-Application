@@ -228,7 +228,8 @@ completion of workouts *@
                             <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category">
                                 <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
                                     class="card workout-link">
-                                    <img src="https://placekitten.com/300/200" class="card-img-top" alt="Workout Image">
+                                    @* <img src="/Images/@workout.imageUrl"  *@
+                                   <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Workout Image">
                                     <div class="card-body">
                                         <h5 class="card-title">@workout.Name</h5>
                                         <div class="info" style="text-align:center;">
@@ -328,8 +329,8 @@ completion of workouts *@
                             data-points="@workout.rewardPoints">
                             <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
                                 class="card workout-link">
-                                <img src="https://placekitten.com/300/200" class="card-img-top" alt="Workout Image">
-                                <div class="card-body">
+                               <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Workout Image">
+                                 <div class="card-body">
                                     <h5 class="card-title">@workout.Name</h5>
 
                                     <div class="info" style="text-align:center;">
