@@ -12,6 +12,8 @@ namespace ProjectWebApp.Data
         public DbSet<WeightEntry> WeightEntries { get; set; }
         public DbSet<UserCalendar> UserCalendars { get; set; }
         public DbSet<LoginStreak> LoginStreaks { get; set; }
+        public DbSet<StreakReward> StreakRewards { get; set; }
+        public DbSet<UserStreakReward> UserStreakRewards { get; set; }
         public DbSet<Challenge> Challenges { get; set; }
         public DbSet<UserChallenge> UserChallenges { get; set; }
         public DbSet<Raffle> Raffles { get; set; }
@@ -74,6 +76,34 @@ namespace ProjectWebApp.Data
                 .HasOne(ls => ls.User)
                 .WithMany(u => u.LoginStreaks)
                 .HasForeignKey(ls => ls.UserId)
+                .IsRequired();
+
+            // Configure the primary key for StreakReward and userStreakReward
+            modelBuilder.Entity<StreakReward>().HasKey(sr => sr.RewardId);
+            modelBuilder.Entity<UserStreakReward>().HasKey(usr => usr.UserStreakRewardId);
+
+            // Configure the relationship between LoginStreak and StreakReward
+            modelBuilder.Entity<LoginStreak>()
+                .HasMany(ls => ls.UserStreakRewards)
+                .WithOne(usr => usr.LoginStreak)
+                .HasForeignKey(usr => new { usr.UserId, usr.LastLoginTime });
+
+            modelBuilder.Entity<StreakReward>()
+                .HasMany(sr => sr.UserStreakRewards)
+                .WithOne(usr => usr.StreakReward)
+                .HasForeignKey(usr => usr.RewardId);
+
+            // Configure the relationship between ApplicationUser and UserStreakReward
+            modelBuilder.Entity<UserStreakReward>()
+                .HasOne(usr => usr.LoginStreak)
+                .WithMany(ls => ls.UserStreakRewards)
+                .HasForeignKey(usr => new { usr.UserId, usr.LastLoginTime })
+                .IsRequired();
+
+            modelBuilder.Entity<UserStreakReward>()
+                .HasOne(usr => usr.StreakReward)
+                .WithMany(sr => sr.UserStreakRewards)
+                .HasForeignKey(usr => usr.RewardId)
                 .IsRequired();
 
             //challenges

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectWebApp.Data;
 
@@ -11,9 +12,11 @@ using ProjectWebApp.Data;
 namespace ProjectWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309145442_AddStreakRewards")]
+    partial class AddStreakRewards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -413,8 +416,17 @@ namespace ProjectWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RewardId"));
 
+                    b.Property<bool>("Claimed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Days")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("LoginStreakLastLoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LoginStreakUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MedalText")
                         .IsRequired()
@@ -424,6 +436,8 @@ namespace ProjectWebApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("RewardId");
+
+                    b.HasIndex("LoginStreakUserId", "LoginStreakLastLoginTime");
 
                     b.ToTable("StreakRewards");
                 });
@@ -545,14 +559,8 @@ namespace ProjectWebApp.Data.Migrations
 
             modelBuilder.Entity("ProjectWebApp.Models.UserStreakReward", b =>
                 {
-                    b.Property<int>("UserStreakRewardId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserStreakRewardId"));
-
-                    b.Property<bool>("Claimed")
-                        .HasColumnType("bit");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("LastLoginTime")
                         .HasColumnType("datetime2");
@@ -560,15 +568,9 @@ namespace ProjectWebApp.Data.Migrations
                     b.Property<int>("RewardId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserStreakRewardId");
+                    b.HasKey("UserId", "LastLoginTime", "RewardId");
 
                     b.HasIndex("RewardId");
-
-                    b.HasIndex("UserId", "LastLoginTime");
 
                     b.ToTable("UserStreakRewards");
                 });
@@ -730,6 +732,13 @@ namespace ProjectWebApp.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ProjectWebApp.Models.StreakReward", b =>
+                {
+                    b.HasOne("ProjectWebApp.Models.LoginStreak", null)
+                        .WithMany("Rewards")
+                        .HasForeignKey("LoginStreakUserId", "LoginStreakLastLoginTime");
+                });
+
             modelBuilder.Entity("ProjectWebApp.Models.UserCalendar", b =>
                 {
                     b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
@@ -868,6 +877,8 @@ namespace ProjectWebApp.Data.Migrations
 
             modelBuilder.Entity("ProjectWebApp.Models.LoginStreak", b =>
                 {
+                    b.Navigation("Rewards");
+
                     b.Navigation("UserStreakRewards");
                 });
 

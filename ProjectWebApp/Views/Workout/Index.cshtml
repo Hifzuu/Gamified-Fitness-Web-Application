@@ -248,6 +248,38 @@ completion of workouts *@
             }
         }
 
+@*          @if (ViewData["Workouts"] != null)
+        {
+            var workouts = ViewData["Workouts"] as List<Workout>;
+            <!-- Display featured workouts -->
+            @if (workouts.Any(w => w.IsFeatured))
+            {
+                <section class="d-flex flex-column h-100">
+                    <div class="section-header featured-section">
+                        <h3>Featured Workouts</h3>
+                    </div>
+                    <div class="scrollable-row" id="featuredWorkouts">
+                        @foreach (var workout in workouts.Where(w => w.IsFeatured))
+                        {
+                            <div class="col-lg-4 col-md-6 col-sm-12 workout-card-new" data-category="@workout.Category">
+                                    <div class="first-content">
+                                        <span>first</span>
+                                    </div>
+                                    @* <img src="/Images/@workout.imageUrl"  *@
+                                   
+                                   @* <div class="second-content">
+                                       <span>second</span>
+                                    </div>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+
+
+        } *@
+
+
 
         <section>
             <!-- All Exercises Section -->

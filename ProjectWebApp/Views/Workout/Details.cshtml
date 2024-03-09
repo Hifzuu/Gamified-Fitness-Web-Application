@@ -53,8 +53,10 @@
 
                     <div class="card">
                         <div class="embed-responsive embed-responsive-16by9">
-                            <video class="embed-responsive-item" src="/Videos/@Model.VideoUrl" autoplay loop muted playsinline controls></video>
+                            <video id="videoPlayer" class="embed-responsive-item" autoplay loop muted playsinline controls></video>
                         </div>
+
+
 
                         <hr class="my-4">
 
@@ -468,7 +470,12 @@
                 });
             }
 
-
+            var videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.onerror = function () {
+                // If video fails to load, set the poster (placeholder image)
+                videoPlayer.poster = 'https://via.placeholder.com/800x450';
+            };
+            videoPlayer.src = "/Videos/@Model.VideoUrl";
         </script>
     }
 

@@ -99,15 +99,15 @@
                                                 <div class="raffle-status-box">
                                                     @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
                                                     {
-                                                        <div class="expired-status">
-                                                            Raffle ended on <br>
+                                                        <div class="expired-status" style="width:120px;">
+                                                            Ended: <br>
                                                             @enteredRaffle.EntryTimestamp.AddMonths(1).Date.ToString("MMMM dd, yyyy")
                                                         </div>
                                                     }
                                                     else
                                                     {
-                                                        <div class="active-status">
-                                                            Ends on <br>
+                                                        <div class="active-status" style="width:120px;">
+                                                            Ends: <br>
                                                             @enteredRaffle.EndDate.ToString("MMMM dd, yyyy")
                                                         </div>
                                                     }

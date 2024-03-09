@@ -128,6 +128,9 @@ body[b-s13xhoid61] {
         box-shadow: none; /* No box shadow for claimed button */
     }
 
+/* _content/ProjectWebApp/Views/Community/Index.cshtml.rz.scp.css */
+body[b-58qcj1vc5v] {
+}
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {
     color: #007bff;
@@ -284,6 +287,23 @@ h2[b-lict9yrgg8] {
 .no-info[b-lict9yrgg8] {
     font-size: 1.2em;
     margin: 10px 0;
+}
+
+.claimable-item[b-lict9yrgg8] {
+    position: relative;
+}
+
+.claim-option[b-lict9yrgg8] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.claimable-item:hover .claim-option[b-lict9yrgg8] {
+    opacity: 1;
 }
 /* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
 body[b-dix295yned] {
@@ -938,3 +958,47 @@ h3[b-25jdkaz98d] {
     padding-right: 30px; /* Ensure there is space for the icon */
 }
 
+
+
+
+/*.workout-card-new {
+    max-width: 300px;
+    margin: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.workout-card-new:hover{
+    cursor:pointer;
+    transform: scale(1.2);
+    background: cornflowerblue;
+}
+
+.first-content{
+    height:100%;
+    width:100%;
+    transition: all 0.4s;
+    opacity: 1;
+}
+
+.workout-card-new:hover .first-content{
+height:0px;
+opacity:0;
+}
+
+.second-content{
+    height:0%;
+    width:100%;
+    opacity:0;
+    transition: all 0.4s;
+    font-size:0px;
+    transform: rotate(90deg) scale(-1);
+}
+
+.workout-card-new:hover .second-content{
+opacity:1;
+height:100%;
+font-size: 1.8rem;
+transform:rotate(0deg);
+}*/

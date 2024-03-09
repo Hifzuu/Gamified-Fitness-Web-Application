@@ -154,3 +154,20 @@
     font-size: 1.2em;
     margin: 10px 0;
 }
+
+.claimable-item {
+    position: relative;
+}
+
+.claim-option {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.claimable-item:hover .claim-option {
+    opacity: 1;
+}

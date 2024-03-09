@@ -583,3 +583,4 @@ C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\ProjectWebApp.genruntimeconfig.cache
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\ref\ProjectWebApp.dll
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Raffle\Index.cshtml.rz.scp.css
+C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Community\Index.cshtml.rz.scp.css

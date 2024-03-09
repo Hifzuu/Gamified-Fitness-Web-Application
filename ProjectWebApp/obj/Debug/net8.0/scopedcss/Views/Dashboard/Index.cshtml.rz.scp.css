@@ -154,3 +154,20 @@ h2[b-lict9yrgg8] {
     font-size: 1.2em;
     margin: 10px 0;
 }
+
+.claimable-item[b-lict9yrgg8] {
+    position: relative;
+}
+
+.claim-option[b-lict9yrgg8] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.claimable-item:hover .claim-option[b-lict9yrgg8] {
+    opacity: 1;
+}
