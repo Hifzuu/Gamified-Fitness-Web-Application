@@ -171,3 +171,31 @@
 .claimable-item:hover .claim-option {
     opacity: 1;
 }
+
+.claimable {
+    background-color: inherit;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.claimed {
+    background-color: inherit;
+    color: white;
+    opacity: 0.7;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.not-claimable {
+    background-color: inherit;
+    color: #7f8c8d;
+    cursor: default;
+    border: 1px solid #7f8c8d;
+    padding: 10px;
+    border-radius: 5px;
+}

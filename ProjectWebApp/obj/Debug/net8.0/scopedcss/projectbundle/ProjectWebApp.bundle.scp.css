@@ -303,6 +303,34 @@ h2[b-lict9yrgg8] {
 .claimable-item:hover .claim-option[b-lict9yrgg8] {
     opacity: 1;
 }
+
+.claimable[b-lict9yrgg8] {
+    background-color: inherit;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.claimed[b-lict9yrgg8] {
+    background-color: inherit;
+    color: white;
+    opacity: 0.7;
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.not-claimable[b-lict9yrgg8] {
+    background-color: inherit;
+    color: #7f8c8d;
+    cursor: default;
+    border: 1px solid #7f8c8d;
+    padding: 10px;
+    border-radius: 5px;
+}
 /* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
 body[b-dix295yned] {
     font-family: 'Arial', sans-serif;
@@ -801,11 +829,6 @@ body[b-25jdkaz98d] {
     transition: transform 0.3s ease;
 }
 
-    .workout-card:hover[b-25jdkaz98d] {
-        transform: scale(1.0);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
 
 /* Info Styles */
 .info[b-25jdkaz98d] {
@@ -842,7 +865,7 @@ body[b-25jdkaz98d] {
 }
 
     .workout-link:hover[b-25jdkaz98d] {
-        transform: scale(1.05);
+        transform: scale(1.03);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         color: inherit;
         background-color: cornflowerblue;
@@ -949,14 +972,6 @@ h3[b-25jdkaz98d] {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
-
-#searchInput[b-25jdkaz98d] {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat 95% center;
-    background-size: 20px; /* Adjust the size as needed */
-    padding-right: 30px; /* Ensure there is space for the icon */
-}
-
-
 
 
 /*.workout-card-new {

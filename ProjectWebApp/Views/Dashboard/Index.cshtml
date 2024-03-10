@@ -81,27 +81,28 @@
                             var userStreakReward = Model.ClaimableRewards.FirstOrDefault(cr => cr.RewardId == reward.RewardId);
                             var badgeColor = userStreakReward != null && !userStreakReward.Claimed ? "badge-primary" : "badge-secondary";
                             var rewardColor = rewardColors.ContainsKey(reward.RewardId) ? rewardColors[reward.RewardId] : "#edf2f9";
+                            var badgeCursor = userStreakReward != null && !userStreakReward.Claimed ? "cursor: pointer;" : "cursor: default;";
+                            var listItemOpacity = userStreakReward != null && userStreakReward.Claimed ? "opacity: 0.7;" : "";
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center claimable-item" style="background-color: #edf2f9; border: none;">
+                            <li class="list-group-item d-flex justify-content-between align-items-center claimable-item" style="background-color: #edf2f9; border: none; @listItemOpacity">
                                 <span class="medal-text">@Html.Raw(reward.MedalText)</span>
 
                                 @if (userStreakReward != null && !userStreakReward.Claimed)
                                 {
-                                    <a class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px;" onclick="claimReward(@userStreakReward.UserStreakRewardId)">
+                                    <a class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; @badgeCursor; color: white;" onclick="claimReward(@userStreakReward.UserStreakRewardId)">
                                         Claim @reward.Points Points
                                     </a>
                                 }
                                 else if (userStreakReward != null && userStreakReward.Claimed)
                                 {
-                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px;">@reward.Points Points claimed</span>
+                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; color: white;">@reward.Points Points claimed</span>
                                 }
                                 else
                                 {
-                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px;">@reward.Points Points</span>
+                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; color: white;">@reward.Points Points</span>
                                 }
                             </li>
                         }
-
 
                     </ul>
                 </section>
@@ -295,7 +296,16 @@
             success: function (response) {
                 if (response.success) {
                     // Display SweetAlert on success
-                    Swal.fire('Success!', response.pointsClaimed + ' Points claimed', 'success');
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.pointsClaimed + ' Points claimed',
+                        icon: 'success',
+                    }).then((result) => {
+                        // Reload the page after the modal is closed
+                        if (result.isConfirmed || result.isDismissed) {
+                            location.reload();
+                        }
+                    });
                 } else {
                     // Display SweetAlert on failure
                     Swal.fire('Error!', 'Unable to claim reward.', 'error');
