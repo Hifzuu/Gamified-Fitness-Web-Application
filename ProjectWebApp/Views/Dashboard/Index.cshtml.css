@@ -111,22 +111,60 @@
     }
 
 
-.leftBox {
-    display: grid;
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.fullBox {
-    width: 100%;
+.grid-item {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Fill the full height of the container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.fullLeft {
-    width: 25%;
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-.fullRight {
-    width: 75%;
-    max-width: 75%;
+.card-text {
+    font-size: 5rem;
+    color: #333;
+    font-weight: bold;
 }
+
+.no-info {
+    color: #999;
+}
+
+@media (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+    .grid-container {
+        flex-direction: row; /* Stack items sideways for small screens */
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+    }
+
+    .grid-item {
+        width: 100%; /* Take full width on small screens */
+    }
+}
+
+
 
 .streak-box {
     width: 100%;
