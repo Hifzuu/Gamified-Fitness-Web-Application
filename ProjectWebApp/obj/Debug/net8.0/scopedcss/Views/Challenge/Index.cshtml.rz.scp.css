@@ -21,7 +21,12 @@ body[b-s13xhoid61] {
     margin: 20px;
     padding: 20px;
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .game-title[b-s13xhoid61] {
     color: black;
