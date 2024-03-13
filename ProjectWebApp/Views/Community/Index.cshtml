@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Community";
+﻿@model List<ProjectWebApp.Models.ClanViewModel>
+@{
+    ViewData["Title"] = "Clans";
 }
 
 <!DOCTYPE html>
@@ -15,14 +16,312 @@
 <body>
     <div class="page-container">
         <section>
+            <h2 class="clan-title">My Clan</h2>
 
-            <h2 class="game-title">community</h2>
-          
+            @if (Model.Count > 0)
+            {
+                <div class="clan-details-container">
+                    <h2 class="clan-name">@Model[0].Name</h2>
+                    <p class="creator-info"><strong>Leader: </strong>@Model[0].CreatorUserName</p>
+
+                    <div class="members-section">
+                        <p class="members-title">Members:</p>
+                        <ul class="members-list">
+                            @foreach (var member in Model[0].Members)
+                            {
+                                <li class="member">@member.UserName</li>
+                            }
+                        </ul>
+                    </div>
+
+                    @if (User.Identity.Name == Model[0].CreatorUserName)
+                    {
+                        <!-- Show delete clan button for the creator -->
+                        <button class="btn btn-danger delete-clan-btn" data-clan-id="@Model[0].ClanId">Delete Clan</button>
+                    }
+                    else if (Model[0].Members.Any(member => member.UserName == User.Identity.Name))
+                    {
+                        <!-- Show leave clan button for members -->
+                        <button class="btn btn-danger leave-clan-btn" data-clan-id="@Model[0].ClanId">Leave Clan</button>
+                    }
+                </div>
+                <!-- Add more details about the clan as needed -->
+            }
+            else
+            {
+                <!-- Display message and buttons to join or create a clan if the user has not joined a clan -->
+                <p class="text-muted">You have not joined a clan. Consider creating or joining one!</p>
+                <div>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#joinClanModal">Join a Clan</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#createClanModal">Create a Clan</button>
+                </div>
+            }
         </section>
-
     </div>
 
+    <!-- Join Clan Modal -->
+    <div class="modal" id="joinClanModal" tabindex="-1" role="dialog" aria-labelledby="joinClanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Add your content for the Join Clan modal here -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="joinClanModalLabel">Join a Clan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add the list of available clans or any other content here -->
+                    <!-- Example: Display a list of available clans -->
+                    <ul>
+                        <!-- Add logic to populate the list of available clans -->
+                        <!-- Use JavaScript to handle the selection and submission -->
+                    </ul>
+                </div>
+                <!-- Add more modal content as needed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Clan Modal -->
+    <div class="modal" id="createClanModal" tabindex="-1" role="dialog" aria-labelledby="createClanModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Add your content for the Create Clan modal here -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createClanModalLabel">Create a Clan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add a form to input the clan name and a button to create -->
+                    <form id="createClanForm" asp-action="CreateClan" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="clanName">Clan Name:</label>
+                            <input type="text" class="form-control" id="clanName" placeholder="Enter Clan Name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="createClanButton">Create Clan</button>
+                    </form>
+                </div>
+                <!-- Add more modal content as needed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap and jQuery script references if not already included -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+       
+
+        // Function to join clans
+        $('#joinClanModal').on('shown.bs.modal', function () {
+            $.ajax({
+                url: '/Community/getAvailableClans',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var ulElement = $('#joinClanModal ul');
+                    ulElement.empty();
+
+                    if (data.length > 0) {
+                        $.each(data, function (index, clan) {
+                            var listItem = $('<li>').text(clan.name);
+                            var joinButton = $('<button>').text('Join').addClass('btn btn-primary join-btn').data('clan-id', clan.clanId);
+                            listItem.append(joinButton);
+                            ulElement.append(listItem);
+                        });
+
+                        // Add click event for the 'Join' button
+                        $('.join-btn').on('click', function () {
+                            var clanId = $(this).data('clan-id');
+
+                            // Use AJAX to call the JoinClan action method
+                            $.ajax({
+                                url: '/Community/JoinClan',
+                                type: 'POST',
+                                data: { clanId: clanId },
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.success) {
+                                        // Display success message (e.g., using Swal)
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Success',
+                                            text: data.message,
+                                            didClose: () => {
+                                                // Reload the page after Swal is closed
+                                                location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        // Display error message
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: data.message
+                                        });
+                                    }
+                                },
+                                error: function (error) {
+                                    console.error('Error joining the clan: ', error);
+                                }
+                            });
+                        });
+
+
+
+                    } else {
+                        ulElement.append('<li>No clans available</li>');
+                    }
+                },
+                error: function (error) {
+                    console.error('Error fetching available clans: ', error);
+                }
+            });
+        });
+
+
+        // Function to create clan
+        $("#createClanButton").click(function () {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            $.ajax({
+                url: $("#createClanForm").attr("action"),
+                type: 'POST',
+                data: {
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+                    Name: $("#clanName").val() // Add the name field from the form
+                },
+                success: function (response) {
+                    // Handle success
+                    if (response.success) {
+                        // Display success message (e.g., using Swal)
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                            didClose: () => {
+                                // Reload the page after Swal is closed
+                                location.reload();
+                            }
+                        });
+                        console.log('AJAX success response:', response);
+                        // Close the modal or take other actions as needed
+                        $('#createClanModal').modal('hide');
+                    } else {
+                        // Display error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error creating clan: ', error);
+
+                    // Display a generic error message to the user
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred during the clan creation process. Please try again later.',
+                    });
+                }
+            });
+        });
+
+
+
+
+        // function to leave clan
+        $('.leave-clan-btn').on('click', function () {
+            var clanId = $(this).data('clan-id');
+
+            // Use AJAX to call the LeaveClan action method
+            $.ajax({
+                url: '/Community/LeaveClan',
+                type: 'POST',
+                data: { clanId: clanId },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        // Display success message (e.g., using Swal)
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message,
+                            didClose: () => {
+                                // Reload the page after Swal is closed
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        // Display error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error('Error leaving the clan: ', error);
+                }
+            });
+        });
+
+        $('.delete-clan-btn').on('click', function () {
+            var clanId = $(this).data('clan-id');
+
+            // Use AJAX to call the DeleteClan action method
+            $.ajax({
+                url: '/Community/DeleteClan',
+                type: 'POST',
+                data: { clanId: clanId },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        // Display success message (e.g., using Swal) and handle redirection
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message,
+                            didClose: () => {
+                                // Reload the page after Swal is closed
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        // Display error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.error('Error deleting the clan: ', error);
+                }
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+
+
+
 
 
 </body>

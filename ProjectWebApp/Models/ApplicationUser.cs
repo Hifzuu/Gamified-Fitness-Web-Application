@@ -30,6 +30,8 @@ namespace ProjectWebApp.Models
         public List<string> SelectedGoals { get; set; } = new List<string>(); 
         public List<string> ExerciseFocus { get; set; } = new List<string>();
         public List<WeightEntry> WeightEntries { get; set; } = new List<WeightEntry>();
+        // Foreign key for the clan the user belongs to
+        public int? ClanId { get; set; }
 
         //Additional properties for rest of app
         public int Points { get; set; }
@@ -39,5 +41,6 @@ namespace ProjectWebApp.Models
         public List<LoginStreak> LoginStreaks { get; set; } = new List<LoginStreak>();
         public List<UserChallenge> UserChallenges { get; set; } = new List<UserChallenge>();
         public List<UserRaffleEntry> UserRaffleEntries { get; set; } = new List<UserRaffleEntry>();
+        public Clan Clan { get; set; }
     }
 }

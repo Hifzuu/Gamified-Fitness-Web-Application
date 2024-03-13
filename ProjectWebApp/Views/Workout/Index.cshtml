@@ -162,17 +162,6 @@ completion of workouts *@
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section class="calendar-section" class="d-flex flex-column h-100">
-                    <div id="calendarSection" style="text-align: center;">
-                        <div class="section-header favourite-section mb-2">
-                            <h3>My Calendar</h3>
-                        </div>
-                        <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
-
-                    </div>
-                </section>
-            </div>
-            <div class="col-md-12 col-lg-6">
                 @if (ViewData["Workouts"] != null)
                 {
                     var workouts = ViewData["Workouts"] as List<Workout>;
@@ -220,6 +209,17 @@ completion of workouts *@
                     </section>
   
                 }
+            </div>
+             <div class="col-md-12 col-lg-6">
+                <section class="calendar-section d-flex flex-column h-100">
+                    <div id="calendarSection" style="text-align: center;">
+                        <div class="section-header favourite-section mb-2">
+                            <h3>My Calendar</h3>
+                        </div>
+                        <div id="calendar" style="height:100%; margin: 0 auto;"></div>
+
+                    </div>
+                </section>
             </div>
         </div>
 

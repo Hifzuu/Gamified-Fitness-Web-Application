@@ -19,6 +19,7 @@ namespace ProjectWebApp.Data
         public DbSet<Raffle> Raffles { get; set; }
         public DbSet<UserRaffleEntry> UserRaffleEntries { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Clan> Clans { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -158,6 +159,19 @@ namespace ProjectWebApp.Data
                 .HasOne(re => re.Raffle)
                 .WithMany(r => r.UserRaffleEntries)
                 .HasForeignKey(re => re.RaffleId);
+
+            //clans
+            modelBuilder.Entity<ApplicationUser>()
+               .HasOne(u => u.Clan)
+               .WithMany(c => c.Members)
+               .HasForeignKey(u => u.ClanId)
+               .OnDelete(DeleteBehavior.Restrict); // Adjust the delete behavior as needed
+
+            modelBuilder.Entity<Clan>()
+                .HasOne(c => c.Creator)
+                .WithMany()
+                .HasForeignKey(c => c.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict); // Adjust the delete behavior as needed
         }
 
         public ApplicationUser GetUserById(string userId)

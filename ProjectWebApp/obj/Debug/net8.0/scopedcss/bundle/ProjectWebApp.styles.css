@@ -133,7 +133,40 @@ body[b-s13xhoid61] {
     }
 
 /* _content/ProjectWebApp/Views/Community/Index.cshtml.rz.scp.css */
-body[b-58qcj1vc5v] {
+.clan-details-container[b-58qcj1vc5v] {
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.clan-name[b-58qcj1vc5v] {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.creator-info[b-58qcj1vc5v] {
+    color: #666;
+}
+
+.members-section[b-58qcj1vc5v] {
+    margin-top: 15px;
+}
+
+.members-title[b-58qcj1vc5v] {
+    font-weight: bold;
+}
+
+.members-list[b-58qcj1vc5v] {
+    list-style-type: none;
+    padding: 0;
+}
+
+.member[b-58qcj1vc5v] {
+    margin-bottom: 5px;
+    color: #444;
 }
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {
