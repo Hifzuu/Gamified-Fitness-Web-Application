@@ -1,4 +1,7 @@
-﻿@model List<ProjectWebApp.Models.ClanViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@model List<ProjectWebApp.Models.ClanViewModel>
+@inject UserManager<ApplicationUser> UserManager
+@inject ProjectWebApp.Data.ApplicationDbContext dbContext
 @{
     ViewData["Title"] = "Clans";
 }
@@ -19,54 +22,80 @@
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
                 <section>
-                    <h2 class="clan-title">My Clan</h2>
-
                     @if (Model.Count > 0)
                     {
-                        <div class="clan-details-container">
-                            <div class="row">
-                                <div class="col">
-                                    <h2 class="clan-name">@Model[0].Name</h2>
-                                </div>
-                                <div class="col-auto">
-                                    @if (User.Identity.Name == Model[0].CreatorUserName)
-                                    {
-                                        <!-- Show delete clan button for the creator -->
-                                        <button class="btn btn-danger delete-clan-btn" data-clan-id="@Model[0].ClanId">Delete Clan</button>
-                                    }
-                                    else if (Model[0].Members.Any(member => member.UserName == User.Identity.Name))
-                                    {
-                                        <!-- Show leave clan button for members -->
-                                        <button class="btn btn-danger leave-clan-btn" data-clan-id="@Model[0].ClanId">Leave Clan</button>
-                                    }
-                                </div>
+                        <div class="row">
+                            <div class="col">
+                                <h2 class="clan-title">My Clan</h2>
                             </div>
+                            <div class="col-auto">
+                                @if (User.Identity.Name == Model[0].CreatorUserName)
+                                {
+                                    <button class="btn btn-danger delete-clan-btn" data-clan-id="@Model[0].ClanId">Delete Clan</button>
+                                }
+                                else if (Model[0].Members.Any(member => member.UserName == User.Identity.Name))
+                                {
+                                    <button class="btn btn-danger leave-clan-btn" data-clan-id="@Model[0].ClanId">Leave Clan</button>
+                                }
+                            </div>
+                        </div>
+                        <div class="clan-details-container">
+                            <h2 class="clan-name">@Model[0].Name</h2>
 
-                            <p class="creator-info"><strong>Leader: </strong>@Model[0].CreatorUserName</p>
+                            <p class="creator-info">
+                                <div class="media">
+                                    <!-- Fetch the profile picture of the leader -->
+                                    <img src="await @GetProfilePictureUrl(Model[0].CreatorId)" class="mr-3 rounded-circle" alt="Leader Profile Picture" width="50" height="50">
+                                    <div class="media-body d-flex align-items-center">
+                                        <h5 class="mt-0">@Model[0].CreatorUserName</h5>
+                                        <!-- Add additional leader details if needed -->
+                                    </div>
+                                    <!-- Add leader role status at the far right -->
+                                    <div class="ml-auto">
+                                        <span class="badge badge-info">Leader</span>
+                                    </div>
+                                </div>
+                            </p>
 
                             <div class="members-section">
-                                <p class="members-title mb-0">Members:</p>
                                 @if (Model[0].Members.Any())
                                 {
-                                    <ul class="members-list">
+                                    <div class="mt-3">
                                         @foreach (var member in Model[0].Members)
                                         {
-                                            <li class="member">@member.UserName</li>
+                                            <div class="media mb-2">
+                                                <img src="@await GetProfilePictureUrl(member.Id)" class="mr-3 rounded-circle" alt="User Profile Picture" width="50" height="50">
+                                                <div class="media-body d-flex align-items-center">
+                                                    <h5 class="mt-0">@member.UserName</h5>
+                                                    <!-- Add additional member details if needed -->
+                                                </div>
+                                                <!-- Add member role status at the far right -->
+                                                <div class="ml-auto">
+                                                    <span class="badge badge-secondary">Member</span>
+                                                </div>
+                                            </div>
                                         }
-                                    </ul>
+                                    </div>
                                 }
                                 else
                                 {
                                     <p class="text-muted">No members</p>
                                 }
                             </div>
-
-                            <!-- Add more details about the clan as needed -->
                         </div>
+
+                    
+
+
+
+
+
+
                     }
 
                     else
                     {
+                        <h2 class="clan-title">My Clan</h2>
                         <!-- Display message and buttons to join or create a clan if the user has not joined a clan -->
                         <p class="text-muted">You have not joined a clan. Consider creating or joining one!</p>
                         <div>
@@ -89,57 +118,66 @@
     </div>
 
     <!-- Join Clan Modal -->
-    <div class="modal" id="joinClanModal" tabindex="-1" role="dialog" aria-labelledby="joinClanModalLabel" aria-hidden="true">
+    <div class="modal fade" id="joinClanModal" tabindex="-1" role="dialog" aria-labelledby="joinClanModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!-- Add your content for the Join Clan modal here -->
-                <div class="modal-header">
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="joinClanModalLabel">Join a Clan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
+                <!-- Modal Body -->
                 <div class="modal-body">
-                    <!-- Add the list of available clans or any other content here -->
-                    <!-- Example: Display a list of available clans -->
-                    <ul>
-                        <!-- Add logic to populate the list of available clans -->
-                        <!-- Use JavaScript to handle the selection and submission -->
-                    </ul>
+                    <p class="lead">Select a Clan to Join:</p>
+                    <ul id="joinClanList" class="list-group"></ul>
                 </div>
-                <!-- Add more modal content as needed -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 
+
     <!-- Create Clan Modal -->
-    <div class="modal" id="createClanModal" tabindex="-1" role="dialog" aria-labelledby="createClanModalLabel" aria-hidden="true">
+    <div class="modal fade" id="createClanModal" tabindex="-1" role="dialog" aria-labelledby="createClanModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!-- Add your content for the Create Clan modal here -->
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createClanModalLabel">Create a Clan (1000 points)</h5>
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="createClanModalLabel">Create a Clan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
+                <!-- Modal Body -->
                 <div class="modal-body">
+                    <p class="lead mb-4">Creating a clan requires 1000 points</p>
+
                     <!-- Add a form to input the clan name and a button to create -->
                     <form id="createClanForm" asp-action="CreateClan" method="post">
                         @Html.AntiForgeryToken()
+
+                        <!-- Clan Name Input -->
                         <div class="form-group">
                             <label for="clanName">Clan Name:</label>
                             <input type="text" class="form-control" id="clanName" placeholder="Enter Clan Name" required>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="createClanButton">Create Clan</button>
+
+                        <!-- Create Clan Button -->
+                        <button type="submit" class="btn btn-primary btn-block" id="createClanButton">Create Clan</button>
                     </form>
                 </div>
-                <!-- Add more modal content as needed -->
             </div>
         </div>
     </div>
 
-    <!-- Add Bootstrap and jQuery script references if not already included -->
+
+ 
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -149,22 +187,42 @@
         // Function to fetch available clans and update the HTML
         function loadAvailableClans() {
             $.ajax({
-                url: '@Url.Action("getOtherClans", "Community")',
+                url: '@Url.Action("getAvailableClans", "Community")',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    // Clear the existing list
-                    $('#availableClansList').empty();
+                    console.log('Received data:', data);
+                    // Clear the existing lists
+                    $('#availableClansList, #joinClanList').empty();
 
                     // Check if there are any available clans
                     if (data.length > 0) {
-                        // Iterate through the available clans and append them to the list
+                        // Iterate through the available clans
                         $.each(data, function (index, clan) {
-                            $('#availableClansList').append('<li class="list-group-item">' + clan.Name + '</li>');
+                            // Use 'let' to declare the 'clan' variable within the loop scope
+                            let clanName = clan.name; // Access the 'name' property
+
+                            if (clanName !== undefined && clanName !== null) {
+                                // Append to the first list with Bootstrap classes for spacing
+                                var listItem1 = $('<li class="list-group-item d-flex justify-content-between align-items-center">').text(clanName);
+                                var joinButton1 = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
+                                listItem1.append(joinButton1);
+                                $('#availableClansList').append(listItem1);
+
+                                // Append to the second list with Bootstrap classes for spacing
+                                var listItem2 = $('<li class="list-group-item d-flex justify-content-between align-items-center">').text(clanName);
+                                var joinButton2 = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
+                                listItem2.append(joinButton2);
+                                $('#joinClanList').append(listItem2);
+
+                                console.log('Processing clan:', clan);
+                            }
                         });
+
                     } else {
                         // Display a message if no clans are available
                         $('#availableClansList').append('<li class="list-group-item text-muted">No available clans</li>');
+                        $('#joinClanList').append('<li class="list-group-item text-muted">No available clans</li>');
                     }
                 },
                 error: function (error) {
@@ -173,74 +231,45 @@
             });
         }
 
+
         // Load available clans when the page loads
         $(document).ready(function () {
             loadAvailableClans();
         });
 
         // Function to join clans
-        $('#joinClanModal').on('shown.bs.modal', function () {
+        $(document).on('click', '.join-btn', function () {
+            var clanId = $(this).data('clan-id');
+
+            // Use AJAX to call the JoinClan action method
             $.ajax({
-                url: '/Community/getAvailableClans',
-                type: 'GET',
+                url: '/Community/JoinClan',
+                type: 'POST',
+                data: { clanId: clanId },
                 dataType: 'json',
                 success: function (data) {
-                    var ulElement = $('#joinClanModal ul');
-                    ulElement.empty();
-
-                    if (data.length > 0) {
-                        $.each(data, function (index, clan) {
-                            var listItem = $('<li>').text(clan.name);
-                            var joinButton = $('<button>').text('Join').addClass('btn btn-primary join-btn').data('clan-id', clan.clanId);
-                            listItem.append(joinButton);
-                            ulElement.append(listItem);
+                    if (data.success) {
+                        // Display success message (e.g., using Swal)
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message,
+                            didClose: () => {
+                                // Reload the page after Swal is closed
+                                location.reload();
+                            }
                         });
-
-                        // Add click event for the 'Join' button
-                        $('.join-btn').on('click', function () {
-                            var clanId = $(this).data('clan-id');
-
-                            // Use AJAX to call the JoinClan action method
-                            $.ajax({
-                                url: '/Community/JoinClan',
-                                type: 'POST',
-                                data: { clanId: clanId },
-                                dataType: 'json',
-                                success: function (data) {
-                                    if (data.success) {
-                                        // Display success message (e.g., using Swal)
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Success',
-                                            text: data.message,
-                                            didClose: () => {
-                                                // Reload the page after Swal is closed
-                                                location.reload();
-                                            }
-                                        });
-                                    } else {
-                                        // Display error message
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error',
-                                            text: data.message
-                                        });
-                                    }
-                                },
-                                error: function (error) {
-                                    console.error('Error joining the clan: ', error);
-                                }
-                            });
-                        });
-
-
-
                     } else {
-                        ulElement.append('<li>No clans available</li>');
+                        // Display error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message
+                        });
                     }
                 },
                 error: function (error) {
-                    console.error('Error fetching available clans: ', error);
+                    console.error('Error joining the clan: ', error);
                 }
             });
         });
@@ -461,5 +490,33 @@
     </script>
 
 </body>
+
+
+@functions {
+    public async Task<string> GetProfilePictureUrl(string userId)
+    {
+        // Check if the user ID is provided
+        if (string.IsNullOrEmpty(userId))
+        {
+            // Use a default or empty profile picture URL
+            return "/Images/empty-pfp.png";
+        }
+
+        // Retrieve the user from UserManager asynchronously using the provided user ID
+        var user = await UserManager.FindByIdAsync(userId);
+
+        // Check if the user has a profile picture
+        if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
+        {
+            return user.ProfileImageUrl;
+        }
+
+        // Use a default or empty profile picture URL
+        return "/Images/empty-pfp.png";
+    }
+
+
+}
+
 </html>
 

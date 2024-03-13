@@ -52,6 +52,7 @@ namespace ProjectWebApp.Controllers
                 ClanId = clan.ClanId,
                 Name = clan.Name,
                 CreatorUserName = clan.Creator.UserName,
+                CreatorId = clan.Creator.Id,
                 Members = clan.Members.ToList(),
                 // Map other properties as needed
             }).ToList();
@@ -102,6 +103,7 @@ namespace ProjectWebApp.Controllers
                         ClanId = newClan.ClanId,
                         Name = newClan.Name,
                         CreatorUserName = newClan.Creator.UserName,
+                        CreatorId = newClan.Creator.Id,
                         Members = newClan.Members.ToList(),
                         // Map other properties as needed
                     };
@@ -144,20 +146,6 @@ namespace ProjectWebApp.Controllers
             }
         }
 
-
-
-
-        public async Task<IActionResult> getAvailableClans()
-        {
-            // Retrieve all clans
-            var allClans = await _context.Clans
-                .ToListAsync();
-
-            // Return JSON data
-            return Json(allClans);
-        }
-
-
         [HttpPost]
         public async Task<IActionResult> JoinClan(int clanId)
         {
@@ -176,6 +164,17 @@ namespace ProjectWebApp.Controllers
                     // Check if the user is already a member of the clan
                     if (!clanToJoin.Members.Any(u => u.Id == userId))
                     {
+                        // Check if the user is already a member of another clan
+                        var userCurrentClan = await _context.Clans
+                            .Include(c => c.Members)
+                            .FirstOrDefaultAsync(c => c.Members.Any(u => u.Id == userId));
+
+                        if (userCurrentClan != null)
+                        {
+                            // User is already a member of a different clan
+                            return Json(new { success = false, message = "You are already a member of another clan. Please leave your current clan before joining a new one." });
+                        }
+
                         // Add the user to the clan
                         var user = await _userManager.FindByIdAsync(userId);
                         clanToJoin.Members.Add(user);
@@ -204,6 +203,7 @@ namespace ProjectWebApp.Controllers
                 return Json(new { success = false, message = "An error occurred while joining the clan." });
             }
         }
+
 
         [HttpPost]
         public async Task<IActionResult> LeaveClan(int clanId)
@@ -341,7 +341,7 @@ namespace ProjectWebApp.Controllers
         }
 
 
-        public async Task<IActionResult> getOtherClans()
+        public async Task<IActionResult> getAvailableClans()
         {
             try
             {
