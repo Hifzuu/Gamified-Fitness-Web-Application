@@ -14,155 +14,158 @@
 </head>
 
 <body>
-    <div class="page-container">
-        <section>
-            
-
-            @if (Model.DailyChallenge != null)
-            {
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="game-title">🌟 Daily Challenges</h2>
-                    </div>
-                    <div class="col-6 text-right">
-                        <h5 class="challenge-timer" id="dailyTimer">
-                            Time remaining: @Model.DailyTime
-                        </h5>
-                    </div>
-                </div>
-
-               
-
-                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
-
-                    <h6>@Model.DailyChallenge.Challenge.Name</h6>
-                    <p class="reward-text">
-                        <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 20 points!
-                    </p>
-                    <p><strong>@Model.DailyChallenge.Challenge.Description</strong></p>
-
-
-                    <div class="game-progress">
-                        <p class="game-progress-text">Progress: @Math.Min(Model.DailyProgressPercentage, 100).ToString("0.##")%</p>
-                        <div class="progress">
-                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.DailyProgressPercentage%" aria-valuenow="@Model.DailyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="page-container ">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4">
+                <section class="challenge-section" style="background-color: lightblue;">
+                    @if (Model.DailyChallenge != null)
+                    {
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h2 class="game-title">Daily Challenge</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h5 class="challenge-timer" id="dailyTimer">
+                                    Time remaining: @Model.DailyTime
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="game-elements">
-                    @if (Model.DailyProgressPercentage >= 100 && !Model.DailyChallenge.IsRewardClaimed)
-                    {
-                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Daily',@Model.DailyChallenge.UserChallengeId)">Claim Reward 🎁</button>
-                    }
-                    else if (Model.DailyProgressPercentage >= 100 && Model.DailyChallenge.IsRewardClaimed)
-                    {
-                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
-                    }
-                </div>
-            }
-            else
-            {
-                <h2 class="game-title">🌟 Daily Challenges</h2>
-                <p class="text-muted">No daily challenges available for today.</p>
-            }
-        </section>
-
-        <section>
-
-            @if (Model.WeeklyChallenge != null)
-            {
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="game-title">🌟 Weekly Challenges</h2>
-                    </div>
-                    <div class="col-6 text-right">
-
-                        <h5 class="challenge-timer" id="weeklyTimer">
-                            Time remaining: @Model.WeeklyTime
-                        </h5>
-                    </div>
-                </div>
-
-                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
-                    <h6>@Model.WeeklyChallenge.Challenge.Name</h6>
-                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 50 points!</p>
-                    <p><strong>@Model.WeeklyChallenge.Challenge.Description</strong></p>
-
-                    <div class="game-progress">
-                        <p class="game-progress-text">Progress: @Math.Min(Model.WeeklyProgressPercentage, 100).ToString("0.##")%</p>
-                        <div class="progress">
-                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.WeeklyProgressPercentage%" aria-valuenow="@Model.WeeklyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="challenge-card game-card" onclick="handleChallengeClick('Daily', @Model.DailyChallenge.UserChallengeId)">
+                            <h6>@Model.DailyChallenge.Challenge.Name</h6>
+                            <p class="reward-text">
+                                <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn <strong>20 points!</strong>
+                            </p>
+                            <p><strong>@Model.DailyChallenge.Challenge.Description</strong></p>
+                            <div class="game-progress">
+                                <p class="game-progress-text">Progress: @Math.Min(Model.DailyProgressPercentage, 100).ToString("0.##")%</p>
+                                <div class="progress">
+                                    <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.DailyProgressPercentage%" aria-valuenow="@Model.DailyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="game-elements d-flex justify-content-center align-items-center">
+                                @if (Model.DailyProgressPercentage >= 100)
+                                {
+                                    if (!Model.DailyChallenge.IsRewardClaimed)
+                                    {
+                                        <button class="btn btn-reward game-button" onclick="claimReward('Daily', @Model.DailyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
+                                    }
+                                }
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="game-elements">
-                    @if (Model.WeeklyProgressPercentage >= 100 && !Model.WeeklyChallenge.IsRewardClaimed)
-                    {
-                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Weekly',@Model.WeeklyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                        <div></div>
                     }
-                    else if (Model.WeeklyProgressPercentage >= 100 && Model.WeeklyChallenge.IsRewardClaimed)
+                    else
                     {
-                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
+                        <h2 class="game-title">Daily Challenge</h2>
+                        <p class="text-muted">No daily challenges available for today.</p>
                     }
-                </div>
-            }
-            else
-            {
-                <h2 class="game-title">🌟 Weekly Challenges</h2>
-                <p class="text-muted">No weekly challenges available.</p>
-            }
-        </section>
-
-        <section>
-
-            @if (Model.MonthlyChallenge != null)
-            {
-                <div class="row">
-                    <div class="col-6">
-                        <h2 class="game-title">🌟 Monthly Challenges</h2>
-                    </div>
-                    <div class="col-6 text-right">
-                        <h5 class="challenge-timer" id="monthlyTimer">
-                            Time remaining: @Model.MonthlyTime
-                        </h5>
-                    </div>
-                </div>
-
-                
-
-                <div class="challenge-card game-card" onclick="navigateToWorkouts()">
-                    <h6>@Model.MonthlyChallenge.Challenge.Name</h6>
-                    <p class="reward-text"> <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn 150 points!</p>
-                    <p><strong>@Model.MonthlyChallenge.Challenge.Description</strong></p>
-
-                    <div class="game-progress">
-                        <p class="game-progress-text">Progress: @Math.Min(Model.MonthlyProgressPercentage, 100).ToString("0.##")%</p>
-                        <div class="progress">
-                            <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.MonthlyProgressPercentage%" aria-valuenow="@Model.MonthlyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                </section>
+            </div>
+            <div class="col-lg-6 col-md-12 mb-4">
+                <section class="challenge-section" style="background-color: lightyellow;">
+                    @if (Model.WeeklyChallenge != null)
+                    {
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h2 class="game-title">Weekly Challenge</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h5 class="challenge-timer" id="weeklyTimer">
+                                    Time remaining: @Model.WeeklyTime
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="game-elements">
-                    @if (Model.MonthlyProgressPercentage >= 100 && !Model.MonthlyChallenge.IsRewardClaimed)
-                    {
-                        <button class="btn btn-reward game-button" id="claimRewardButton" onclick="claimReward('Monthly',@Model.MonthlyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                        <div class="challenge-card game-card" onclick="handleChallengeClick('Weekly', @Model.WeeklyChallenge.UserChallengeId)">
+                            <h6>@Model.WeeklyChallenge.Challenge.Name</h6>
+                            <p class="reward-text">
+                                <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn <strong>50 points!</strong>
+                            </p>
+                            <p><strong>@Model.WeeklyChallenge.Challenge.Description</strong></p>
+                            <div class="game-progress">
+                                <p class="game-progress-text">Progress: @Math.Min(Model.WeeklyProgressPercentage, 100).ToString("0.##")%</p>
+                                <div class="progress">
+                                    <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.WeeklyProgressPercentage%" aria-valuenow="@Model.WeeklyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="game-elements d-flex justify-content-center align-items-center">
+                                @if (Model.WeeklyProgressPercentage >= 100)
+                                {
+                                    if (!Model.WeeklyChallenge.IsRewardClaimed)
+                                    {
+                                        <button class="btn btn-reward game-button" onclick="claimReward('Weekly', @Model.WeeklyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div></div>
                     }
-                    else if (Model.MonthlyProgressPercentage >= 100 && Model.MonthlyChallenge.IsRewardClaimed)
+                    else
                     {
-                        <button class="btn btn-reward game-button claimed" id="claimRewardButton" disabled>Claimed 🎁</button>
+                        <h2 class="game-title">Weekly Challenge</h2>
+                        <p class="text-muted">No weekly challenges available.</p>
                     }
-                </div>
-            }
-            else
-            {
-                <h2 class="game-title">🌟 Monthly Challenges</h2>
-                <p class="text-muted">No monthly challenges available.</p>
-            }
-        </section>
-
-
+                </section>
+            </div>
+            <div class="col-lg-12 col-md-12 mb-4">
+                <section class="challenge-section" style="background-color: lightpink;">
+                    @if (Model.MonthlyChallenge != null)
+                    {
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h2 class="game-title">Monthly Challenge</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h5 class="challenge-timer" id="monthlyTimer">
+                                    Time remaining: @Model.MonthlyTime
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="challenge-card game-card" onclick="handleChallengeClick('Monthly', @Model.MonthlyChallenge.UserChallengeId)">
+                            <h6>@Model.MonthlyChallenge.Challenge.Name</h6>
+                            <p class="reward-text">
+                                <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn <strong>150 points!</strong>
+                            </p>
+                            <p><strong>@Model.MonthlyChallenge.Challenge.Description</strong></p>
+                            <div class="game-progress">
+                                <p class="game-progress-text">Progress: @Math.Min(Model.MonthlyProgressPercentage, 100).ToString("0.##")%</p>
+                                <div class="progress">
+                                    <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model.MonthlyProgressPercentage%" aria-valuenow="@Model.MonthlyProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="game-elements d-flex justify-content-center align-items-center">
+                                @if (Model.MonthlyProgressPercentage >= 100)
+                                {
+                                    if (!Model.MonthlyChallenge.IsRewardClaimed)
+                                    {
+                                        <button class="btn btn-reward game-button" onclick="claimReward('Monthly', @Model.MonthlyChallenge.UserChallengeId)">Claim Reward 🎁</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div></div>
+                    }
+                    else
+                    {
+                        <h2 class="game-title">Monthly Challenge</h2>
+                        <p class="text-muted">No monthly challenges available.</p>
+                    }
+                </section>
+            </div>
+        </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

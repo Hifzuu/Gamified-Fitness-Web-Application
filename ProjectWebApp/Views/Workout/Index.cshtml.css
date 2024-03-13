@@ -196,6 +196,11 @@
         stroke: red;
     }
 
+.search-icon {
+    transform: translateY(5%);
+    transform: translateX(-10%);
+}
+
 /* Show the clear icon when there's input in the search bar */
 #searchInput:not(:placeholder-shown) + .clear-icon {
     display: block;

@@ -9,18 +9,17 @@
     var email = user?.Email;
     var goalWeight = user?.GoalWeight;
     var rewardColors = new Dictionary<int, string>
-{
-    { 1, "#8D6747" },   // Bronze (7 days)
-    { 2, "#C7C7C7" },   // Silver (14 days)
-    { 3, "#FFD700" },   // Gold (30 days)
-    { 4, "#7EFFEF" },   // Platinum (60 days)
-    { 5, "#4199FF" },   // Diamond (90 days)
-    { 6, "#6741FF" },   // Master (180 days)
-    { 7, "#B25CFF " },   // Champion (270 days)
-    { 8, "#FF389F " }    // Legend (365 days)
-    // Add more as needed
-};
-
+    {
+        { 1, "#8D6747" },   // Bronze (7 days)
+        { 2, "#C7C7C7" },   // Silver (14 days)
+        { 3, "#FFD700" },   // Gold (30 days)
+        { 4, "#7EFFEF" },   // Platinum (60 days)
+        { 5, "#4199FF" },   // Diamond (90 days)
+        { 6, "#6741FF" },   // Master (180 days)
+        { 7, "#B25CFF " },   // Champion (270 days)
+        { 8, "#FF389F " }    // Legend (365 days)
+        // Add more as needed
+    };
 }
 
 <!DOCTYPE html>
@@ -39,39 +38,38 @@
 <body>
 
     <div class="page-container">
+        <div class="row">
 
-        <div class="d-flex flex-wrap box">
+            <div class="col-lg-3">
+                <div class="grid-container">
+                    <!-- Streak Boxes (Left Side) -->
+                    <section class="grid-item mb-4" style="background-color: lightblue;">
+                        <h5 class="card-title">Current Streak</h5>
+                        @if (Model != null)
+                        {
+                            <p class="card-text">@Model.LoginStreak.CurrentStreak</p>
+                        }
+                        else
+                        {
+                            <p class="card-text no-info">No login streak information available.</p>
+                        }
+                    </section>
 
-            <div class="leftBox fullLeft">
-                <!-- Streak Boxes (Left Side) -->
-                <div class="streak-box">
-                    <h3>Current Streak</h3>
-                    @if (Model != null)
-                    {
-                        <p>@Model.LoginStreak.CurrentStreak</p>
-                    }
-                    else
-                    {
-                        <p class="no-info">No login streak information available.</p>
-                    }
+                    <section class="grid-item mb-4" style="background-color: lightblue;">
+                        <h5 class="card-title">Longest Streak</h5>
+                        @if (Model != null)
+                        {
+                            <p class="card-text">@Model.LoginStreak.LongestStreak</p>
+                        }
+                        else
+                        {
+                            <p class="card-text no-info">No login streak information available.</p>
+                        }
+                    </section>
                 </div>
-
-                <div class="streak-box">
-                    <h3>Longest Streak</h3>
-                    @if (Model != null)
-                    {
-                        <p>@Model.LoginStreak.LongestStreak</p>
-                    }
-                    else
-                    {
-                        <p class="no-info">No login streak information available.</p>
-                    }
-                </div>
-
             </div>
 
-
-            <div class="col-sm-12 mb-4 fullRight" style="flex-grow: 1;">
+            <div class="col-lg-6">
                 <section>
                     <h3>Login Streak Rewards</h3>
                     <ul class="list-group">
@@ -81,41 +79,50 @@
                             var userStreakReward = Model.ClaimableRewards.FirstOrDefault(cr => cr.RewardId == reward.RewardId);
                             var badgeColor = userStreakReward != null && !userStreakReward.Claimed ? "badge-primary" : "badge-secondary";
                             var rewardColor = rewardColors.ContainsKey(reward.RewardId) ? rewardColors[reward.RewardId] : "#edf2f9";
-                            var badgeCursor = userStreakReward != null && !userStreakReward.Claimed ? "cursor: pointer;" : "cursor: default;";
-                            var listItemOpacity = userStreakReward != null && userStreakReward.Claimed ? "opacity: 0.7;" : "";
+                            var badgeCursor = userStreakReward != null && !userStreakReward.Claimed ? "pointer" : "default";
+                            var listItemOpacity = userStreakReward != null && userStreakReward.Claimed ? "opacity: 0.5;" : "";
+                            var claimableStyle = userStreakReward != null && !userStreakReward.Claimed || userStreakReward != null && userStreakReward.Claimed
+                            ? "background-color: #3498db; color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);"
+                            : "";
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center claimable-item" style="background-color: #edf2f9; border: none; @listItemOpacity">
+                            <li class="list-group-item d-flex justify-content-between align-items-center claimable-item" style="border: none; @listItemOpacity @claimableStyle">
                                 <span class="medal-text">@Html.Raw(reward.MedalText)</span>
 
                                 @if (userStreakReward != null && !userStreakReward.Claimed)
                                 {
-                                    <a class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; @badgeCursor; color: white;" onclick="claimReward(@userStreakReward.UserStreakRewardId)">
+                                    <a class="badge @badgeColor badge-pill point-badge claimable" style="background-color: @rewardColor; font-size: 16px; padding: 10px; cursor: @badgeCursor; color: white;" onclick="claimReward(@userStreakReward.UserStreakRewardId)">
                                         Claim @reward.Points Points
                                     </a>
                                 }
                                 else if (userStreakReward != null && userStreakReward.Claimed)
                                 {
-                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; color: white;">@reward.Points Points claimed</span>
+                                    <span class="badge @badgeColor badge-pill point-badge claimed" style="background-color: @rewardColor; font-size: 16px; padding: 10px; color: white;">@reward.Points Points claimed</span>
                                 }
                                 else
                                 {
-                                    <span class="badge @badgeColor badge-pill point-badge" style="background-color: @rewardColor; font-size: 16px; padding: 10px; color: white;">@reward.Points Points</span>
+                                    <span class="badge @badgeColor badge-pill point-badge not-claimable" style="background-color: @rewardColor; font-size: 16px; padding: 10px; cursor: default; color: white;">@reward.Points Points</span>
                                 }
                             </li>
                         }
-
                     </ul>
                 </section>
             </div>
 
+            <div class="col-lg-3">
+                <div class="grid-container">
+                    <section class="grid-item mb-4" style="background-color: lightgoldenrodyellow;">
+                        <h5 class="card-title">Total Workouts</h5>
+                        <p class="card-text">XX</p>
+                    </section>
 
-
-
-
-
+                    <section class="grid-item mb-4" style="background-color: lightgoldenrodyellow;">
+                        <h5 class="card-title">Total Duration</h5>
+                        <p class="card-text">XX</p>
+                    </section>
+                </div>
+            </div>
 
         </div>
-
 
         <section>
             <h3>Weight</h3>

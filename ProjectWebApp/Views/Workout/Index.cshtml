@@ -117,46 +117,58 @@ completion of workouts *@
 <body>
     <div class="page-container">
 
-        <section>
+       <section>
             <div class="row">
                 <!-- Search Bar Section -->
                 <div class="col-md-12">
-                    <div id="searchBar" class="d-flex">
-                        <input type="text" id="searchInput" class="form-control flex-grow-1"
-                            placeholder="Search workouts by name..." oninput="updateSearchResults()">
-                        <div class="clear-icon" id="clearButton" onclick="clearSearch()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                            </svg>
+                    <div id="searchBar" class="position-relative mb-0">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="search-icon" id="searchIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </span>
+                            </div>
+                            <input type="text" id="searchInput" class="form-control flex-grow-1"
+                                placeholder="Search workouts by name..." oninput="updateSearchResults()">
+                            <div class="clear-icon" id="clearButton" onclick="clearSearch()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                    <div id="searchResults" style="display: none;">
-                        <h3>Search Results</h3>
-                        <div class="scrollable-row" id="searchResultsWorkouts"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Search Results Section -->
-            <div id="searchResults" style="display: none;">
-                <h3>Search Results</h3>
-                <div class="scrollable-row" id="searchResultsWorkouts"></div>
+           <!-- Search Results Section -->
+            <div id="searchResults" style="display: none; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
+                <h4 class="mb-3">Search Results</h4>
+                <div class="scrollable-row" id="searchResultsWorkouts">
+                    <!-- Dynamic content will be added here -->
+                </div>
+                <div id="noResultsMessage" class="text-muted" style="display: none;">No search results found.</div>
             </div>
+
         </section>
+
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
                 <section class="calendar-section" class="d-flex flex-column h-100">
                     <div id="calendarSection" style="text-align: center;">
-                        <div class="section-header favourite-section">
+                        <div class="section-header favourite-section mb-2">
                             <h3>My Calendar</h3>
                         </div>
-                        <section class="box" style="background-color:white;">
-                            <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
-                        </section>
+                        <div id="calendar" style="max-width: 600px; height:100%; margin: 0 auto;"></div>
+
                     </div>
                 </section>
             </div>
@@ -177,11 +189,10 @@ completion of workouts *@
 
                                     if (workout != null)
                                     {
-                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                      <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="workout-card" data-category="@workout.Category">
-                                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
-                                                class="card workout-link">
-                                                   <div class="card-body" style="background-image: url('https://placekitten.com/800/400'); background-size: cover; background-position: center;">
+                                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                                                    <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://placekitten.com/800/400'); background-size: cover; background-position: center;">
                                                         <h5 class="card-title text-white">@workout.Name</h5>
                                                         <div class="info" style="text-align:center; background-color:white;">
                                                             <p class="category">Category: @workout.Category</p>
@@ -191,10 +202,10 @@ completion of workouts *@
                                                             <p class="points">Points: @workout.rewardPoints</p>
                                                         </div>
                                                     </div>
-
                                                 </a>
                                             </div>
                                         </div>
+
                                     }
                                 }
                             </div>
@@ -562,45 +573,53 @@ completion of workouts *@
             filterInfo.style.display = 'none';
         }
 
-        function updateSearchResults() {
-            var searchInput = document.getElementById('searchInput').value.trim();
-            var clearButton = document.getElementById('clearButton');
-            var searchResultsSection = document.getElementById('searchResults');
-            var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
-            var allWorkoutsSection = document.getElementById('allWorkouts');
-            var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
+      function updateSearchResults() {
+        var searchInput = document.getElementById('searchInput').value.trim();
+        var clearButton = document.getElementById('clearButton');
+        var searchResultsSection = document.getElementById('searchResults');
+        var searchResultsWorkouts = document.getElementById('searchResultsWorkouts');
+        var allWorkoutsSection = document.getElementById('allWorkouts');
+        var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
+        var noResultsMessage = document.getElementById('noResultsMessage');
 
-            // Show or hide the clear button based on the search input
-            clearButton.style.display = searchInput.length > 0 ? 'block' : 'none';
+        // Show or hide the clear button based on the search input
+        clearButton.style.display = searchInput.length > 0 ? 'block' : 'none';
 
-            // If there are search results, adjust the layout and display them
-            if (searchInput.length > 0) {
-                adjustLayout();
-                searchResultsSection.style.display = 'block';
+        // If there are search results, adjust the layout and display them
+        if (searchInput.length > 0) {
+            adjustLayout();
+            searchResultsSection.style.display = 'block';
 
-                // Clear previous search results
-                searchResultsWorkouts.innerHTML = '';
+            // Clear previous search results
+            searchResultsWorkouts.innerHTML = '';
 
-                // Iterate through workout cards to find matches
-                for (var i = 0; i < workoutCards.length; i++) {
-                    var workoutCard = workoutCards[i];
-                    var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
+            // Iterate through workout cards to find matches
+            var resultsFound = false;
+            for (var i = 0; i < workoutCards.length; i++) {
+                var workoutCard = workoutCards[i];
+                var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
 
-                    // Check if the workout name contains the search term
-                    var displayCard = workoutName.includes(searchInput);
+                // Check if the workout name contains the search term
+                var displayCard = workoutName.includes(searchInput);
 
-                    if (displayCard) {
-                        // Create a copy of the card and append it to the search results section
-                        var clonedCard = workoutCard.cloneNode(true);
-                        clonedCard.style.display = 'block';
-                        searchResultsWorkouts.appendChild(clonedCard);
-                    }
+                if (displayCard) {
+                    // Create a copy of the card and append it to the search results section
+                    var clonedCard = workoutCard.cloneNode(true);
+                    clonedCard.style.display = 'block';
+                    searchResultsWorkouts.appendChild(clonedCard);
+                    resultsFound = true;
                 }
-            } else {
-                // If the search bar is empty, hide the search results section
-                searchResultsSection.style.display = 'none';
             }
+
+            // Toggle visibility of the "No search results" message
+            noResultsMessage.style.display = resultsFound ? 'none' : 'block';
+        } else {
+            // If the search bar is empty, hide the search results section
+            searchResultsSection.style.display = 'none';
+            noResultsMessage.style.display = 'none';
         }
+      }
+
 
         function clearSearch() {
             var searchInput = document.getElementById('searchInput');
