@@ -70,6 +70,18 @@ namespace ProjectWebApp.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
+                    // Check for an empty clan name
+                    if (string.IsNullOrWhiteSpace(model.Name))
+                    {
+                        return Json(new { success = false, message = "Clan name cannot be empty." });
+                    }
+
+                    // Check for duplicate clan name
+                    if (IsDuplicateClanName(model.Name))
+                    {
+                        return Json(new { success = false, message = "Clan name is already taken. Please choose a different name." });
+                    }
+
                     var userId = _userManager.GetUserId(User);
 
                     // Create a new Clan entity
@@ -89,7 +101,7 @@ namespace ProjectWebApp.Controllers
                     {
                         ClanId = newClan.ClanId,
                         Name = newClan.Name,
-                        CreatorUserName = newClan.Creator.UserName, 
+                        CreatorUserName = newClan.Creator.UserName,
                         Members = newClan.Members.ToList(),
                         // Map other properties as needed
                     };
@@ -109,10 +121,28 @@ namespace ProjectWebApp.Controllers
                 return Json(new { success = false, message = "An error occurred during the clan creation process." });
             }
         }
+        // Helper method to check for duplicate clan name
+        private bool IsDuplicateClanName(string clanName)
+        {
+            try
+            {
+                // Use StringComparison.OrdinalIgnoreCase outside of the query
+                var normalizedClanName = clanName.ToUpperInvariant();
 
+                // Materialize the list before using LINQ-to-Objects
+                var clans = _context.Clans.ToList();
 
+                return clans.Any(c => string.Equals(c.Name, normalizedClanName, StringComparison.OrdinalIgnoreCase));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                _logger.LogError(ex, "Error checking duplicate clan name");
 
-
+                // Propagate the exception
+                throw;
+            }
+        }
 
 
 
@@ -274,10 +304,80 @@ namespace ProjectWebApp.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetCurrentUserPoints()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = _userManager.GetUserAsync(User).Result;
+
+                // Assuming Points is the property in your ApplicationUser model
+                var points = user?.Points ?? 0;
+
+                return Json(points);
+            }
+
+            return Json(0); // Return 0 for unauthenticated users or handle it according to your logic
+        }
 
 
+        [HttpPost]
+        public async Task<IActionResult> UpdatePoints(int points)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser != null)
+            {
+                currentUser.Points -= points;
+                var result = await _userManager.UpdateAsync(currentUser);
+
+                if (result.Succeeded)
+                {
+                    return Ok(); // or return a JSON response if needed
+                }
+            }
+
+            return BadRequest("Failed to update points");
+        }
 
 
+        public async Task<IActionResult> getOtherClans()
+        {
+            try
+            {
+                var allClans = await _context.Clans
+                    .ToListAsync();
+
+                // Filter out the user's clans
+                var userId = _userManager.GetUserId(User);
+                var userClans = await GetUserClans(userId);
+
+                var otherClans = allClans.Except(userClans).ToList();
+
+                return Json(otherClans);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                _logger.LogError(ex, "Error fetching available clans");
+
+                return Json(new { error = "An error occurred while fetching available clans." });
+            }
+        }
+
+        private async Task<List<Clan>> GetUserClans(string userId)
+        {
+            var clansCreatedByUser = await _context.Clans
+                .Where(c => c.CreatorId == userId)
+                .ToListAsync();
+
+            var clansForMember = await _context.Clans
+                .Where(c => c.Members.Any(u => u.Id == userId))
+                .ToListAsync();
+
+            var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
+            return userClans;
+        }
 
 
 

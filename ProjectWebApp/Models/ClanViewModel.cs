@@ -7,6 +7,6 @@ namespace ProjectWebApp.Models
         public string Name { get; set; }
         public string CreatorUserName { get; set; }
         public List<ApplicationUser> Members { get; set; } = new List<ApplicationUser>();
-        // Add more properties as needed
+        
     }
 }
