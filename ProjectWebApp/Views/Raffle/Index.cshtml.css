@@ -149,3 +149,7 @@ h2 {
 
 
 
+.section-scrollable {
+    max-height: 450px; /* Set the maximum height as needed */
+    overflow-y: auto;
+}

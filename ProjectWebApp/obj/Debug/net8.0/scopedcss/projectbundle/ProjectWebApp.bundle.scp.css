@@ -130,41 +130,46 @@ body[b-s13xhoid61] {
         box-shadow: none; /* No box shadow for claimed button */
     }
 
-/* _content/ProjectWebApp/Views/Community/Index.cshtml.rz.scp.css */
-.clan-details-container[b-58qcj1vc5v] {
+/* _content/ProjectWebApp/Views/Clan/Index.cshtml.rz.scp.css */
+.clan-details-container[b-qk0rk6zmgx] {
     background-color: lightblue;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
-.clan-name[b-58qcj1vc5v] {
+.clan-name[b-qk0rk6zmgx] {
     font-size: 24px;
     font-weight: bold;
     color: #333;
 }
 
-.creator-info[b-58qcj1vc5v] {
+.creator-info[b-qk0rk6zmgx] {
     color: #666;
 }
 
-.members-section[b-58qcj1vc5v] {
+.members-section[b-qk0rk6zmgx] {
     margin-top: 15px;
 }
 
-.members-title[b-58qcj1vc5v] {
+.members-title[b-qk0rk6zmgx] {
     font-weight: bold;
 }
 
-.members-list[b-58qcj1vc5v] {
+.members-list[b-qk0rk6zmgx] {
     list-style-type: none;
     padding: 0;
 }
 
-.member[b-58qcj1vc5v] {
+.member[b-qk0rk6zmgx] {
     margin-bottom: 5px;
     color: #444;
+}
+
+.clan-points[b-qk0rk6zmgx] {
+    font-size: 18px;
+    color: #777;
 }
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {
@@ -412,6 +417,8 @@ h2[b-lict9yrgg8] {
     padding: 10px;
     border-radius: 5px;
 }
+
+
 /* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
 body[b-dix295yned] {
     font-family: 'Arial', sans-serif;
@@ -686,6 +693,10 @@ h2[b-dub9o406z4] {
 
 
 
+.section-scrollable[b-dub9o406z4] {
+    max-height: 450px; /* Set the maximum height as needed */
+    overflow-y: auto;
+}
 /* _content/ProjectWebApp/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

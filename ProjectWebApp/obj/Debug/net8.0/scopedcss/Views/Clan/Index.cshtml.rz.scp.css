@@ -1,0 +1,40 @@
+.clan-details-container[b-qk0rk6zmgx] {
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px;
+}
+
+.clan-name[b-qk0rk6zmgx] {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.creator-info[b-qk0rk6zmgx] {
+    color: #666;
+}
+
+.members-section[b-qk0rk6zmgx] {
+    margin-top: 15px;
+}
+
+.members-title[b-qk0rk6zmgx] {
+    font-weight: bold;
+}
+
+.members-list[b-qk0rk6zmgx] {
+    list-style-type: none;
+    padding: 0;
+}
+
+.member[b-qk0rk6zmgx] {
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.clan-points[b-qk0rk6zmgx] {
+    font-size: 18px;
+    color: #777;
+}

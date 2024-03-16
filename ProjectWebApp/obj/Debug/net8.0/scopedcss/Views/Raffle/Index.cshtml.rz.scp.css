@@ -149,3 +149,7 @@ h2[b-dub9o406z4] {
 
 
 
+.section-scrollable[b-dub9o406z4] {
+    max-height: 450px; /* Set the maximum height as needed */
+    overflow-y: auto;
+}

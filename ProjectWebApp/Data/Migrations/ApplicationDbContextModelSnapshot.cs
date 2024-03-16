@@ -336,6 +336,9 @@ namespace ProjectWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClanId"));
 
+                    b.Property<int>("ClanPoints")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatorId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");

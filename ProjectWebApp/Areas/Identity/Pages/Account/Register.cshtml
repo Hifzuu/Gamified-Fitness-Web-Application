@@ -102,7 +102,7 @@
                                                 break;
                                             case "DOB":
                                                 <div class="alert alert-danger">
-                                                    Please ensure you have provided a valid date of birth.
+                                                    Sorry, you must be over the age of 16 to use this app.
                                                 </div>
                                                 break;
                                             case "country":
@@ -340,6 +340,39 @@
                 toggleIcon.removeClass("fa-eye-slash").addClass("fa-eye");
             }
         }
+
+    // Function to handle form submission
+    $('#registerForm').submit(function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Serialize the form data
+        var formData = $(this).serialize();
+
+        // Send an AJAX request to submit the form data
+        $.ajax({
+            url: '@Url.Page("/Register")', // Update the URL as needed
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                // Handle the response from the server
+                if (response.success) {
+                    // If registration is successful, redirect the user to another page
+                    window.location.href = response.redirectUrl;
+                } else {
+                    // If there are validation errors, display them next to the corresponding input fields
+                    $.each(response.errors, function (fieldName, errorMessage) {
+                        var fieldContainer = $('[name="' + fieldName + '"]').closest('.form-group');
+                        fieldContainer.find('.text-danger').text(errorMessage);
+                    });
+                }
+            },
+            error: function (error) {
+                console.error('Error submitting form: ', error);
+            }
+        });
+    });
+
     </script>
 
 </html>

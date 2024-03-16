@@ -569,8 +569,10 @@ C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ProjectWebApp.props
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Challenge\Index.cshtml.rz.scp.css
+C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Clan\Index.cshtml.rz.scp.css
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Dashboard\Index.cshtml.rz.scp.css
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Home\Index.cshtml.rz.scp.css
+C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Raffle\Index.cshtml.rz.scp.css
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Workout\Details.cshtml.rz.scp.css
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Workout\Index.cshtml.rz.scp.css
@@ -582,5 +584,3 @@ C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\ProjectWebApp.pdb
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\ProjectWebApp.genruntimeconfig.cache
 C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\ref\ProjectWebApp.dll
-C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Raffle\Index.cshtml.rz.scp.css
-C:\Users\hifzm\OneDrive - UCLan\Uni Yr3\Project\ProjectWebApp\ProjectWebApp\obj\Debug\net8.0\scopedcss\Views\Community\Index.cshtml.rz.scp.css
