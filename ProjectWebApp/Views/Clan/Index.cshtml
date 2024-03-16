@@ -15,7 +15,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
 </head>
+<style>
+    .rank {
+        font-weight: bold;
+        font-size: 18px; /* Adjust font size as needed */
+        margin-right:0;
+    }
 
+    .first-place {
+        color: gold; /* Color for first place */
+    }
+
+    .second-place {
+        color: silver; /* Color for second place */
+    }
+
+    .third-place {
+        color: #cd7f32; /* Color for third place (bronze) */
+    }
+
+    .clan-name
+    {
+        color: black;
+        font-weight: normal;
+        margin-left:10px;
+    }
+</style>
 <body>
     <div class="page-container">
 
@@ -42,7 +67,7 @@
                         <div class="clan-details-container">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h2 class="clan-name">@Model[0].Name</h2>
-                                <h2 class="clan-points"> <i class="fas fa-coins" style="color: gold;"></i>CP @Model[0].ClanPoints</h2>
+                                <h2 class="clan-points"> <i class="fas fa-medal" style="color: white;">CP</i> <strong> @Model[0].ClanPoints</strong></h2>
 
                             </div>
 
@@ -117,6 +142,13 @@
                     <ul id="availableClansList" class="list-group"></ul>
                 </section>
             </div>
+            <div class="col-md-12 col-lg-6">
+                <section>
+                    <h2>Leaderboards</h2>
+                    <ul id="clanLeaderboard" class="list-group"></ul>
+                </section>
+            </div>
+
 
         </div>
 
@@ -209,17 +241,23 @@
                             let clanName = clan.name; // Access the 'name' property
 
                             if (clanName !== undefined && clanName !== null) {
-                                // Append to the first list with Bootstrap classes for spacing
-                                var listItem1 = $('<li class="list-group-item d-flex justify-content-between align-items-center">').text(clanName);
-                                var joinButton1 = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
-                                listItem1.append(joinButton1);
-                                $('#availableClansList').append(listItem1);
+                                // Create a list item element with Bootstrap classes
+                                var listItem = $('<li class="list-group-item d-flex justify-content-between align-items-center">');
 
-                                // Append to the second list with Bootstrap classes for spacing
-                                var listItem2 = $('<li class="list-group-item d-flex justify-content-between align-items-center">').text(clanName);
-                                var joinButton2 = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
-                                listItem2.append(joinButton2);
-                                $('#joinClanList').append(listItem2);
+                                // Display the clan name and points
+                                listItem.text(clanName);
+
+                                // Create a clan points element
+                                var clanPoints = $('<p class="clan-points"><i class="fas fa-medal" style="color: gold;">CP</i><strong> ' + clan.clanPoints + '</strong></p>');
+
+                                // Create a join button and attach clan ID as data attribute
+                                var joinButton = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
+
+                                // Append the clan points and join button to the list item
+                                listItem.append(clanPoints, joinButton);
+
+                                // Append the list item to both lists
+                                $('#availableClansList, #joinClanList').append(listItem);
 
                                 console.log('Processing clan:', clan);
                             }
@@ -236,6 +274,7 @@
                 }
             });
         }
+
 
 
         // Load available clans when the page loads
@@ -490,6 +529,65 @@
         });
 
 
+        // Function to load clan leaderboards
+        function loadClanLeaderboards() {
+            $.ajax({
+                url: '/Clan/Leaderboards', // Replace this with your actual endpoint URL
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log('Received clan leaderboards data:', data);
+                    var leaderboardList = $('#clanLeaderboard');
+                    leaderboardList.empty(); // Clear existing content
+
+                    // Check if data is not empty
+                    if (data && data.length > 0) {
+                        // Iterate through the leaderboard data
+                        $.each(data, function (index, clan) {
+                            // Create list item for each clan
+                            var listItem = $('<li class="list-group-item d-flex justify-content-between align-items-center">');
+
+                            // Display rank and clan name together without space
+                            var rankAndName = $('<span class="rank">'+'#' + (index + 1) + ' <span class="clan-name">' + clan.name + '</span></span>');
+                            if (index === 0) {
+                                rankAndName.addClass('first-place');
+                            } else if (index === 1) {
+                                rankAndName.addClass('second-place');
+                            } else if (index === 2) {
+                                rankAndName.addClass('third-place');
+                            }
+
+                            // Append rank and clan name to the list item
+                            listItem.append(rankAndName);
+
+                            // Create a clan points element
+                            var clanPoints = $('<p class="clan-points"><i class="fas fa-medal" style="color: gold;">CP</i><strong> ' + clan.points + '</strong></p>');
+
+                            // Append the clan points to the list item
+                            listItem.append(clanPoints);
+
+                            leaderboardList.append(listItem);
+                        });
+                    } else {
+                        // Display a message if there are no leaderboards available
+                        leaderboardList.append('<li class="list-group-item">No leaderboards available</li>');
+                    }
+
+                },
+                error: function (error) {
+                    console.error('Error fetching clan leaderboards:', error);
+                }
+            });
+        }
+
+
+
+
+
+        // Call the function to load clan leaderboards when the page loads
+        $(document).ready(function () {
+            loadClanLeaderboards();
+        });
 
 
 

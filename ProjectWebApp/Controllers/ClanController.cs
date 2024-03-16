@@ -395,7 +395,22 @@ namespace ProjectWebApp.Controllers
             return userClans;
         }
 
+        // GET: Clan/Leaderboards
+        public ActionResult Leaderboards()
+        {
+            // Retrieve leaderboards data from the database
+            var leaderboardsData = _context.Clans
+                .OrderByDescending(clan => clan.ClanPoints) // Order by points in descending order
+                .Select(clan => new
+                {
+                    clan.Name,
+                    Points = clan.ClanPoints
+                })
+                .ToList();
 
+            // Return the leaderboards data as JSON
+            return Json(leaderboardsData);
+        }
 
 
     }
