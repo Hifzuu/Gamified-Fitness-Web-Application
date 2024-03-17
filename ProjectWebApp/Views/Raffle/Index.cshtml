@@ -19,21 +19,21 @@
     <div class="page-container">
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section id="raffleCarousel" class="carousel slide h-100 p-0" data-ride="carousel">
+                <section id="raffleCarousel" class="carousel slide h-100 p-0" data-ride="carousel" style="max-height: 400px; min-height:400px;">
                     <div class="carousel-inner h-100">
                         @foreach (var raffle in Model.Raffles)
                         {
                             <div class="carousel-item h-100 @(raffle == Model.Raffles.First() ? "active" : "")" style="background-image: url('@(string.IsNullOrEmpty(raffle.ImageUrl) ? "https://picsum.photos/800/400" : raffle.ImageUrl)'); background-size: cover; background-position: center;">
                                 <div class="d-flex justify-content-center align-items-center h-100">
                                     <!-- Add d-flex and align-items-center classes here -->
-                                    <div class="row w-100">
+                                    <div class="row">
                                         <div class="col-md-12">
-                                            <div class="raffle-info p-4" style="background-color: rgba(255, 255, 255, 0.8);">
-                                                <h3 class="mb-3 text-primary">@raffle.Name</h3>
-                                                <p class="description mb-3">@raffle.Description</p>
-                                                <p class="text-muted"><strong>Start Date:</strong> @raffle.StartDate.ToString("MMMM dd, yyyy")</p>
-                                                <p class="text-muted"><strong>End Date:</strong> @raffle.EndDate.ToString("MMMM dd, yyyy")</p>
-                                                <p class="text-muted"><strong>Cost:</strong> <i class="fas fa-coins gold-coin-icon"></i>@raffle.Cost.ToString("F0")</p>
+                                            <div class="raffle-info p-4" style="background-color: rgba(0, 0, 0, 0.7);">
+                                                <h3 class="mb-3 text-primary text-white">@raffle.Name</h3>
+                                                <p class="description mb-3 text-white">@raffle.Description</p>
+                                                <p class="text-white"><strong>Start Date:</strong> @raffle.StartDate.ToString("MMMM dd, yyyy")</p>
+                                                <p class="text-white"><strong>End Date:</strong> @raffle.EndDate.ToString("MMMM dd, yyyy")</p>
+                                                <p class="text-white"><strong>Cost:</strong> <i class="fas fa-coins gold-coin-icon"></i>@raffle.Cost.ToString("F0")</p>
                                                 <div class="mt-4">
                                                     <a href="#" class="btn btn-primary btn-lg enter-raffle-btn" data-cost="@raffle.Cost" data-raffle-id="@raffle.RaffleId">Enter Raffle</a>
                                                 </div>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-md-12 col-lg-6">
-                <section class="d-flex flex-column h-100">
+                <section class="d-flex flex-column h-100" style="max-height: 400px; min-height:400px;">
                     <h3>My Entries</h3>
                     <div class="section-scrollable">
                         @if (Model.UserEnteredRaffles.Any())
@@ -152,7 +152,7 @@
 
 
             <div class="col-md-12 col-lg-6">
-                <section>
+                <section style="max-height: 400px; min-height:400px;">
 
                     <div class="row">
                         <div class="col-6">

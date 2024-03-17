@@ -40,16 +40,17 @@
         font-weight: normal;
         margin-left:10px;
     }
+
 </style>
 <body>
     <div class="page-container">
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section>
+                <section style="max-height: 400px; min-height:400px; overflow-y: auto; overflow-x:hidden;">
                     @if (Model.Count > 0)
                     {
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col">
                                 <h2 class="clan-title">My Clan</h2>
                             </div>
@@ -64,10 +65,10 @@
                                 }
                             </div>
                         </div>
-                        <div class="clan-details-container">
+                        <div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h2 class="clan-name">@Model[0].Name</h2>
-                                <h2 class="clan-points"> <i class="fas fa-medal" style="color: white;">CP</i> <strong> @Model[0].ClanPoints</strong></h2>
+                                <h2 class="clan-points"> <i class="fas fa-medal" style="color: gold;">CP</i> <strong> @Model[0].ClanPoints</strong></h2>
 
                             </div>
 
@@ -137,15 +138,19 @@
 
             </div>
             <div id="availableClansContainer" class="col-md-12 col-lg-6">
-                <section>
+                <section style="max-height: 400px; min-height:400px;">
                     <h2>Discover Clans</h2>
-                    <ul id="availableClansList" class="list-group"></ul>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <ul id="availableClansList" class="list-group"></ul>
+                    </div>
                 </section>
             </div>
-            <div class="col-md-12 col-lg-6">
-                <section>
-                    <h2>Leaderboards</h2>
-                    <ul id="clanLeaderboard" class="list-group"></ul>
+            <div class="col-md-12 col-lg-12">
+                <section style="max-height: 400px; min-height:400px;">
+                    <h2>Leaderboard</h2>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        <ul id="clanLeaderboard" class="list-group"></ul>
+                    </div>
                 </section>
             </div>
 
@@ -213,6 +218,7 @@
             </div>
         </div>
     </div>
+
 
 
  
