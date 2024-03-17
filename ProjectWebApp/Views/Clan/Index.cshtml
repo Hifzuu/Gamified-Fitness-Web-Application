@@ -41,98 +41,115 @@
         margin-left:10px;
     }
 
+
 </style>
 <body>
     <div class="page-container">
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section style="max-height: 400px; min-height:400px; overflow-y: auto; overflow-x:hidden;">
+                <section style="max-height: 400px; min-height:400px; overflow-y: auto; overflow-x:hidden; padding:0;">
                     @if (Model.Count > 0)
                     {
-                        <div class="row mb-2">
-                            <div class="col">
-                                <h2 class="clan-title">My Clan</h2>
-                            </div>
-                            <div class="col-auto">
-                                @if (User.Identity.Name == Model[0].CreatorUserName)
-                                {
-                                    <button class="btn btn-danger delete-clan-btn" data-clan-id="@Model[0].ClanId">Delete Clan</button>
-                                }
-                                else if (Model[0].Members.Any(member => member.UserName == User.Identity.Name))
-                                {
-                                    <button class="btn btn-danger leave-clan-btn" data-clan-id="@Model[0].ClanId">Leave Clan</button>
-                                }
-                            </div>
-                        </div>
+
                         <div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h2 class="clan-name">@Model[0].Name</h2>
-                                <h2 class="clan-points"> <i class="fas fa-medal" style="color: gold;">CP</i> <strong> @Model[0].ClanPoints</strong></h2>
-
+                            <div class="clan-info d-flex justify-content-between align-items-center">
+                                <div class="left-info">
+                                    <h2 class="clan-name">@Model[0].Name</h2>
+                                    <h2 class="clan-points">Clan Points: <i class="fas fa-medal" style="color: gold;">CP</i> @Model[0].ClanPoints</h2>
+                                    <h2 class="clan-points">Members: @Model[0].Members.Count()/30</h2>
+                                </div>
+                                <div class="action-buttons">
+                                    @if (User.Identity.Name == Model[0].CreatorUserName)
+                                    {
+                                        <button class="btn btn-danger delete-clan-btn" data-clan-id="@Model[0].ClanId">Delete Clan</button>
+                                    }
+                                    else if (Model[0].Members.Any(member => member.UserName == User.Identity.Name))
+                                    {
+                                        <button class="btn btn-danger leave-clan-btn" data-clan-id="@Model[0].ClanId">Leave Clan</button>
+                                    }
+                                </div>
                             </div>
 
-                            <p class="creator-info">
-                                <div class="media">
-                                    <!-- Fetch the profile picture of the leader -->
-                                    @{
-                                        var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
-                                    }
-                                    <img src="@leaderProfilePictureUrl" class="mr-3 rounded-circle" alt="Leader Profile Picture" width="50" height="50">
-                                    <div class="media-body d-flex align-items-center" style="margin-top: 10px;">
-                                        <h5 class="mt-0">@Model[0].CreatorUserName</h5>
-                                        <!-- Add additional leader details if needed -->
-                                    </div>
-                                    <!-- Add leader role status at the far right -->
-                                    <div class="ml-auto">
-                                        <span class="badge badge-info">Leader</span>
-                                    </div>
-                                </div>
-                            </p>
 
                             <div class="members-section">
                                 @if (Model[0].Members.Any())
                                 {
-                                    <div class="mt-3">
-                                        @foreach (var member in Model[0].Members)
-                                        {
-                                            // Exclude the creator from the members list
-                                            if (member.Id != Model[0].CreatorId)
-                                            {
-                                                var user = dbContext.GetUserById(member.Id);
+                                    <div class="member-list">
+                                        @{
+                                            // Get leader details
+                                            var leader = Model[0].Members.FirstOrDefault(member => member.Id == Model[0].CreatorId);
+                                            var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
+                                            var leaderPoints = await GetUserPoints(Model[0].CreatorId.ToString());
 
-                                                <div class="media mb-2">
-                                                    <img src="@await GetProfilePictureUrl(member.Id)" class="mr-3 rounded-circle" alt="User Profile Picture" width="50" height="50">
-                                                    <div class="media-body d-flex align-items-center" style="margin-top: 10px;">
-                                                        <h5 class="mt-0">@member.UserName</h5>
-                                                        <!-- Add additional member details if needed -->
-                                                        <!-- Add member role status at the far right -->
-                                                        <div class="ml-auto">
+                                            // Order members by points
+                                            var orderedMembers = Model[0].Members
+                                            .OrderByDescending(member => member.Points)
+                                            .ToList();
+
+                                            // Remove leader from the ordered list (if exists)
+                                            orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
+
+                                            // Add leader to the beginning of the ordered list
+                                            orderedMembers.Insert(0, leader);
+                                        }
+
+                                        @foreach (var member in orderedMembers)
+                                        {
+                                            <div class="media member-item mt-3">
+                                                <img src="@await GetProfilePictureUrl(member.Id)" class="mr-3 rounded-circle" alt="User Profile Picture" width="50" height="50">
+                                                <div class="media-body d-flex align-items-center justify-content-between w-100">
+                                                    <div>
+                                                        <h5 class="mt-0 mb-0">@member.UserName</h5>
+                                                        @if (member.Id == Model[0].CreatorId)
+                                                        {
+                                                            <span class="badge badge-info">Leader</span>
+                                                        }
+                                                        else
+                                                        {
                                                             <span class="badge badge-secondary">Member</span>
-                                                        </div>
+                                                        }
+                                                    </div>
+                                                    <div>
+                                                        <span class="member-points">
+                                                            <i class="fas fa-coins gold-coin-icon"></i>
+                                                            <strong>@member.Points</strong> <strong style="font-size: 0.7em;">pts</strong>
+                                                        </span>
+                                                        @if (User.Identity.Name == Model[0].CreatorUserName && member.Id != Model[0].CreatorId)
+                                                        {
+                                                            <button class="btn btn-outline-danger btn-sm kick-member-btn" data-member-id="@member.Id">Kick</button>
+                                                        }
                                                     </div>
                                                 </div>
-
-                                            }
+                                            </div>
                                         }
+
                                     </div>
+
                                 }
                                 else
                                 {
                                     <p class="text-muted">No members</p>
                                 }
                             </div>
+
                         </div>
+
                     }
                     else
                     {
-                        <h2 class="clan-title">My Clan</h2>
-                        <!-- Display message and buttons to join or create a clan if the user has not joined a clan -->
-                        <p class="text-muted">You have not joined a clan. Consider creating or joining one!</p>
-                        <div>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#joinClanModal">Join a Clan</button>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#createClanModal">Create a Clan</button>
+                        <div class="no-clan">
+                            <h2 class="clan-title">My Clan</h2>
+                            <div class="clan-message">
+                                <p class="text-muted">You haven't joined a clan yet. Why not create or join one now?</p>
+                                <div class="button-container">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#joinClanModal">Join a Clan</button>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#createClanModal">Create a Clan</button>
+                                </div>
+                            </div>
                         </div>
+
+
                     }
                 </section>
 
@@ -174,8 +191,20 @@
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <p class="lead">Select a Clan to Join:</p>
-                    <ul id="joinClanList" class="list-group"></ul>
+
+                    <div class="input-group mb-3">
+                        <input type="text" id="searchClanInput" class="form-control" placeholder="Search for a Clan" autocomplete="off">
+                    </div>
+
+                    <ul id="joinClanList" class="list-group list-group-flush" style="max-height: 250px; overflow-y: auto;">
+                        <!-- List items will be dynamically populated here -->
+                    </ul>
+
+                    <!-- Search Results -->
+                    <div id="searchResults">
+                        <!-- Search results will be dynamically populated here -->
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -183,6 +212,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Create Clan Modal -->
@@ -588,12 +618,93 @@
 
 
 
-
-
         // Call the function to load clan leaderboards when the page loads
         $(document).ready(function () {
             loadClanLeaderboards();
         });
+
+        $('.kick-member-btn').click(function () {
+            var memberId = $(this).data('member-id');
+
+            // Show confirmation dialog with Swal
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Once kicked, this member will be removed from the clan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, kick them!"
+            }).then((willKick) => {
+                if (willKick.isConfirmed) {
+                    // If confirmed, make AJAX call to kick the member
+                    $.ajax({
+                        url: '/Clan/KickMember', 
+                        type: 'POST',
+                        data: { memberId: memberId },
+                        success: function (response) {
+                            // Handle success response
+                            Swal.fire({
+                                icon: "success",
+                                title: "Member kicked successfully!",
+                            }).then(() => {
+                                // Optionally, reload the page or update UI as needed
+                                location.reload();
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle error response
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Failed to kick member. Please try again later.",
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        // Function to handle search input changes
+        $('#searchClanInput').on('input', function () {
+            var searchText = $(this).val().toLowerCase(); // Convert input to lowercase for case-insensitive search
+
+            // Make AJAX request to search for clans
+            $.ajax({
+                url: '/Clan/SearchClans', // Adjust URL if necessary
+                type: 'GET',
+                data: { searchText: searchText }, // Pass the search text as a query parameter
+                dataType: 'json',
+                success: function (data) {
+                    // Update the HTML to display the search results
+                    displaySearchResults(data);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error searching clans: " + error);
+                }
+            });
+        });
+
+        // Function to display search results
+        function displaySearchResults(clans) {
+            var $searchResults = $('#searchResults');
+
+            // Clear previous search results
+            $searchResults.empty();
+
+            // Check if there are any matching clans
+            if (clans.length > 0) {
+                // Iterate through the matching clans and append them to the search results
+                clans.forEach(function (clan) {
+                    var listItem = $('<li class="list-group-item">').text(clan.name);
+                    $searchResults.append(listItem);
+                });
+            } else {
+                // No matching clans found
+                $searchResults.html('<p>No matching clans found.</p>');
+            }
+        }
+
 
 
 
@@ -621,6 +732,19 @@
         return "/Images/empty-pfp.png";
     }
 
+   [HttpGet]
+    public async Task<int> GetUserPoints(string id)
+    {
+        var user = await UserManager.FindByIdAsync(id);
+
+        if (user != null)
+        {
+            var points = user.Points;
+            return (points);
+        }
+
+        return (0); 
+    }
 
 
 
