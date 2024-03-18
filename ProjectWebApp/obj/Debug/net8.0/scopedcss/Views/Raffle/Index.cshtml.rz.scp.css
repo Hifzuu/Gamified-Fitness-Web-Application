@@ -90,20 +90,25 @@ h2[b-dub9o406z4] {
 }
 
 
-.list-group-item[b-dub9o406z4] {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 15px;
+.entry-item[b-dub9o406z4] {
+    background-color: white;
+    padding: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 20px;
 }
 
-    .list-group-item h5[b-dub9o406z4] {
+    .entry-item h5[b-dub9o406z4] {
         color: #333;
     }
 
-    .list-group-item p[b-dub9o406z4] {
+    .entry-item p[b-dub9o406z4] {
         color: #777;
     }
+
+.rounded-square[b-dub9o406z4]{
+    border-radius:12px;
+}
 
 .badge-info[b-dub9o406z4] {
     background-color: #17a2b8;
@@ -120,8 +125,9 @@ h2[b-dub9o406z4] {
 
 /* Additional styling for responsiveness */
 @media (max-width: 576px) {
-    .list-group-item[b-dub9o406z4] {
+    .entry-item[b-dub9o406z4] {
         padding: 10px;
+        font-size:12px;
     }
 
     .badge-info[b-dub9o406z4], .badge-danger[b-dub9o406z4] {
@@ -152,4 +158,12 @@ h2[b-dub9o406z4] {
 .section-scrollable[b-dub9o406z4] {
     max-height: 450px; /* Set the maximum height as needed */
     overflow-y: auto;
+}
+
+.winner[b-dub9o406z4] {
+    background-color: white;
+    padding: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 20px;
 }

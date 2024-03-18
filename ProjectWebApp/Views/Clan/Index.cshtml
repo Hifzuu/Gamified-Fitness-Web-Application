@@ -5,23 +5,7 @@
 @{
     ViewData["Title"] = "Clans";
 }
-@{
-    // Get leader details
-    var leader = Model[0].Members.FirstOrDefault(member => member.Id == Model[0].CreatorId);
-    var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
-    var leaderPoints = await GetUserPoints(Model[0].CreatorId.ToString());
 
-    // Order members by points
-    var orderedMembers = Model[0].Members
-    .OrderByDescending(member => member.Points)
-    .ToList();
-
-    // Remove leader from the ordered list (if exists)
-    orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
-
-    // Add leader to the beginning of the ordered list
-    orderedMembers.Insert(0, leader);
-}
 
 
 <!DOCTYPE html>
@@ -34,10 +18,20 @@
     <link rel="stylesheet" href="/css/site.css" />
 </head>
 <style>
+    .leaderboard-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eeeeee;
+        padding: 8px;
+        margin: 2px 0;
+        border-radius: 20px;
+    }
+
     .rank {
         font-weight: bold;
         font-size: 18px; /* Adjust font size as needed */
-        margin-right:0;
+        margin-right: 0;
     }
 
     .first-place {
@@ -52,14 +46,15 @@
         color: #cd7f32; /* Color for third place (bronze) */
     }
 
-    .clan-name
-    {
+    .clan-name {
         color: black;
         font-weight: normal;
-        margin-left:10px;
+        margin-left: 10px;
     }
 
-
+    .clan-points{
+        color:black;
+    }
 </style>
 <body>
     <div class="page-container">
@@ -101,7 +96,7 @@
                             </div>
 
                             <!-- Members Section -->
-                            <div class="d-flex justify-content-between pt-2 align-items-center">
+                            <div class="d-flex justify-content-between pt-2 align-items-center" style="background-color:#D0EBFF;">
                                 <!-- Updated alignment to center vertically -->
                                 <h2 class="members-section text-dark pb-0 mb-0">Members</h2>
                                 <!-- Search Input with custom styles -->
@@ -111,7 +106,7 @@
                                             <i class="fas fa-search text-muted"></i> <!-- Font Awesome search icon -->
                                         </span>
                                     </div>
-                                    <input type="text" id="memberSearchInput" class="form-control border-0 rounded-0 pl-0" placeholder="Search members...">
+                                    <input type="text" id="memberSearchInput" class="form-control border-0 rounded-0 pl-0 custom-search" placeholder="Search members..." style="background-color:#D0EBFF;">
 
                                 </div>
                                 <h2 class="members-section text-dark pb-0 mb-0">@Model[0].Members.Count()/30</h2>
@@ -125,6 +120,22 @@
                                     <!-- Member Items -->
                                     @if (Model[0].Members.Any())
                                     {
+                                        // Get leader details
+                                        var leader = Model[0].Members.FirstOrDefault(member => member.Id == Model[0].CreatorId);
+                                        var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
+                                        var leaderPoints = await GetUserPoints(Model[0].CreatorId.ToString());
+                                        
+                                        // Order members by points
+                                        var orderedMembers = Model[0].Members                 
+                                        .OrderByDescending(member => member.Points)
+                                        .ToList();
+
+                                        // Remove leader from the ordered list (if exists)
+                                        orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
+
+                                        // Add leader to the beginning of the ordered list
+                                        orderedMembers.Insert(0, leader);
+                                    
                                         <!-- Loop through members -->
                                         @foreach (var member in orderedMembers)
                                         {
@@ -682,7 +693,7 @@
                         // Iterate through the leaderboard data
                         $.each(data, function (index, clan) {
                             // Create list item for each clan
-                            var listItem = $('<li class="list-group-item d-flex justify-content-between align-items-center">');
+                            var listItem = $('<li class="list-group-item leaderboard-item d-flex justify-content-between align-items-center">');
 
                             // Display rank and clan name together without space
                             var rankAndName = $('<span class="rank">' + '#' + (index + 1) + ' <span class="clan-name text-dark font-weight-bold">' + clan.name + '</span></span>');
@@ -709,6 +720,7 @@
                         // Display a message if there are no leaderboards available
                         leaderboardList.append('<li class="list-group-item">No leaderboards available</li>');
                     }
+
 
                 },
                 error: function (error) {

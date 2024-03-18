@@ -90,20 +90,25 @@ h2 {
 }
 
 
-.list-group-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    padding: 15px;
+.entry-item {
+    background-color: white;
+    padding: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 20px;
 }
 
-    .list-group-item h5 {
+    .entry-item h5 {
         color: #333;
     }
 
-    .list-group-item p {
+    .entry-item p {
         color: #777;
     }
+
+.rounded-square{
+    border-radius:12px;
+}
 
 .badge-info {
     background-color: #17a2b8;
@@ -120,8 +125,9 @@ h2 {
 
 /* Additional styling for responsiveness */
 @media (max-width: 576px) {
-    .list-group-item {
+    .entry-item {
         padding: 10px;
+        font-size:12px;
     }
 
     .badge-info, .badge-danger {
@@ -152,4 +158,12 @@ h2 {
 .section-scrollable {
     max-height: 450px; /* Set the maximum height as needed */
     overflow-y: auto;
+}
+
+.winner {
+    background-color: white;
+    padding: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 20px;
 }

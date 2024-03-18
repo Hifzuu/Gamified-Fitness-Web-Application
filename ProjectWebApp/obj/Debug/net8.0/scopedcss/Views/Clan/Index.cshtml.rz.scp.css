@@ -18,8 +18,8 @@
 .members-section[b-qk0rk6zmgx] {
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 20px;
     font-size: 16px;
+    background-color: #D0EBFF;
 }
 
 .members-title[b-qk0rk6zmgx] {
@@ -39,7 +39,6 @@
 .clan-points[b-qk0rk6zmgx] {
     font-size: 16px;
     color: white;
-    padding-bottom: 5px;
 }
 
 .clan-bio[b-qk0rk6zmgx] {
@@ -56,7 +55,7 @@
 .clan-info[b-qk0rk6zmgx] {
     background-color: #258cfb;
     padding: 20px;
-    padding-bottom: 5px;
+    padding-bottom: 14px;
 }
 
 .no-clan[b-qk0rk6zmgx] {
@@ -110,12 +109,35 @@
     background-color: white; /* Blue */
     color: black;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 6px 10px;
+    border-radius: 2px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
     .edit-clan-btn:hover[b-qk0rk6zmgx] {
-        background-color: lightblue; /* Darker Blue */
+        background-color: #cecece;
     }
+
+.member-item[b-qk0rk6zmgx] {
+    background-color: white;
+    padding: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius:20px;
+}
+
+.custom-search[b-qk0rk6zmgx] {
+    border: none !important;
+    border-radius: 0;
+    padding-left: 0;
+    background-color: #D0EBFF;
+    outline: none !important;
+}
+
+    .custom-search:focus[b-qk0rk6zmgx] {
+        outline: none;
+        box-shadow: none;
+    }
+
+

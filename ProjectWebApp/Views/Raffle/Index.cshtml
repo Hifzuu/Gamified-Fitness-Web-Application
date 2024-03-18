@@ -19,7 +19,7 @@
     <div class="page-container">
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section id="raffleCarousel" class="carousel slide h-100 p-0" data-ride="carousel" style="max-height: 400px; min-height:400px;">
+                <section id="raffleCarousel" class="carousel slide h-100 p-0" data-ride="carousel" style="max-height: 500px; min-height:500px;">
                     <div class="carousel-inner h-100">
                         @foreach (var raffle in Model.Raffles)
                         {
@@ -60,87 +60,82 @@
             </div>
 
             <div class="col-md-12 col-lg-6">
-                <section class="d-flex flex-column h-100" style="max-height: 400px; min-height:400px;">
+                <section class="d-flex flex-column h-100" style="max-height: 500px; min-height:500px; background-color:#ADDCFF;">
                     <h3>My Entries</h3>
                     <div class="section-scrollable">
                         @if (Model.UserEnteredRaffles.Any())
                         {
-                            <div class="card">
-                                <ul class="list-group list-group-flush">
-                                    @foreach (var enteredRaffle in sortedRaffles)
-                                    {
-                                        <li class="list-group-item">
-                                            <div class="d-flex justify-content-between align-items-center p-0 m-0">
-                                                <div class="d-flex align-items-center">
-                                                    <!-- Flex container for row -->
-                                                    <!-- Square image -->
-                                                    <div>
-                                                        @if (!string.IsNullOrEmpty(enteredRaffle.ImageUrl))
-                                                        {
-                                                            <img src="@enteredRaffle.ImageUrl" class="rounded-square" alt="@enteredRaffle.Name" style="width: 50px; height: 50px;">
-                                                        }
-                                                        else
-                                                        {
-                                                            <!-- Placeholder image from Lorem Picsum -->
-                                                            <img src="https://picsum.photos/300" class="rounded-square" alt="Placeholder" style="width: 100px; height: 100px;">
-                                                        }
-                                                    </div>
-
-                                                    <!-- Raffle information -->
-                                                    <div class="d-flex flex-column ml-3">
-                                                        <!-- Flex container for column -->
-                                                        <h5 class="mb-1 font-weight-bold">@enteredRaffle.Name</h5>
-                                                        <p class="mb-0 text-muted">Entered: @enteredRaffle.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
-                                                        <!-- Check if the raffle has ended -->
-                                                        @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
-                                                        {
-                                                            <!-- Check if the user is a winner -->
-                                                            @if (enteredRaffle.isWinner)
-                                                            {
-                                                                <div class="congratulations-message text-success">
-                                                                    Congratulations! You won this raffle!
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                <div class="motivational-message text-muted">
-                                                                    Better luck next time! Keep participating!
-                                                                </div>
-                                                            }
-                                                        }
-                                                        else
-                                                        {
-                                                            <div class="active-raffle-message" style="color: #258cfb;">
-                                                                Raffle is still active. Check back after it ends.
-                                                            </div>
-                                                        }
-                                                    </div>
+                            <ul class="list-group list-group-flush">
+                                @foreach (var enteredRaffle in sortedRaffles)
+                                {
+                                    <li class="entry-item mb-3">
+                                        <div class="d-flex justify-content-between align-items-center p-0 m-0">
+                                            <!-- Image and Raffle Information -->
+                                            <div class="d-flex align-items-center flex-grow-1">
+                                                <!-- Square image -->
+                                                <div class="mr-3">
+                                                    @if (!string.IsNullOrEmpty(enteredRaffle.ImageUrl))
+                                                    {
+                                                        <img src="@enteredRaffle.ImageUrl" class="rounded-square img-fluid" alt="@enteredRaffle.Name" style="max-width: 80px; max-height: 80px;">
+                                                    }
+                                                    else
+                                                    {
+                                                        <!-- Placeholder image from Lorem Picsum -->
+                                                        <img src="https://picsum.photos/300" class="rounded-square img-fluid" alt="Placeholder" style="max-width: 80px; max-height: 80px;">
+                                                    }
                                                 </div>
-
-                                                <!-- Raffle status -->
-                                                <div class="text-left">
-                                                    <div class="raffle-status-box">
-                                                        @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
+                                                <!-- Raffle information -->
+                                                <div class="d-flex flex-column flex-grow-1">
+                                                    <h5 class="mb-1 font-weight-bold">@enteredRaffle.Name</h5>
+                                                    <p class="mb-0 text-muted">Entered: @enteredRaffle.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
+                                                    <!-- Check if the raffle has ended -->
+                                                    @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
+                                                    {
+                                                        <!-- Check if the user is a winner -->
+                                                        @if (enteredRaffle.isWinner)
                                                         {
-                                                            <div class="expired-status" style="width:120px;">
-                                                                Ended: <br>
-                                                                @enteredRaffle.EntryTimestamp.AddMonths(1).Date.ToString("MMMM dd, yyyy")
+                                                            <div class="congratulations-message text-success">
+                                                                Congratulations! You won this raffle!
                                                             </div>
                                                         }
                                                         else
                                                         {
-                                                            <div class="active-status" style="width:120px;">
-                                                                Ends: <br>
-                                                                @enteredRaffle.EndDate.ToString("MMMM dd, yyyy")
+                                                            <div class="motivational-message text-muted">
+                                                                Better luck next time! Keep participating!
                                                             </div>
                                                         }
-                                                    </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="active-raffle-message text-primary">
+                                                            Raffle is still active. Check back after it ends.
+                                                        </div>
+                                                    }
                                                 </div>
                                             </div>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
+                                            <!-- Raffle status -->
+                                            <div class="text-left">
+                                                <div class="raffle-status-box">
+                                                    @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
+                                                    {
+                                                        <div class="expired-status">
+                                                            <strong>Ends:</strong> @enteredRaffle.EntryTimestamp.AddMonths(1).Date.ToString("MMMM dd, yyyy")
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="active-status">
+                                                            <strong>Ends:</strong> @enteredRaffle.EndDate.ToString("MMMM dd, yyyy")
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+
+
                         }
                         else
                         {
@@ -153,7 +148,7 @@
 
 
             <div class="col-md-12 col-lg-12">
-                <section style="max-height: 400px; min-height:400px;">
+                <section style="max-height: 500px; min-height:500px; background-color:#B8D3FF;">
 
                     <div class="row">
                         <div class="col-6">
@@ -170,32 +165,30 @@
                     <div class="section-scrollable">
                         @if (Model.winners.Any())
                         {
-                            <div class="card">
-                                <ul class="list-group list-group-flush">
-                                    @foreach (var winner in Model.winners.Where(entry => entry.isWinner))
-                                    {
-                                        // Fetch user information based on UserId
-                                        var user = dbContext.GetUserById(winner.userId);
+                            <ul class="list-group list-group-flush">
+                                @foreach (var winner in Model.winners.Where(entry => entry.isWinner))
+                                {
+                                    // Fetch user information based on UserId
+                                    var user = dbContext.GetUserById(winner.userId);
 
-                                        <li class="list-group-item">
-                                            <div class="d-flex align-items-center">
-                                                <!-- User's Profile Picture -->
-                                                <img src="@user.ProfileImageUrl" alt="Profile Picture" class="mr-3 rounded-circle" width="50" height="50">
+                                    <li class="entry-item winner">
+                                        <div class="d-flex align-items-center">
+                                            <!-- User's Profile Picture -->
+                                            <img src="@user.ProfileImageUrl" alt="Profile Picture" class="mr-3 rounded-circle" width="50" height="50">
 
-                                                <!-- Details: User's Name, Raffle Name, Entry Timestamp, and Raffle End Date -->
-                                                <div class="d-flex flex-column">
-                                                    <h5 class="mb-1 font-weight-bold">@user.UserName</h5>
-                                                    <p class="mb-0 text-muted">@winner.Name</p>
-                                                    <p class="mb-0 text-muted">Won on: @winner.EndDate.ToString("MMMM dd, yyyy")</p>
-                                                </div>
-
+                                            <!-- Details: User's Name, Raffle Name, Entry Timestamp, and Raffle End Date -->
+                                            <div class="d-flex flex-column">
+                                                <h5 class="mb-1 font-weight-bold">@user.UserName</h5>
+                                                <p class="mb-0 text-muted">@winner.Name</p>
+                                                <p class="mb-0 text-muted">Won on: @winner.EndDate.ToString("MMMM dd, yyyy")</p>
                                             </div>
-                                        </li>
 
-                                    }
+                                        </div>
+                                    </li>
 
-                                </ul>
-                            </div>
+                                }
+
+                            </ul>
                         }
                         else
                         {
