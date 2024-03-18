@@ -5,6 +5,7 @@ namespace ProjectWebApp.Models
     {
         public int ClanId { get; set; }
         public string Name { get; set; }
+        public string bio { get; set; }
         public string CreatorUserName { get; set; }
         public int ClanPoints { get; set; }
         public string CreatorId { get; set; }

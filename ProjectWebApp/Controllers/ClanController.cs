@@ -55,6 +55,7 @@ namespace ProjectWebApp.Controllers
                 CreatorId = clan.Creator.Id,
                 Members = clan.Members.ToList(),
                 ClanPoints = clan.ClanPoints,
+                bio = clan.bio,
             }).ToList();
 
             return View(clanViewModels);
@@ -66,6 +67,7 @@ namespace ProjectWebApp.Controllers
         public async Task<IActionResult> CreateClan(ClanViewModel model)
         {
             _logger.LogInformation($"Received request to create clan with name: {model.Name}");
+            _logger.LogInformation($"Received request to create bio with name: {model.bio}");
 
             try
             {
@@ -91,6 +93,7 @@ namespace ProjectWebApp.Controllers
                         Name = model.Name,
                         CreatorId = userId,
                         ClanPoints = 0,
+                        bio = model.bio,
                     };
 
                     // Save the new clan to the database
@@ -122,6 +125,7 @@ namespace ProjectWebApp.Controllers
                         CreatorId = newClan.Creator.Id,
                         Members = newClan.Members.ToList(),
                         ClanPoints = newClan.ClanPoints,
+                        bio = newClan.bio,
                     };
 
                     return Json(new { success = true, message = "Clan created successfully!", clanId = newClan.ClanId });
@@ -510,6 +514,25 @@ namespace ProjectWebApp.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditClanBio(int clanId, string newBio)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            // Check if the current user is the leader of the clan
+            var clan = await _context.Clans.FirstOrDefaultAsync(c => c.ClanId == clanId && c.CreatorId == userId);
+            if (clan == null)
+            {
+                return Json(new { success = false, message = "You are not authorized to edit this clan's bio." });
+            }
+
+            // Update the clan bio
+            clan.bio = newBio;
+            _context.Clans.Update(clan);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, message = "Clan bio updated successfully." });
+        }
 
 
 

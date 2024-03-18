@@ -137,9 +137,10 @@ body[b-s13xhoid61] {
 .clan-name[b-qk0rk6zmgx] {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
+    color: white;
     margin-left:0;
     margin-right:0;
+    padding-bottom:10px;
 }
 
 .creator-info[b-qk0rk6zmgx] {
@@ -154,6 +155,7 @@ body[b-s13xhoid61] {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 8px;
+    font-size: 16px;
 }
 
 .members-title[b-qk0rk6zmgx] {
@@ -172,18 +174,23 @@ body[b-s13xhoid61] {
 
 .clan-points[b-qk0rk6zmgx] {
     font-size: 16px;
-    color: black;
+    color: white;
 }
 
+.clan-bio[b-qk0rk6zmgx] {
+    font-size: 14px;
+    color: white;
+}
 
 .member-points[b-qk0rk6zmgx] {
     font-size: 16px;
     color: #777;
 }
 
-.clan-info[b-qk0rk6zmgx]{
-    background-color:lightsteelblue;
+.clan-info[b-qk0rk6zmgx] {
+    background-color: #258cfb;
     padding: 20px;
+    padding-bottom: 5px;
 }
 
 .no-clan[b-qk0rk6zmgx] {
@@ -232,6 +239,20 @@ body[b-s13xhoid61] {
     padding: 0.25rem 0.5rem; /* Adjust padding to reduce height */
     font-size: 0.875rem; /* Adjust font size if necessary */
 }
+
+.edit-clan-btn[b-qk0rk6zmgx] {
+    background-color: white; /* Blue */
+    color: black;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .edit-clan-btn:hover[b-qk0rk6zmgx] {
+        background-color: lightblue; /* Darker Blue */
+    }
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {
     color: #007bff;
