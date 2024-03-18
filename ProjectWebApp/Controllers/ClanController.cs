@@ -27,41 +27,49 @@ namespace ProjectWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = _userManager.GetUserId(User);
-
-            // Retrieve clans where the current user is the creator
-            var clansCreatedByUser = await _context.Clans
-                .Where(c => c.CreatorId == userId)
-                .Include(c => c.Creator)
-                .Include(c => c.Members)
-                .ToListAsync();
-
-            // Retrieve clans where the current user is a member
-            var clansForMember = await _context.Clans
-                .Include(c => c.Creator)
-                .Include(c => c.Members)
-                .Where(c => c.Members.Any(u => u.Id == userId))
-                .ToListAsync();
-
-            // Combine the two lists
-            var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
-
-            // Map Clan entities to ClanViewModel
-            var clanViewModels = userClans.Select(clan => new ClanViewModel
+            try
             {
-                ClanId = clan.ClanId,
-                Name = clan.Name,
-                CreatorUserName = clan.Creator.UserName,
-                CreatorId = clan.Creator.Id,
-                Members = clan.Members.ToList(),
-                ClanPoints = clan.ClanPoints,
-                bio = clan.bio,
-            }).ToList();
+                var userId = _userManager.GetUserId(User);
+                _logger.LogInformation("User ID: {UserId}", userId);
 
-            return View(clanViewModels);
+                // Retrieve clans created by the user
+                var clansCreatedByUser = await _context.Clans
+                    .Where(c => c.CreatorId == userId)
+                    .Include(c => c.Creator)
+                    .Include(c => c.Members)
+                    .ToListAsync();
+
+                // Retrieve clans where the user is a member
+                var clansForMember = await _context.Clans
+                    .Include(c => c.Creator)
+                    .Include(c => c.Members)
+                    .Where(c => c.Members.Any(u => u.Id == userId))
+                    .ToListAsync();
+
+                // Combine the two lists
+                var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
+                _logger.LogInformation("Number of user clans: {Count}", userClans.Count);
+
+                // Map Clan entities to ClanViewModel
+                var clanViewModels = userClans.Select(clan => new ClanViewModel
+                {
+                    ClanId = clan.ClanId,
+                    Name = clan.Name,
+                    CreatorUserName = clan.Creator.UserName,
+                    CreatorId = clan.Creator.Id,
+                    Members = clan.Members.ToList(),
+                    ClanPoints = clan.ClanPoints,
+                    bio = clan.bio,
+                }).ToList();
+
+                return View(clanViewModels);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching user clans.");
+                throw; // Re-throw the exception for global exception handling
+            }
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> CreateClan(ClanViewModel model)

@@ -5,6 +5,24 @@
 @{
     ViewData["Title"] = "Clans";
 }
+@{
+    // Get leader details
+    var leader = Model[0].Members.FirstOrDefault(member => member.Id == Model[0].CreatorId);
+    var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
+    var leaderPoints = await GetUserPoints(Model[0].CreatorId.ToString());
+
+    // Order members by points
+    var orderedMembers = Model[0].Members
+    .OrderByDescending(member => member.Points)
+    .ToList();
+
+    // Remove leader from the ordered list (if exists)
+    orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
+
+    // Add leader to the beginning of the ordered list
+    orderedMembers.Insert(0, leader);
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,12 +66,14 @@
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section style="max-height: 400px; min-height:400px; overflow-y: hidden; overflow-x:hidden; padding:0;">
+                <section style="max-height: 500px; min-height:500px; overflow-y: hidden; overflow-x:hidden; padding:0;">
                     @if (Model.Count > 0)
                     {
 
                         <div>
+                            <!-- Clan Info Section -->
                             <div class="clan-info d-flex justify-content-between align-items-center">
+                                <!-- Left Info Section -->
                                 <div class="left-info">
                                     <h2 class="clan-name">@Model[0].Name</h2>
                                     @if (!string.IsNullOrEmpty(Model[0].bio))
@@ -66,6 +86,7 @@
                                     }
                                     <h2 class="clan-points">Clan Points: <i class="fas fa-medal" style="color: gold;">CP</i> @Model[0].ClanPoints</h2>
                                 </div>
+                                <!-- Action Buttons Section -->
                                 <div class="action-buttons">
                                     @if (User.Identity.Name == Model[0].CreatorUserName)
                                     {
@@ -79,38 +100,35 @@
                                 </div>
                             </div>
 
-
-
-                            <div class="d-flex justify-content-between pt-2">
+                            <!-- Members Section -->
+                            <div class="d-flex justify-content-between pt-2 align-items-center">
+                                <!-- Updated alignment to center vertically -->
                                 <h2 class="members-section text-dark pb-0 mb-0">Members</h2>
+                                <!-- Search Input with custom styles -->
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-transparent border-0 rounded-0">
+                                            <i class="fas fa-search text-muted"></i> <!-- Font Awesome search icon -->
+                                        </span>
+                                    </div>
+                                    <input type="text" id="memberSearchInput" class="form-control border-0 rounded-0 pl-0" placeholder="Search members...">
+
+                                </div>
                                 <h2 class="members-section text-dark pb-0 mb-0">@Model[0].Members.Count()/30</h2>
                             </div>
 
 
-                            <div class="members-section" style="max-height: 260px; overflow-y: auto;">
-                                @if (Model[0].Members.Any())
-                                {
-                                    <div class="member-list pb-2 ">
-                                        @{
-                                            // Get leader details
-                                            var leader = Model[0].Members.FirstOrDefault(member => member.Id == Model[0].CreatorId);
-                                            var leaderProfilePictureUrl = await GetProfilePictureUrl(Model[0].CreatorId.ToString());
-                                            var leaderPoints = await GetUserPoints(Model[0].CreatorId.ToString());
-
-                                            // Order members by points
-                                            var orderedMembers = Model[0].Members
-                                            .OrderByDescending(member => member.Points)
-                                            .ToList();
-
-                                            // Remove leader from the ordered list (if exists)
-                                            orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
-
-                                            // Add leader to the beginning of the ordered list
-                                            orderedMembers.Insert(0, leader);
-                                        }
-
+                            <!-- Member List Section -->
+                            <div class="members-section" style="max-height: 340px; overflow-y: auto;">
+                                <!-- Member List -->
+                                <div class="member-list pb-2">
+                                    <!-- Member Items -->
+                                    @if (Model[0].Members.Any())
+                                    {
+                                        <!-- Loop through members -->
                                         @foreach (var member in orderedMembers)
                                         {
+                                            <!-- Display member item -->
                                             <div class="media member-item mt-3">
                                                 <img src="@await GetProfilePictureUrl(member.Id)" class="mr-3 rounded-circle" alt="User Profile Picture" width="50" height="50">
                                                 <div class="media-body d-flex align-items-center justify-content-between w-100">
@@ -138,17 +156,15 @@
                                                 </div>
                                             </div>
                                         }
-
-                                    </div>
-
-                                }
-                                else
-                                {
-                                    <p class="text-muted">No members</p>
-                                }
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted">No members</p>
+                                    }
+                                </div>
                             </div>
-
                         </div>
+
 
                     }
                     else
@@ -170,9 +186,9 @@
 
             </div>
             <div id="availableClansContainer" class="col-md-12 col-lg-6">
-                <section style="max-height: 400px; min-height:400px;">
+                <section style="max-height: 500px; min-height:500px;">
                     <h2>Discover Clans</h2>
-                    <div style="max-height: 320px; overflow-y: auto;">
+                    <div style="max-height: 420px; overflow-y: auto;">
                         <ul id="availableClansList" class="list-group"></ul>
                     </div>
                 </section>
@@ -327,6 +343,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
+         $(document).ready(function () {
+            $('#memberSearchInput').on('input', function () {
+                var searchQuery = $(this).val().toLowerCase();
+                $('.member-item').each(function () {
+                    var memberName = $(this).find('h5').text().toLowerCase();
+                    if (memberName.includes(searchQuery)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+
         // Function to fetch available clans and update the HTML
         function loadAvailableClans() {
             $.ajax({
