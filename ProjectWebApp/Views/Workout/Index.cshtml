@@ -181,7 +181,7 @@ completion of workouts *@
                                       <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div class="workout-card" data-category="@workout.Category">
                                                 <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
-                                                    <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://placekitten.com/800/400'); background-size: cover; background-position: center;">
+                                                    <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('@workout.ImageUrl'); background-size: cover; background-position: center;">
                                                         <h5 class="card-title text-white">@workout.Name</h5>
                                                         <div class="info" style="text-align:center; background-color:white;">
                                                             <p class="category">Category: @workout.Category</p>
@@ -240,7 +240,7 @@ completion of workouts *@
                                 <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
                                     class="card workout-link">
                                     @* <img src="/Images/@workout.imageUrl"  *@
-                                   <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Workout Image">
+                                   <img src="@workout.ImageUrl" class="card-img-top" alt="Workout Image" style="height: 200px;">
                                     <div class="card-body">
                                         <h5 class="card-title">@workout.Name</h5>
                                         <div class="info" style="text-align:center;">
@@ -372,7 +372,7 @@ completion of workouts *@
                             data-points="@workout.rewardPoints">
                             <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
                                 class="card workout-link">
-                               <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Workout Image">
+                               <img src="@workout.ImageUrl" class="card-img-top" alt="Workout Image" style="height: 200px;">
                                  <div class="card-body">
                                     <h5 class="card-title">@workout.Name</h5>
 

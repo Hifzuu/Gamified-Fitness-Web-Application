@@ -22,11 +22,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #eeeeee;
-        padding: 8px;
+        background-color: white;
+        padding: 12px;
         margin: 2px 0;
         border-radius: 20px;
     }
+
+        .leaderboard-item:first-child {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
 
     .rank {
         font-weight: bold;
@@ -54,6 +64,7 @@
 
     .clan-points{
         color:black;
+        margin-bottom:0;
     }
 </style>
 <body>
@@ -61,7 +72,7 @@
 
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
-                <section style="max-height: 500px; min-height:500px; overflow-y: hidden; overflow-x:hidden; padding:0;">
+                <section style="max-height: 500px; min-height:500px; overflow-y: hidden; overflow-x:hidden; padding:0; background-color: #D0EBFF;">
                     @if (Model.Count > 0)
                     {
 
@@ -114,7 +125,7 @@
 
 
                             <!-- Member List Section -->
-                            <div class="members-section" style="max-height: 340px; overflow-y: auto;">
+                            <div class="members-section" style="max-height: 320px; overflow-y: auto;">
                                 <!-- Member List -->
                                 <div class="member-list pb-2">
                                     <!-- Member Items -->
@@ -196,18 +207,18 @@
                 </section>
 
             </div>
-            <div id="availableClansContainer" class="col-md-12 col-lg-6">
+@*             <div id="availableClansContainer" class="col-md-12 col-lg-6">
                 <section style="max-height: 500px; min-height:500px;">
                     <h2>Discover Clans</h2>
                     <div style="max-height: 420px; overflow-y: auto;">
                         <ul id="availableClansList" class="list-group"></ul>
                     </div>
                 </section>
-            </div>
-            <div class="col-md-12 col-lg-12">
-                <section style="max-height: 400px; min-height:400px;">
+            </div> *@
+            <div class="col-md-12 col-lg-6">
+                <section style="max-height: 500px; min-height:500px; background-color: #B8D3FF;">
                     <h2>Leaderboard</h2>
-                    <div style="max-height: 320px; overflow-y: auto;">
+                    <div style="max-height: 425px; overflow-y: auto; background-color: #B8D3FF;">
                         <ul id="clanLeaderboard" class="list-group"></ul>
                     </div>
                 </section>

@@ -643,6 +643,10 @@ namespace ProjectWebApp.Data.Migrations
                     b.Property<int>("DurationMinutes")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsFavourited")
                         .HasColumnType("bit");
 

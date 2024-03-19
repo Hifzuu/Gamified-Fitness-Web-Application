@@ -473,7 +473,7 @@
             var videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.onerror = function () {
                 // If video fails to load, set the poster (placeholder image)
-                videoPlayer.poster = 'https://via.placeholder.com/800x450';
+                videoPlayer.poster = '@Model.ImageUrl';
             };
             videoPlayer.src = "/Videos/@Model.VideoUrl";
         </script>

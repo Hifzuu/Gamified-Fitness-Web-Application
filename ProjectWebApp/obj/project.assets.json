@@ -9255,13 +9255,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\obj\\project.nuget.cache : The cloud file provider is not running.\r\n"
-    }
-  ]
+  }
 }

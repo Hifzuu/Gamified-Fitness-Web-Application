@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YRqN21YiobCEEvIgV58LvF8u1tPGdu+MPjB3hMuR3VQ=",
+  "Hash": "mmpIGebYXDPtszebWaeR8D1auZygINUbKMvaxlW+pL4=",
   "Source": "ProjectWebApp",
   "BasePath": "_content/ProjectWebApp",
   "Mode": "Default",
@@ -1611,6 +1611,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\report.png"
+    },
+    {
+      "Identity": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\running.jpg",
+      "SourceId": "ProjectWebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\",
+      "BasePath": "_content/ProjectWebApp",
+      "RelativePath": "Images/running.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\running.jpg"
     },
     {
       "Identity": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\social.png",

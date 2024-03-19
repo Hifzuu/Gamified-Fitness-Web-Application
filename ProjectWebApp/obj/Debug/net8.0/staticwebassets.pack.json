@@ -77,6 +77,10 @@
       "PackagePath": "staticwebassets\\Images\\report.png"
     },
     {
+      "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\running.jpg",
+      "PackagePath": "staticwebassets\\Images\\running.jpg"
+    },
+    {
       "Id": "C:\\Users\\hifzm\\OneDrive - UCLan\\Uni Yr3\\Project\\ProjectWebApp\\ProjectWebApp\\wwwroot\\Images\\social.png",
       "PackagePath": "staticwebassets\\Images\\social.png"
     },

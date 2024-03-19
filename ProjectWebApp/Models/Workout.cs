@@ -7,6 +7,7 @@
         public string Category { get; set; } = string.Empty;
         public string Description { get; set; }
         public string VideoUrl { get; set; }
+        public string ImageUrl { get; set; }
         public int DurationMinutes { get; set; }
         public bool IsFavourited { get; set; } = false;
         public bool IsFeatured { get; set; } = false;
