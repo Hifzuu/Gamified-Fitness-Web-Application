@@ -49,16 +49,16 @@
         <div class="row row-equal-height">
             <div class="col-md-12 col-lg-6">
                 <section class="d-flex flex-column h-100">
-                    <a href="@Url.Action("Index", "Workout")" class="btn btn-primary mb-3">Back to Workouts</a>
+                    <a href="@Url.Action("Index", "Workout")" class="back-link mb-3" style="color: black !important; text-decoration: none; display: inline-block;">
+                        <span style="margin-right: 5px; line-height: 1;">&#9664;</span> Back
+                    </a>
 
-                    <div class="card">
+
+
+                    <div class="card mt-0">
                         <div class="embed-responsive embed-responsive-16by9">
                             <video id="videoPlayer" class="embed-responsive-item" autoplay loop muted playsinline controls></video>
                         </div>
-
-
-
-                        <hr class="my-4">
 
                         <div class="card-body text-center">
                             <h3 class="card-title">@Model.Name</h3>

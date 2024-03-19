@@ -144,7 +144,7 @@ body[b-25jdkaz98d] {
 }
 
     .workout-link:hover[b-25jdkaz98d] {
-        transform: scale(1.03);
+        transform: scale(1.02);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         color: inherit;
         background-color: cornflowerblue;
@@ -215,9 +215,14 @@ h3[b-25jdkaz98d] {
     color: black;
 }
 
-.card-title[b-25jdkaz98d]{
-    text-align:center;
+.card-title[b-25jdkaz98d] {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%; /* Adjust the width as needed */
 }
+
 
 @media (max-width: 768px) {
     #searchBar[b-25jdkaz98d] {
@@ -258,44 +263,23 @@ h3[b-25jdkaz98d] {
 }
 
 
-/*.workout-card-new {
-    max-width: 300px;
-    margin: 5px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    border-radius: 10px;
+.custom-search[b-25jdkaz98d] {
+    border: none !important;
+    border-radius: 0;
+    padding-left: 0;
+    outline: none !important;
 }
 
-.workout-card-new:hover{
-    cursor:pointer;
-    transform: scale(1.2);
-    background: cornflowerblue;
-}
+    .custom-search:focus[b-25jdkaz98d] {
+        outline: none;
+        box-shadow: none;
+    }
 
-.first-content{
-    height:100%;
-    width:100%;
-    transition: all 0.4s;
-    opacity: 1;
+.clear-icon[b-25jdkaz98d] {
+    visibility: visible;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1; /* Ensure the clear icon is above the input field */
 }
-
-.workout-card-new:hover .first-content{
-height:0px;
-opacity:0;
-}
-
-.second-content{
-    height:0%;
-    width:100%;
-    opacity:0;
-    transition: all 0.4s;
-    font-size:0px;
-    transform: rotate(90deg) scale(-1);
-}
-
-.workout-card-new:hover .second-content{
-opacity:1;
-height:100%;
-font-size: 1.8rem;
-transform:rotate(0deg);
-}*/

@@ -37,11 +37,9 @@ body[b-s13xhoid61] {
 }
 
 .challenge-card[b-s13xhoid61] {
-    background-color: white;
-    border: 2px solid #3498db;
+    background-color: #D1ECFF;
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
@@ -63,6 +61,7 @@ body[b-s13xhoid61] {
 
 .game-progress[b-s13xhoid61] {
     margin: 20px 0;
+
 }
 
 .game-progress-text[b-s13xhoid61] {
@@ -80,6 +79,10 @@ body[b-s13xhoid61] {
     height: 100%;
     border-radius: 8px;
     background-color: #2ecc71;
+}
+
+.progress[b-s13xhoid61]{
+    background-color:white;
 }
 
 .game-elements[b-s13xhoid61] {

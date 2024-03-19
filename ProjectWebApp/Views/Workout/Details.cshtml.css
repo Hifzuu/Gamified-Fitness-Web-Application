@@ -83,3 +83,15 @@ h3 {
 #completionModal .modal-content {
     border-radius: 10px;
 }
+
+
+.back-link {
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    color:black !important;
+}
+
+    .back-link:hover {
+        color: #ff0000; /* Change color on hover if needed */
+    }

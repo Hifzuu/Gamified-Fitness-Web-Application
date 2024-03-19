@@ -76,6 +76,7 @@ namespace ProjectWebApp.Controllers
                     EndDate = re.Raffle.EndDate,
                     isWinner = re.IsWinner,
                     userId = re.UserId,
+                    ImageUrl = re.Raffle.ImageUrl,
                 })
                 .ToListAsync();
 
@@ -90,6 +91,7 @@ namespace ProjectWebApp.Controllers
                     EndDate = re.Raffle.EndDate,
                     isWinner = re.IsWinner,
                     userId = re.UserId,
+                    ImageUrl=re.Raffle.ImageUrl,
                 })
                 .ToListAsync();
 

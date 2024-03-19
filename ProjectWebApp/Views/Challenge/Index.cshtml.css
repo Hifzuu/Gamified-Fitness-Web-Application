@@ -37,11 +37,9 @@ body {
 }
 
 .challenge-card {
-    background-color: white;
-    border: 2px solid #3498db;
+    background-color: #D1ECFF;
     border-radius: 10px;
     padding: 20px;
-    margin: 20px 0;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
@@ -63,6 +61,7 @@ body {
 
 .game-progress {
     margin: 20px 0;
+
 }
 
 .game-progress-text {
@@ -80,6 +79,10 @@ body {
     height: 100%;
     border-radius: 8px;
     background-color: #2ecc71;
+}
+
+.progress{
+    background-color:white;
 }
 
 .game-elements {

@@ -83,3 +83,15 @@ h3[b-9cvkiois10] {
 #completionModal .modal-content[b-9cvkiois10] {
     border-radius: 10px;
 }
+
+
+.back-link[b-9cvkiois10] {
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    color:black !important;
+}
+
+    .back-link:hover[b-9cvkiois10] {
+        color: #ff0000; /* Change color on hover if needed */
+    }

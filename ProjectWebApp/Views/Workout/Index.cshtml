@@ -124,17 +124,12 @@ completion of workouts *@
                     <div id="searchBar" class="position-relative mb-0">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="search-icon" id="searchIcon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                    </svg>
-                                </span>
+                                <span class="input-group-text bg-transparent border-0 rounded-0">
+                                   <i class="fas fa-search text-muted"></i> <!-- Font Awesome search icon -->
+                               </span>
                             </div>
-                            <input type="text" id="searchInput" class="form-control flex-grow-1"
-                                placeholder="Search workouts by name..." oninput="updateSearchResults()">
+                            <input type="text" id="searchInput" class="form-control flex-grow-1 custom-search"
+                                placeholder="Search workouts by name..." oninput="updateSearchResults()" autocomplete="off">
                             <div class="clear-icon" id="clearButton" onclick="clearSearch()">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -146,7 +141,7 @@ completion of workouts *@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>          
 
            <!-- Search Results Section -->
             <div id="searchResults" style="display: none; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
@@ -166,34 +161,38 @@ completion of workouts *@
                 {
                     var workouts = ViewData["Workouts"] as List<Workout>;
 
-                    <section>
+                    <section class="favourite-section" style="background-color:white;">
                         <h3>Favourite Workouts</h3>
                              <!-- Display user's favorited workouts -->
                         @if (favoritedWorkoutIds.Any())
                         {
-                            <div class="row" id="favouriteWorkouts" style="max-height: 520px; overflow-y: auto;">
+                            <div class="row" id="favouriteWorkouts" style="max-height: 650px; overflow-y: auto;">
                                 @foreach (var workoutId in favoritedWorkoutIds)
                                 {
                                     var workout = workouts.FirstOrDefault(w => w.WorkoutId == workoutId);
 
                                     if (workout != null)
                                     {
-                                      <div class="col-lg-4 col-md-6 col-sm-12">
-                                            <div class="workout-card" data-category="@workout.Category">
-                                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
-                                                    <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('@workout.ImageUrl'); background-size: cover; background-position: center;">
-                                                        <h5 class="card-title text-white">@workout.Name</h5>
-                                                        <div class="info" style="text-align:center; background-color:white;">
-                                                            <p class="category">Category: @workout.Category</p>
-                                                            <p class="duration">Duration: @workout.DurationMinutes minutes</p>
-                                                            <p class="difficulty">Difficulty: @workout.difficulty</p>
-                                                            <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
-                                                            <p class="points">Points: @workout.rewardPoints</p>
-                                                        </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="workout-card" data-category="@workout.Category">
+                                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                                                <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('@workout.ImageUrl'); background-size: cover; background-position: center;">
+                                                    <h5 class="card-title text-white">@workout.Name</h5>
+                                                    <div class="info" style="text-align:center; background-color:white; opacity:0.8">
+                                                        <p class="category">Category: @workout.Category</p>
+                                                        <p class="duration">Duration: @workout.DurationMinutes minutes</p>
+                                                        <p class="difficulty">Difficulty: @workout.difficulty</p>
+                                                        <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
+                                                         <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                                                            <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                                                            <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
+                                                        </span>
                                                     </div>
-                                                </a>
-                                            </div>
+                                                </div>
+                                            </a>
                                         </div>
+                                    </div>
+
 
                                     }
                                 }
@@ -248,7 +247,11 @@ completion of workouts *@
                                             <p class="duration">Duration: @workout.DurationMinutes minutes</p>
                                             <p class="difficulty">Difficulty: @workout.difficulty</p>
                                             <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
-                                            <p class="points">Points: @workout.rewardPoints</p>
+                                            <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                                                <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                                                <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
+                                            </span>
+
                                         </div>
                                     </div>
                                 </a>
@@ -381,7 +384,10 @@ completion of workouts *@
                                         <p class="duration">Duration: @workout.DurationMinutes minutes</p>
                                         <p class="difficulty">Difficulty: @workout.difficulty</p>
                                         <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
-                                        <p class="points">Points: @workout.rewardPoints</p>
+                                            <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                                                <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                                                <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
+                                            </span>
                                     </div>
                                 </div>
                             </a>
