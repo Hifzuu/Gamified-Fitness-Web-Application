@@ -42,6 +42,7 @@ body {
     padding: 20px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    border: 1px solid black;
 }
 
     .challenge-card:hover {
@@ -122,8 +123,8 @@ body {
 
     .btn-reward:hover {
         background-color: #2980b9; /* Darker blue on hover */
-        transform: scale(1.05); /* Scale on hover */
-        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); /* Enhanced box shadow on hover */
+        transform: scale(1.05); 
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); 
     }
 
     .btn-reward.claimed {
@@ -132,3 +133,9 @@ body {
         box-shadow: none; /* No box shadow for claimed button */
     }
 
+
+.rectangle {
+    height: 500px;
+    background-color: blue;
+    margin-bottom: 10px; /* Adjust spacing between rectangles */
+}

@@ -16,28 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap">
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function updatePoints() {
-            $.ajax({
-                url: '@Url.Action("GetCurrentUserPoints", "Workout")',  // Adjust controller name as needed
-                type: 'GET',
-                success: function (points) {
-                    // Assuming you have an element with id 'userPoints' in your partial view
-                    $('#userPoints').text(`Points: ${points}`);
 
-                    // Handle other success actions if needed
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error occurred while fetching user's points: " + error);
-                }
-            });
-        }
-
-        // Call the updatePoints function when the page is loaded
-        $(document).ready(function () {
-            updatePoints();
-        });
-    </script>
 </head>
 
 <style>
@@ -78,12 +57,12 @@
                     <div class="card-bodyyyy d-flex align-items-center logg d-flex align-items-center justify-content-center">
                         <ul class="list-unstyled m-0 p-0">
                             <li class="nav-item dropdown" id="userDropdownContainer">
-                                <a class="nav-link" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" id="userDropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">
                                     <div class="profile-container">
                                         <img class="profile-picture" src="@GetProfilePictureUrl()" alt="Profile Picture" id="profile-picture" />
                                     </div>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 0; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <div class="dropdown-menu dropdown-menu-end position-fixed" aria-labelledby="userDropdown" style="top: 60px; right: 60px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" id="userDropdownMenu">
                                     <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">
                                         <i class="fas fa-user-cog mr-2"></i> Manage Account
                                     </a>
@@ -112,9 +91,8 @@
                             <strong>@points</strong> <strong style="font-size: 0.7em;">points</strong>
                         </span>
                     </div>
-
-
                 }
+
                 else
                 {
                     <span class="user-details">Guest</span>
@@ -138,6 +116,49 @@
     }
  
 </body>
+
+<script>
+    function updatePoints() {
+        $.ajax({
+            url: '@Url.Action("GetCurrentUserPoints", "Workout")',  // Adjust controller name as needed
+            type: 'GET',
+            success: function (points) {
+                // Assuming you have an element with id 'userPoints' in your partial view
+                $('#userPoints').text(`Points: ${points}`);
+
+                // Handle other success actions if needed
+            },
+            error: function (xhr, status, error) {
+                console.error("Error occurred while fetching user's points: " + error);
+            }
+        });
+    }
+
+    // Call the updatePoints function when the page is loaded
+    $(document).ready(function () {
+        updatePoints();
+    });
+
+    // Function to toggle the dropdown menu
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById('userDropdownMenu');
+        dropdownMenu.classList.toggle('show');
+    }
+
+    // Function to close the dropdown menu when clicking outside
+    window.onclick = function (event) {
+        if (!event.target.matches('.nav-link')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
 
 @functions {
     public string GetProfilePictureUrl()

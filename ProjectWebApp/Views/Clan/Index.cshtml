@@ -224,6 +224,56 @@
                 </section>
             </div>
 
+            <div class="col-md-12 col-lg-12">
+                <section style="max-height: 500px; min-height:500px; background-color: white;">
+                    @if (Model != null && Model.Count > 0 && Model[0].ClanChallenge != null)
+                    {
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h2 class="game-title">Clan Challenge</h2>
+                            </div>
+                            <div class="col-6 text-right">
+                                <h5 class="challenge-timer" id="dailyTimer">
+                                    Time remaining: @Model[0].ChallengeTime
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="challenge-card game-card" onclick="handleChallengeClick('Daily', @Model[0].ClanChallenge.ClanChallengeId)">
+                            <h6>@Model[0].ClanChallenge.Challenge.Name</h6>
+                            <p class="reward-text">
+                                <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn <strong>20 points!</strong>
+                            </p>
+                            <p><strong>@Model[0].ClanChallenge.Challenge.Description</strong></p>
+                            <div class="game-progress">
+                                <p class="game-progress-text">Progress: @Math.Min(Model[0].ChallengeProgressPercentage, 100).ToString("0.##")%</p>
+                                <div class="progress">
+                                    <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model[0].ChallengeProgressPercentage%" aria-valuenow="@Model[0].ChallengeProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <div class="game-elements d-flex justify-content-center align-items-center">
+                                @if (Model[0].ChallengeProgressPercentage >= 100)
+                                {
+                                    if (!Model[0].ClanChallenge.IsRewardClaimed)
+                                    {
+                                        <button class="btn btn-reward game-button" onclick="claimReward('Daily', @Model[0].ClanChallenge.ClanChallengeId)">Claim Reward 🎁</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div></div>
+                    }
+                    else
+                    {
+                        <h2 class="game-title">Daily Challenge</h2>
+                        <p class="text-muted">No daily challenges available for today.</p>
+                    }
+                </section>
+            </div>
+
 
         </div>
 
@@ -318,36 +368,36 @@
     @{
         if (Model != null && Model.Count > 0)
         {
-            <div class="modal fade" id="editBioModal" tabindex="-1" role="dialog" aria-labelledby="editBioModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editBioModalLabel">Edit Clan Info</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="clanName">Name:</label>
-                                <input type="text" class="form-control" id="clanName" value="@Model[0].Name" readonly>
+                <div class="modal fade" id="editBioModal" tabindex="-1" role="dialog" aria-labelledby="editBioModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editBioModalLabel">Edit Clan Info</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="clanPoints">Points:</label>
-                                <input type="text" class="form-control" id="clanPoints" value="@Model[0].ClanPoints" readonly>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="clanName">Name:</label>
+                                    <input type="text" class="form-control" id="clanName" value="@Model[0].Name" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="clanPoints">Points:</label>
+                                    <input type="text" class="form-control" id="clanPoints" value="@Model[0].ClanPoints" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentBio">Bio:</label>
+                                    <textarea class="form-control" id="currentBio" rows="3">@Model[0].bio</textarea>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="currentBio">Bio:</label>
-                                <textarea class="form-control" id="currentBio" rows="3">@Model[0].bio</textarea>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="saveBioBtn">Save</button>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" id="saveBioBtn">Save</button>
                         </div>
                     </div>
                 </div>
-            </div>
         }
     }
 
@@ -361,6 +411,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
+        function updateTimer(endDate, timerElementId) {
+            var timerElement = document.getElementById(timerElementId);
+            var currentUtcTime = new Date('@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")');
+
+            // Append a default date to endDate (assuming today's date)
+            var endChallengeTime = new Date(endDate);
+
+            // Calculate total seconds remaining until the end of the challenge
+            var totalSecondsRemaining = Math.max(0, Math.floor((endChallengeTime - currentUtcTime) / 1000));
+
+            // Update the timer display
+            function updateDisplay() {
+                var hours = Math.floor(totalSecondsRemaining / 3600);
+                var minutes = Math.floor((totalSecondsRemaining % 3600) / 60);
+                var seconds = totalSecondsRemaining % 60;
+
+                timerElement.textContent = 'Time remaining: ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+            }
+
+            // Initial update
+            updateDisplay();
+
+            // Update the display every second
+            var timerInterval = setInterval(function () {
+                if (totalSecondsRemaining > 0) {
+                    totalSecondsRemaining--;
+                    updateDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = 'Challenge ended';
+                }
+            }, 1000);
+        }
+
+        
+
          $(document).ready(function () {
             $('#memberSearchInput').on('input', function () {
                 var searchQuery = $(this).val().toLowerCase();

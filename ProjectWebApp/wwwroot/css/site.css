@@ -344,7 +344,13 @@ button.accept-policy {
 .profile-container {
     display: flex;
     align-items: center;
+    border-radius:50%;
 }
+
+    .profile-container:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7);
+    }
 
 .profile-picture {
     width: 60px; /* Set the desired width */

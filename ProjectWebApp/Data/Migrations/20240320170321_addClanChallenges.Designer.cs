@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectWebApp.Data;
 
@@ -11,9 +12,11 @@ using ProjectWebApp.Data;
 namespace ProjectWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320170321_addClanChallenges")]
+    partial class addClanChallenges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,9 +185,6 @@ namespace ProjectWebApp.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClanChallengeId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ClanId")
                         .HasColumnType("int");
 
@@ -277,8 +277,6 @@ namespace ProjectWebApp.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClanChallengeId");
 
                     b.HasIndex("ClanId");
 
@@ -805,10 +803,6 @@ namespace ProjectWebApp.Data.Migrations
 
             modelBuilder.Entity("ProjectWebApp.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("ProjectWebApp.Models.ClanChallenge", null)
-                        .WithMany("Participants")
-                        .HasForeignKey("ClanChallengeId");
-
                     b.HasOne("ProjectWebApp.Models.Clan", "Clan")
                         .WithMany("Members")
                         .HasForeignKey("ClanId")
@@ -1010,8 +1004,6 @@ namespace ProjectWebApp.Data.Migrations
 
             modelBuilder.Entity("ProjectWebApp.Models.ClanChallenge", b =>
                 {
-                    b.Navigation("Participants");
-
                     b.Navigation("Workouts");
                 });
 

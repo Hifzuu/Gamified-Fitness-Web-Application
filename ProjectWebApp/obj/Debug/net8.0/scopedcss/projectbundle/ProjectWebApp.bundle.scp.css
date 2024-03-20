@@ -43,6 +43,7 @@ body[b-s13xhoid61] {
     padding: 20px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    border: 1px solid black;
 }
 
     .challenge-card:hover[b-s13xhoid61] {
@@ -123,8 +124,8 @@ body[b-s13xhoid61] {
 
     .btn-reward:hover[b-s13xhoid61] {
         background-color: #2980b9; /* Darker blue on hover */
-        transform: scale(1.05); /* Scale on hover */
-        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); /* Enhanced box shadow on hover */
+        transform: scale(1.05); 
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); 
     }
 
     .btn-reward.claimed[b-s13xhoid61] {
@@ -133,6 +134,12 @@ body[b-s13xhoid61] {
         box-shadow: none; /* No box shadow for claimed button */
     }
 
+
+.rectangle[b-s13xhoid61] {
+    height: 500px;
+    background-color: blue;
+    margin-bottom: 10px; /* Adjust spacing between rectangles */
+}
 /* _content/ProjectWebApp/Views/Clan/Index.cshtml.rz.scp.css */
 
 .clan-name[b-qk0rk6zmgx] {
@@ -1079,7 +1086,7 @@ body[b-25jdkaz98d] {
 
 /* Points Styles */
 .points[b-25jdkaz98d] {
-    color: #28a745;
+    color: #2ecc71;
     font-weight: bold;
 }
 

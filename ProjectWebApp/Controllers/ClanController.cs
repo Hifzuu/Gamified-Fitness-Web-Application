@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ProjectWebApp.Data;
+using ProjectWebApp.Data.Migrations;
 using ProjectWebApp.Models;
+using System;
 using System.Security.Claims;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -13,6 +15,7 @@ namespace ProjectWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private static readonly Random random = new Random(Guid.NewGuid().GetHashCode());
         private readonly ILogger<ClanController> _logger; // Add logger
 
         public ClanController(
@@ -30,7 +33,6 @@ namespace ProjectWebApp.Controllers
             try
             {
                 var userId = _userManager.GetUserId(User);
-                _logger.LogInformation("User ID: {UserId}", userId);
 
                 // Retrieve clans created by the user
                 var clansCreatedByUser = await _context.Clans
@@ -48,7 +50,31 @@ namespace ProjectWebApp.Controllers
 
                 // Combine the two lists
                 var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
-                _logger.LogInformation("Number of user clans: {Count}", userClans.Count);
+
+                // Initialize variables for challenge information
+                ClanChallenge activeClanChallenge = null;
+                string formattedTimeForChallenge = string.Empty;
+                double challengeProgressPercentage = 0;
+
+                // Check if the user is a creator or member of any clan
+                if (userClans.Any())
+                {
+                    // Get the clan ID of the first clan the user is a member of
+                    var userClanId = userClans.First().ClanId;
+
+                    // Retrieve the user's current daily challenge for today
+                    activeClanChallenge = GetClanChallenge(userClanId);
+                    formattedTimeForChallenge = activeClanChallenge != null
+                        ? FormatChallengeTime(activeClanChallenge)
+                        : string.Empty;
+
+                    int dailyCountProgress = activeClanChallenge?.CountProgress ?? 0;
+
+                    if (activeClanChallenge != null && activeClanChallenge.Challenge.TargetCount > 0)
+                    {
+                        challengeProgressPercentage = (double)dailyCountProgress / activeClanChallenge.Challenge.TargetCount * 100;
+                    }
+                }
 
                 // Map Clan entities to ClanViewModel
                 var clanViewModels = userClans.Select(clan => new ClanViewModel
@@ -60,7 +86,12 @@ namespace ProjectWebApp.Controllers
                     Members = clan.Members.ToList(),
                     ClanPoints = clan.ClanPoints,
                     bio = clan.bio,
+                    ClanChallenge = activeClanChallenge,
+                    ChallengeTime = formattedTimeForChallenge,
+                    ChallengeProgressPercentage = challengeProgressPercentage,
                 }).ToList();
+
+                _logger.LogInformation("Model count: {Count}", (clanViewModels != null ? clanViewModels.Count : 0));
 
                 return View(clanViewModels);
             }
@@ -70,6 +101,189 @@ namespace ProjectWebApp.Controllers
                 throw; // Re-throw the exception for global exception handling
             }
         }
+
+
+
+
+        private void UpdateClanChallengeParticipants(int clanId)
+        {
+            var clanChallenge = _context.ClanChallenges
+                .Include(cc => cc.Participants)
+                .FirstOrDefault(cc => cc.ClanId == clanId);
+
+            if (clanChallenge != null)
+            {
+                var clan = _context.Clans.Include(c => c.Members).FirstOrDefault(c => c.ClanId == clanId);
+
+                if (clan != null)
+                {
+                    var currentMembers = clan.Members.ToList();
+
+                    // Remove participants who are no longer in the clan
+                    var removedParticipants = clanChallenge.Participants
+                        .Where(p => !currentMembers.Any(m => m.Id == p.Id))
+                        .ToList();
+
+                    foreach (var removedParticipant in removedParticipants)
+                    {
+                        clanChallenge.Participants.Remove(removedParticipant);
+                    }
+
+                    // Add new members as participants
+                    foreach (var member in currentMembers)
+                    {
+                        if (!clanChallenge.Participants.Any(p => p.Id == member.Id))
+                        {
+                            clanChallenge.Participants.Add(member);
+                        }
+                    }
+
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+
+
+        private string FormatChallengeTime(ClanChallenge clanChallenge)
+        {
+            if (clanChallenge != null)
+            {
+                // Use the UserChallenge's end date
+                DateTime clanChallengeEnd = clanChallenge.EndDate;
+                TimeSpan timeRemaining = clanChallengeEnd - DateTime.Now;
+
+                // Ensure the result is non-negative to avoid negative time remaining
+                int secondsRemaining = (int)Math.Max(0, timeRemaining.TotalSeconds);
+
+                // Include both date and time in the formatted output
+                string formattedTime = DateTime.Now.AddSeconds(secondsRemaining).ToString("yyyy-MM-dd HH:mm:ssZ");
+
+                return formattedTime;
+            }
+            else
+            {
+                // Handle null scenario
+                return string.Empty; // Or any other appropriate action
+            }
+
+        }
+
+        private ClanChallenge GetClanChallenge(int? clanId)
+        {
+            try
+            {
+                DateTime currentDate = DateTime.Now.Date;
+
+                // Calculate the start of the week
+                DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday);
+
+                // Retrieve the clan's current challenge for the specified type and date
+                var clanChallenge = _context.ClanChallenges
+                    .Include(uc => uc.Challenge)
+                        .ThenInclude(c => c.Workouts) // Include related data as needed
+                    .FirstOrDefault(uc => uc.ClanId == clanId
+                                            && uc.StartDate.Date == startOfWeek.Date
+                                            && uc.Challenge.ChallengeType == ChallengeType.Clan);
+
+                // Update participants based on the current list of clan members
+                if (clanChallenge != null)
+                {
+                    var currentMembers = _context.Users.Where(u => u.ClanId == clanId).ToList();
+
+                    // Remove participants who are no longer in the clan
+                    var removedParticipants = clanChallenge.Participants
+                        .Where(p => !currentMembers.Any(m => m.Id == p.Id))
+                        .ToList();
+
+                    foreach (var removedParticipant in removedParticipants)
+                    {
+                        clanChallenge.Participants.Remove(removedParticipant);
+                    }
+
+                    // Add new members as participants
+                    foreach (var member in currentMembers)
+                    {
+                        if (!clanChallenge.Participants.Any(p => p.Id == member.Id))
+                        {
+                            clanChallenge.Participants.Add(member);
+                        }
+                    }
+
+                    _context.SaveChanges(); // Save changes to update participants
+                }
+
+                return clanChallenge;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error retrieving clan challenge: {ex.Message}");
+                return null;
+            }
+        }
+
+
+
+        private void AssignClanChallengeForAllMembers(int clanId)
+        {
+            try
+            {
+                DateTime currentDate = DateTime.Now;
+                DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday); // Assuming Monday is the start of the week
+                DateTime endOfWeek = startOfWeek.AddDays(6).EndOfDay();
+
+                // Check if a weekly challenge is already assigned for the current week for the clan
+                bool hasChallenge = _context.ClanChallenges
+                    .Any(uc => uc.ClanId == clanId
+                                && uc.StartDate.Date >= startOfWeek.Date
+                                && uc.EndDate.Date <= endOfWeek.Date
+                                && uc.Challenge.ChallengeType == ChallengeType.Clan);
+
+                if (!hasChallenge)
+                {
+                    // Get all available weekly challenges
+                    var clanChallenges = _context.Challenges
+                        .Where(c => c.ChallengeType == ChallengeType.Clan)
+                        .ToList();
+
+                    if (clanChallenges.Count > 0)
+                    {
+                        // Pick a random weekly challenge
+                        var random = new Random();
+                        Challenge randomChallenge = clanChallenges[random.Next(clanChallenges.Count)];
+
+                        // Create a new clan challenge instance
+                        ClanChallenge clanChallenge = new ClanChallenge
+                        {
+                            ClanId = clanId,
+                            ChallengeId = randomChallenge.ChallengeId,
+                            StartDate = startOfWeek,
+                            EndDate = endOfWeek,
+                            CountProgress = 0
+                        };
+
+                        _context.ClanChallenges.Add(clanChallenge);
+                        _context.SaveChanges();
+
+                        // Update participants for the clan challenge
+                        UpdateClanChallengeParticipants(clanId);
+                    }
+                    else
+                    {
+                        // Log or handle the case where no weekly challenges are available
+                        Console.WriteLine("No clan challenges available.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                Console.WriteLine($"Error assigning clan challenge: {ex.Message}");
+            }
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> CreateClan(ClanViewModel model)
@@ -213,6 +427,8 @@ namespace ProjectWebApp.Controllers
                         var user = await _userManager.FindByIdAsync(userId);
                         clanToJoin.Members.Add(user);
 
+                        UpdateClanChallengeParticipants(clanId);
+
                         // Update the database
                         await _context.SaveChangesAsync();
 
@@ -262,6 +478,8 @@ namespace ProjectWebApp.Controllers
                         // Remove the user from the clan
                         clanToLeave.Members.Remove(user);
 
+                        UpdateClanChallengeParticipants(clanId);
+
                         // Update the database
                         await _context.SaveChangesAsync();
 
@@ -298,6 +516,7 @@ namespace ProjectWebApp.Controllers
                 // Retrieve the clan to delete
                 var clanToDelete = await _context.Clans
                     .Include(c => c.Members)
+                    .Include(c => c.ClanChallenges) // Include clan challenges
                     .FirstOrDefaultAsync(c => c.ClanId == clanId);
 
                 if (clanToDelete != null)
@@ -310,6 +529,9 @@ namespace ProjectWebApp.Controllers
                         {
                             member.ClanId = null;
                         }
+
+                        // Delete associated clan challenges
+                        _context.ClanChallenges.RemoveRange(clanToDelete.ClanChallenges);
 
                         // Delete the clan (including members)
                         _context.Clans.Remove(clanToDelete);
@@ -337,6 +559,7 @@ namespace ProjectWebApp.Controllers
                 return Json(new { success = false, message = "An error occurred while deleting the clan." });
             }
         }
+
 
         [HttpGet]
         public IActionResult GetCurrentUserPoints()

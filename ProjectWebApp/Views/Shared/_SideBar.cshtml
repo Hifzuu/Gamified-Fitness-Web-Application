@@ -58,12 +58,12 @@
                         <span class="icon-text">Clan</span>
                     </a>
                 </li>
-                <li class="btn-style @(current == "Achievement" && actionCurrent == "Index" ? "active" : "")">
+                @* <li class="btn-style @(current == "Achievement" && actionCurrent == "Index" ? "active" : "")">
                     <a href="/Achievement/Index">
                         <img class="nav-img" src="/Images/badge.png" alt="Achievement Icon" />
                         <span class="icon-text">Achievements</span>
                     </a>
-                </li>
+                </li> *@
                 <li class="header fs-10 text-uppercase text-light" style="margin-top:50px;">More</li>
                
                 <li class="btn-style">
@@ -138,7 +138,7 @@
             }
         }
 
-        // Function to submit feedback (you can customize this function based on your backend logic)
+        // Function to submit feedback 
         async function submitFeedback() {
             const formData = {
                 name: document.getElementById('name').value,
@@ -157,8 +157,7 @@
                 });
 
                 if (response.ok) {
-                    closeModal(); // Close the modal after successful submission
-                    // Display SweetAlert success message
+                    closeModal(); 
                     Swal.fire({
                         icon: 'success',
                         title: 'Feedback Submitted!',
@@ -166,7 +165,6 @@
                     });
                 } else {
                     console.error('Failed to submit feedback');
-                    // Display SweetAlert error message
                     Swal.fire({
                         icon: 'error',
                         title: 'Submission Failed',
@@ -175,7 +173,6 @@
                 }
             } catch (error) {
                 console.error(error);
-                // Display SweetAlert error message for unexpected errors
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',

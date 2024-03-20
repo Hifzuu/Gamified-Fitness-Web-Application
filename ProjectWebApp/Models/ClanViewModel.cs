@@ -10,6 +10,8 @@ namespace ProjectWebApp.Models
         public int ClanPoints { get; set; }
         public string CreatorId { get; set; }
         public List<ApplicationUser> Members { get; set; } = new List<ApplicationUser>();
-        
+        public ClanChallenge? ClanChallenge { get; set; }
+        public string? ChallengeTime { get; set; }
+        public double ChallengeProgressPercentage { get; set; }
     }
 }

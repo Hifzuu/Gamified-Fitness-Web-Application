@@ -333,9 +333,11 @@ namespace ProjectWebApp.Controllers
             // Retrieve the user challenges associated with the completed workout for the current user
             var userChallenges = await _context.UserChallenges
                 .Include(uc => uc.Challenge)
-                .Where(uc =>
-                    uc.UserId == currentUser.Id)
+                .Where(uc => uc.UserId == currentUser.Id)
                 .ToListAsync();
+
+            // Check if the user is part of a clan
+            var userClan = await _context.Clans.FirstOrDefaultAsync(clan => clan.Members.Any(member => member.Id == currentUser.Id));
 
             foreach (var userChallenge in userChallenges)
             {
@@ -388,12 +390,50 @@ namespace ProjectWebApp.Controllers
                 }
             }
 
+            // Update clan challenge progress if the user is part of a clan
+            if (userClan != null)
+            {
+                var clanChallenges = await _context.ClanChallenges
+                    .Include(cc => cc.Challenge)
+                    .Where(cc => cc.ClanId == userClan.ClanId)
+                    .ToListAsync();
+
+                foreach (var clanChallengeItem in clanChallenges)
+                {
+                    if (clanChallengeItem.Challenge.Type != completedWorkout.Category)
+                    {
+                        continue; // Skip to the next iteration if there's no match
+                    }
+
+                    // Log clan challenge details for debugging
+                    Console.WriteLine($"Clan Challenge Type: {clanChallengeItem.Challenge.ChallengeType}");
+                    Console.WriteLine($"Clan Measurement Criteria: {clanChallengeItem.Challenge.MeasurementCriteria}");
+
+                    // Update clan challenge progress based on the completed workout
+                    if (clanChallengeItem.Challenge.MeasurementCriteria == MeasurementCriteria.TotalTime)
+                    {
+                        // Update based on total time of the workout (adjust based on your actual model)
+                        clanChallengeItem.CountProgress += completedWorkout.DurationMinutes;
+                    }
+                    else if (clanChallengeItem.Challenge.MeasurementCriteria == MeasurementCriteria.WorkoutCategoryCount)
+                    {
+                        // Log category details for debugging
+                        Console.WriteLine($"Completed Workout Category: {completedWorkout.Category}");
+
+                        // Update based on count (add 1)
+                        clanChallengeItem.CountProgress++;
+                    }
+                }
+            }
+
             // Save changes to the database
             await _context.SaveChangesAsync();
 
             // Other logic or redirection as needed
             return Ok(new { success = true, message = "Workout marked as completed successfully." });
         }
+
+
 
     }
 

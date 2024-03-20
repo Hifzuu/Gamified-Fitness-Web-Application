@@ -14,5 +14,7 @@
 
         // List of users in the clan
         public List<ApplicationUser> Members { get; set; } = new List<ApplicationUser>();
+
+        public List<ClanChallenge> ClanChallenges { get; set; } = new List<ClanChallenge>();
     }
 }

@@ -21,7 +21,8 @@
     {
         Daily,
         Weekly,
-        Monthly
+        Monthly,
+        Clan
     }
 
     public enum MeasurementCriteria
