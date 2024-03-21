@@ -255,7 +255,7 @@
                                 {
                                     if (!Model[0].ClanChallenge.IsRewardClaimed)
                                     {
-                                        <button class="btn btn-reward game-button" onclick="claimReward('Daily', @Model[0].ClanChallenge.ClanChallengeId)">Claim Reward 🎁</button>
+                                        <button class="btn btn-reward game-button" onclick="claimReward(@Model[0].ClanChallenge.ClanChallengeId)">Claim Reward 🎁</button>
                                     }
                                     else
                                     {
@@ -410,7 +410,60 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    @if (Model != null && Model.Count > 0 && Model[0].ClanChallenge != null && !string.IsNullOrEmpty(Model[0].ChallengeTime))
+    {
+        <script>
+            window.onload = function () {
+                updateTimer('@Model[0].ChallengeTime', 'dailyTimer');
+            };
+        </script>
+    }
+
     <script>
+
+        function claimReward(clanChallengeId) {
+            // Add logic to award points based on the challenge type
+            console.log('Claim reward button clicked.');
+            var pointsToAward = 80;
+
+            // Display the rewarded points in the SweetAlert modal
+            Swal.fire({
+                title: 'Congratulations!',
+                html: `<p>Congratulations! Your clan has earned <strong>${pointsToAward} points!</strong></p>`,
+                icon: 'success',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                // Reload the page after the modal is closed
+                if (result.isConfirmed || result.isDismissed) {
+                    location.reload();
+                }
+            });
+
+
+            // Update user's points on the server side
+            updatePointsChallenge(pointsToAward, clanChallengeId);
+
+        }
+
+        function updatePointsChallenge(points, clanChallengeId) {
+            console.log("Adding points to db");
+            $.ajax({
+                url: '@Url.Action("updatePointsChallenge", "Clan")',
+                type: 'POST',
+                data: { points: points, clanChallengeId: clanChallengeId },
+                success: function (response) {
+                    // Handle success
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error occurred while updating user's points:");
+                    console.error("XHR object:", xhr);
+                    console.log("XHR response:", xhr.responseText);
+                    console.error("Status:", status);
+                    console.error("Error:", error);
+                }
+            });
+        }
+
         function updateTimer(endDate, timerElementId) {
             var timerElement = document.getElementById(timerElementId);
             var currentUtcTime = new Date('@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")');

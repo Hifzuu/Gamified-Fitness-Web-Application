@@ -338,6 +338,9 @@ namespace ProjectWebApp.Controllers
                     // Save changes to the clan
                     await _context.SaveChangesAsync();
 
+                    // Call the method to assign challenge for all members of the newly created clan
+                    AssignClanChallengeForAllMembers(newClan.ClanId);
+
                     // Map ClanViewModel to the newly created clan
                     var clanViewModel = new ClanViewModel
                     {
@@ -365,6 +368,7 @@ namespace ProjectWebApp.Controllers
                 return Json(new { success = false, message = "An error occurred during the clan creation process." });
             }
         }
+
         // Helper method to check for duplicate clan name
         private bool IsDuplicateClanName(string clanName)
         {
@@ -700,6 +704,8 @@ namespace ProjectWebApp.Controllers
                 // Remove the member from the clan
                 clan.Members.Remove(memberToKick);
 
+                UpdateClanChallengeParticipants(clan.ClanId);
+
                 // Update the database
                 await _context.SaveChangesAsync();
 
@@ -765,10 +771,55 @@ namespace ProjectWebApp.Controllers
             return Json(new { success = true, message = "Clan bio updated successfully." });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdatePointsChallenge(int points, int clanChallengeId)
+        {
+            _logger.LogInformation($"Received points update request. Points: {points}, ClanChallengeId: {clanChallengeId}");
+            try
+            {
+                // Retrieve the current user
+                var currentUser = await _userManager.GetUserAsync(User);
+
+                // Retrieve the clan of the current user
+                var clan = await _context.Clans
+                    .Include(c => c.Members)
+                    .FirstOrDefaultAsync(c => c.ClanId == currentUser.ClanId);
+
+                if (clan != null)
+                {
+                    // Mark the challenge as claimed
+                    var clanChallenge = _context.ClanChallenges.Find(clanChallengeId);
+                    if (clanChallenge != null && !clanChallenge.IsRewardClaimed)
+                    {
+                        // Update clan's points only if the reward is not already claimed
+                        clan.ClanPoints += points;
+
+                        // Update the IsRewardClaimed property
+                        clanChallenge.IsRewardClaimed = true;
+
+                        // Save changes to the database
+                        _context.SaveChanges();
+
+                        return Ok(); // or return a JSON response if needed
+                    }
+                }
+
+                // Log failure to update points
+                _logger.LogError($"Failed to update points. User: {currentUser?.UserName}, ChallengeId: {clanChallengeId}");
+
+                return BadRequest("Failed to update points");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                _logger.LogError(ex, $"An exception occurred while updating points. ClanChallengeId: {clanChallengeId}");
+                return BadRequest("An error occurred while updating points");
+            }
+        }
 
 
     }
 
-
-
 }
+
+

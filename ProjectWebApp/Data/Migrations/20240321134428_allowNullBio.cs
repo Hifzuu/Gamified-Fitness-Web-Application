@@ -5,25 +5,32 @@
 namespace ProjectWebApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ClanBio : Migration
+    public partial class allowNullBio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.AlterColumn<string>(
                 name: "bio",
                 table: "Clans",
                 type: "nvarchar(max)",
                 nullable: true,
-                defaultValue: "");
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AlterColumn<string>(
                 name: "bio",
-                table: "Clans");
+                table: "Clans",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "nvarchar(max)",
+                oldNullable: true);
         }
     }
 }
