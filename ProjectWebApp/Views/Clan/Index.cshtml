@@ -225,53 +225,76 @@
             </div>
 
             <div class="col-md-12 col-lg-12">
-                <section style="max-height: 500px; min-height:500px; background-color: white;">
-                    @if (Model != null && Model.Count > 0 && Model[0].ClanChallenge != null)
-                    {
+                @if (Model != null && Model.Count > 0 && Model[0].ClanChallenge != null)
+                {
+
+                    <section class="challenge-card game-card" style="background-color: white;">
                         <div class="row">
-                            <div class="col-6 d-flex align-items-center">
-                                <h2 class="game-title">Clan Challenge</h2>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <h2>@Model[0].ClanChallenge.Challenge.Name</h2>
                             </div>
-                            <div class="col-6 text-right">
+                            <div class="col-md-6 text-md-right">
                                 <h5 class="challenge-timer" id="dailyTimer">
                                     Time remaining: @Model[0].ChallengeTime
                                 </h5>
                             </div>
                         </div>
-                        <div class="challenge-card game-card" onclick="handleChallengeClick('Daily', @Model[0].ClanChallenge.ClanChallengeId)">
-                            <h6>@Model[0].ClanChallenge.Challenge.Name</h6>
-                            <p class="reward-text">
-                                <i class="fas fa-coins gold-coin-icon"></i>Complete this challenge and earn <strong>20 points!</strong>
-                            </p>
-                            <p><strong>@Model[0].ClanChallenge.Challenge.Description</strong></p>
-                            <div class="game-progress">
-                                <p class="game-progress-text">Progress: @Math.Min(Model[0].ChallengeProgressPercentage, 100).ToString("0.##")%</p>
-                                <div class="progress">
-                                    <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model[0].ChallengeProgressPercentage%" aria-valuenow="@Model[0].ChallengeProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="game-elements d-flex justify-content-center align-items-center">
-                                @if (Model[0].ChallengeProgressPercentage >= 100)
-                                {
-                                    if (!Model[0].ClanChallenge.IsRewardClaimed)
-                                    {
-                                        <button class="btn btn-reward game-button" onclick="claimReward(@Model[0].ClanChallenge.ClanChallengeId)">Claim Reward 🎁</button>
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
-                                    }
-                                }
+                        <p class="reward-text">
+                            Complete this challenge and earn <strong><i class="fas fa-coins gold-coin-icon mr-2"></i>80</strong> <strong style="font-size: 0.7em;">points</strong>
+                        </p
+
+                        <p class="challenge-description"><strong>@Model[0].ClanChallenge.Challenge.Description</strong></p>
+                        <div class="game-progress">
+                            <p class="game-progress-text">Progress: @Math.Min(Model[0].ChallengeProgressPercentage, 100).ToString("0.##")%</p>
+                            <div class="progress">
+                                <div class="progress-bar game-progress-bar" role="progressbar" style="width: @Model[0].ChallengeProgressPercentage%" aria-valuenow="@Model[0].ChallengeProgressPercentage" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
-                        <div></div>
-                    }
-                    else
-                    {
-                        <h2 class="game-title">Daily Challenge</h2>
-                        <p class="text-muted">No daily challenges available for today.</p>
-                    }
-                </section>
+                        <div class="game-elements d-flex justify-content-center align-items-center">
+                            @if (Model[0].ChallengeProgressPercentage >= 100)
+                            {
+                                if (!Model[0].ClanChallenge.IsRewardClaimed)
+                                {
+                                    <button class="btn btn-reward game-button" onclick="claimReward(@Model[0].ClanChallenge.ClanChallengeId)">Claim Reward 🎁</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
+                                }
+                            }
+                        </div>
+                        <!-- Scrollable Row for Filtered Workouts -->
+                        <div class="scrollable-row" id="allWorkouts">
+                            @foreach (var workout in Model[0].Workouts)
+                            {
+                                <!-- Workout Card Markup -->
+                                <div class="col-lg-4 col-md-6 col-sm-12" data-category="@workout.Category" style="max-width:200px; padding:10px;"
+                                     data-difficulty="@workout.difficulty" data-muscle="@workout.TargetMuscle"
+                                     data-points="@workout.rewardPoints">
+                                    <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })"
+                                       class="card workout-link">
+                                        <img src="@workout.ImageUrl" class="card-img-top" alt="Workout Image" style="height: 150px;">
+                                        <div class="card-body">
+                                            <p class="workout-name">@workout.Name</p>
+                                            <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                                                <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                                                <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </section>
+                }
+                else
+                {
+                    <section class="challenge-card game-card" style="background-color: white;">
+                        <h2 class="game-title">Clan Challenge</h2>
+                        <p class="text-muted">No clan challenges available, join a clan to participate in exciting challenges and climb the leaderboards with your friends.</p>
+                    </section>
+
+                }
             </div>
 
 

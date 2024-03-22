@@ -13,5 +13,7 @@ namespace ProjectWebApp.Models
         public ClanChallenge? ClanChallenge { get; set; }
         public string? ChallengeTime { get; set; }
         public double ChallengeProgressPercentage { get; set; }
+
+        public List<Workout> Workouts { get; set; } = new List<Workout>();
     }
 }

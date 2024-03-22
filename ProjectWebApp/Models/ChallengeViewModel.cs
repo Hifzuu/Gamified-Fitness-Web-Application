@@ -22,7 +22,9 @@ namespace ProjectWebApp.ViewModels
         public double MonthlyProgressPercentage { get; set; }
 
 
-
+        public List<Workout> DailyChallengeWorkouts { get; set; } = new List<Workout>();
+        public List<Workout> WeeklyChallengeWorkouts { get; set; } = new List<Workout>();
+        public List<Workout> MonthlyChallengeWorkouts { get; set; } = new List<Workout>();
 
 
 

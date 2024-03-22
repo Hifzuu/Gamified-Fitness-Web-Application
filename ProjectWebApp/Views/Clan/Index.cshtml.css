@@ -143,3 +143,144 @@
     }
 
 
+
+/* Custom styling for the challenge card */
+.challenge-card {
+    background-color: lightgreen;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    min-height: 500px;
+    background-color: white;
+}
+
+    .challenge-card h2 {
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #3498db;
+    }
+
+    .challenge-card p {
+        color: #555;
+        font-size: 16px;
+    }
+
+
+.reward-text {
+    color: #6c757d;
+}
+
+    .reward-text strong {
+        color: #2ecc71;
+    }
+
+.challenge-description {
+    margin-bottom: 15px;
+}
+
+.game-progress {
+    margin-bottom: 10px;
+}
+
+.game-progress-text {
+    margin-bottom: 5px;
+    color: #6c757d;
+}
+
+.progress-bar {
+    background-color: #28a745;
+}
+
+.game-elements button {
+    font-size: 14px;
+}
+
+.claimed {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #333;
+}
+
+    .claimed:hover {
+        background-color: #e0a800;
+        border-color: #e0a800;
+    }
+
+/*workouts*/
+.scrollable-row {
+    display: flex;
+    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    background-color: white;
+    margin-top:10px;
+}
+
+    .scrollable-row a {
+        margin-right: 0px;
+    }
+
+/* Category Styles */
+.workout-name {
+    font-weight: bold;
+    margin-bottom:0;
+    margin-top:0;
+}
+
+.card-body{
+    padding:8px;
+}
+
+/* Points Styles */
+.points {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.workout-link {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    background-color: #D0EBFF;
+}
+
+    .workout-link:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: inherit;
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+        .workout-link:hover .info {
+            color: black;
+        }
+
+/* Updated styles for the "Claim Reward" button */
+.btn-reward {
+    background: #3498db; /* Blue background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+    .btn-reward:hover {
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7);
+    }
+
+    .btn-reward.claimed {
+        background-color: #95a5a6; /* Gray color for claimed button */
+        cursor: not-allowed;
+        box-shadow: none; /* No box shadow for claimed button */
+    }

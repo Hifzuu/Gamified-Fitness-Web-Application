@@ -34,6 +34,56 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
 </head>
 
+<style>
+    .leaderboard-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 12px;
+        margin: 2px 0;
+        border-radius: 20px;
+    }
+
+        .leaderboard-item:first-child {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+    .rank {
+        font-weight: bold;
+        font-size: 18px; 
+        margin-right: 0;
+    }
+
+    .first-place {
+        color: gold; /* Color for first place */
+    }
+
+    .second-place {
+        color: silver; /* Color for second place */
+    }
+
+    .third-place {
+        color: #cd7f32; /* Color for third place (bronze) */
+    }
+
+    .clan-name {
+        color: black;
+        font-weight: normal;
+        margin-left: 10px;
+    }
+
+    .clan-points {
+        color: black;
+        margin-bottom: 0;
+    }
+</style>
 
 <body>
 
@@ -257,22 +307,20 @@
 
                 </section>
             </div>
+
             <div class="col-lg-4">
                 <div class="grid-container">
-                    <section class="grid-item" style="background-color: #728CFF;">
-                        <h5 class="card-title text-white">My clan</h5>
-                        <p class="card-text text-white">Clan Name</p>
+                    <section class="grid-item leaderboard-item" style="background-color: #728CFF;">
+                        <h1>Leaderboard</h1>
+                        <div style="max-height: 425px; overflow-y: auto; background-color: #728CFF;">
+                            <ul id="userLeaderboard" class="list-group"></ul>
+                        </div>
                     </section>
                 </div>
             </div>
         </div>
 
-       
-
-
-
-
-
+      
     </div>
 
 
@@ -304,6 +352,67 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
+
+    // Function to load clan leaderboards
+    function loadUserLeaderboards() {
+        $.ajax({
+            url: '/Dashboard/Leaderboards', // Replace this with your actual endpoint URL
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log('Received user leaderboards data:', data);
+                var leaderboardList = $('#userLeaderboard');
+                leaderboardList.empty(); // Clear existing content
+
+                // Check if data is not empty
+                if (data && data.length > 0) {
+                    // Iterate through the leaderboard data
+                    $.each(data, function (index, user) {
+                        // Create list item for each clan
+                        var listItem = $('<li class="list-group-item leaderboard-item d-flex justify-content-between align-items-center">');
+
+                        // Display rank and clan name together without space
+                        var rankAndName = $('<span class="rank">' + '#' + (index + 1) + ' <span class="clan-name text-dark font-weight-bold">' + user.customUserName + '</span></span>');
+                        if (index === 0) {
+                            rankAndName.addClass('first-place');
+                        } else if (index === 1) {
+                            rankAndName.addClass('second-place');
+                        } else if (index === 2) {
+                            rankAndName.addClass('third-place');
+                        }
+
+                        // Append rank and clan name to the list item
+                        listItem.append(rankAndName);
+
+                        // Create a user points element
+                        var userPoints = $('<p class="user-points"><i class="fas fa-medal" style="color: gold;">UP</i><strong> ' + user.points + '</strong></p>');
+
+                        // Append the clan points to the list item
+                        listItem.append(userPoints);
+
+                        leaderboardList.append(listItem);
+                    });
+                } else {
+                    // Display a message if there are no leaderboards available
+                    leaderboardList.append('<li class="list-group-item">No leaderboards available</li>');
+                }
+
+
+            },
+            error: function (error) {
+                console.error('Error fetching clan leaderboards:', error);
+            }
+        });
+    }
+
+
+
+    // Call the function to load clan leaderboards when the page loads
+    $(document).ready(function () {
+        loadUserLeaderboards();
+    });
+
+
     // Function to handle claiming rewards
     function claimReward(userStreakRewardId) {
         $.ajax({

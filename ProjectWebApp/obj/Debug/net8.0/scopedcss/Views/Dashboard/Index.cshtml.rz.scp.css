@@ -130,6 +130,11 @@ h2[b-lict9yrgg8] {
     justify-content: center;
 }
 
+.leaderboard-item[b-lict9yrgg8] {
+    text-align: left; 
+    justify-content: flex-start; 
+}
+
 .card-title[b-lict9yrgg8] {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;

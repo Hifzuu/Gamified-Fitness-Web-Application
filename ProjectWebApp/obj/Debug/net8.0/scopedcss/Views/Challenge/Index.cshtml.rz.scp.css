@@ -40,14 +40,8 @@ body[b-s13xhoid61] {
     background-color: #D1ECFF;
     border-radius: 10px;
     padding: 20px;
-    cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    border: 1px solid black;
 }
-
-    .challenge-card:hover[b-s13xhoid61] {
-        transform: scale(1.02);
-    }
 
     .challenge-card h6[b-s13xhoid61] {
         color: #3498db;
@@ -82,9 +76,6 @@ body[b-s13xhoid61] {
     background-color: #2ecc71;
 }
 
-.progress[b-s13xhoid61]{
-    background-color:white;
-}
 
 .game-elements[b-s13xhoid61] {
     margin-top: 20px;
@@ -139,3 +130,63 @@ body[b-s13xhoid61] {
     background-color: blue;
     margin-bottom: 10px; /* Adjust spacing between rectangles */
 }
+
+/*workouts*/
+.scrollable-row[b-s13xhoid61] {
+    display: flex;
+    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    background-color: white;
+    margin-top: 10px;
+}
+
+    .scrollable-row a[b-s13xhoid61] {
+        margin-right: 0px;
+    }
+
+/* Category Styles */
+.workout-name[b-s13xhoid61] {
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.card-body[b-s13xhoid61] {
+    padding: 8px;
+}
+
+/* Points Styles */
+.points[b-s13xhoid61] {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.workout-link[b-s13xhoid61] {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    background-color: #D0EBFF;
+}
+
+    .workout-link:hover[b-s13xhoid61] {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: inherit;
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+        .workout-link:hover .info[b-s13xhoid61] {
+            color: black;
+        }
+
+.reward-text[b-s13xhoid61] {
+    color: #2ecc71;
+}
+
+    .reward-text strong[b-s13xhoid61] {
+        color: #2ecc71;
+    }

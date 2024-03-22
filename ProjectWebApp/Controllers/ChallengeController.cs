@@ -92,6 +92,21 @@ namespace ProjectWebApp.Controllers
                 monthlyProgressPercentage = (double)monthlyCountProgress / userMonthlyChallenge.Challenge.TargetCount * 100;
             }
 
+            List<Workout> dailyChallengeWorkouts = new List<Workout>();
+            dailyChallengeWorkouts = await _context.Workouts
+                       .Where(w => w.Category == userDailyChallenge.Challenge.Type)
+                       .ToListAsync();
+
+            List<Workout> weeklyChallengeWorkouts = new List<Workout>();
+            weeklyChallengeWorkouts = await _context.Workouts
+                       .Where(w => w.Category == userWeeklyChallenge.Challenge.Type)
+                       .ToListAsync();
+
+            List<Workout> monthlyChallengeWorkouts = new List<Workout>();
+            monthlyChallengeWorkouts = await _context.Workouts
+                       .Where(w => w.Category == userMonthlyChallenge.Challenge.Type)
+                       .ToListAsync();
+
             var model = new ChallengeViewModel
             {
                 DailyChallenge = userDailyChallenge,
@@ -104,7 +119,11 @@ namespace ProjectWebApp.Controllers
 
                 MonthlyChallenge = userMonthlyChallenge,
                 MonthlyProgressPercentage = monthlyProgressPercentage,
-                MonthlyTime = formattedTimeForMonthlyChallenge
+                MonthlyTime = formattedTimeForMonthlyChallenge,
+
+                DailyChallengeWorkouts = dailyChallengeWorkouts,
+                WeeklyChallengeWorkouts = weeklyChallengeWorkouts,
+                MonthlyChallengeWorkouts = monthlyChallengeWorkouts
             };
 
             return View(model);

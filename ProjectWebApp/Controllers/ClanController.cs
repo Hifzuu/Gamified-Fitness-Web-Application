@@ -55,6 +55,7 @@ namespace ProjectWebApp.Controllers
                 ClanChallenge activeClanChallenge = null;
                 string formattedTimeForChallenge = string.Empty;
                 double challengeProgressPercentage = 0;
+                List<Workout> matchingWorkouts = new List<Workout>();
 
                 // Check if the user is a creator or member of any clan
                 if (userClans.Any())
@@ -74,6 +75,14 @@ namespace ProjectWebApp.Controllers
                     {
                         challengeProgressPercentage = (double)dailyCountProgress / activeClanChallenge.Challenge.TargetCount * 100;
                     }
+
+                    // Get the type of the active clan challenge
+                    var activeChallengeType = activeClanChallenge?.Challenge?.Type;
+
+                    // Query the workouts matching the active challenge type
+                    matchingWorkouts = await _context.Workouts
+                        .Where(w => w.Category == activeChallengeType)
+                        .ToListAsync();
                 }
 
                 // Map Clan entities to ClanViewModel
@@ -89,6 +98,7 @@ namespace ProjectWebApp.Controllers
                     ClanChallenge = activeClanChallenge,
                     ChallengeTime = formattedTimeForChallenge,
                     ChallengeProgressPercentage = challengeProgressPercentage,
+                    Workouts = matchingWorkouts,
                 }).ToList();
 
                 _logger.LogInformation("Model count: {Count}", (clanViewModels != null ? clanViewModels.Count : 0));

@@ -41,14 +41,8 @@ body[b-s13xhoid61] {
     background-color: #D1ECFF;
     border-radius: 10px;
     padding: 20px;
-    cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    border: 1px solid black;
 }
-
-    .challenge-card:hover[b-s13xhoid61] {
-        transform: scale(1.02);
-    }
 
     .challenge-card h6[b-s13xhoid61] {
         color: #3498db;
@@ -83,9 +77,6 @@ body[b-s13xhoid61] {
     background-color: #2ecc71;
 }
 
-.progress[b-s13xhoid61]{
-    background-color:white;
-}
 
 .game-elements[b-s13xhoid61] {
     margin-top: 20px;
@@ -140,6 +131,66 @@ body[b-s13xhoid61] {
     background-color: blue;
     margin-bottom: 10px; /* Adjust spacing between rectangles */
 }
+
+/*workouts*/
+.scrollable-row[b-s13xhoid61] {
+    display: flex;
+    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    background-color: white;
+    margin-top: 10px;
+}
+
+    .scrollable-row a[b-s13xhoid61] {
+        margin-right: 0px;
+    }
+
+/* Category Styles */
+.workout-name[b-s13xhoid61] {
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.card-body[b-s13xhoid61] {
+    padding: 8px;
+}
+
+/* Points Styles */
+.points[b-s13xhoid61] {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.workout-link[b-s13xhoid61] {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    background-color: #D0EBFF;
+}
+
+    .workout-link:hover[b-s13xhoid61] {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: inherit;
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+        .workout-link:hover .info[b-s13xhoid61] {
+            color: black;
+        }
+
+.reward-text[b-s13xhoid61] {
+    color: #2ecc71;
+}
+
+    .reward-text strong[b-s13xhoid61] {
+        color: #2ecc71;
+    }
 /* _content/ProjectWebApp/Views/Clan/Index.cshtml.rz.scp.css */
 
 .clan-name[b-qk0rk6zmgx] {
@@ -286,6 +337,147 @@ body[b-s13xhoid61] {
     }
 
 
+
+/* Custom styling for the challenge card */
+.challenge-card[b-qk0rk6zmgx] {
+    background-color: lightgreen;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    min-height: 500px;
+    background-color: white;
+}
+
+    .challenge-card h2[b-qk0rk6zmgx] {
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #3498db;
+    }
+
+    .challenge-card p[b-qk0rk6zmgx] {
+        color: #555;
+        font-size: 16px;
+    }
+
+
+.reward-text[b-qk0rk6zmgx] {
+    color: #6c757d;
+}
+
+    .reward-text strong[b-qk0rk6zmgx] {
+        color: #2ecc71;
+    }
+
+.challenge-description[b-qk0rk6zmgx] {
+    margin-bottom: 15px;
+}
+
+.game-progress[b-qk0rk6zmgx] {
+    margin-bottom: 10px;
+}
+
+.game-progress-text[b-qk0rk6zmgx] {
+    margin-bottom: 5px;
+    color: #6c757d;
+}
+
+.progress-bar[b-qk0rk6zmgx] {
+    background-color: #28a745;
+}
+
+.game-elements button[b-qk0rk6zmgx] {
+    font-size: 14px;
+}
+
+.claimed[b-qk0rk6zmgx] {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #333;
+}
+
+    .claimed:hover[b-qk0rk6zmgx] {
+        background-color: #e0a800;
+        border-color: #e0a800;
+    }
+
+/*workouts*/
+.scrollable-row[b-qk0rk6zmgx] {
+    display: flex;
+    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    background-color: white;
+    margin-top:10px;
+}
+
+    .scrollable-row a[b-qk0rk6zmgx] {
+        margin-right: 0px;
+    }
+
+/* Category Styles */
+.workout-name[b-qk0rk6zmgx] {
+    font-weight: bold;
+    margin-bottom:0;
+    margin-top:0;
+}
+
+.card-body[b-qk0rk6zmgx]{
+    padding:8px;
+}
+
+/* Points Styles */
+.points[b-qk0rk6zmgx] {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.workout-link[b-qk0rk6zmgx] {
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 0 0 auto;
+    background-color: #D0EBFF;
+}
+
+    .workout-link:hover[b-qk0rk6zmgx] {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: inherit;
+        background-color: cornflowerblue;
+        color: white;
+    }
+
+        .workout-link:hover .info[b-qk0rk6zmgx] {
+            color: black;
+        }
+
+/* Updated styles for the "Claim Reward" button */
+.btn-reward[b-qk0rk6zmgx] {
+    background: #3498db; /* Blue background color */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    padding: 15px 30px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size */
+    cursor: pointer; /* Cursor on hover */
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+    .btn-reward:hover[b-qk0rk6zmgx] {
+        background-color: #2980b9; /* Darker blue on hover */
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7);
+    }
+
+    .btn-reward.claimed[b-qk0rk6zmgx] {
+        background-color: #95a5a6; /* Gray color for claimed button */
+        cursor: not-allowed;
+        box-shadow: none; /* No box shadow for claimed button */
+    }
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {
     color: #007bff;
@@ -417,6 +609,11 @@ h2[b-lict9yrgg8] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.leaderboard-item[b-lict9yrgg8] {
+    text-align: left; 
+    justify-content: flex-start; 
 }
 
 .card-title[b-lict9yrgg8] {
@@ -951,6 +1148,8 @@ h3[b-9cvkiois10] {
     .back-link:hover[b-9cvkiois10] {
         color: #ff0000; /* Change color on hover if needed */
     }
+
+
 /* _content/ProjectWebApp/Views/Workout/Index.cshtml.rz.scp.css */
 body[b-25jdkaz98d] {
     font-family: 'Arial', sans-serif;

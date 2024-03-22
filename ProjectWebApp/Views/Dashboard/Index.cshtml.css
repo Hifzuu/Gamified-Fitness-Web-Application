@@ -130,6 +130,11 @@
     justify-content: center;
 }
 
+.leaderboard-item {
+    text-align: left; 
+    justify-content: flex-start; 
+}
+
 .card-title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
