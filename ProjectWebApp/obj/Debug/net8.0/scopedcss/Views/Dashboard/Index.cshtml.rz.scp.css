@@ -250,3 +250,14 @@ h2[b-lict9yrgg8] {
 }
 
 
+.medal-text[b-lict9yrgg8] {
+    font-weight: 600;
+}
+
+.streak-reward-item[b-lict9yrgg8] {
+    background-color: white;
+    padding: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 10px;
+}

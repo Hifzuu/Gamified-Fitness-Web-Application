@@ -250,3 +250,14 @@
 }
 
 
+.medal-text {
+    font-weight: 600;
+}
+
+.streak-reward-item {
+    background-color: white;
+    padding: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 10px;
+}
