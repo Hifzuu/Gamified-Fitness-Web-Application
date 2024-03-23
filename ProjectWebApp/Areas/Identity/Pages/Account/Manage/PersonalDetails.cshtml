@@ -116,8 +116,26 @@
                             <span asp-validation-for="Input.NewCountry" class="text-danger"></span>
                         </div>
 
+                        <label asp-for="Input.NewGoal" class="mr-2 d-block text-left">Goal</label>
+                        <div class="form-group">
+                            <select asp-for="Input.NewGoal" class="form-control">
+                                <option value="Weight Loss">Weight Loss</option>
+                                <option value="Muscle Building">Muscle Building</option>
+                                <option value="Cardiovascular Fitness">Cardiovascular Fitness</option>
+                                <option value="Flexibility Improvement">Flexibility Improvement</option>
+                                <option value="General Health and Wellness">General Health and Wellness</option>
+                            </select>
+                            <span asp-validation-for="Input.NewGoal" class="text-danger"></span>
+                        </div>
+
+
+
+
+
                         <button id="change-details-button" type="submit" asp-page-handler="ChangePersonalDetails" class="w-100 btn btn-lg btn-primary">Save Changes</button>
                     </form>
+
+                    
                 </section>
             </div>
         </div>
@@ -130,4 +148,10 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('#Input_NewCountry option:first').prop('disabled', true);
+        });
+    </script>
 }

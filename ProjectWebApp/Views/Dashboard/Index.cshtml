@@ -164,20 +164,22 @@
                 <div class="grid-container">
                     <section class="grid-item mb-4" style="background-color: lightblue;">
                         <h5 class="card-title">Total Completed Workouts</h5>
-                        <p class="card-text">@Model.UserWorkoutStats.WorkoutCount</p>
+                        <p class="card-text">@((Model.UserWorkoutStats != null ? Model.UserWorkoutStats.WorkoutCount : "N/A"))</p>
                     </section>
 
                     <section class="grid-item mb-4" style="background-color: lightblue;">
                         <h5 class="card-title">Total Workout Duration (Mins)</h5>
-                        <p class="card-text">@Model.UserWorkoutStats.TotalWorkoutDuration</p>
+                        <p class="card-text">@((Model.UserWorkoutStats != null ? Model.UserWorkoutStats.TotalWorkoutDuration : "N/A"))</p>
                     </section>
 
                     <section class="grid-item mb-4" style="background-color: lightblue;">
                         <h5 class="card-title">Most Frequent Workout Type</h5>
-                        <p class="card-text-string">@Model.MostFrequentWorkoutType</p>
+                        <p class="card-text-string">@((Model.MostFrequentWorkoutType != "" ? Model.MostFrequentWorkoutType : "N/A"))</p>
                     </section>
                 </div>
             </div>
+
+
 
             <div class="col-lg-8">
                 <section style="max-height: 790px;">

@@ -1,6 +1,6 @@
-// PersonalDetails.cshtml.cs
-
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +21,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
         public int Height { get; set; }
         public string Gender { get; set; }
         public string Country { get; set; }
+        public List<string> Goals { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -38,20 +39,24 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "New Country")]
             public string NewCountry { get; set; }
+
+            [Display(Name = "New Goal")]
+            public List<string> NewGoal { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            // Load existing details from the user or modify as per your ApplicationUser model
             Height = user.Height;
             Gender = user.Gender;
             Country = user.Country;
+            Goals = user.SelectedGoals;
 
             Input = new InputModel
             {
                 NewHeight = Height,
                 NewGender = Gender,
                 NewCountry = Country,
+                NewGoal = Goals,
             };
         }
 
@@ -81,12 +86,11 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            // Update user details with the values from the input model
             user.Height = Input.NewHeight;
             user.Gender = Input.NewGender;
             user.Country = Input.NewCountry;
+            user.SelectedGoals = Input.NewGoal;
 
-            // Update the user in the database
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
