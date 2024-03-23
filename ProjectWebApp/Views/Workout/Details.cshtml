@@ -110,7 +110,7 @@
                         <div id="scheduledInfoSection" style="max-height: 700px; overflow-y: auto; padding:10px;">
                             @foreach (var scheduledWorkout in scheduledWorkouts.OrderBy(sw => sw.ScheduledDateTime))
                             {
-                                <div class="card mb-2" >
+                                <div class="card mb-4" >
                                     <div class="card-header bg-primary text-white">
                                         <h5 class="mb-0">@scheduledWorkout.ScheduledDateTime.ToString("dddd, dd MMMM yyyy")</h5>
                                     </div>

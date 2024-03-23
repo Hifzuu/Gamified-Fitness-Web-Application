@@ -207,14 +207,8 @@
                 </section>
 
             </div>
-@*             <div id="availableClansContainer" class="col-md-12 col-lg-6">
-                <section style="max-height: 500px; min-height:500px;">
-                    <h2>Discover Clans</h2>
-                    <div style="max-height: 420px; overflow-y: auto;">
-                        <ul id="availableClansList" class="list-group"></ul>
-                    </div>
-                </section>
-            </div> *@
+
+            @* leaderboard section *@
             <div class="col-md-12 col-lg-6">
                 <section style="max-height: 500px; min-height:500px; background-color: #D0EBFF;">
                     <h2>Leaderboard</h2>
@@ -262,6 +256,10 @@
                                     <button class="btn btn-reward game-button claimed" disabled>Claimed 🎁</button>
                                 }
                             }
+                            else
+                                {
+                                    <button class="btn btn-reward game-button claimed" disabled>Complete to claim</button>
+                                }
                         </div>
                         <!-- Scrollable Row for Filtered Workouts -->
                         <div class="scrollable-row" id="allWorkouts">

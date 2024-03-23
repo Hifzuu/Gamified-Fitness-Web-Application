@@ -21,6 +21,8 @@ namespace ProjectWebApp.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Clan> Clans { get; set; }
         public DbSet<ClanChallenge> ClanChallenges { get; set; }
+        public DbSet<UserWorkoutStats> UserWorkoutStats { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

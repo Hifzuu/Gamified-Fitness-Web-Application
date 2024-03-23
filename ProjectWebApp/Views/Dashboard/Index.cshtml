@@ -120,7 +120,7 @@
             </div>
 
             <div class="col-lg-6">
-                <section>
+                <section style="background-color: #D0EBFF;">
                     <h3>Login Streak Rewards</h3>
                     <ul class="list-group">
                         <!-- Inside your loop for rewards -->
@@ -135,7 +135,9 @@
                             ? "background-color: #3498db; color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);"
                             : "";
 
-                            <li class="list-group-item d-flex justify-content-between align-items-center claimable-item" style="border: none; @listItemOpacity @claimableStyle">
+ 
+                            <!-- Display member item -->
+                            <div class="media streak-reward-item mt-3 d-flex justify-content-between align-items-center claimable-item" style="border: none; @listItemOpacity @claimableStyle">
                                 <span class="medal-text">@Html.Raw(reward.MedalText)</span>
 
                                 @if (userStreakReward != null && !userStreakReward.Claimed)
@@ -152,7 +154,7 @@
                                 {
                                     <span class="badge @badgeColor badge-pill point-badge not-claimable" style="background-color: @rewardColor; font-size: 16px; padding: 10px; cursor: default; color: white;">@reward.Points Points</span>
                                 }
-                            </li>
+                            </div>
                         }
                     </ul>
                 </section>
@@ -161,19 +163,24 @@
             <div class="col-lg-3">
                 <div class="grid-container">
                     <section class="grid-item mb-4" style="background-color: lightblue;">
-                        <h5 class="card-title">Total Workouts</h5>
-                        <p class="card-text">XX</p>
+                        <h5 class="card-title">Total Completed Workouts</h5>
+                        <p class="card-text">@Model.UserWorkoutStats.WorkoutCount</p>
                     </section>
 
                     <section class="grid-item mb-4" style="background-color: lightblue;">
-                        <h5 class="card-title">Total Duration</h5>
-                        <p class="card-text">XX</p>
+                        <h5 class="card-title">Total Workout Duration (Mins)</h5>
+                        <p class="card-text">@Model.UserWorkoutStats.TotalWorkoutDuration</p>
+                    </section>
+
+                    <section class="grid-item mb-4" style="background-color: lightblue;">
+                        <h5 class="card-title">Most Frequent Workout Type</h5>
+                        <p class="card-text-string">@Model.MostFrequentWorkoutType</p>
                     </section>
                 </div>
             </div>
 
             <div class="col-lg-8">
-                <section>
+                <section style="max-height: 790px;">
                     <h3>Weight</h3>
 
                     <!-- Current Weight -->
@@ -309,31 +316,17 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="grid-container">
-                    <section class="grid-item leaderboard-item" style="background-color: #728CFF;">
-                        <h1>Leaderboard</h1>
-                        <div style="max-height: 425px; overflow-y: auto; background-color: #728CFF;">
-                            <ul id="userLeaderboard" class="list-group"></ul>
-                        </div>
-                    </section>
-                </div>
+                <section style="max-height: 790px; min-height:790px;background-color: #D5DDFF;">
+                    <h2 style="color:black;">User Leaderboards</h2>
+                    <div style="max-height: 705px; overflow-y: auto; background-color: #D5DDFF;">
+                        <ul id="userLeaderboard" class="list-group"></ul>
+                    </div>
+                </section>
             </div>
         </div>
 
       
     </div>
-
-
-
-
-
-
-
-
-
-
-  
-
    
 </body>
 
@@ -385,7 +378,8 @@
                         listItem.append(rankAndName);
 
                         // Create a user points element
-                        var userPoints = $('<p class="user-points"><i class="fas fa-medal" style="color: gold;">UP</i><strong> ' + user.points + '</strong></p>');
+                        var userPoints = $('<span class="user-details" style="font-size: 1.1em; letter-spacing: 1px;"> <i class="fas fa-coins gold-coin-icon mr-2"></i> <strong>' + user.points + '</strong> <strong style="font-size: 0.7em;">points</strong></span>');
+
 
                         // Append the clan points to the list item
                         listItem.append(userPoints);

@@ -647,6 +647,49 @@ namespace ProjectWebApp.Data.Migrations
                     b.ToTable("UserStreakRewards");
                 });
 
+            modelBuilder.Entity("ProjectWebApp.Models.UserWorkoutStats", b =>
+                {
+                    b.Property<string>("UserWorkoutStatsId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BalancedWorkoutsCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CardioCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HIITCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PilatesCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RunningCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StrengthTrainingCompletedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalWorkoutDuration")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("WorkoutCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("YogaCompletedCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserWorkoutStatsId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserWorkoutStats");
+                });
+
             modelBuilder.Entity("ProjectWebApp.Models.WeightEntry", b =>
                 {
                     b.Property<string>("UserId")
@@ -950,6 +993,17 @@ namespace ProjectWebApp.Data.Migrations
                     b.Navigation("LoginStreak");
 
                     b.Navigation("StreakReward");
+                });
+
+            modelBuilder.Entity("ProjectWebApp.Models.UserWorkoutStats", b =>
+                {
+                    b.HasOne("ProjectWebApp.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectWebApp.Models.WeightEntry", b =>

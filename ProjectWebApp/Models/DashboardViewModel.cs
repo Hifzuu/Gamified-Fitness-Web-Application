@@ -6,5 +6,7 @@
         public LoginStreak LoginStreak { get; set; }
         public List<StreakReward> Rewards { get; set; }
         public List<UserStreakReward> ClaimableRewards { get; set; }
+        public UserWorkoutStats UserWorkoutStats { get; set; }
+        public string MostFrequentWorkoutType { get; set; }
     }
 }

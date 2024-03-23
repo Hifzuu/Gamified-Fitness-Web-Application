@@ -326,6 +326,106 @@ namespace ProjectWebApp.Controllers
                 return NotFound(); // Handle appropriately
             }
 
+            // Retrieve the user workout stats for the current user
+            var userWorkoutStats = await _context.UserWorkoutStats.FirstOrDefaultAsync(uws => uws.UserId == currentUser.Id);
+
+            // If the user doesn't have workout stats, create a new entry
+            if (userWorkoutStats == null)
+            {
+                // Create a new user workout stats entry
+
+                var CardioCompletedCount = 0;
+                var HIITCompletedCount = 0;
+                var StrengthTrainingCompletedCount = 0;
+                var RunningCompletedCount = 0;
+                var YogaCompletedCount = 0;
+                var PilatesCompletedCount = 0;
+                var BalancedWorkoutsCompletedCount = 0;
+
+                switch (completedWorkout.Category)
+                {
+                    case "Cardio":
+                        CardioCompletedCount += 1;
+                        break;
+                    case "High-Intensity Interval Training":
+                        HIITCompletedCount += 1;
+                        break;
+                    case "Strength Training":
+                        StrengthTrainingCompletedCount += 1;
+                        break;
+                    case "Running":
+                        RunningCompletedCount += 1;
+                        break;
+                    case "Yoga":
+                        YogaCompletedCount += 1;
+                        break;
+                    case "Pilates":
+                        PilatesCompletedCount += 1;
+                        break;
+                    case "Balanced Workouts":
+                        BalancedWorkoutsCompletedCount += 1;
+                        break;
+                    default:
+                        // Handle unsupported workout categories
+                        break;
+                }
+
+                userWorkoutStats = new UserWorkoutStats
+                {
+                    UserWorkoutStatsId = Guid.NewGuid().ToString(),
+                    UserId = currentUser.Id,
+                    WorkoutCount = 1,
+                    TotalWorkoutDuration = completedWorkout.DurationMinutes, 
+                    CardioCompletedCount = CardioCompletedCount,
+                    HIITCompletedCount = HIITCompletedCount,
+                    StrengthTrainingCompletedCount = StrengthTrainingCompletedCount,
+                    RunningCompletedCount = RunningCompletedCount,
+                    YogaCompletedCount = YogaCompletedCount,
+                    PilatesCompletedCount = PilatesCompletedCount,
+                    BalancedWorkoutsCompletedCount = BalancedWorkoutsCompletedCount,
+                };
+                // Add the new entry to the context
+                _context.UserWorkoutStats.Add(userWorkoutStats);
+            }
+            else
+            {
+                // Increment workout count and update duration
+                userWorkoutStats.WorkoutCount++;
+                userWorkoutStats.TotalWorkoutDuration += completedWorkout.DurationMinutes;
+
+                // Update the workout type count based on the completed workout category
+                switch (completedWorkout.Category)
+                {
+                    case "Cardio":
+                        userWorkoutStats.CardioCompletedCount++;
+                        break;
+                    case "High-Intensity Interval Training":
+                        userWorkoutStats.HIITCompletedCount++;
+                        break;
+                    case "Strength Training":
+                        userWorkoutStats.StrengthTrainingCompletedCount++;
+                        break;
+                    case "Running":
+                        userWorkoutStats.RunningCompletedCount++;
+                        break;
+                    case "Yoga":
+                        userWorkoutStats.YogaCompletedCount++;
+                        break;
+                    case "Pilates":
+                        userWorkoutStats.PilatesCompletedCount++;
+                        break;
+                    case "Balanced Workouts":
+                        userWorkoutStats.BalancedWorkoutsCompletedCount++;
+                        break;
+                    default:
+                        // Handle unsupported workout categories
+                        break;
+                }
+            }
+
+            
+
+
             // Log completed workout details for debugging
             Console.WriteLine($"Completed Workout ID: {completedWorkout.WorkoutId}");
             Console.WriteLine($"Completed Workout Category: {completedWorkout.Category}");

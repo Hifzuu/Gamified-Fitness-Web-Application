@@ -156,6 +156,7 @@ body[b-s13xhoid61] {
 
 .card-body[b-s13xhoid61] {
     padding: 8px;
+    text-align:center;
 }
 
 /* Points Styles */
@@ -169,7 +170,7 @@ body[b-s13xhoid61] {
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 0 0 auto;
-    background-color: #D0EBFF;
+    background-color: #dedede;
 }
 
     .workout-link:hover[b-s13xhoid61] {
@@ -424,8 +425,9 @@ body[b-s13xhoid61] {
     margin-top:0;
 }
 
-.card-body[b-qk0rk6zmgx]{
-    padding:8px;
+.card-body[b-qk0rk6zmgx] {
+    padding: 8px;
+    text-align: center;
 }
 
 /* Points Styles */
@@ -439,7 +441,7 @@ body[b-s13xhoid61] {
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 0 0 auto;
-    background-color: #D0EBFF;
+    background-color: #dedede;
 }
 
     .workout-link:hover[b-qk0rk6zmgx] {
@@ -628,6 +630,39 @@ h2[b-lict9yrgg8] {
     font-weight: bold;
 }
 
+.card-text-string[b-lict9yrgg8] {
+    font-size: 3rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+    .card-title[b-lict9yrgg8]{
+        font-size:1.2rem;
+    }
+    .card-text-string[b-lict9yrgg8] {
+        font-size: 2rem; /* Adjust the font size for smaller screens */
+    }
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 676px) {
+    .card-title[b-lict9yrgg8] {
+        font-size: 1rem;
+    }
+
+    .card-text-string[b-lict9yrgg8] {
+        font-size: 1.3rem; /* Adjust the font size for smaller screens */
+    }
+
+    .card-text[b-lict9yrgg8]{
+        font-size:3rem;
+    }
+}
+
+
+
 .no-info[b-lict9yrgg8] {
     color: #999;
 }
@@ -742,6 +777,7 @@ h2[b-lict9yrgg8] {
     margin-right: 0;
     border-radius: 10px;
 }
+
 /* _content/ProjectWebApp/Views/Home/Index.cshtml.rz.scp.css */
 body[b-dix295yned] {
     font-family: 'Arial', sans-serif;
@@ -1087,7 +1123,7 @@ video[b-9cvkiois10]::-webkit-media-controls-enclosure {
 
 /* Styles specific to Workout Details page */
 .card[b-9cvkiois10] {
-    margin-top: 20px;
+    margin-top: 0px;
     background-color: #fff;
     border: none;
     border-radius: 10px;

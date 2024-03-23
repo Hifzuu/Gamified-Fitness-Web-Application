@@ -230,8 +230,9 @@
     margin-top:0;
 }
 
-.card-body{
-    padding:8px;
+.card-body {
+    padding: 8px;
+    text-align: center;
 }
 
 /* Points Styles */
@@ -245,7 +246,7 @@
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     flex: 0 0 auto;
-    background-color: #D0EBFF;
+    background-color: #dedede;
 }
 
     .workout-link:hover {

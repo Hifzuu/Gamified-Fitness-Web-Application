@@ -80,10 +80,69 @@ namespace ProjectWebApp.Controllers
                 }
             }
 
-            // Save changes to the database
-            _context.SaveChanges();
+            // Retrieve the current user's workout stats
+            var userWorkoutStats = _context.UserWorkoutStats
+                .FirstOrDefault(uws => uws.UserId == userId);
+
+            // Now, based on the maxCompletedCount, determine the workout type
+            string mostFrequentWorkoutType = "";
+            if (userWorkoutStats != null)
+            {
+                // Get the maximum completed count among different workout types
+                int maxCompletedCount = Math.Max(
+                    userWorkoutStats.CardioCompletedCount,
+                    Math.Max(
+                        userWorkoutStats.HIITCompletedCount,
+                        Math.Max(
+                            userWorkoutStats.StrengthTrainingCompletedCount,
+                            Math.Max(
+                                userWorkoutStats.RunningCompletedCount,
+                                Math.Max(
+                                    userWorkoutStats.YogaCompletedCount,
+                                    Math.Max(
+                                        userWorkoutStats.PilatesCompletedCount,
+                                        userWorkoutStats.BalancedWorkoutsCompletedCount
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+
+                // Determine the most frequent workout type based on the maximum completed count
+                if (maxCompletedCount == userWorkoutStats.CardioCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Cardio";
+                }
+                else if (maxCompletedCount == userWorkoutStats.HIITCompletedCount)
+                {
+                    mostFrequentWorkoutType = "HIIT";
+                }
+                else if (maxCompletedCount == userWorkoutStats.StrengthTrainingCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Strength Training";
+                }
+                else if (maxCompletedCount == userWorkoutStats.RunningCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Running";
+                }
+                else if (maxCompletedCount == userWorkoutStats.YogaCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Yoga";
+                }
+                else if (maxCompletedCount == userWorkoutStats.PilatesCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Pilates";
+                }
+                else if (maxCompletedCount == userWorkoutStats.BalancedWorkoutsCompletedCount)
+                {
+                    mostFrequentWorkoutType = "Balanced Workouts";
+                }
+            }
 
 
+                // Save changes to the database
+                _context.SaveChanges();
 
             // Pass weight data, login streak, and all streak rewards to the view
             var viewModel = new DashboardViewModel
@@ -92,6 +151,8 @@ namespace ProjectWebApp.Controllers
                 LoginStreak = loginStreak,
                 Rewards = allStreakRewards,
                 ClaimableRewards= userStreaksRewardsList,
+                UserWorkoutStats = userWorkoutStats,
+                MostFrequentWorkoutType = mostFrequentWorkoutType,
             };
 
             return View(viewModel);
