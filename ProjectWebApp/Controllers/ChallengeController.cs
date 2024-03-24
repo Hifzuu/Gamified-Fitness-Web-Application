@@ -45,12 +45,10 @@ namespace ProjectWebApp.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it appropriately
-                // This prevents an exception from blocking the page load
                 Console.WriteLine($"Error assigning challenges: {ex.Message}");
             }
 
-            // Retrieve the user's current daily challenge for today
+            // users current daily challenge
             var userDailyChallenge = GetUserDailyChallenge(userId);
             string formattedTimeForDailyChallenge = userDailyChallenge != null
                ? FormatChallengeTime(userDailyChallenge)
@@ -61,10 +59,12 @@ namespace ProjectWebApp.Controllers
 
             if (userDailyChallenge != null && userDailyChallenge.Challenge.TargetCount > 0)
             {
+                // daily progress percentage =  the daily count progress divided by the target count * 100
                 dailyProgressPercentage = (double)dailyCountProgress / userDailyChallenge.Challenge.TargetCount * 100;
             }
 
-            // Retrieve the user's current weekly challenge for the current week
+
+            // users current weekly challenge
             var userWeeklyChallenge = GetUserWeeklyChallenge(userId);
             string formattedTimeForWeeklyChallenge = userWeeklyChallenge != null
                 ? FormatChallengeTime(userWeeklyChallenge)
@@ -78,7 +78,7 @@ namespace ProjectWebApp.Controllers
                 weeklyProgressPercentage = (double)weeklyCountProgress / userWeeklyChallenge.Challenge.TargetCount * 100;
             }
 
-            // Retrieve the user's current monthly challenge for the current month
+            // users current monthly challenge
             var userMonthlyChallenge = GetUserMonthlyChallenge(userId);
             string formattedTimeForMonthlyChallenge = userMonthlyChallenge != null
                 ? FormatChallengeTime(userMonthlyChallenge)
@@ -92,6 +92,7 @@ namespace ProjectWebApp.Controllers
                 monthlyProgressPercentage = (double)monthlyCountProgress / userMonthlyChallenge.Challenge.TargetCount * 100;
             }
 
+            // get all associated workouts to the challenges
             List<Workout> dailyChallengeWorkouts = new List<Workout>();
             dailyChallengeWorkouts = await _context.Workouts
                        .Where(w => w.Category == userDailyChallenge.Challenge.Type)
@@ -107,6 +108,7 @@ namespace ProjectWebApp.Controllers
                        .Where(w => w.Category == userMonthlyChallenge.Challenge.Type)
                        .ToListAsync();
 
+            //populate challenge view model with all the retrieved data
             var model = new ChallengeViewModel
             {
                 DailyChallenge = userDailyChallenge,
@@ -128,15 +130,15 @@ namespace ProjectWebApp.Controllers
 
             return View(model);
         }
-
+         
+        // return users daily challenge (today)
         private UserChallenge GetUserDailyChallenge(string userId)
         {
             DateTime currentDate = DateTime.Now.Date;
 
-            // Retrieve the user's current challenge for the specified type and date
             var userChallenge = _context.UserChallenges
                 .Include(uc => uc.Challenge)
-                    .ThenInclude(c => c.Workouts) // Include related data as needed
+                    .ThenInclude(c => c.Workouts) 
                 .FirstOrDefault(uc => uc.UserId == userId
                                        && uc.StartDate.Date == currentDate
                                        && uc.Challenge.ChallengeType == ChallengeType.Daily);
@@ -144,17 +146,15 @@ namespace ProjectWebApp.Controllers
             return userChallenge;
         }
 
+        // return users weekly challenge (start of week)
         private UserChallenge GetUserWeeklyChallenge(string userId)
         {
             DateTime currentDate = DateTime.Now.Date;
-
-            // Calculate the start of the week
             DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday);
 
-            // Retrieve the user's current challenge for the specified type and date
             var userChallenge = _context.UserChallenges
                 .Include(uc => uc.Challenge)
-                    .ThenInclude(c => c.Workouts) // Include related data as needed
+                    .ThenInclude(c => c.Workouts)
                 .FirstOrDefault(uc => uc.UserId == userId
                                        && uc.StartDate.Date == startOfWeek.Date
                                        && uc.Challenge.ChallengeType == ChallengeType.Weekly);
@@ -162,18 +162,15 @@ namespace ProjectWebApp.Controllers
             return userChallenge;
         }
 
-
+        // return users monthly challenge (start of month)
         private UserChallenge GetUserMonthlyChallenge(string userId)
         {
             DateTime currentDate = DateTime.Now.Date;
-
-            // Calculate the start of the month
             DateTime startOfMonth = currentDate.StartOfMonth();
 
-            // Retrieve the user's current challenge for the specified type and date
             var userChallenge = _context.UserChallenges
                 .Include(uc => uc.Challenge)
-                    .ThenInclude(c => c.Workouts) // Include related data as needed
+                    .ThenInclude(c => c.Workouts) 
                 .FirstOrDefault(uc => uc.UserId == userId
                                        && uc.StartDate.Date == startOfMonth.Date
                                        && uc.Challenge.ChallengeType == ChallengeType.Monthly);
@@ -187,7 +184,7 @@ namespace ProjectWebApp.Controllers
             DateTime currentDate = DateTime.Now;
             DateTime endOfDay = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 23, 59, 59);
 
-            // Check if a daily challenge is already assigned for the current day
+            // check if already assigned
             bool hasDailyChallenge = _context.UserChallenges
                 .Any(uc => uc.UserId == userId
                            && uc.StartDate.Date == currentDate.Date
@@ -195,16 +192,17 @@ namespace ProjectWebApp.Controllers
 
             if (!hasDailyChallenge)
             {
-                // Get all available daily challenges
+                // Get all daily challenges
                 var dailyChallenges = _context.Challenges
                     .Where(c => c.ChallengeType == ChallengeType.Daily)
                     .ToList();
 
                 if (dailyChallenges.Count > 0)
                 {
-                    // Pick a random daily challenge using the static Random instance
+                    // Pick a random daily challenge 
                     Challenge randomDailyChallenge = dailyChallenges[random.Next(dailyChallenges.Count)];
 
+                    // assign the challenge
                     UserChallenge userChallenge = new UserChallenge
                     {
                         UserId = userId,
@@ -219,7 +217,6 @@ namespace ProjectWebApp.Controllers
                 }
                 else
                 {
-                    // Log or handle the case where no daily challenges are available
                     Console.WriteLine("No daily challenges available.");
                 }
             }
@@ -228,10 +225,9 @@ namespace ProjectWebApp.Controllers
         private void AssignWeeklyChallenge(string userId)
         {
             DateTime currentDate = DateTime.Now;
-            DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday); // Assuming Monday is the start of the week
+            DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday); // monday is the start of the week
             DateTime endOfWeek = startOfWeek.AddDays(6).EndOfDay();
 
-            // Check if a weekly challenge is already assigned for the current week
             bool hasWeeklyChallenge = _context.UserChallenges
                 .Any(uc => uc.UserId == userId
                            && uc.StartDate.Date >= startOfWeek.Date
@@ -240,16 +236,16 @@ namespace ProjectWebApp.Controllers
 
             if (!hasWeeklyChallenge)
             {
-                // Get all available weekly challenges
+                // Get all weekly challenges
                 var weeklyChallenges = _context.Challenges
                     .Where(c => c.ChallengeType == ChallengeType.Weekly)
                     .ToList();
 
                 if (weeklyChallenges.Count > 0)
                 {
-                    // Pick a random weekly challenge using the static Random instance
                     Challenge randomWeeklyChallenge = weeklyChallenges[random.Next(weeklyChallenges.Count)];
 
+                    // assign challenge
                     UserChallenge userChallenge = new UserChallenge
                     {
                         UserId = userId,
@@ -264,7 +260,6 @@ namespace ProjectWebApp.Controllers
                 }
                 else
                 {
-                    // Log or handle the case where no weekly challenges are available
                     Console.WriteLine("No weekly challenges available.");
                 }
             }
@@ -277,7 +272,6 @@ namespace ProjectWebApp.Controllers
             DateTime startOfMonth = currentDate.StartOfMonth();
             DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1).EndOfDay();
 
-            // Check if a monthly challenge is already assigned for the current month
             bool hasMonthlyChallenge = _context.UserChallenges
                 .Any(uc => uc.UserId == userId
                            && uc.StartDate.Date >= startOfMonth.Date
@@ -286,14 +280,13 @@ namespace ProjectWebApp.Controllers
 
             if (!hasMonthlyChallenge)
             {
-                // Get all available monthly challenges
+                // Get all monthly challenges
                 var monthlyChallenges = _context.Challenges
                     .Where(c => c.ChallengeType == ChallengeType.Monthly)
                     .ToList();
 
                 if (monthlyChallenges.Count > 0)
                 {
-                    // Pick a random monthly challenge using the static Random instance
                     Challenge randomMonthlyChallenge = monthlyChallenges[random.Next(monthlyChallenges.Count)];
 
                     UserChallenge userChallenge = new UserChallenge
@@ -311,7 +304,6 @@ namespace ProjectWebApp.Controllers
                 }
                 else
                 {
-                    // Log or handle the case where no monthly challenges are available
                     Console.WriteLine("No monthly challenges available.");
                 }
             }
@@ -321,14 +313,16 @@ namespace ProjectWebApp.Controllers
 
         private string FormatChallengeTime(UserChallenge dailyChallenge)
         {
-            // Use the UserChallenge's end date
+            // Retrieve end date of daily challenge.
             DateTime dailyChallengeEnd = dailyChallenge.EndDate;
+
+            // Calculate time remaining until end date.
             TimeSpan timeRemaining = dailyChallengeEnd - DateTime.Now;
 
-            // Ensure the result is non-negative to avoid negative time remaining
+            // Ensure non-negative time remaining.
             int secondsRemaining = (int)Math.Max(0, timeRemaining.TotalSeconds);
 
-            // Include both date and time in the formatted output
+            // Format current date and time plus remaining seconds.
             string formattedTime = DateTime.Now.AddSeconds(secondsRemaining).ToString("yyyy-MM-dd HH:mm:ssZ");
 
             return formattedTime;
@@ -358,67 +352,50 @@ namespace ProjectWebApp.Controllers
 
                 if (currentUser != null)
                 {
-                    // Mark the challenge as claimed
                     var userChallenge = _context.UserChallenges.Find(userChallengeId);
                     if (userChallenge != null && !userChallenge.IsRewardClaimed)
                     {
-                        // Update user's points only if the reward is not already claimed
                         currentUser.Points += points;
-
-                        // Update the IsRewardClaimed property
                         userChallenge.IsRewardClaimed = true;
+                        _context.SaveChanges(); 
 
-                        // Save changes to the database
-                        _context.SaveChanges(); // Save changes to the UserChallenge entity
-
-                        // Save changes to the user entity
+                        // update user entity
                         var userUpdateResult = await _userManager.UpdateAsync(currentUser);
-
-                        if (userUpdateResult.Succeeded)
-                        {
-                            // Log successful points update
-                            _logger.LogInformation($"Points updated successfully. User: {currentUser.UserName}, Points: {currentUser.Points}, ChallengeId: {userChallengeId}");
-
-                            return Ok(); // or return a JSON response if needed
-                        }
                     }
                 }
-
-                // Log failure to update points
-                _logger.LogError($"Failed to update points. User: {currentUser?.UserName}, ChallengeId: {userChallengeId}");
 
                 return BadRequest("Failed to update points");
             }
             catch (Exception ex)
             {
-                // Log the exception
-                _logger.LogError(ex, $"An exception occurred while updating points. ChallengeId: {userChallengeId}");
                 return BadRequest("An error occurred while updating points");
             }
         }
-
-
     }
+
+    // Extension method for date time manipulation.
     public static class DateTimeExtensions
     {
+        // Returns the start of the week
         public static DateTime StartOfWeek(this DateTime dt, DayOfWeek startOfWeek)
         {
             int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
             return dt.Date.AddDays(-1 * diff);
         }
 
+        // Returns the end of the day 
         public static DateTime EndOfDay(this DateTime dt)
         {
             return new DateTime(dt.Year, dt.Month, dt.Day, 23, 59, 59, 999);
         }
 
+        // Returns the start of the month
         public static DateTime StartOfMonth(this DateTime dt)
         {
             return new DateTime(dt.Year, dt.Month, 1);
         }
-
-
     }
+
 
 
 

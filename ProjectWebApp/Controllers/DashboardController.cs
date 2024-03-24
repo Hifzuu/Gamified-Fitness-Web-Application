@@ -34,27 +34,23 @@ namespace ProjectWebApp.Controllers
 
             // Retrieve all streak rewards
             var allStreakRewards = _context.StreakRewards
-                .OrderBy(sr => sr.Points) // Order by Points, adjust as needed
+                .OrderBy(sr => sr.Points) 
                 .ToList();
 
-            // Check if it's a new year
+            // if new year, clear users streak rewards
             if (IsNewYear())
             {
-                // Clear user streak rewards for the new year
                 ClearUserStreakRewards(userId);
-
-                // Update the last login time in login streak
                 loginStreak.LastLoginTime = DateTime.Now;
                 _context.SaveChanges();
             }
 
-            // Check if the user's current streak matches any reward days
+            // Check if the users current streak matches any reward days
             var claimableRewards = allStreakRewards
                 .Where(sr => loginStreak.CurrentStreak >= sr.Days)
                 .ToList();
 
-
-            // Fetch the user's streak rewards list
+            // Fetch the users streak rewards list
             var userStreaksRewardsList = _context.UserStreakRewards
                 .Where(ur => ur.UserId == userId)
                 .ToList();
@@ -73,22 +69,20 @@ namespace ProjectWebApp.Controllers
                         UserId = userId,
                         LastLoginTime = loginStreak.LastLoginTime,
                         RewardId = reward.RewardId,
-                        Claimed = false // You may set it to true if you want to mark it as claimed initially
+                        Claimed = false 
                     };
-
                     _context.UserStreakRewards.Add(userStreakReward);
                 }
             }
 
-            // Retrieve the current user's workout stats
+            // Retrieve the current users workout stats
             var userWorkoutStats = _context.UserWorkoutStats
                 .FirstOrDefault(uws => uws.UserId == userId);
 
-            // Now, based on the maxCompletedCount, determine the workout type
             string mostFrequentWorkoutType = "";
             if (userWorkoutStats != null)
             {
-                // Get the maximum completed count among different workout types
+                // Get the maximum completed count out of all workout types
                 int maxCompletedCount = Math.Max(
                     userWorkoutStats.CardioCompletedCount,
                     Math.Max(
@@ -109,7 +103,6 @@ namespace ProjectWebApp.Controllers
                     )
                 );
 
-                // Determine the most frequent workout type based on the maximum completed count
                 if (maxCompletedCount == userWorkoutStats.CardioCompletedCount)
                 {
                     mostFrequentWorkoutType = "Cardio";
@@ -140,11 +133,8 @@ namespace ProjectWebApp.Controllers
                 }
             }
 
-
-                // Save changes to the database
                 _context.SaveChanges();
 
-            // Pass weight data, login streak, and all streak rewards to the view
             var viewModel = new DashboardViewModel
             {
                 WeightData = weightData,
@@ -174,19 +164,16 @@ namespace ProjectWebApp.Controllers
                 Weight = newWeight
             };
 
-            // Add the new entry to the database
             _context.WeightEntries.Add(newWeightEntry);
             _context.SaveChanges();
 
-            // Redirect back to the dashboard with the updated data
             return RedirectToAction("Index");
         }
 
-        // Helper method to check if it's a new year
+        // method to check if it's a new year
         private bool IsNewYear()
         {
             var userId = _userManager.GetUserId(User);
-            // Compare current year with the stored last login year
             var currentYear = DateTime.Now.Year;
             var lastLoginYear = _context.LoginStreaks
                 .Where(ls => ls.UserId == userId)
@@ -195,7 +182,7 @@ namespace ProjectWebApp.Controllers
             return currentYear > lastLoginYear;
         }
 
-        // Helper method to clear user streak rewards for the new year
+        // method to clear user streak rewards for the new year
         private void ClearUserStreakRewards(string userId)
         {
             var userStreakRewards = _context.UserStreakRewards
@@ -210,45 +197,30 @@ namespace ProjectWebApp.Controllers
         [HttpPost]
         public IActionResult ClaimReward(int userStreakRewardId)
         {
-            // Retrieve the user streak reward
             var userStreakReward = _context.UserStreakRewards.FirstOrDefault(ur => ur.UserStreakRewardId == userStreakRewardId);
 
             // Check if the userStreakReward exists and has not been claimed
             if (userStreakReward != null && !userStreakReward.Claimed)
             {
-                // Find the associated reward based on RewardId
                 var claimedReward = _context.StreakRewards.FirstOrDefault(sr => sr.RewardId == userStreakReward.RewardId);
 
-                // Check if the reward is found
                 if (claimedReward != null)
                 {
-                    // Mark the current reward as claimed
                     userStreakReward.Claimed = true;
-
-                    // Retrieve the user associated with the reward
                     var user = _context.Users.FirstOrDefault(u => u.Id == userStreakReward.UserId);
-
-                    // Update user points (add the points associated with the claimed reward)
                     user.Points += claimedReward.Points;
-
-                    // Save changes to the database
                     _context.SaveChanges();
-
-                    // Return JSON response indicating success
                     return Json(new { success = true, pointsClaimed = claimedReward.Points });
                 }
             }
 
-            // If the reward has already been claimed or doesn't exist, return JSON response indicating failure
             return Json(new { success = false });
         }
 
-        // GET: Clan/Leaderboards
         public ActionResult Leaderboards()
         {
-            // Retrieve leaderboards data from the database
             var leaderboardsData = _context.Users
-                .OrderByDescending(user => user.Points) // Order by points in descending order
+                .OrderByDescending(user => user.Points) 
                 .Select(user => new
                 {
                     user.CustomUserName,
@@ -256,7 +228,6 @@ namespace ProjectWebApp.Controllers
                 })
                 .ToList();
 
-            // Return the leaderboards data as JSON
             return Json(leaderboardsData);
         }
 

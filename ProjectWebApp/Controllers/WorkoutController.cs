@@ -7,7 +7,7 @@ using ProjectWebApp.Data;
 using ProjectWebApp.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Collections.Generic; // Add this if not already present
+using System.Collections.Generic; 
 using Newtonsoft.Json.Converters;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -30,37 +30,33 @@ namespace ProjectWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Get the current user
-            var currentUser = await _userManager.GetUserAsync(User);
 
+            var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null)
             {
-                // Handle the case where the user is not authenticated
                 return RedirectToAction("Login", "Account");
             }
 
-            // Get user's calendar entries
+            // Get users calendar entries
             var userCalendars = _context.UserCalendars
                 .Include(uc => uc.Workout)
                 .Where(uc => uc.UserId == currentUser.Id)
                 .OrderBy(uc => uc.ScheduledDateTime)
                 .ToList();
 
-            // Get the user's exercise focus
+            // Get users exercise focus
             var userExerciseFocus = currentUser.ExerciseFocus;
 
-            // Get workouts from the database
+            // Get all workouts 
             var workouts = _context.Workouts.ToList();
 
-            // Set IsFeatured to true for workouts matching the user's exercise focus
+            // Set set featured for workouts matching the users exercise focus
             foreach (var workout in workouts)
             {
                 workout.IsFeatured = userExerciseFocus.Contains(workout.Category);
             }
 
-            // Save changes to the database (optional, only if you want to persist the IsFeatured changes)
             _context.SaveChanges();
-
             ViewData["UserCalendars"] = userCalendars;
             ViewData["Workouts"] = workouts;
 
@@ -72,7 +68,6 @@ namespace ProjectWebApp.Controllers
             var workout = _context.Workouts.FirstOrDefault(e => e.WorkoutId == id);
             return View(workout);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> GetPoints(int workoutId)
@@ -88,12 +83,10 @@ namespace ProjectWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToFavourites(int workoutId)
         {
-            // Get the current user
             var currentUser = await _userManager.GetUserAsync(User);
-
             if (currentUser == null)
             {
-                return Unauthorized(); // or handle as needed
+                return Unauthorized(); 
             }
 
             try
@@ -103,37 +96,27 @@ namespace ProjectWebApp.Controllers
                     .Where(w => w.UserId == currentUser.Id && w.WorkoutId == workoutId)
                     .FirstOrDefaultAsync();
 
+                // remove from favourite
                 if (existingFavourite != null)
                 {
-                    // User has already favorited this workout, remove it from favorites
                     _context.UserFavouriteWorkouts.Remove(existingFavourite);
-
-                    // Save changes to the database
                     await _context.SaveChangesAsync();
-
-                    // Redirect back to the workout details page or handle as needed
                     return RedirectToAction("Details", new { id = workoutId });
                 }
 
-                // Create a new UserFavouriteWorkout
                 var newFavourite = new UserFavouriteWorkout
                 {
                     UserId = currentUser.Id,
                     WorkoutId = workoutId
                 };
 
-                // Add the UserFavouriteWorkout to the context
+
                 _context.UserFavouriteWorkouts.Add(newFavourite);
-
-                // Save changes to the database
                 await _context.SaveChangesAsync();
-
-                // Redirect back to the workout details page or handle as needed
                 return RedirectToAction("Details", new { id = workoutId });
             }
             catch (Exception ex)
             {
-                // Log the exception or handle as needed
                 return BadRequest($"An error occurred: {ex.Message}");
             }
 
@@ -155,10 +138,6 @@ namespace ProjectWebApp.Controllers
             return Json(isFavourited);
         }
 
-        private string GetCurrentUserId()
-        {
-            return User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.NameIdentifier)?.Value : null;
-        }
 
         [HttpPost]
         public async Task<IActionResult> UpdatePoints(int points)
@@ -172,10 +151,9 @@ namespace ProjectWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok(); // or return a JSON response if needed
+                    return Ok(); 
                 }
             }
-
             return BadRequest("Failed to update points");
         }
 
@@ -185,14 +163,11 @@ namespace ProjectWebApp.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userManager.GetUserAsync(User).Result;
-
-                // Assuming Points is the property in your ApplicationUser model
                 var points = user?.Points ?? 0;
-
                 return Json(points);
             }
 
-            return Json(0); // Return 0 for unauthenticated users or handle it according to your logic
+            return Json(0); 
         }
 
 
@@ -226,7 +201,6 @@ namespace ProjectWebApp.Controllers
 
             try
             {
-                // Check if there's any existing workout scheduled at the same time for the current user
                 bool isTimeSlotAvailable = await IsTimeSlotAvailable(currentUser.Id, scheduleDate.Date + scheduleTime);
 
                 if (!isTimeSlotAvailable)
@@ -234,7 +208,6 @@ namespace ProjectWebApp.Controllers
                     return Json(new { success = false, message = "A workout is already scheduled at this time. Please choose a different time." });
                 }
 
-                // Assuming you have a DbSet<UserCalendar> in your ApplicationDbContext
                 var userCalendarEntry = new UserCalendar
                 {
                     UserId = currentUser.Id,
@@ -246,19 +219,15 @@ namespace ProjectWebApp.Controllers
 
                 _context.UserCalendars.Add(userCalendarEntry);
                 await _context.SaveChangesAsync();
-
                 return Json(new { success = true, message = "Schedule information saved successfully." });
             }
             catch (DbUpdateException ex)
             {
                 var errorMessage = "Error occurred while saving schedule information.";
-
                 if (ex.InnerException is SqlException sqlException)
                 {
-                    // Handle specific SQL Server exceptions
                     errorMessage += $" SQL Server Error Number: {sqlException.Number}. ";
                 }
-
                 return Json(new { success = false, message = errorMessage });
             }
             catch (Exception ex)
@@ -267,10 +236,9 @@ namespace ProjectWebApp.Controllers
             }
         }
 
-
+        // Check if there's any existing workout scheduled at the same time for the current user
         private async Task<bool> IsTimeSlotAvailable(string userId, DateTime scheduledDateTime)
         {
-            // Check if there's any existing workout scheduled at the same time for the current user
             return !await _context.UserCalendars.AnyAsync(uc =>
                 uc.UserId == userId &&
                 uc.ScheduledDateTime == scheduledDateTime);
@@ -282,8 +250,6 @@ namespace ProjectWebApp.Controllers
             try
             {
                 var currentUser = await _userManager.GetUserAsync(User);
-
-                // Assuming you have a DbSet<UserCalendar> in your ApplicationDbContext
                 var userCalendarEntry = _context.UserCalendars.FirstOrDefault(u => u.WorkoutId == workoutId && u.UserId == currentUser.Id);
 
                 if (userCalendarEntry == null)
@@ -293,7 +259,6 @@ namespace ProjectWebApp.Controllers
 
                 _context.UserCalendars.Remove(userCalendarEntry);
                 await _context.SaveChangesAsync();
-
                 return Json(new { success = true, message = "Workout removed successfully." });
             }
             catch (DbUpdateException ex)
@@ -302,10 +267,8 @@ namespace ProjectWebApp.Controllers
 
                 if (ex.InnerException is SqlException sqlException)
                 {
-                    // Handle specific SQL Server exceptions
                     errorMessage += $" SQL Server Error Number: {sqlException.Number}. ";
                 }
-
                 return Json(new { success = false, message = errorMessage });
             }
             catch (Exception ex)
@@ -317,23 +280,18 @@ namespace ProjectWebApp.Controllers
         public async Task<IActionResult> MarkWorkoutAsCompleted(int workoutId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
-
-            // Retrieve the completed workout
             var completedWorkout = await _context.Workouts.FindAsync(workoutId);
 
             if (completedWorkout == null)
             {
-                return NotFound(); // Handle appropriately
+                return NotFound();
             }
 
-            // Retrieve the user workout stats for the current user
             var userWorkoutStats = await _context.UserWorkoutStats.FirstOrDefaultAsync(uws => uws.UserId == currentUser.Id);
 
             // If the user doesn't have workout stats, create a new entry
             if (userWorkoutStats == null)
             {
-                // Create a new user workout stats entry
-
                 var CardioCompletedCount = 0;
                 var HIITCompletedCount = 0;
                 var StrengthTrainingCompletedCount = 0;
@@ -366,7 +324,6 @@ namespace ProjectWebApp.Controllers
                         BalancedWorkoutsCompletedCount += 1;
                         break;
                     default:
-                        // Handle unsupported workout categories
                         break;
                 }
 
@@ -384,7 +341,7 @@ namespace ProjectWebApp.Controllers
                     PilatesCompletedCount = PilatesCompletedCount,
                     BalancedWorkoutsCompletedCount = BalancedWorkoutsCompletedCount,
                 };
-                // Add the new entry to the context
+
                 _context.UserWorkoutStats.Add(userWorkoutStats);
             }
             else
@@ -418,39 +375,23 @@ namespace ProjectWebApp.Controllers
                         userWorkoutStats.BalancedWorkoutsCompletedCount++;
                         break;
                     default:
-                        // Handle unsupported workout categories
                         break;
                 }
             }
 
-            
-
-
-            // Log completed workout details for debugging
-            Console.WriteLine($"Completed Workout ID: {completedWorkout.WorkoutId}");
-            Console.WriteLine($"Completed Workout Category: {completedWorkout.Category}");
-
-            // Retrieve the user challenges associated with the completed workout for the current user
+            // Retrieve the user challenges associated with the completed workout 
             var userChallenges = await _context.UserChallenges
                 .Include(uc => uc.Challenge)
                 .Where(uc => uc.UserId == currentUser.Id)
                 .ToListAsync();
 
-            // Check if the user is part of a clan
-            var userClan = await _context.Clans.FirstOrDefaultAsync(clan => clan.Members.Any(member => member.Id == currentUser.Id));
-
             foreach (var userChallenge in userChallenges)
             {
                 if (userChallenge.Challenge.Type != completedWorkout.Category)
                 {
-                    continue; // Skip to the next iteration if there's no match
+                    continue; 
                 }
 
-                // Log challenge details for debugging
-                Console.WriteLine($"Challenge Type: {userChallenge.Challenge.ChallengeType}");
-                Console.WriteLine($"Measurement Criteria: {userChallenge.Challenge.MeasurementCriteria}");
-
-                // Determine the date criteria for the challenge
                 DateTime currentDate = DateTime.Now.Date;
                 DateTime challengeStartDate;
 
@@ -469,30 +410,25 @@ namespace ProjectWebApp.Controllers
                         break;
 
                     default:
-                        // Handle unsupported challenge types
                         continue;
                 }
 
-                // Check if the completed workout is within the challenge date range
-                // Update challenge progress based on the completed workout
                 if (userChallenge.Challenge.MeasurementCriteria == MeasurementCriteria.TotalTime)
                 {
-                    // Update based on total time of the workout (adjust based on your actual model)
                     userChallenge.CountProgress += completedWorkout.DurationMinutes;
                 }
                 else if (userChallenge.Challenge.MeasurementCriteria == MeasurementCriteria.WorkoutCategoryCount)
                 {
-                    // Log category details for debugging
-                    Console.WriteLine($"Completed Workout Category: {completedWorkout.Category}");
-
-                    // Update based on count (add 1)
                     userChallenge.CountProgress++;
                 }
             }
 
-            // Update clan challenge progress if the user is part of a clan
+            // Check if the user is part of a clan
+            var userClan = await _context.Clans.FirstOrDefaultAsync(clan => clan.Members.Any(member => member.Id == currentUser.Id));
+
             if (userClan != null)
             {
+                // Update clan challenge progress
                 var clanChallenges = await _context.ClanChallenges
                     .Include(cc => cc.Challenge)
                     .Where(cc => cc.ClanId == userClan.ClanId)
@@ -502,41 +438,24 @@ namespace ProjectWebApp.Controllers
                 {
                     if (clanChallengeItem.Challenge.Type != completedWorkout.Category)
                     {
-                        continue; // Skip to the next iteration if there's no match
+                        continue; 
                     }
 
-                    // Log clan challenge details for debugging
-                    Console.WriteLine($"Clan Challenge Type: {clanChallengeItem.Challenge.ChallengeType}");
-                    Console.WriteLine($"Clan Measurement Criteria: {clanChallengeItem.Challenge.MeasurementCriteria}");
-
-                    // Update clan challenge progress based on the completed workout
                     if (clanChallengeItem.Challenge.MeasurementCriteria == MeasurementCriteria.TotalTime)
                     {
-                        // Update based on total time of the workout (adjust based on your actual model)
                         clanChallengeItem.CountProgress += completedWorkout.DurationMinutes;
                     }
                     else if (clanChallengeItem.Challenge.MeasurementCriteria == MeasurementCriteria.WorkoutCategoryCount)
                     {
-                        // Log category details for debugging
-                        Console.WriteLine($"Completed Workout Category: {completedWorkout.Category}");
-
-                        // Update based on count (add 1)
                         clanChallengeItem.CountProgress++;
                     }
                 }
             }
 
-            // Save changes to the database
             await _context.SaveChangesAsync();
-
-            // Other logic or redirection as needed
             return Ok(new { success = true, message = "Workout marked as completed successfully." });
         }
-
-
-
     }
-
 }
 
 

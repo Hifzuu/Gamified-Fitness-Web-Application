@@ -16,16 +16,16 @@ namespace ProjectWebApp.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private static readonly Random random = new Random(Guid.NewGuid().GetHashCode());
-        private readonly ILogger<ClanController> _logger; // Add logger
+        private readonly ILogger<ClanController> _logger; 
 
         public ClanController(
             UserManager<ApplicationUser> userManager,
             ApplicationDbContext context,
-            ILogger<ClanController> logger) // Add logger parameter
+            ILogger<ClanController> logger) 
         {
             _userManager = userManager;
             _context = context;
-            _logger = logger; // Initialize logger
+            _logger = logger; 
         }
 
         public async Task<IActionResult> Index()
@@ -51,19 +51,17 @@ namespace ProjectWebApp.Controllers
                 // Combine the two lists
                 var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
 
-                // Initialize variables for challenge information
+                // Initialize variables for challenge info
                 ClanChallenge activeClanChallenge = null;
                 string formattedTimeForChallenge = string.Empty;
                 double challengeProgressPercentage = 0;
                 List<Workout> matchingWorkouts = new List<Workout>();
 
-                // Check if the user is a creator or member of any clan
                 if (userClans.Any())
                 {
-                    // Get the clan ID of the first clan the user is a member of
                     var userClanId = userClans.First().ClanId;
 
-                    // Retrieve the user's current daily challenge for today
+                    // retrieve current clan challenge
                     activeClanChallenge = GetClanChallenge(userClanId);
                     formattedTimeForChallenge = activeClanChallenge != null
                         ? FormatChallengeTime(activeClanChallenge)
@@ -76,16 +74,15 @@ namespace ProjectWebApp.Controllers
                         challengeProgressPercentage = (double)dailyCountProgress / activeClanChallenge.Challenge.TargetCount * 100;
                     }
 
-                    // Get the type of the active clan challenge
                     var activeChallengeType = activeClanChallenge?.Challenge?.Type;
 
-                    // Query the workouts matching the active challenge type
+                    // retrieve workouts for the challenge type
                     matchingWorkouts = await _context.Workouts
                         .Where(w => w.Category == activeChallengeType)
                         .ToListAsync();
                 }
 
-                // Map Clan entities to ClanViewModel
+                // populate clan view model
                 var clanViewModels = userClans.Select(clan => new ClanViewModel
                 {
                     ClanId = clan.ClanId,
@@ -111,9 +108,6 @@ namespace ProjectWebApp.Controllers
                 throw; // Re-throw the exception for global exception handling
             }
         }
-
-
-
 
         private void UpdateClanChallengeParticipants(int clanId)
         {
@@ -153,28 +147,19 @@ namespace ProjectWebApp.Controllers
             }
         }
 
-
-
         private string FormatChallengeTime(ClanChallenge clanChallenge)
         {
             if (clanChallenge != null)
             {
-                // Use the UserChallenge's end date
                 DateTime clanChallengeEnd = clanChallenge.EndDate;
                 TimeSpan timeRemaining = clanChallengeEnd - DateTime.Now;
-
-                // Ensure the result is non-negative to avoid negative time remaining
                 int secondsRemaining = (int)Math.Max(0, timeRemaining.TotalSeconds);
-
-                // Include both date and time in the formatted output
                 string formattedTime = DateTime.Now.AddSeconds(secondsRemaining).ToString("yyyy-MM-dd HH:mm:ssZ");
-
                 return formattedTime;
             }
             else
             {
-                // Handle null scenario
-                return string.Empty; // Or any other appropriate action
+                return string.Empty; 
             }
 
         }
@@ -184,19 +169,17 @@ namespace ProjectWebApp.Controllers
             try
             {
                 DateTime currentDate = DateTime.Now.Date;
-
-                // Calculate the start of the week
                 DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday);
 
-                // Retrieve the clan's current challenge for the specified type and date
+                // retrieve current weekly clan challenge
                 var clanChallenge = _context.ClanChallenges
                     .Include(uc => uc.Challenge)
-                        .ThenInclude(c => c.Workouts) // Include related data as needed
+                        .ThenInclude(c => c.Workouts) 
                     .FirstOrDefault(uc => uc.ClanId == clanId
                                             && uc.StartDate.Date == startOfWeek.Date
                                             && uc.Challenge.ChallengeType == ChallengeType.Clan);
 
-                // Update participants based on the current list of clan members
+                // Update participants based on current clan members
                 if (clanChallenge != null)
                 {
                     var currentMembers = _context.Users.Where(u => u.ClanId == clanId).ToList();
@@ -220,30 +203,27 @@ namespace ProjectWebApp.Controllers
                         }
                     }
 
-                    _context.SaveChanges(); // Save changes to update participants
+                    _context.SaveChanges(); 
                 }
 
                 return clanChallenge;
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it appropriately
                 Console.WriteLine($"Error retrieving clan challenge: {ex.Message}");
                 return null;
             }
         }
-
-
 
         private void AssignClanChallengeForAllMembers(int clanId)
         {
             try
             {
                 DateTime currentDate = DateTime.Now;
-                DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday); // Assuming Monday is the start of the week
+                DateTime startOfWeek = currentDate.StartOfWeek(DayOfWeek.Monday); // every week
                 DateTime endOfWeek = startOfWeek.AddDays(6).EndOfDay();
 
-                // Check if a weekly challenge is already assigned for the current week for the clan
+                // check if challenge exists for this week
                 bool hasChallenge = _context.ClanChallenges
                     .Any(uc => uc.ClanId == clanId
                                 && uc.StartDate.Date >= startOfWeek.Date
@@ -263,7 +243,6 @@ namespace ProjectWebApp.Controllers
                         var random = new Random();
                         Challenge randomChallenge = clanChallenges[random.Next(clanChallenges.Count)];
 
-                        // Create a new clan challenge instance
                         ClanChallenge clanChallenge = new ClanChallenge
                         {
                             ClanId = clanId,
@@ -281,31 +260,24 @@ namespace ProjectWebApp.Controllers
                     }
                     else
                     {
-                        // Log or handle the case where no weekly challenges are available
                         Console.WriteLine("No clan challenges available.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it appropriately
                 Console.WriteLine($"Error assigning clan challenge: {ex.Message}");
             }
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> CreateClan(ClanViewModel model)
         {
-            _logger.LogInformation($"Received request to create clan with name: {model.Name}");
-            _logger.LogInformation($"Received request to create bio with name: {model.bio}");
-
             try
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    // Check for an empty clan name
+                    // Check for empty clan name
                     if (string.IsNullOrWhiteSpace(model.Name))
                     {
                         return Json(new { success = false, message = "Clan name cannot be empty." });
@@ -328,30 +300,27 @@ namespace ProjectWebApp.Controllers
                         bio = model.bio,
                     };
 
-                    // Save the new clan to the database
+                    // Add new clan to the Clans database.
                     _context.Clans.Add(newClan);
+
+                    // Load the Creator navigation property of the new clan 
                     await _context.Entry(newClan).Reference(c => c.Creator).LoadAsync();
+
+                    // Save changes asynchronously to the database
                     await _context.SaveChangesAsync();
 
-                    // Assign the ClanId to the ApplicationUser (user who created the clan)
                     var user = await _userManager.FindByIdAsync(userId);
-
-                    // Add the user as the creator of the clan
                     newClan.Creator = user;
-
-                    // Set ClanId for the creator
                     user.ClanId = newClan.ClanId;
-
-                    // Save changes to the user
                     await _userManager.UpdateAsync(user);
 
-                    // Save changes to the clan
+
                     await _context.SaveChangesAsync();
 
-                    // Call the method to assign challenge for all members of the newly created clan
+                    // assign challenge for all members of the new clan
                     AssignClanChallengeForAllMembers(newClan.ClanId);
 
-                    // Map ClanViewModel to the newly created clan
+                    // Map ClanViewModel to the new clan
                     var clanViewModel = new ClanViewModel
                     {
                         ClanId = newClan.ClanId,
@@ -372,9 +341,6 @@ namespace ProjectWebApp.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                _logger.LogError(ex, "Error creating clan");
-
                 return Json(new { success = false, message = "An error occurred during the clan creation process." });
             }
         }
@@ -384,20 +350,12 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Use StringComparison.OrdinalIgnoreCase outside of the query
                 var normalizedClanName = clanName.ToUpperInvariant();
-
-                // Materialize the list before using LINQ-to-Objects
                 var clans = _context.Clans.ToList();
-
-                return clans.Any(c => string.Equals(c.Name, normalizedClanName, StringComparison.OrdinalIgnoreCase));
+                return clans.Any(c => string.Equals(c.Name, normalizedClanName, StringComparison.OrdinalIgnoreCase)); //case sensitive
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                _logger.LogError(ex, "Error checking duplicate clan name");
-
-                // Propagate the exception
                 throw;
             }
         }
@@ -407,20 +365,17 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Retrieve the current user
                 var userId = _userManager.GetUserId(User);
-
-                // Retrieve the clan to join
                 var clanToJoin = await _context.Clans
                     .Include(c => c.Members)
                     .FirstOrDefaultAsync(c => c.ClanId == clanId);
 
                 if (clanToJoin != null)
                 {
-                    // Check if the user is already a member of the clan
+                    // if user is not part of this clan
                     if (!clanToJoin.Members.Any(u => u.Id == userId))
                     {
-                        // Check if the clan has reached the maximum number of members (30)
+                        // check if there is space in clan
                         if (clanToJoin.Members.Count >= 30)
                         {
                             return Json(new { success = false, message = "This clan has reached its maximum capacity. No more members can join at the moment." });
@@ -433,37 +388,28 @@ namespace ProjectWebApp.Controllers
 
                         if (userCurrentClan != null)
                         {
-                            // User is already a member of a different clan
                             return Json(new { success = false, message = "You are already a member of another clan. Please leave your current clan before joining a new one." });
                         }
 
-                        // Add the user to the clan
                         var user = await _userManager.FindByIdAsync(userId);
                         clanToJoin.Members.Add(user);
 
                         UpdateClanChallengeParticipants(clanId);
-
-                        // Update the database
                         await _context.SaveChangesAsync();
-
-                        // Return a JSON response with success message
                         return Json(new { success = true, message = "Successfully joined the clan." });
                     }
                     else
                     {
-                        // User is already a member of the clan
                         return Json(new { success = false, message = "You are already a member of the clan." });
                     }
                 }
                 else
                 {
-                    // Clan not found
                     return Json(new { success = false, message = "Clan not found." });
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
                 return Json(new { success = false, message = "An error occurred while joining the clan." });
             }
         }
@@ -474,10 +420,7 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Retrieve the current user
                 var userId = _userManager.GetUserId(User);
-
-                // Retrieve the clan to leave
                 var clanToLeave = await _context.Clans
                     .Include(c => c.Members)
                     .FirstOrDefaultAsync(c => c.ClanId == clanId);
@@ -491,29 +434,22 @@ namespace ProjectWebApp.Controllers
                     {
                         // Remove the user from the clan
                         clanToLeave.Members.Remove(user);
-
                         UpdateClanChallengeParticipants(clanId);
-
-                        // Update the database
                         await _context.SaveChangesAsync();
-
                         return Json(new { success = true, message = "Successfully left the clan." });
                     }
                     else
                     {
-                        // User is not a member of the clan
                         return Json(new { success = false, message = "You are not a member of this clan." });
                     }
                 }
                 else
                 {
-                    // Clan not found
                     return Json(new { success = false, message = "Clan not found." });
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
                 return Json(new { success = false, message = "An error occurred while leaving the clan." });
             }
         }
@@ -524,18 +460,15 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Retrieve the current user
                 var userId = _userManager.GetUserId(User);
-
-                // Retrieve the clan to delete
                 var clanToDelete = await _context.Clans
                     .Include(c => c.Members)
-                    .Include(c => c.ClanChallenges) // Include clan challenges
+                    .Include(c => c.ClanChallenges)
                     .FirstOrDefaultAsync(c => c.ClanId == clanId);
 
                 if (clanToDelete != null)
                 {
-                    // Check if the current user is the creator of the clan
+                    // check if its the leader
                     if (clanToDelete.CreatorId == userId)
                     {
                         // Set ClanId to null for all members
@@ -544,32 +477,24 @@ namespace ProjectWebApp.Controllers
                             member.ClanId = null;
                         }
 
-                        // Delete associated clan challenges
+                        // Delete associated clan challenges and clan with members
                         _context.ClanChallenges.RemoveRange(clanToDelete.ClanChallenges);
-
-                        // Delete the clan (including members)
                         _context.Clans.Remove(clanToDelete);
-
-                        // Update the database
                         await _context.SaveChangesAsync();
-
                         return Json(new { success = true, message = "Successfully deleted the clan." });
                     }
                     else
                     {
-                        // User is not the creator of the clan
                         return Json(new { success = false, message = "You are not authorized to delete this clan." });
                     }
                 }
                 else
                 {
-                    // Clan not found
                     return Json(new { success = false, message = "Clan not found." });
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions
                 return Json(new { success = false, message = "An error occurred while deleting the clan." });
             }
         }
@@ -581,14 +506,11 @@ namespace ProjectWebApp.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userManager.GetUserAsync(User).Result;
-
-                // Assuming Points is the property in your ApplicationUser model
                 var points = user?.Points ?? 0;
-
                 return Json(points);
             }
 
-            return Json(0); // Return 0 for unauthenticated users or handle it according to your logic
+            return Json(0); // Return 0 for unauthenticated users 
         }
 
 
@@ -604,7 +526,7 @@ namespace ProjectWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok(); // or return a JSON response if needed
+                    return Ok(); 
                 }
             }
 
@@ -616,22 +538,16 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
+                // retroeve all clans except users current clan
                 var allClans = await _context.Clans
                     .ToListAsync();
-
-                // Filter out the user's clans
                 var userId = _userManager.GetUserId(User);
                 var userClans = await GetUserClans(userId);
-
                 var otherClans = allClans.Except(userClans).ToList();
-
                 return Json(otherClans);
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                _logger.LogError(ex, "Error fetching available clans");
-
                 return Json(new { error = "An error occurred while fetching available clans." });
             }
         }
@@ -647,15 +563,14 @@ namespace ProjectWebApp.Controllers
                 .ToListAsync();
 
             var userClans = clansCreatedByUser.Concat(clansForMember).ToList();
+
             return userClans;
         }
 
-        // GET: Clan/Leaderboards
         public ActionResult Leaderboards()
         {
-            // Retrieve leaderboards data from the database
             var leaderboardsData = _context.Clans
-                .OrderByDescending(clan => clan.ClanPoints) // Order by points in descending order
+                .OrderByDescending(clan => clan.ClanPoints)
                 .Select(clan => new
                 {
                     clan.Name,
@@ -663,7 +578,6 @@ namespace ProjectWebApp.Controllers
                 })
                 .ToList();
 
-            // Return the leaderboards data as JSON
             return Json(leaderboardsData);
         }
 
@@ -672,28 +586,24 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Retrieve the current user
                 var currentUser = await _userManager.GetUserAsync(User);
 
-                // Check if the current user is the leader of the clan
+                // chekck if user is leader
                 if (currentUser == null || currentUser.ClanId == null)
                 {
                     return Json(new { success = false, message = "You are not authorized to kick members from a clan." });
                 }
 
-                // Retrieve the member to be kicked
-                var memberToKick = await _context.Users.FirstOrDefaultAsync(u => u.Id == memberId);
 
+                var memberToKick = await _context.Users.FirstOrDefaultAsync(u => u.Id == memberId);
                 if (memberToKick == null)
                 {
                     return Json(new { success = false, message = "Member not found." });
                 }
 
-                // Retrieve the clan of the current user
                 var clan = await _context.Clans
                     .Include(c => c.Members)
                     .FirstOrDefaultAsync(c => c.ClanId == currentUser.ClanId);
-
                 if (clan == null)
                 {
                     return Json(new { success = false, message = "Clan not found." });
@@ -711,19 +621,13 @@ namespace ProjectWebApp.Controllers
                     return Json(new { success = false, message = "The specified member is not a member of this clan." });
                 }
 
-                // Remove the member from the clan
                 clan.Members.Remove(memberToKick);
-
                 UpdateClanChallengeParticipants(clan.ClanId);
-
-                // Update the database
                 await _context.SaveChangesAsync();
-
                 return Json(new { success = true, message = "Member kicked successfully." });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error kicking member from clan");
                 return Json(new { success = false, message = "An error occurred while kicking the member from the clan." });
             }
         }
@@ -733,30 +637,21 @@ namespace ProjectWebApp.Controllers
         {
             try
             {
-                // Check if the search text is null or empty
+                // Return an empty result if search text is null or empty
                 if (string.IsNullOrWhiteSpace(searchText))
                 {
-                    // Return an empty result if search text is null or empty
                     return Json(new List<Clan>());
                 }
 
-                // Convert the search text to lowercase for case-insensitive search
                 searchText = searchText.ToLower();
-
-                // Retrieve clans that match the search criteria
                 var matchingClans = await _context.Clans
                     .Where(c => c.Name.ToLower().Contains(searchText))
                     .ToListAsync();
 
-                // Return the matching clans as JSON
                 return Json(matchingClans);
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                _logger.LogError(ex, "Error searching clans");
-
-                // Return an error response
                 return StatusCode(500, "An error occurred while searching for clans.");
             }
         }
@@ -777,20 +672,15 @@ namespace ProjectWebApp.Controllers
             clan.bio = newBio;
             _context.Clans.Update(clan);
             await _context.SaveChangesAsync();
-
             return Json(new { success = true, message = "Clan bio updated successfully." });
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdatePointsChallenge(int points, int clanChallengeId)
         {
-            _logger.LogInformation($"Received points update request. Points: {points}, ClanChallengeId: {clanChallengeId}");
             try
             {
-                // Retrieve the current user
                 var currentUser = await _userManager.GetUserAsync(User);
-
-                // Retrieve the clan of the current user
                 var clan = await _context.Clans
                     .Include(c => c.Members)
                     .FirstOrDefaultAsync(c => c.ClanId == currentUser.ClanId);
@@ -801,35 +691,21 @@ namespace ProjectWebApp.Controllers
                     var clanChallenge = _context.ClanChallenges.Find(clanChallengeId);
                     if (clanChallenge != null && !clanChallenge.IsRewardClaimed)
                     {
-                        // Update clan's points only if the reward is not already claimed
                         clan.ClanPoints += points;
-
-                        // Update the IsRewardClaimed property
                         clanChallenge.IsRewardClaimed = true;
-
-                        // Save changes to the database
                         _context.SaveChanges();
-
-                        return Ok(); // or return a JSON response if needed
+                        return Ok(); 
                     }
                 }
-
-                // Log failure to update points
-                _logger.LogError($"Failed to update points. User: {currentUser?.UserName}, ChallengeId: {clanChallengeId}");
 
                 return BadRequest("Failed to update points");
             }
             catch (Exception ex)
             {
-                // Log the exception
-                _logger.LogError(ex, $"An exception occurred while updating points. ClanChallengeId: {clanChallengeId}");
                 return BadRequest("An error occurred while updating points");
             }
         }
-
-
     }
-
 }
 
 
