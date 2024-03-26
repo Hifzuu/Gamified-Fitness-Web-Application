@@ -363,7 +363,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                     _logger.LogInformation($"ModelState Error: {error.ErrorMessage}");
                 }
 
-                // Add custom error message
+                // custom error message
                 ModelState.AddModelError(string.Empty, "An error occurred while processing your request. Please try again.");
 
                 // Return the page with preserved ModelState

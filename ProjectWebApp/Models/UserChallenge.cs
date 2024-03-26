@@ -2,7 +2,6 @@
 
 namespace ProjectWebApp.Models
 {
-    // UserChallenge Model
     public class UserChallenge
     {
         public int UserChallengeId { get; set; }

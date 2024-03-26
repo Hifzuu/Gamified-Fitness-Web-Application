@@ -132,7 +132,7 @@ namespace ProjectWebApp.Controllers
         }
          
         // return users daily challenge (today)
-        private UserChallenge GetUserDailyChallenge(string userId)
+        private UserChallenge GetUserDailyChallenge(string userId) 
         {
             DateTime currentDate = DateTime.Now.Date;
 

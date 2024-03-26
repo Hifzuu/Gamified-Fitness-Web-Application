@@ -2,15 +2,15 @@
 {
     public class Challenge
     {
-        public int ChallengeId { get; set; } // Primary Key
+        public int ChallengeId { get; set; } 
 
-        public string Name { get; set; } // Name of the challenge
-        public string Description { get; set; } // Description of the challenge
-        public string Type { get; set; } // Type of challenge (e.g., cardio, strength, etc.)
-        public int TargetCount { get; set; } // Target count for the challenge (e.g., number of workouts to complete)
-        public string MeasurementType { get; set; } // Type of measurement for progress (e.g., duration, repetitions, etc.)
+        public string Name { get; set; } 
+        public string Description { get; set; } 
+        public string Type { get; set; } 
+        public int TargetCount { get; set; }
+        public string MeasurementType { get; set; } 
 
-        // Navigation property for the many-to-many relationship
+
         public List<Workout> Workouts { get; set; } = new List<Workout>();
 
         public ChallengeType ChallengeType { get; set; }
@@ -29,6 +29,5 @@
     {
         TotalTime,
         WorkoutCategoryCount
-        // Add more as needed
     }
 }

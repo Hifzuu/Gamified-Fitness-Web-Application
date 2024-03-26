@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using ProjectWebApp.Models; // Make sure to include the namespace where ApplicationUser is defined
+using ProjectWebApp.Models; 
 
 namespace ProjectWebApp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> // Provide ApplicationUser as the generic argument
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> 
     {
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<UserFavouriteWorkout> UserFavouriteWorkouts { get; set; }
@@ -32,7 +32,6 @@ namespace ProjectWebApp.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure many-to-many relationship for user favourited workouts
             modelBuilder.Entity<UserFavouriteWorkout>()
                 .HasKey(ufw => new { ufw.UserId, ufw.WorkoutId });
 
@@ -56,7 +55,6 @@ namespace ProjectWebApp.Data
                 .HasForeignKey(we => we.UserId)
                 .IsRequired();
 
-            // Configure one-to-many relationship for user calendar entries
             modelBuilder.Entity<UserCalendar>()
                .HasKey(uc => new { uc.UserCalendarId });
 
@@ -72,7 +70,6 @@ namespace ProjectWebApp.Data
                 .HasForeignKey(uc => uc.WorkoutId)
                 .IsRequired();
 
-            // Configure the relationship between ApplicationUser and Streak
             modelBuilder.Entity<LoginStreak>()
             .HasKey(ls => new { ls.UserId, ls.LastLoginTime });
 
@@ -82,11 +79,9 @@ namespace ProjectWebApp.Data
                 .HasForeignKey(ls => ls.UserId)
                 .IsRequired();
 
-            // Configure the primary key for StreakReward and userStreakReward
             modelBuilder.Entity<StreakReward>().HasKey(sr => sr.RewardId);
             modelBuilder.Entity<UserStreakReward>().HasKey(usr => usr.UserStreakRewardId);
 
-            // Configure the relationship between LoginStreak and StreakReward
             modelBuilder.Entity<LoginStreak>()
                 .HasMany(ls => ls.UserStreakRewards)
                 .WithOne(usr => usr.LoginStreak)
@@ -97,7 +92,6 @@ namespace ProjectWebApp.Data
                 .WithOne(usr => usr.StreakReward)
                 .HasForeignKey(usr => usr.RewardId);
 
-            // Configure the relationship between ApplicationUser and UserStreakReward
             modelBuilder.Entity<UserStreakReward>()
                 .HasOne(usr => usr.LoginStreak)
                 .WithMany(ls => ls.UserStreakRewards)
@@ -194,7 +188,6 @@ namespace ProjectWebApp.Data
 
         public ApplicationUser GetUserById(string userId)
         {
-            // Assuming you have a User DbSet in your DbContext
             return Users.FirstOrDefault(u => u.Id == userId);
         }
     }

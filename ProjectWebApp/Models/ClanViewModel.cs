@@ -1,5 +1,4 @@
-﻿// ClanViewModel.cs
-namespace ProjectWebApp.Models
+﻿namespace ProjectWebApp.Models
 {
     public class ClanViewModel
     {

@@ -9,147 +9,93 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        crossorigin="anonymous">
-
-</head>
-
-<style>
-    .main-content {
-        margin-left: 0px;
-    }
-
-    .btn.btn-lg {
-        padding: 10px 30px;
-        font-size: 25px;
-    }
-
-    .btn.btn-outline-primary.btn-lg {
-        padding: 10px 30px;
-        font-size: 25px;
-    }
-
-
-    .or-divider {
-        font-size: 18px!important;
-        margin-left: 10px;
-        margin-right: 10px;
-        display: flex;
-        align-items: center;
-        color: white;
-    }
-
-        .or-divider::before,
-        .or-divider::after {
-            content: '';
-            flex: 1;
-            border-top: 1px solid white;
-            margin: 0 10px;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Fit.Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
-</style>
+        .bg-img {
+            background-image: url(/Images/logreg.jpg);
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-<body>
+        .section-wrapper {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .welcome-message h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .cta-buttons .btn {
+                padding: 15px 30px;
+                font-size: 20px;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+                color: #fff;
+                cursor: pointer;
+                margin: 0 10px;
+                text-decoration: none;
+                border:none;
+            }
 
 
-    <div class="container-one">
-        <!-- Introduction Section -->
-        <div class="content-container">
-
-            <div class="welcome-message text-center">
-                <h1 class="display-4">Welcome to Fit.Me</h1>
-                <p>Your personalised fitness journey starts here! Unlock achievements, conquer challenges, and earn
-                    exciting rewards on your path to a healthier you.</p>
-            </div>
-
-            <!-- Key Features Section -->
-            <div class="key-features text-center">
-                <div class="feature">
-                    <img src="/images/medals.png" alt="Rewards Icon" class="feature-icon" />
-                    <div class="feature-text">
-                        <h3>Unlock Achievements and Rewards</h3>
-                        <p>
-                            Elevate your workout experience by unlocking achievements, conquering challenges, and
-                            earning rewards. Our AI-driven platform tailors workout plans to fit your goals, ensuring a
-                            personalized fitness journey. Connect with a vibrant community of like-minded individuals,
-                            share your achievements, and find inspiration. Fit.Me transforms each exercise into an
-                            exciting adventure, making fitness goals more achievable and enjoyable. Join us for a
-                            gamified fitness experience that turns every workout into a rewarding accomplishment.
-                        </p>
-                    </div>
-                </div>
-                <div class="feature">
-                    <img src="/images/variety.png" alt="Variety of Workouts Icon" class="feature-icon" />
-                    <div class="feature-text">
-                        <h3>Diverse Range of Workouts</h3>
-                        <p>
-                            At Fit.Me, we believe in keeping your fitness journey exciting and dynamic. Explore a
-                            diverse range of workouts that cater to all fitness levels and preferences. Whether you're
-                            into high-intensity training, yoga, strength-building, or cardio, our platform offers a
-                            variety of engaging workouts. Discover new exercises, challenge yourself with different
-                            routines, and keep things fresh to make every workout a thrilling experience. Your fitness
-                            journey with us is not just effective; it's an adventure with endless possibilities.
-                        </p>
-                    </div>
-                </div>
-                <div class="feature">
-                    <img src="/images/social.png" alt="Social Interaction Icon" class="feature-icon" />
-                    <div class="feature-text">
-                        <h3>Connect and Share</h3>
-                        <p>
-                            Connect with friends, share achievements, and inspire each other on your fitness journey.
-                            Fitness is more fun when it's a shared adventure! Join fitness challenges together,
-                            celebrate milestones, and motivate each other to reach new heights. Fit.Me fosters a
-                            supportive community that makes every step of your journey enjoyable and rewarding.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Call-to-Action Section -->
-            <div class="cta-buttons text-center">
-                @if (!isAuthenticated)
-                {
-                    <!-- User not signed in, show log in and sign up buttons -->
-                    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg">Sign Up</a>
-                    <span class="or-divider">OR</span>
-                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg">Log In</a>
-                }
-                else
-                {
-                    <!-- User is signed in, show My Dashboard button -->
-                    <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="btn btn-primary btn-lg">Visit Your
-                        Dashboard</a>
-                }
-            </div>
-
-            <!-- App Benefits Section -->
-            <div class="app-benefits">
-                <div class="benefit">
-                    <h2>Personalised Plans</h2>
-                    <p>Tailored workouts designed to meet your unique fitness goals and preferences.</p>
-                </div>
-                <div class="benefit">
-                    <h2>Social Interaction</h2>
-                    <p>Connect with friends, share achievements, and inspire each other on your fitness adventure.</p>
-                </div>
-                <div class="benefit">
-                    <h2>Rewards and Achievements</h2>
-                    <p>Earn exciting rewards, unlock achievements, and level up your fitness game with every workout.
-                    </p>
-                </div>
-            </div>
-
+        .or-divider {
+            font-size: 18px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body class="home-page hold-transition theme-primary bg-img">
+    <div class="section-wrapper">
+        <div class="welcome-message">
+            <h1>Welcome to Fit.Me</h1>
+            <p>Your personalized fitness journey starts here! Complete workouts, join clans, conquer challenges and earn exciting rewards on your path to a healthier you.</p>
+        </div>
+        <div class="cta-buttons">
+            @if (!isAuthenticated)
+            {
+                <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary">Sign Up</a>
+                <span class="or-divider">OR</span>
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Log In</a>
+            }
+            else
+            {
+                <a asp-area="" asp-controller="Dashboard" asp-action="Index" class="btn btn-primary">Visit Your Dashboard</a>
+            }
         </div>
     </div>
-
-
-
 </body>
-
 </html>

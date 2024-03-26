@@ -107,7 +107,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // something failed, redisplay form
             return Page();
         }
 
@@ -157,21 +157,9 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account
                     }
                 }
 
-                // Add the new entity to the context
                 _dbContext.LoginStreaks.Add(newLoginStreak);
-
-                // Save changes to the database
                 await _dbContext.SaveChangesAsync();
             }
         }
-
-
-
-
-
-
-
-
     }
-
 }

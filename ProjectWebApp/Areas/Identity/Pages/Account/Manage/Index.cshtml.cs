@@ -60,9 +60,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                // Use the ProfileImageUrl directly for displaying the current profile picture
                 ProfilePicture = null,
-               // Update ProfilePictureUrl
                 ProfilePictureUrl = user.ProfileImageUrl
         };
         }
@@ -107,7 +105,6 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            // Handle Profile Picture
             if (Input.ProfilePicture != null)
             {
                 // Save the uploaded image to the UserPfpUploads folder
@@ -121,7 +118,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
                 }
 
                 // Update the user's profile picture URL
-                user.ProfileImageUrl = "/UserPfpUploads/" + fileName; // Adjust the path as needed
+                user.ProfileImageUrl = "/UserPfpUploads/" + fileName; 
 
                 if (!string.IsNullOrEmpty(oldProfilePicturePath) && oldProfilePicturePath != "/Images/empty-pfp.png")
                 {
@@ -133,7 +130,7 @@ namespace ProjectWebApp.Areas.Identity.Pages.Account.Manage
                 }
 
                 // Update the user's profile picture URL
-                user.ProfileImageUrl = "/UserPfpUploads/" + fileName; // Adjust the path as needed
+                user.ProfileImageUrl = "/UserPfpUploads/" + fileName;
 
                 // Update ProfilePictureUrl
                 Input.ProfilePictureUrl = user.ProfileImageUrl;
