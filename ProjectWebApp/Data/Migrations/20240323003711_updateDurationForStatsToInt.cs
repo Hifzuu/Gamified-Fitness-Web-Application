@@ -11,8 +11,6 @@ namespace ProjectWebApp.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Drop default constraint
-            migrationBuilder.Sql("ALTER TABLE UserWorkoutStats DROP CONSTRAINT <constraint_name>");
 
             // Alter column type
             migrationBuilder.AlterColumn<int>(

@@ -177,12 +177,20 @@ namespace ProjectWebApp.Data
             modelBuilder.Entity<ClanChallenge>()
                 .HasOne(cc => cc.Clan)
                 .WithMany(c => c.ClanChallenges)
-                .HasForeignKey(cc => cc.ClanId);
+                .HasForeignKey(cc => cc.ClanId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ClanChallenge>()
                 .HasOne(cc => cc.Challenge)
                 .WithMany()
                 .HasForeignKey(cc => cc.ChallengeId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(u => u.ClanChallenge)
+                .WithMany()
+                .HasForeignKey(u => u.ClanChallengeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
         }
 

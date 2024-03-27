@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectWebApp.Data;
 
@@ -11,9 +12,11 @@ using ProjectWebApp.Data;
 namespace ProjectWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327224044_updateAspNetUserClanChallId")]
+    partial class updateAspNetUserClanChallId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,9 +188,6 @@ namespace ProjectWebApp.Data.Migrations
                     b.Property<int?>("ClanChallengeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClanChallengeId1")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ClanId")
                         .HasColumnType("int");
 
@@ -282,8 +282,6 @@ namespace ProjectWebApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClanChallengeId");
-
-                    b.HasIndex("ClanChallengeId1");
 
                     b.HasIndex("ClanId");
 
@@ -853,13 +851,8 @@ namespace ProjectWebApp.Data.Migrations
             modelBuilder.Entity("ProjectWebApp.Models.ApplicationUser", b =>
                 {
                     b.HasOne("ProjectWebApp.Models.ClanChallenge", "ClanChallenge")
-                        .WithMany()
-                        .HasForeignKey("ClanChallengeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ProjectWebApp.Models.ClanChallenge", null)
                         .WithMany("Participants")
-                        .HasForeignKey("ClanChallengeId1");
+                        .HasForeignKey("ClanChallengeId");
 
                     b.HasOne("ProjectWebApp.Models.Clan", "Clan")
                         .WithMany("Members")

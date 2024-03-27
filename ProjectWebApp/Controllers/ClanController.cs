@@ -257,8 +257,14 @@ namespace ProjectWebApp.Controllers
                         _context.ClanChallenges.Add(clanChallenge);
                         _context.SaveChanges();
 
-                        // Update participants for the clan challenge
-                        UpdateClanChallengeParticipants(clanId);
+                        // Update ClanChallengeId for all members of the clan
+                        var clanMembers = _context.Users.Where(u => u.ClanId == clanId).ToList();
+                        foreach (var member in clanMembers)
+                        {
+                            member.ClanChallengeId = clanChallenge.ClanChallengeId;
+                        }
+
+                        _context.SaveChanges();
                     }
                     else
                     {
@@ -271,6 +277,7 @@ namespace ProjectWebApp.Controllers
                 Console.WriteLine($"Error assigning clan challenge: {ex.Message}");
             }
         }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateClan(ClanViewModel model)

@@ -39,5 +39,8 @@ namespace ProjectWebApp.Models
         public List<LoginStreak> LoginStreaks { get; set; } = new List<LoginStreak>();
         public List<UserChallenge> UserChallenges { get; set; } = new List<UserChallenge>();
         public List<UserRaffleEntry> UserRaffleEntries { get; set; } = new List<UserRaffleEntry>();
+
+        public int? ClanChallengeId { get; set; }  
+        public ClanChallenge ClanChallenge { get; set; } 
     }
 }
