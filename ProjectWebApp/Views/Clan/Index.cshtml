@@ -40,20 +40,20 @@
 
     .rank {
         font-weight: bold;
-        font-size: 18px; /* Adjust font size as needed */
+        font-size: 18px;
         margin-right: 0;
     }
 
     .first-place {
-        color: gold; /* Color for first place */
+        color: gold; 
     }
 
     .second-place {
-        color: silver; /* Color for second place */
+        color: silver; 
     }
 
     .third-place {
-        color: #cd7f32; /* Color for third place (bronze) */
+        color: #cd7f32; 
     }
 
     .clan-name {
@@ -77,9 +77,9 @@
                     {
 
                         <div>
-                            <!-- Clan Info Section -->
+                            <!-- Clan Info -->
                             <div class="clan-info d-flex justify-content-between align-items-center">
-                                <!-- Left Info Section -->
+                                <!-- Left Info -->
                                 <div class="left-info">
                                     <h2 class="clan-name">@Model[0].Name</h2>
                                     @if (!string.IsNullOrEmpty(Model[0].bio))
@@ -92,7 +92,7 @@
                                     }
                                     <h2 class="clan-points">Clan Points: <i class="fas fa-medal" style="color: gold;">CP</i> @Model[0].ClanPoints</h2>
                                 </div>
-                                <!-- Action Buttons Section -->
+                                <!-- Buttons Right Side -->
                                 <div class="action-buttons">
                                     @if (User.Identity.Name == Model[0].CreatorUserName)
                                     {
@@ -106,15 +106,14 @@
                                 </div>
                             </div>
 
-                            <!-- Members Section -->
+                            <!-- Members Header -->
                             <div class="d-flex justify-content-between pt-2 align-items-center" style="background-color:#D0EBFF;">
-                                <!-- Updated alignment to center vertically -->
                                 <h2 class="members-section text-dark pb-0 mb-0">Members</h2>
-                                <!-- Search Input with custom styles -->
+                                <!-- Search bar -->
                                 <div class="input-group">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-transparent border-0 rounded-0">
-                                            <i class="fas fa-search text-muted"></i> <!-- Font Awesome search icon -->
+                                            <i class="fas fa-search text-muted"></i> 
                                         </span>
                                     </div>
                                     <input type="text" id="memberSearchInput" class="form-control border-0 rounded-0 pl-0 custom-search" placeholder="Search members..." style="background-color:#D0EBFF;">
@@ -124,11 +123,9 @@
                             </div>
 
 
-                            <!-- Member List Section -->
+                            <!-- Member List -->
                             <div class="members-section" style="max-height: 320px; overflow-y: auto;">
-                                <!-- Member List -->
                                 <div class="member-list pb-2">
-                                    <!-- Member Items -->
                                     @if (Model[0].Members.Any())
                                     {
                                         // Get leader details
@@ -141,16 +138,12 @@
                                         .OrderByDescending(member => member.Points)
                                         .ToList();
 
-                                        // Remove leader from the ordered list (if exists)
+                                        // Remove leader from the list and put at top
                                         orderedMembers.RemoveAll(member => member.Id == Model[0].CreatorId);
-
-                                        // Add leader to the beginning of the ordered list
                                         orderedMembers.Insert(0, leader);
                                     
-                                        <!-- Loop through members -->
                                         @foreach (var member in orderedMembers)
                                         {
-                                            <!-- Display member item -->
                                             <div class="media member-item mt-3">
                                                 <img src="@await GetProfilePictureUrl(member.Id)" class="mr-3 rounded-circle" alt="User Profile Picture" width="50" height="50">
                                                 <div class="media-body d-flex align-items-center justify-content-between w-100">
@@ -208,7 +201,7 @@
 
             </div>
 
-            @* leaderboard section *@
+            <!-- leaderboard --> 
             <div class="col-md-12 col-lg-6">
                 <section style="max-height: 500px; min-height:500px; background-color: #D0EBFF;">
                     <h2>Leaderboard</h2>
@@ -235,7 +228,7 @@
                         </div>
                         <p class="reward-text">
                             Complete this challenge and earn <strong><i class="fas fa-coins gold-coin-icon mr-2"></i>80</strong> <strong style="font-size: 0.7em;">points</strong>
-                        </p
+                        </p>
 
                         <p class="challenge-description"><strong>@Model[0].ClanChallenge.Challenge.Description</strong></p>
                         <div class="game-progress">
@@ -258,14 +251,14 @@
                             }
                             else
                                 {
-                                    <button class="btn btn-reward game-button claimed" disabled>Complete to claim</button>
+                                    <button class="btn btn-reward game-button incomplete" disabled>Complete to claim</button>
                                 }
                         </div>
-                        <!-- Scrollable Row for Filtered Workouts -->
+
+                        <!-- Challenge related Workouts -->
                         <div class="scrollable-row" id="allWorkouts">
                             @foreach (var workout in Model[0].Workouts)
                             {
-                                <!-- Workout Card Markup -->
                                 <div class="col-lg-4 col-md-6 col-sm-12" data-category="@workout.Category" style="max-width:200px; padding:10px;"
                                      data-difficulty="@workout.difficulty" data-muscle="@workout.TargetMuscle"
                                      data-points="@workout.rewardPoints">
@@ -322,16 +315,13 @@
 
                     <!-- Search Results -->
                     <div id="searchResults">
-                        <!-- Search results will be dynamically populated here -->
                     </div>
 
-                    <!-- Divider -->
                     <hr class="my-4">
 
                     <!-- Normal Results -->
                     <div id="normalResults">
                         <ul id="joinClanList" class="list-group list-group-flush" style="max-height: 250px; overflow-y: auto;">
-                            <!-- List items will be dynamically populated here -->
                         </ul>
                     </div>
                 </div>
@@ -361,7 +351,7 @@
                 <div class="modal-body">
                     <p class="lead mb-4">Creating a clan requires 1000 points</p>
 
-                    <!-- Add a form to input the clan name, bio, and a button to create -->
+                    <!-- form to input the clan name, bio, and a create button -->
                     <form id="createClanForm" asp-action="CreateClan" method="post">
                         @Html.AntiForgeryToken()
 
@@ -422,9 +412,6 @@
         }
     }
 
-
-
-
  
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -443,25 +430,22 @@
     <script>
 
         function claimReward(clanChallengeId) {
-            // Add logic to award points based on the challenge type
             console.log('Claim reward button clicked.');
             var pointsToAward = 80;
 
-            // Display the rewarded points in the SweetAlert modal
             Swal.fire({
                 title: 'Congratulations!',
                 html: `<p>Congratulations! Your clan has earned <strong>${pointsToAward} points!</strong></p>`,
                 icon: 'success',
                 confirmButtonText: 'OK',
             }).then((result) => {
-                // Reload the page after the modal is closed
+                // Reload page after modal is closed
                 if (result.isConfirmed || result.isDismissed) {
                     location.reload();
                 }
             });
 
-
-            // Update user's points on the server side
+            // Update user's points 
             updatePointsChallenge(pointsToAward, clanChallengeId);
 
         }
@@ -473,7 +457,6 @@
                 type: 'POST',
                 data: { points: points, clanChallengeId: clanChallengeId },
                 success: function (response) {
-                    // Handle success
                 },
                 error: function (xhr, status, error) {
                     console.error("Error occurred while updating user's points:");
@@ -489,13 +472,13 @@
             var timerElement = document.getElementById(timerElementId);
             var currentUtcTime = new Date('@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")');
 
-            // Append a default date to endDate (assuming today's date)
+            // Append a default date to endDate
             var endChallengeTime = new Date(endDate);
 
             // Calculate total seconds remaining until the end of the challenge
             var totalSecondsRemaining = Math.max(0, Math.floor((endChallengeTime - currentUtcTime) / 1000));
 
-            // Update the timer display
+            // Update timer display
             function updateDisplay() {
                 var hours = Math.floor(totalSecondsRemaining / 3600);
                 var minutes = Math.floor((totalSecondsRemaining % 3600) / 60);
@@ -543,42 +526,30 @@
                 dataType: 'json',
                 success: function (data) {
                     console.log('Received data:', data);
-                    // Clear the existing lists
+                    // Clear existing lists
                     $('#availableClansList, #joinClanList').empty();
 
                     // Check if there are any available clans
                     if (data.length > 0) {
                         // Iterate through the available clans
                         $.each(data, function (index, clan) {
-                            // Use 'let' to declare the 'clan' variable within the loop scope
-                            let clanName = clan.name; // Access the 'name' property
+                            let clanName = clan.name; 
 
+                            // create list item for clan
                             if (clanName !== undefined && clanName !== null) {
-                                // Create a list item element with Bootstrap classes
                                 var listItem = $('<li class="list-group-item d-flex justify-content-between align-items-center">');
-
-                                // Display the clan name and points
                                 listItem.text(clanName);
-
-                                // Create a clan points element
                                 var clanPoints = $('<p class="clan-points"><i class="fas fa-medal" style="color: gold;">CP</i><strong> ' + clan.clanPoints + '</strong></p>');
-
-                                // Create a join button and attach clan ID as data attribute
                                 var joinButton = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
-
-                                // Append the clan points and join button to the list item
                                 listItem.append(clanPoints, joinButton);
-
-                                // Append the list item to both lists
                                 $('#availableClansList, #joinClanList').append(listItem);
-
                                 console.log('Processing clan:', clan);
                             }
 
                         });
 
                     } else {
-                        // Display a message if no clans are available
+                        // no clan message 
                         $('#availableClansList').append('<li class="list-group-item text-muted">No available clans</li>');
                         $('#joinClanList').append('<li class="list-group-item text-muted">No available clans</li>');
                     }
@@ -589,9 +560,6 @@
             });
         }
 
-
-
-        // Load available clans when the page loads
         $(document).ready(function () {
             loadAvailableClans();
         });
@@ -600,7 +568,6 @@
         $(document).on('click', '.join-btn', function () {
             var clanId = $(this).data('clan-id');
 
-            // Use AJAX to call the JoinClan action method
             $.ajax({
                 url: '/Clan/JoinClan',
                 type: 'POST',
@@ -608,7 +575,6 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data.success) {
-                        // Display success message (e.g., using Swal)
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -619,7 +585,6 @@
                             }
                         });
                     } else {
-                        // Display error message
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -636,31 +601,28 @@
 
         // Function to create clan
         $("#createClanButton").click(function () {
-            event.preventDefault(); // Prevent the default form submission behavior
+            event.preventDefault(); 
             console.log('Create Clan button clicked');
 
-            // Specify the required points to create a clan
-            var requiredPoints = 1000; // Adjust the required points as needed
+            var requiredPoints = 1000;
 
-            // Make an AJAX request to get the user's current points
             $.ajax({
-                url: '/Clan/GetCurrentUserPoints', // Replace with the actual URL of your method
+                url: '/Clan/GetCurrentUserPoints', 
                 type: 'GET',
                 dataType: 'json',
                 success: function (userData) {
-                    // Check if the user has enough points
+                    // Check if user has enough points
                     console.log('Checking user points');
                     if (userData < requiredPoints) {
-                        // Display an error message if the user doesn't have enough points
                         Swal.fire({
                             icon: 'error',
                             title: 'Insufficient Points',
                             text: 'You do not have enough points to create a clan.'
                         });
-                        return; // Exit the function without proceeding
+                        return; 
                     }
 
-                    // Ask for confirmation with the cost information
+                    // confirmation to create and deduct points
                     Swal.fire({
                         icon: 'question',
                         title: 'Create Clan Confirmation',
@@ -670,39 +632,32 @@
                         cancelButtonText: 'Cancel',
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Proceed with clan creation if the user confirms
                             console.log('User confirmed, proceeding with clan creation');
 
-                            // Make an AJAX request to create the clan
                             $.ajax({
                                 url: $("#createClanForm").attr("action"),
                                 type: 'POST',
                                 data: {
                                     __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
-                                    Name: $("#clanName").val(), // Add the name field from the form
-                                    Bio: $("#clanBio").val() // Add the bio field from the form
+                                    Name: $("#clanName").val(), 
+                                    Bio: $("#clanBio").val() 
                                 },
                                 success: function (response) {
-                                    // Handle success
                                     if (response.success) {
-                                        // Deduct points from the user
                                         $.ajax({
-                                            url: '/Clan/UpdatePoints', // Replace with the actual URL of your method
+                                            url: '/Clan/UpdatePoints', 
                                             type: 'POST',
                                             data: { points: requiredPoints },
                                             success: function () {
-                                                // Display success message (e.g., using Swal)
                                                 Swal.fire({
                                                     icon: 'success',
                                                     title: 'Success',
                                                     text: response.message,
                                                     didClose: () => {
-                                                        // Reload the page after Swal is closed
                                                         location.reload();
                                                     }
                                                 });
                                                 console.log('AJAX success response:', response);
-                                                // Close the modal or take other actions as needed
                                                 $('#createClanModal').modal('hide');
                                             },
                                             error: function (error) {
@@ -710,7 +665,6 @@
                                             }
                                         });
                                     } else {
-                                        // Display error message
                                         Swal.fire({
                                             icon: 'error',
                                             title: 'Error',
@@ -720,8 +674,6 @@
                                 },
                                 error: function (xhr, status, error) {
                                     console.error('Error creating clan: ', error);
-
-                                    // Display a generic error message to the user
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Error',
@@ -743,7 +695,7 @@
         $('.leave-clan-btn').on('click', function () {
             var clanId = $(this).data('clan-id');
 
-            // Display a confirmation dialog
+            //  confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You are about to leave the clan. This action cannot be undone.',
@@ -754,9 +706,7 @@
                 confirmButtonText: 'Yes, leave it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // User confirmed, proceed with leaving the clan
 
-                    // Use AJAX to call the LeaveClan action method
                     $.ajax({
                         url: '/Clan/LeaveClan',
                         type: 'POST',
@@ -764,13 +714,11 @@
                         dataType: 'json',
                         success: function (data) {
                             if (data.success) {
-                                // Display success message and handle redirection
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success',
                                     text: data.message,
                                     didClose: () => {
-                                        // Reload the page after Swal is closed
                                         location.reload();
                                     }
                                 });
@@ -791,11 +739,10 @@
             });
         });
 
-        // Similar confirmation for delete action
+        // confirmation for delete action
         $('.delete-clan-btn').on('click', function () {
             var clanId = $(this).data('clan-id');
 
-            // Display a confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You are about to delete the clan. This action cannot be undone.',
@@ -806,9 +753,6 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // User confirmed, proceed with deleting the clan
-
-                    // Use AJAX to call the DeleteClan action method
                     $.ajax({
                         url: '/Clan/DeleteClan',
                         type: 'POST',
@@ -816,18 +760,15 @@
                         dataType: 'json',
                         success: function (data) {
                             if (data.success) {
-                                // Display success message and handle redirection
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Success',
                                     text: data.message,
                                     didClose: () => {
-                                        // Reload the page after Swal is closed
                                         location.reload();
                                     }
                                 });
                             } else {
-                                // Display error message
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'Error',
@@ -847,22 +788,20 @@
         // Function to load clan leaderboards
         function loadClanLeaderboards() {
             $.ajax({
-                url: '/Clan/Leaderboards', // Replace this with your actual endpoint URL
+                url: '/Clan/Leaderboards',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     console.log('Received clan leaderboards data:', data);
                     var leaderboardList = $('#clanLeaderboard');
-                    leaderboardList.empty(); // Clear existing content
+                    leaderboardList.empty(); // Clear existing list
 
                     // Check if data is not empty
                     if (data && data.length > 0) {
-                        // Iterate through the leaderboard data
                         $.each(data, function (index, clan) {
                             // Create list item for each clan
                             var listItem = $('<li class="list-group-item leaderboard-item d-flex justify-content-between align-items-center">');
 
-                            // Display rank and clan name together without space
                             var rankAndName = $('<span class="rank">' + '#' + (index + 1) + ' <span class="clan-name text-dark font-weight-bold">' + clan.name + '</span></span>');
                             if (index === 0) {
                                 rankAndName.addClass('first-place');
@@ -872,19 +811,13 @@
                                 rankAndName.addClass('third-place');
                             }
 
-                            // Append rank and clan name to the list item
                             listItem.append(rankAndName);
-
-                            // Create a clan points element
                             var clanPoints = $('<p class="clan-points"><i class="fas fa-medal" style="color: gold;">CP</i><strong> ' + clan.points + '</strong></p>');
-
-                            // Append the clan points to the list item
                             listItem.append(clanPoints);
-
                             leaderboardList.append(listItem);
                         });
                     } else {
-                        // Display a message if there are no leaderboards available
+                        //  message for no leaderboards available
                         leaderboardList.append('<li class="list-group-item">No leaderboards available</li>');
                     }
 
@@ -896,9 +829,7 @@
             });
         }
 
-
-
-        // Call the function to load clan leaderboards when the page loads
+        // load clan leaderboards when page loads
         $(document).ready(function () {
             loadClanLeaderboards();
         });
@@ -906,7 +837,6 @@
         $('.kick-member-btn').click(function () {
             var memberId = $(this).data('member-id');
 
-            // Show confirmation dialog with Swal
             Swal.fire({
                 title: "Are you sure?",
                 text: "Once kicked, this member will be removed from the clan!",
@@ -917,23 +847,19 @@
                 confirmButtonText: "Yes, kick them!"
             }).then((willKick) => {
                 if (willKick.isConfirmed) {
-                    // If confirmed, make AJAX call to kick the member
                     $.ajax({
                         url: '/Clan/KickMember', 
                         type: 'POST',
                         data: { memberId: memberId },
                         success: function (response) {
-                            // Handle success response
                             Swal.fire({
                                 icon: "success",
                                 title: "Member kicked successfully!",
                             }).then(() => {
-                                // Optionally, reload the page or update UI as needed
                                 location.reload();
                             });
                         },
                         error: function (xhr, status, error) {
-                            // Handle error response
                             Swal.fire({
                                 icon: "error",
                                 title: "Error",
@@ -947,16 +873,14 @@
 
         // Function to handle search input changes
         $('#searchClanInput').on('input', function () {
-            var searchText = $(this).val().toLowerCase(); // Convert input to lowercase for case-insensitive search
+            var searchText = $(this).val().toLowerCase(); // input to lowercase 
 
-            // Make AJAX request to search for clans
             $.ajax({
-                url: '/Clan/SearchClans', // Adjust URL if necessary
+                url: '/Clan/SearchClans', 
                 type: 'GET',
-                data: { searchText: searchText }, // Pass the search text as a query parameter
+                data: { searchText: searchText }, 
                 dataType: 'json',
                 success: function (data) {
-                    // Update the HTML to display the search results
                     displaySearchResults(data);
                 },
                 error: function (xhr, status, error) {
@@ -974,30 +898,16 @@
 
             // Check if there are any matching clans
             if (clans.length > 0) {
-                // Iterate through the available clans
                 clans.forEach(function (clan) {
-                    // Use 'let' to declare the 'clan' variable within the loop scope
-                    let clanName = clan.name; // Access the 'name' property
+                    let clanName = clan.name; 
 
                     if (clanName !== undefined && clanName !== null) {
-                        // Create a list item element with Bootstrap classes
                         var listItem = $('<li class="list-group-item d-flex justify-content-between align-items-center">');
-
-                        // Display the clan name and points
                         listItem.text(clanName);
-
-                        // Create a clan points element
                         var clanPoints = $('<p class="clan-points"><i class="fas fa-medal" style="color: gold;">CP</i><strong> ' + clan.clanPoints + '</strong></p>');
-
-                        // Create a join button and attach clan ID as data attribute
                         var joinButton = $('<button class="btn btn-primary join-btn">').text('Join').data('clan-id', clan.clanId);
-
-                        // Append the clan points and join button to the list item
                         listItem.append(clanPoints, joinButton);
-
-                        // Append the list item to the search results
                         $searchResults.append(listItem);
-
                         console.log('Processing clan:', clan);
                     }
                 });
@@ -1008,7 +918,6 @@
                     // Clear the search results and show nothing if search text is empty
                     $searchResults.empty();
                 } else {
-                    // Display a message if no clans are available
                     $searchResults.html('<p>No matching clans found.</p>');
                 }
             }
@@ -1019,7 +928,7 @@
             $('#editBioModal').modal('show');
 
             $('#saveBioBtn').click(function () {
-                var newBio = $('#currentBio').val().trim(); // Getting the bio from the modal textarea
+                var newBio = $('#currentBio').val().trim(); 
 
                 if (newBio !== "") {
                     $.ajax({
@@ -1037,7 +946,7 @@
                                     text: response.message,
                                     confirmButtonText: 'OK'
                                 }).then(() => {
-                                    location.reload(); // Reload the page after successful update
+                                    location.reload();
                                 });
                             } else {
                                 Swal.fire({
@@ -1067,29 +976,25 @@
                 }
             });
         });
-
-
     </script>
-
 </body>
-
 
 @functions {
     public async Task<string> GetProfilePictureUrl(string userId)
     {
         if (!string.IsNullOrEmpty(userId))
         {
-            // Retrieve the user from UserManager asynchronously
+            // Retrieve user from UserManager asynchronously
             var user = await UserManager.FindByIdAsync(userId);
 
-            // Check if the user has a profile picture
+            // Check if user has a profile picture
             if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
             {
                 return user.ProfileImageUrl;
             }
         }
 
-        // Use a default or empty profile picture URL
+        // default profile picture URL
         return "/Images/empty-pfp.png";
     }
 
@@ -1106,11 +1011,6 @@
 
         return (0); 
     }
-
-
-
-
 }
-
 </html>
 

@@ -61,6 +61,8 @@ namespace ProjectWebApp.Controllers
                 {
                     var userClanId = userClans.First().ClanId;
 
+                    AssignClanChallengeForAllMembers(userClanId);
+
                     // retrieve current clan challenge
                     activeClanChallenge = GetClanChallenge(userClanId);
                     formattedTimeForChallenge = activeClanChallenge != null

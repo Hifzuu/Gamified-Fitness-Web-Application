@@ -100,42 +100,48 @@ body[b-s13xhoid61] {
     display: inline-block;
 }
 
-/* Updated styles for the "Claim Reward" button */
 .btn-reward[b-s13xhoid61] {
-    background: #3498db; /* Blue background color */
-    color: #fff; /* White text */
-    border: none; /* No border */
-    padding: 15px 30px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    font-size: 18px; /* Font size */
-    cursor: pointer; /* Cursor on hover */
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    background: #3498db; 
+    color: #fff; 
+    border: none; 
+    padding: 15px 30px; 
+    border-radius: 8px;
+    font-size: 18px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); 
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
     .btn-reward:hover[b-s13xhoid61] {
-        background-color: #2980b9; /* Darker blue on hover */
+        background-color: #2980b9; 
         transform: scale(1.05); 
         box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7); 
     }
 
     .btn-reward.claimed[b-s13xhoid61] {
-        background-color: #95a5a6; /* Gray color for claimed button */
+        background-color: #2980b9;
         cursor: not-allowed;
-        box-shadow: none; /* No box shadow for claimed button */
+        box-shadow: none;
     }
+
+    .btn-reward.incomplete[b-s13xhoid61] {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
 
 
 .rectangle[b-s13xhoid61] {
     height: 500px;
     background-color: blue;
-    margin-bottom: 10px; /* Adjust spacing between rectangles */
+    margin-bottom: 10px;
 }
 
 /*workouts*/
 .scrollable-row[b-s13xhoid61] {
     display: flex;
-    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
+    overflow-x: auto; 
     overflow-y: hidden; /* Hide vertical scrollbar */
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -281,16 +287,16 @@ body[b-s13xhoid61] {
     font-size: 16px;
     border-radius: 5px;
     transition: all 0.3s ease;
-    background-color: #007bff; /* Blue */
-    border-color: #007bff; /* Blue */
+    background-color: #007bff; 
+    border-color: #007bff;
     color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
     .btn-primary:hover[b-qk0rk6zmgx],
     .btn-success:hover[b-qk0rk6zmgx] {
-        background-color: #0056b3; /* Darker Blue */
-        border-color: #0056b3; /* Darker Blue */
+        background-color: #0056b3; 
+        border-color: #0056b3;
         transform: translateY(-2px);
         box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
     }
@@ -298,12 +304,12 @@ body[b-s13xhoid61] {
 
 
 .kick-member-btn[b-qk0rk6zmgx] {
-    padding: 0.25rem 0.5rem; /* Adjust padding to reduce height */
-    font-size: 0.875rem; /* Adjust font size if necessary */
+    padding: 0.25rem 0.5rem; 
+    font-size: 0.875rem;
 }
 
 .edit-clan-btn[b-qk0rk6zmgx] {
-    background-color: white; /* Blue */
+    background-color: white; 
     color: black;
     border: none;
     padding: 6px 10px;
@@ -406,8 +412,8 @@ body[b-s13xhoid61] {
 /*workouts*/
 .scrollable-row[b-qk0rk6zmgx] {
     display: flex;
-    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
-    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: auto; 
+    overflow-y: hidden; 
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     background-color: white;
@@ -456,29 +462,35 @@ body[b-s13xhoid61] {
             color: black;
         }
 
-/* Updated styles for the "Claim Reward" button */
+
 .btn-reward[b-qk0rk6zmgx] {
-    background: #3498db; /* Blue background color */
-    color: #fff; /* White text */
-    border: none; /* No border */
-    padding: 15px 30px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    font-size: 18px; /* Font size */
-    cursor: pointer; /* Cursor on hover */
-    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); /* Blue box shadow */
+    background: #3498db; 
+    color: #fff;
+    border: none; 
+    padding: 15px 30px; 
+    border-radius: 8px; 
+    font-size: 18px; 
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.5); 
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
     .btn-reward:hover[b-qk0rk6zmgx] {
-        background-color: #2980b9; /* Darker blue on hover */
+        background-color: #2980b9;
         transform: scale(1.05);
         box-shadow: 0 6px 12px rgba(52, 152, 219, 0.7);
     }
 
     .btn-reward.claimed[b-qk0rk6zmgx] {
-        background-color: #95a5a6; /* Gray color for claimed button */
+        background-color: #2980b9;
         cursor: not-allowed;
-        box-shadow: none; /* No box shadow for claimed button */
+        box-shadow: none; 
+    }
+
+    .btn-reward.incomplete[b-qk0rk6zmgx] {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+        box-shadow: none;
     }
 /* _content/ProjectWebApp/Views/Dashboard/Index.cshtml.rz.scp.css */
 h2[b-lict9yrgg8] {

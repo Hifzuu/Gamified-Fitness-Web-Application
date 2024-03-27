@@ -99,7 +99,6 @@ body {
     display: inline-block;
 }
 
-/* Updated styles for the "Claim Reward" button */
 .btn-reward {
     background: #3498db; 
     color: #fff; 
@@ -119,16 +118,23 @@ body {
     }
 
     .btn-reward.claimed {
-        background-color: #95a5a6; 
+        background-color: #2980b9;
         cursor: not-allowed;
-        box-shadow: none; 
+        box-shadow: none;
     }
+
+    .btn-reward.incomplete {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
 
 
 .rectangle {
     height: 500px;
     background-color: blue;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 /*workouts*/
