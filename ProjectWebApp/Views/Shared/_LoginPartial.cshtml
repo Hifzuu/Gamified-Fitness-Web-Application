@@ -120,13 +120,10 @@
 <script>
     function updatePoints() {
         $.ajax({
-            url: '@Url.Action("GetCurrentUserPoints", "Workout")',  // Adjust controller name as needed
+            url: '@Url.Action("GetCurrentUserPoints", "Workout")',  
             type: 'GET',
             success: function (points) {
-                // Assuming you have an element with id 'userPoints' in your partial view
                 $('#userPoints').text(`Points: ${points}`);
-
-                // Handle other success actions if needed
             },
             error: function (xhr, status, error) {
                 console.error("Error occurred while fetching user's points: " + error);
@@ -134,18 +131,18 @@
         });
     }
 
-    // Call the updatePoints function when the page is loaded
+    // Call updatePoints function when page is loaded
     $(document).ready(function () {
         updatePoints();
     });
 
-    // Function to toggle the dropdown menu
+    // Function to toggle dropdown menu
     function toggleDropdown() {
         var dropdownMenu = document.getElementById('userDropdownMenu');
         dropdownMenu.classList.toggle('show');
     }
 
-    // Function to close the dropdown menu when clicking outside
+    // Function to close dropdown menu when clicking outside
     window.onclick = function (event) {
         if (!event.target.matches('.nav-link')) {
             var dropdowns = document.getElementsByClassName("dropdown-menu");
@@ -163,28 +160,20 @@
 @functions {
     public string GetProfilePictureUrl()
     {
-        // Check if the user is authenticated
         if (User.Identity?.IsAuthenticated == true)
         {
-            // Retrieve the user from UserManager synchronously
             var user = UserManager.GetUserAsync(User).GetAwaiter().GetResult();
-
-            // Check if the user has a profile picture
             if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
             {
                 return user.ProfileImageUrl;
             }
         }
-
-        // Use a default or empty profile picture URL
         return "/Images/empty-pfp.png";
     }
 
     private int GetCurrentUserPoints()
     {
         var user = UserManager.GetUserAsync(User).Result;
-
-        // Assuming Points is the property in your ApplicationUser model
         return user?.Points ?? 0;
     }
 }

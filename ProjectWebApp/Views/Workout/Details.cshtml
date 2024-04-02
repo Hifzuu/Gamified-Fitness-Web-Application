@@ -14,11 +14,11 @@
     var scheduledWorkouts = await _context.UserCalendars
            .Where(w => w.UserId == currentUser.Id && w.WorkoutId == Model.WorkoutId)
            .ToListAsync();
-    // Check if the current workout is scheduled for the current user
+    // Check if current workout is scheduled for current user
     var hasScheduledWorkout = await _context.UserCalendars
         .AnyAsync(w => w.UserId == currentUser.Id && w.WorkoutId == Model.WorkoutId);
 
-    // Get the scheduled date and time (if applicable)
+    // Get scheduled date and time 
     var scheduledWorkoutEntry = await _context.UserCalendars
         .FirstOrDefaultAsync(w => w.UserId == currentUser.Id && w.WorkoutId == Model.WorkoutId);
 
@@ -188,44 +188,31 @@
             function startWorkout(workoutId, durationMinutes, points) {
                 // Hide the button
                 document.getElementById('startButton').style.display = 'none';
-
-                // Show the progress bar
+                // Show progress bar
                 document.getElementById('progressBarSection').style.display = 'block';
                 document.getElementById('timerSection').style.display = 'block';
 
                 // * 60 for minutes
-                var durationSeconds = durationMinutes;
-
-                // Set the total duration for the progress bar and timer
+                var durationSeconds = durationMinutes; //in seconds for testing
                 var totalDuration = durationSeconds;
 
-                // Set up the progress bar
                 var progressBar = document.getElementById('progressBar');
                 progressBar.style.width = '0%';
 
-                // Set up the timer display
                 var timerDisplay = document.getElementById('timer');
                 timerDisplay.textContent = formatTime(totalDuration);
 
-                // Update the progress bar and timer every second
-                var updateInterval = 1000; // Update the progress every second
+                // Update progress bar and timer every second
+                var updateInterval = 1000; // every second
                 var updateProgressBar = setInterval(function () {
-                    // Update the progress bar
                     progressBar.style.width = ((durationSeconds - totalDuration) / durationSeconds) * 100 + '%';
-
-                    // Update the timer display
                     timerDisplay.textContent = formatTime(totalDuration);
 
                     // Check if the total duration has reached zero
                     if (totalDuration < 0) {
-                        // Automatically complete the workout when the timer reaches zero
                         completeWorkout(workoutId);
-
-                        // Clear the interval
                         clearInterval(updateProgressBar);
                     }
-
-                    // Decrement the total duration
                     totalDuration--;
                 }, updateInterval);
             }
@@ -235,33 +222,27 @@
                 document.getElementById('progressBarSection').style.display = 'none';
                 document.getElementById('timerSection').style.display = 'none';
 
-                // Fetch the points from the server and update the user's points
                 fetch(`/Workout/GetPoints?workoutId=${workoutId}`)
                     .then(response => response.json())
                     .then(updatedPoints => {
                         // Update the user's points
                         updatePoints(updatedPoints);
-
-                        // Display completion message using SweetAlert
                         Swal.fire({
                             title: 'Congratulations!',
                             text: `You have completed the workout and earned ${updatedPoints} points.`,
                             icon: 'success',
                             confirmButtonText: 'OK',
                         }).then((result) => {
-                            // Reload the page after the modal is closed
                             if (result.isConfirmed || result.isDismissed) {
                                 location.reload();
                             }
                         });
 
-                        // Trigger the server-side action to mark the workout as completed
                         fetch(`/Workout/MarkWorkoutAsCompleted?workoutId=${workoutId}`, {
                             method: 'POST'
                         })
                             .then(response => response.ok ? response.json() : Promise.reject("Failed to mark workout as completed"))
                             .then(responseData => {
-                                // Handle the response if needed
                                 console.log(responseData);
                             })
                             .catch(error => {
@@ -278,11 +259,10 @@
             function updatePoints(points) {
                 console.log("Adding points to db...");
                 $.ajax({
-                    url: '@Url.Action("UpdatePoints", "Workout")',  // Adjust controller name as needed
+                    url: '@Url.Action("UpdatePoints", "Workout")',  
                     type: 'POST',
-                    data: { points: points },  // Use the correct variable name
+                    data: { points: points },  
                     success: function (response) {
-                        // Handle success
                     },
                     error: function (xhr, status, error) {
                         console.error("Error occurred while updating user's points: " + error);
@@ -296,7 +276,6 @@
                 return minutes + 'm ' + remainingSeconds + 's ';
             }
 
-            //----------------------------------------------------------------------------------------------------------------------
             $(document).ready(function () {
                 updateFavouriteStatus();
 
@@ -309,7 +288,7 @@
                 $.ajax({
                     url: "@Url.Action("IsFavourited", "Workout", new { id = Model.WorkoutId })",
                     type: "GET",
-                    async: false, // Set to synchronous
+                    async: false, // synchronous
                     success: function (isFavorited) {
                         if (isFavorited) {
                             $("#favouriteButton").html('<i class="fas fa-heart fa-2x text-danger"></i>');
@@ -326,7 +305,6 @@
             function addToFavourites(workoutId) {
                 $.post("/Workout/AddToFavourites", { workoutId: @Model.WorkoutId })
                     .done(function () {
-                        // Handle success, you can update UI or provide feedback
                         console.log("Workout added to favourites!");
                         updateFavouriteStatus();
                     })
@@ -362,14 +340,11 @@
                         success: function (response) {
                             if (response.success) {
                                 console.log('Schedule information saved successfully:', response);
-
-                                // Display success message using SweetAlert
                                 Swal.fire({
                                     title: 'Success',
                                     text: 'Schedule information saved successfully!',
                                     icon: 'success',
                                 }).then((result) => {
-                                    // Reload the page after the modal is closed
                                     if (result.isConfirmed || result.isDismissed) {
                                         $('#scheduleModal').modal('hide');
                                         location.reload();
@@ -377,8 +352,6 @@
                                 });
                             } else {
                                 console.error('Error occurred while saving schedule information:', response.message);
-
-                                // Display error message using SweetAlert
                                 Swal.fire({
                                     title: 'Error',
                                     text: response.message,
@@ -388,8 +361,6 @@
                         },
                         error: function (xhr, status, error) {
                             console.error('Error occurred while saving schedule information:', error);
-
-                            // Display error message using SweetAlert
                             Swal.fire({
                                 title: 'Error',
                                 text: 'Error occurred while saving schedule information. Please try again.',
@@ -404,14 +375,10 @@
 
         <script>
             function removeScheduledWorkout(button) {
-                // Set data attributes for workout information
                 var workoutId = $(button).data('workout-id');
                 var scheduledDateTime = $(button).data('scheduled-datetime');
-
-                // Format the date and time using Moment.js
                 var formattedDateTime = moment(scheduledDateTime).format('DD-MM-YYYY HH:mm');
 
-                // Display a confirmation message using SweetAlert
                 Swal.fire({
                     title: 'Confirmation',
                     html: 'Are you sure you want to remove the scheduled workout for ' + formattedDateTime + '?',
@@ -422,14 +389,12 @@
                     confirmButtonText: 'Yes, remove it!',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // If the user confirms, call the confirmedRemove function
                         confirmedRemove(workoutId, scheduledDateTime);
                     }
                 });
             }
 
             function confirmedRemove(workoutId, scheduledDateTime) {
-                // Send the workout ID and scheduled date and time to the server for removal
                 $.ajax({
                     url: '@Url.Action("RemoveScheduledWorkout", "Workout")',
                     type: 'POST',
@@ -437,20 +402,17 @@
                     success: function (response) {
                         if (response.success) {
                             console.log('Scheduled workout removed successfully:', response);
-                            // Display success message using SweetAlert
                             Swal.fire({
                                 title: 'Success',
                                 text: 'Scheduled workout removed successfully!',
                                 icon: 'success',
                             }).then((result) => {
-                                // Reload the page after the modal is closed
                                 if (result.isConfirmed || result.isDismissed) {
                                     location.reload();
                                 }
                             });
                         } else {
                             console.error('Error occurred while removing scheduled workout:', response.message);
-                            // Display error message using SweetAlert
                             Swal.fire({
                                 title: 'Error',
                                 text: response.message,
@@ -460,7 +422,6 @@
                     },
                     error: function (xhr, status, error) {
                         console.error('Error occurred while removing scheduled workout:', error);
-                        // Display error message using SweetAlert
                         Swal.fire({
                             title: 'Error',
                             text: 'Error occurred while removing scheduled workout. Please try again.',
@@ -472,7 +433,7 @@
 
             var videoPlayer = document.getElementById('videoPlayer');
             videoPlayer.onerror = function () {
-                // If video fails to load, set the poster (placeholder image)
+                // If video fails to load set the placeholder image
                 videoPlayer.poster = '@Model.ImageUrl';
             };
             videoPlayer.src = "/Videos/@Model.VideoUrl";

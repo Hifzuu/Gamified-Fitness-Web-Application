@@ -13,7 +13,6 @@
     margin-bottom: 50px;
 }
 
-/* Section Header Styles */
 .section-header {
     font-size: 24px;
     font-weight: bold;
@@ -23,13 +22,11 @@
     align-items: center;
 }
 
-/* Filter Icon Styles */
 .filter-icon {
     width: 30px;
     cursor: pointer;
 }
 
-/* Filter Form Styles */
 .filter-form {
     position: absolute;
     top: 100%;
@@ -68,7 +65,6 @@
             background-color: #0056b3;
         }
 
-/* Filter Option Styles */
 .filter-option {
     margin-bottom: 15px;
 }
@@ -85,11 +81,11 @@
         margin-bottom: 10px;
     }
 
-/* Scrollable Row Styles */
+
 .scrollable-row {
     display: flex;
-    overflow-x: auto; /* Use 'auto' instead of 'hidden' for horizontal scrolling */
-    overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: auto; 
+    overflow-y: hidden; 
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
@@ -98,7 +94,6 @@
         margin-right: 0px;
     }
 
-/* Card Styles */
 .workout-card {
     max-width: 300px;
     margin: 5px;
@@ -108,8 +103,6 @@
     transition: transform 0.3s ease;
 }
 
-
-/* Info Styles */
 .info {
     background-color: #e8eefe;
     padding: 10px;
@@ -125,12 +118,10 @@
         text-overflow: ellipsis;
     }
 
-/* Category Styles */
 .category {
     font-weight: bold;
 }
 
-/* Points Styles */
 .points {
     color: #2ecc71;
     font-weight: bold;
@@ -155,7 +146,6 @@
             color: black;
         }
 
-/*search bar*/
 #searchBar {
     display: flex;
     justify-content: space-between;
@@ -201,7 +191,6 @@
     transform: translateX(-10%);
 }
 
-/* Show the clear icon when there's input in the search bar */
 #searchInput:not(:placeholder-shown) + .clear-icon {
     display: block;
 }
@@ -220,7 +209,7 @@ h3 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 90%; /* Adjust the width as needed */
+    width: 90%;
 }
 
 
@@ -235,10 +224,9 @@ h3 {
     }
 
     .workout-card {
-        /* Adjust the width for smaller screens */
         width: 100%;
-        font-size: 12px; /* Increase the font size for readability */
-        padding: 5px; /* Add padding for better spacing */
+        font-size: 12px; 
+        padding: 5px; 
     }
 
     #filterForm {
@@ -248,7 +236,7 @@ h3 {
 
 /*calendar*/
 .fc-toolbar h2 {
-    color: white; /* Set the text color for the calendar header */
+    color: white;
 }
 
 
@@ -281,5 +269,5 @@ h3 {
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
-    z-index: 1; /* Ensure the clear icon is above the input field */
+    z-index: 1; 
 }

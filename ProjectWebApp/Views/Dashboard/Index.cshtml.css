@@ -47,7 +47,6 @@
     }
 }
 
-/* Custom styling for gamification */
 .box {
     position: relative;
     transition: transform 0.3s ease-in-out;
@@ -64,8 +63,8 @@
 
 .profile-card {
     background-color: white;
-    border-radius: 8px; /* Add rounded corners */
-    overflow: hidden; /* Hide overflowing content */
+    border-radius: 8px;
+    overflow: hidden; 
     transition: box-shadow 0.3s, transform 0.3s ease-in-out;
     text-decoration: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,40 +73,40 @@
 
     .profile-card:hover {
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        transform: scale(1.01); /* Add a slight scale effect */
+        transform: scale(1.01);
         text-decoration: none;
         cursor: pointer;
     }
 
 .profile-container {
-    width: 60px; /* Set width of the profile container */
-    height: 60px; /* Set height of the profile container */
-    overflow: hidden; /* Hide overflowing content */
-    border-radius: 50%; /* Create a circular shape */
-    margin-right: 15px; /* Add some spacing between the profile picture and text */
+    width: 60px;
+    height: 60px; 
+    overflow: hidden;
+    border-radius: 50%; 
+    margin-right: 15px; 
 }
 
 .profile-picture {
-    width: 100%; /* Make the profile picture fill the container */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Ensure the picture remains circular */
+    width: 100%;
+    height: auto;
+    border-radius: 50%; 
 }
 
 .profile-details {
-    flex-grow: 1; /* Allow the details to grow and fill the remaining space */
+    flex-grow: 1;
 }
 
     .profile-details h5 {
-        margin-bottom: 5px; /* Add spacing below the name */
+        margin-bottom: 5px; 
     }
 
     .profile-details p {
-        margin: 0; /* Remove default margins for better spacing */
-        color: #555; /* Use a slightly muted color for additional information */
+        margin: 0; 
+        color: #555; 
     }
 
         .custom-display-4 {
-        font-size: 2em; /* Adjust the font size as needed */
+        font-size: 2em;
     }
 
 
@@ -124,7 +123,7 @@
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex-grow: 1; /* Fill the full height of the container */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,32 +152,29 @@
     font-weight: bold;
 }
 
-/* Media query for smaller screens */
+/* smaller screens */
 @media only screen and (max-width: 768px) {
     .card-title{
         font-size:1.2rem;
     }
     .card-text-string {
-        font-size: 2rem; /* Adjust the font size for smaller screens */
+        font-size: 2rem; 
     }
 }
 
-/* Media query for smaller screens */
 @media only screen and (max-width: 676px) {
     .card-title {
         font-size: 1rem;
     }
 
     .card-text-string {
-        font-size: 1.3rem; /* Adjust the font size for smaller screens */
+        font-size: 1.3rem; 
     }
 
     .card-text{
         font-size:3rem;
     }
 }
-
-
 
 .no-info {
     color: #999;
@@ -190,29 +186,25 @@
     }
 }
 
-/* Media query for small screens */
 @media (max-width: 767px) {
     .grid-container {
-        flex-direction: row; /* Stack items sideways for small screens */
-        overflow-x: auto; /* Enable horizontal scrolling if needed */
+        flex-direction: row; 
+        overflow-x: auto; 
     }
 
     .grid-item {
         width: calc(33.33% - 10px); /* Take up 1/3 width with 10px margin */
-        margin-right: 10px; /* Add margin to the right of grid items */
+        margin-right: 10px; 
     }
 
         .grid-item:last-child {
-            margin-right: 0; /* Remove margin from the last item */
+            margin-right: 0; 
         }
 }
 
-
-
-
 .streak-box {
     width: 100%;
-    background-color: #3498db; /* Blue color */
+    background-color: #3498db; 
     color: white;
     padding: 20px;
     text-align: center;

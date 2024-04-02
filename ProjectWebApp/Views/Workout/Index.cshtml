@@ -17,9 +17,6 @@
     var userCalendars = ViewData["UserCalendars"] as List<UserCalendar>;
 }
 
-@* add tabs for weeks 1-4- allow adding and removing of workouts - send email reminders to do workout / progress bar for
-completion of workouts *@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +27,6 @@ completion of workouts *@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css" />
-    <!-- Update the version number in the URLs -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"
         integrity="sha384-39yVKLsD9lMelmY+ij49KZgE+Mfk6hjdUPNE8yKHqdMPceLXzhlCJAK81xlD5jDj" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"
@@ -52,9 +48,7 @@ completion of workouts *@
 
         .fc .fc-event {
             background-color: #007bff;
-            /* Set the background color for events */
             color: white !important;
-            /* Set the text color for events */
             cursor: pointer;
         }
 
@@ -70,9 +64,7 @@ completion of workouts *@
 
         .fc .fc-toolbar-title {
             font-size: 18px;
-            /* Adjust the font size as needed */
             font-weight: bold;
-            /* Optionally adjust the font weight */
             text-transform: uppercase;
         }
 
@@ -86,13 +78,10 @@ completion of workouts *@
             color: #333;
             border: 1px solid #ddd;
             font-size: 12px;
-            /* Adjust the font size for smaller screens */
             padding: 4px 12px;
-            /* Adjust padding for smaller screens */
             text-transform: uppercase;
         }
 
-        /* Default hover styles */
         .fc .fc-button:hover,
         .fc .fc-customTitle-button:hover {
             background-color: #007bff;
@@ -100,7 +89,6 @@ completion of workouts *@
 
         .fc .fc-daygrid-day.fc-day-today {
             background-color: #b8dbff;
-            /* Dark blue color */
         }
 
         .fc .fc-day-header,
@@ -125,7 +113,7 @@ completion of workouts *@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text bg-transparent border-0 rounded-0">
-                                   <i class="fas fa-search text-muted"></i> <!-- Font Awesome search icon -->
+                                   <i class="fas fa-search text-muted"></i> 
                                </span>
                             </div>
                             <input type="text" id="searchInput" class="form-control flex-grow-1 custom-search"
@@ -147,7 +135,6 @@ completion of workouts *@
             <div id="searchResults" style="display: none; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px;">
                 <h4 class="mb-3">Search Results</h4>
                 <div class="scrollable-row" id="searchResultsWorkouts">
-                    <!-- Dynamic content will be added here -->
                 </div>
                 <div id="noResultsMessage" class="text-muted" style="display: none;">No search results found.</div>
             </div>
@@ -163,7 +150,7 @@ completion of workouts *@
 
                     <section class="favourite-section" style="background-color:white;">
                         <h3>Favourite Workouts</h3>
-                             <!-- Display user's favorited workouts -->
+                        <!-- user's favorited workouts -->
                         @if (favoritedWorkoutIds.Any())
                         {
                             <div class="row" id="favouriteWorkouts" style="max-height: 650px; overflow-y: auto;">
@@ -173,27 +160,25 @@ completion of workouts *@
 
                                     if (workout != null)
                                     {
-                                    <div class="col-lg-4 col-md-6 col-sm-12">
-                                        <div class="workout-card" data-category="@workout.Category">
-                                            <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
-                                                <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('@workout.ImageUrl'); background-size: cover; background-position: center;">
-                                                    <h5 class="card-title text-white">@workout.Name</h5>
-                                                    <div class="info" style="text-align:center; background-color:white; opacity:0.8">
-                                                        <p class="category">Category: @workout.Category</p>
-                                                        <p class="duration">Duration: @workout.DurationMinutes minutes</p>
-                                                        <p class="difficulty">Difficulty: @workout.difficulty</p>
-                                                        <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
-                                                         <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
-                                                            <i class="fas fa-coins gold-coin-icon mr-2"></i>
-                                                            <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
-                                                        </span>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="workout-card" data-category="@workout.Category">
+                                                <a href="@Url.Action("Details", "Workout", new { id = workout.WorkoutId })" class="card workout-link">
+                                                    <div class="card-body" style="background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('@workout.ImageUrl'); background-size: cover; background-position: center;">
+                                                        <h5 class="card-title text-white">@workout.Name</h5>
+                                                        <div class="info" style="text-align:center; background-color:white; opacity:0.8">
+                                                            <p class="category">Category: @workout.Category</p>
+                                                            <p class="duration">Duration: @workout.DurationMinutes minutes</p>
+                                                            <p class="difficulty">Difficulty: @workout.difficulty</p>
+                                                            <p class="targetMuscle">Muscle Target: @workout.TargetMuscle</p>
+                                                             <span class="points" style="font-family: 'Roboto', sans-serif; font-size: 1.1em; letter-spacing: 1px;">
+                                                                <i class="fas fa-coins gold-coin-icon mr-2"></i>
+                                                                <strong>@workout.rewardPoints</strong> <strong style="font-size: 0.7em;">points</strong>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-
-
                                     }
                                 }
                             </div>
@@ -225,7 +210,7 @@ completion of workouts *@
         @if (ViewData["Workouts"] != null)
         {
             var workouts = ViewData["Workouts"] as List<Workout>;
-            <!-- Display featured workouts -->
+            <!-- featured workouts -->
             @if (workouts.Any(w => w.IsFeatured))
             {
                 <section class="d-flex flex-column h-100">
@@ -296,7 +281,7 @@ completion of workouts *@
 
 
         <section>
-            <!-- All Exercises Section -->
+            <!-- All Exercises -->
             <div class="section-header all-workouts-section" style="position: relative;">
                 <h3 style="float: left; margin-right: 10px;">All Workouts</h3>
                 <img id="filterIcon" class="filter-icon" src="/Images/filter.png" alt="Filter Icon"
@@ -350,7 +335,6 @@ completion of workouts *@
                             <option value="30">30</option>
                             <option value="35">35</option>
                             <option value="50">50</option>
-                            <!-- Add more options based on your database -->
                         </select>
                     </div>
 
@@ -360,16 +344,14 @@ completion of workouts *@
 
             <div id="filterContainer" style="display: flex; flex-direction: column; position: relative;">
 
-                <!-- Filter Info -->
                 <div id="filterInfo" style="display: none; margin: 10px;">
                     <p id="filterResultText"></p>
                 </div>
 
-                <!-- Scrollable Row for Filtered Workouts -->
+                <!-- Filtered Workouts -->
                 <div class="scrollable-row" id="allWorkouts">
                     @foreach (var workout in ViewData["Workouts"] as List<Workout>)
                     {
-                        <!-- Workout Card Markup -->
                         <div class="col-lg-4 col-md-6 col-sm-12 workout-card" data-category="@workout.Category"
                             data-difficulty="@workout.difficulty" data-muscle="@workout.TargetMuscle"
                             data-points="@workout.rewardPoints">
@@ -397,7 +379,6 @@ completion of workouts *@
 
             </div>
         </section>
-
     </div>
 
     <script>
@@ -449,7 +430,7 @@ completion of workouts *@
                 var workoutMuscle = workoutCard.getAttribute('data-muscle');
                 var workoutPoints = workoutCard.getAttribute('data-points');
 
-                // Check if the workout card is part of the "All Workouts" section
+                // Check if the workout card is part of the All Workouts section
                 if (workoutCard.closest('#allWorkouts')) {
                     console.log(`Card ${i + 1}: Category: ${workoutCategory}, Difficulty: ${workoutDifficulty}, Muscle: ${workoutMuscle}, Points: ${workoutPoints}`);
 
@@ -481,7 +462,6 @@ completion of workouts *@
                 }
             }
 
-            // Adjust layout after applying the filter
             adjustLayout();
 
             // Display filter information
@@ -533,7 +513,6 @@ completion of workouts *@
             var resultsCount = 0;
 
             if (filter.trim() === '') {
-                // If the search bar is empty, hide the search results section and show all original workout cards
                 searchResultsSection.style.display = 'none';
 
                 for (var i = 0; i < workoutCards.length; i++) {
@@ -541,41 +520,29 @@ completion of workouts *@
                     workoutCard.style.display = 'block';
                 }
 
-                // Adjust layout after clearing the search
                 adjustLayout();
-
-                // Clear filter information
                 filterInfo.style.display = 'none';
-
                 return;
             }
 
             for (var i = 0; i < workoutCards.length; i++) {
                 var workoutCard = workoutCards[i];
                 var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
-
-                // Check if the workout name contains the search term
                 var displayCard = workoutName.includes(filter);
 
-                workoutCard.style.display = displayCard ? 'none' : 'block'; // Hide the card in the original section
+                workoutCard.style.display = displayCard ? 'none' : 'block'; 
 
                 if (displayCard) {
                     resultsCount++;
 
-                    // Create a copy of the card and append it to the search results section
                     var clonedCard = workoutCard.cloneNode(true);
                     clonedCard.style.display = 'block';
                     searchResultsWorkouts.appendChild(clonedCard);
                 }
             }
 
-            // Display or hide the search results section based on the number of results
             searchResultsSection.style.display = resultsCount > 0 ? 'block' : 'none';
-
-            // Adjust layout after applying the search
             adjustLayout();
-
-            // Clear filter information
             filterInfo.style.display = 'none';
         }
 
@@ -588,28 +555,20 @@ completion of workouts *@
         var workoutCards = allWorkoutsSection.getElementsByClassName('workout-card');
         var noResultsMessage = document.getElementById('noResultsMessage');
 
-        // Show or hide the clear button based on the search input
         clearButton.style.display = searchInput.length > 0 ? 'block' : 'none';
 
-        // If there are search results, adjust the layout and display them
         if (searchInput.length > 0) {
             adjustLayout();
             searchResultsSection.style.display = 'block';
-
-            // Clear previous search results
             searchResultsWorkouts.innerHTML = '';
 
-            // Iterate through workout cards to find matches
             var resultsFound = false;
             for (var i = 0; i < workoutCards.length; i++) {
                 var workoutCard = workoutCards[i];
                 var workoutName = workoutCard.querySelector('.card-title').textContent.toLowerCase();
-
-                // Check if the workout name contains the search term
                 var displayCard = workoutName.includes(searchInput);
 
                 if (displayCard) {
-                    // Create a copy of the card and append it to the search results section
                     var clonedCard = workoutCard.cloneNode(true);
                     clonedCard.style.display = 'block';
                     searchResultsWorkouts.appendChild(clonedCard);
@@ -617,10 +576,8 @@ completion of workouts *@
                 }
             }
 
-            // Toggle visibility of the "No search results" message
             noResultsMessage.style.display = resultsFound ? 'none' : 'block';
         } else {
-            // If the search bar is empty, hide the search results section
             searchResultsSection.style.display = 'none';
             noResultsMessage.style.display = 'none';
         }
@@ -629,11 +586,9 @@ completion of workouts *@
 
         function clearSearch() {
             var searchInput = document.getElementById('searchInput');
-            searchInput.value = ''; // Clear the search input
-            updateSearchResults(); // Update search results (show/hide) based on the cleared input
+            searchInput.value = ''; 
+            updateSearchResults(); 
         }
-
-
     </script>
 
     <script>
@@ -650,12 +605,11 @@ completion of workouts *@
                 events: '/Workout/GetUserCalendarEvents',
                 eventClick: function (info) {
                     if (info.event.id) {
-                        // Redirect to the Details page using the workout ID
+                        // Redirect to Details page 
                         window.location.href = '/Workout/Details/' + info.event.id;
                     }
                 },
                 eventMouseEnter: function (info) {
-                    // Show details in a tooltip or any other UI element
                     var tooltip = document.createElement('div');
                     tooltip.className = 'event-tooltip';
 
@@ -670,14 +624,12 @@ completion of workouts *@
                             'Start: ' + info.event.start.toLocaleString();
                     }
 
-                    // Set the tooltip position based on the mouse coordinates
                     tooltip.style.left = info.jsEvent.pageX + 'px';
                     tooltip.style.top = info.jsEvent.pageY + 'px';
 
                     document.body.appendChild(tooltip);
                 },
                 eventMouseLeave: function () {
-                    // Remove the tooltip or hide the details UI element
                     var tooltip = document.querySelector('.event-tooltip');
                     if (tooltip) {
                         document.body.removeChild(tooltip);
@@ -685,8 +637,6 @@ completion of workouts *@
                 }
 
             });
-
-            // Render the calendar
             calendar.render();
         });
     </script>

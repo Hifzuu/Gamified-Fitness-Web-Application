@@ -123,7 +123,6 @@ h2 {
     color: #fff;
 }
 
-/* Additional styling for responsiveness */
 @media (max-width: 576px) {
     .entry-item {
         padding: 10px;
@@ -136,28 +135,32 @@ h2 {
 }
 
 .raffle-status-box {
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 6px; /* Add rounded corners */
-    padding: 10px; /* Add padding */
-    display: flex; /* Use flexbox to align items */
-    justify-content: flex-start; /* Align items to the start */
+    border: 1px solid #ccc;
+    border-radius: 6px; 
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start; 
 }
 
 .expired-status {
-    color: #dc3545; /* Red text color for expired status */
+    color: #dc3545;
     font-weight: bold;
 }
 
 .active-status {
-    color: #28a745; /* Green text color for active status */
+    color: #28a745; 
     font-weight: bold;
 }
 
 
 
 .section-scrollable {
-    max-height: 450px; /* Set the maximum height as needed */
+    max-height: 450px; 
     overflow-y: auto;
+}
+
+.winners-scroll {
+    max-height: 430px; 
 }
 
 .winner {

@@ -25,7 +25,6 @@
                         {
                             <div class="carousel-item h-100 @(raffle == Model.Raffles.First() ? "active" : "")" style="background-image: url('@(string.IsNullOrEmpty(raffle.ImageUrl) ? "https://picsum.photos/800/400" : raffle.ImageUrl)'); background-size: cover; background-position: center;">
                                 <div class="d-flex justify-content-center align-items-center h-100">
-                                    <!-- Add d-flex and align-items-center classes here -->
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="raffle-info p-4" style="background-color: rgba(0, 0, 0, 0.7);">
@@ -70,7 +69,7 @@
                                 {
                                     <li class="entry-item mb-3">
                                         <div class="d-flex justify-content-between align-items-center p-2 m-0">
-                                            <!-- Image and Raffle Information -->
+                                            <!-- Image and Raffle Info -->
                                             <div class="d-flex align-items-center flex-grow-1">
                                                 <!-- Square image -->
                                                 <div class="mr-3">
@@ -80,11 +79,10 @@
                                                     }
                                                     else
                                                     {
-                                                        <!-- Placeholder image from Lorem Picsum -->
                                                         <img src="https://picsum.photos/300" class="rounded-square img-fluid" alt="Placeholder" style="max-width: 80px; max-height: 80px;">
                                                     }
                                                 </div>
-                                                <!-- Raffle information -->
+                                                <!-- Raffle info -->
                                                 <div class="d-flex flex-column flex-grow-1">
                                                     <h5 class="mb-1 font-weight-bold">@enteredRaffle.Name</h5>
                                                     <p class="mb-0 text-muted">Entered: @enteredRaffle.EntryTimestamp.ToString("MMMM dd, yyyy")</p>
@@ -119,7 +117,7 @@
                                                     @if (enteredRaffle.EntryTimestamp.Month < DateTime.UtcNow.Month)
                                                     {
                                                         <div class="expired-status">
-                                                            <strong>Ends:</strong> @enteredRaffle.EntryTimestamp.AddMonths(1).Date.ToString("MMMM dd, yyyy")
+                                                            <strong>Ended:</strong> @enteredRaffle.EntryTimestamp.AddMonths(1).Date.ToString("MMMM dd, yyyy")
                                                         </div>
                                                     }
                                                     else
@@ -162,7 +160,7 @@
 
                     </div>
 
-                    <div class="section-scrollable">
+                    <div class="section-scrollable winners-scroll">
                         @if (Model.winners.Any())
                         {
                             <ul class="list-group list-group-flush">
@@ -171,11 +169,11 @@
                                     // Fetch user information based on UserId
                                     var user = dbContext.GetUserById(winner.userId);
 
-                                    <li class="entry-item winner d-flex justify-content-between align-items-center">
-                                        <!-- Details: User's Name, Raffle Name, Entry Timestamp, and Raffle End Date -->
+                                    <li class="entry-item winner d-flex justify-content-between align-items-center mb-3">
+                                        <!-- Raffle Details -->
                                         <div class="d-flex flex-column">
                                             <div class="d-flex align-items-center">
-                                                <!-- User's Profile Picture -->
+                                                <!-- Users Profile Picture -->
                                                 <img src="@user.ProfileImageUrl" alt="Profile Picture" class="mr-3 rounded-circle" width="50" height="50">
 
                                                 <div>
@@ -193,7 +191,6 @@
                                             }
                                             else
                                             {
-                                                <!-- Placeholder image from Lorem Picsum -->
                                                 <img src="https://picsum.photos/300" class="rounded-square img-fluid" alt="Placeholder" style="max-width: 80px; max-height: 80px;">
                                             }
                                         </div>
@@ -216,7 +213,6 @@
         </div>
     </div>
 
-
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -227,26 +223,23 @@
             $(".enter-raffle-btn").click(function () {
                 console.log("Raw data-Cost:", $(this).data("Cost"));
                 var raffleCost = parseInt($(this).data("cost"), 10);
-                var raffleId = $(this).data("raffle-id"); // Add this line to get the raffle ID
+                var raffleId = $(this).data("raffle-id"); // get raffle ID
                 console.log("Parsed raffleCost:", raffleCost);
 
-                // Make an AJAX request to check user points and add raffle entry
                 $.ajax({
                     url: '@Url.Action("AddRaffleEntry", "Raffle")',
                     type: 'POST',
-                    data: { raffleCost: raffleCost, raffleId: raffleId }, // Pass the raffle ID
+                    data: { raffleCost: raffleCost, raffleId: raffleId }, 
                     success: function (result) {
                         if (result.success) {
                             // Check if the user is already entered
                             if (result.alreadyEntered) {
-                                // User is already entered, show a message
                                 Swal.fire({
                                     icon: 'info',
                                     title: 'Already Entered',
                                     text: 'You are already entered in this raffle.',
                                 });
                             } else {
-                                // Raffle entry added successfully, show a success message
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Raffle Entered Successfully!',
@@ -254,11 +247,10 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).then(function () {
-                                    location.reload(); // Reload the page after the success message
+                                    location.reload(); 
                                 });
                             }
                         } else {
-                            // Error adding raffle entry, show an error message
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
@@ -267,7 +259,6 @@
                         }
                     },
                     error: function () {
-                        // Handle errors when adding raffle entry
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -279,21 +270,14 @@
         });
 
         function selectWinnersAndRefresh() {
-            // Submit the form asynchronously
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("SelectWinners", "Raffle")',
                 success: function () {
-                    // Reload the page after successful submission
                     location.reload();
                 }
             });
         }
     </script>
-
-
-
-
-
 </body>
 </html>

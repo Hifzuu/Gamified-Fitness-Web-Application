@@ -955,6 +955,10 @@ h2[b-dub9o406z4] {
     overflow-y: auto;
 }
 
+.winners-scroll[b-dub9o406z4] {
+    max-height: 430px; /* Set the maximum height as needed */
+}
+
 .winner[b-dub9o406z4] {
     background-color: white;
     padding: 16px;

@@ -61,15 +61,15 @@
     }
 
     .first-place {
-        color: gold; /* Color for first place */
+        color: gold; 
     }
 
     .second-place {
-        color: silver; /* Color for second place */
+        color: silver; 
     }
 
     .third-place {
-        color: #cd7f32; /* Color for third place (bronze) */
+        color: #cd7f32; 
     }
 
     .clan-name {
@@ -122,7 +122,6 @@
                 <section style="background-color: #D0EBFF;">
                     <h3>Login Streak Rewards</h3>
                     <ul class="list-group">
-                        <!-- Inside your loop for rewards -->
                         @foreach (var reward in Model.Rewards)
                         {
                             var userStreakReward = Model.ClaimableRewards.FirstOrDefault(cr => cr.RewardId == reward.RewardId);
@@ -135,7 +134,7 @@
                             : "";
 
  
-                            <!-- Display member item -->
+                            <!-- member item -->
                             <div class="media streak-reward-item mt-3 d-flex justify-content-between align-items-center claimable-item" style="border: none; @listItemOpacity @claimableStyle">
                                 <span class="medal-text">@Html.Raw(reward.MedalText)</span>
 
@@ -201,11 +200,11 @@
 
                             var progress = (firstWeight <= goalWeight && currentWeight >= goalWeight) ? 100 : ((currentWeight - firstWeight) / (goalWeight - firstWeight) * 100);
 
-                            var progressColorClass = (progress < 0) ? "bg-danger" : "bg-success"; // Updated color class
+                            var progressColorClass = (progress < 0) ? "bg-danger" : "bg-success";
 
                             var formattedProgress = $"{(decimal)Math.Abs(progress.GetValueOrDefault()):F1}";
 
-                            var textColorClass = (progress < 100) ? "text-black" : "text-white"; // Determine text color class
+                            var textColorClass = (progress < 100) ? "text-black" : "text-white"; 
 
                             <div class="progress-bar progress-bar-striped progress-bar-animated @progressColorClass" role="progressbar" style="width: @formattedProgress%;" aria-valuenow="@progress" aria-valuemin="0" aria-valuemax="100"></div>
                             <span class="progress-label-right font-weight-bold @textColorClass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 14px;">@($"Goal: {goalWeight:F1} kg")</span>
@@ -271,7 +270,7 @@
                             </button>
                         </div>
 
-                        <!-- Chart.js Canvas for Weight Tracking Chart -->
+                        <!-- Weight Tracking Chart -->
                         <div class="chart-container">
                             <canvas id="weightChart" width="400" height="200"></canvas>
                         </div>
@@ -342,7 +341,6 @@
     }
 </script>
 
-<!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
@@ -428,7 +426,6 @@
                         }
                     });
                 } else {
-                    // Display SweetAlert on failure
                     Swal.fire('Error!', 'Unable to claim reward.', 'error');
                 }
             },
@@ -448,46 +445,37 @@
 @functions {
     public string GetProfilePictureUrl()
     {
-        // Check if the user is authenticated
         if (User.Identity?.IsAuthenticated == true)
         {
-            // Retrieve the user from UserManager synchronously
             var user = UserManager.GetUserAsync(User).GetAwaiter().GetResult();
-
             // Check if the user has a profile picture
             if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
             {
                 return user.ProfileImageUrl;
             }
         }
-
-        // Use a default or empty profile picture URL
+        // Use empty profile picture URL
         return "/Images/empty-pfp.png";
     }
 }
 
 </html>
 
-<!-- Include Moment.js library -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-<!-- Include Chart.js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-
-<!-- Include Moment.js date adapter for Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0/dist/chartjs-adapter-moment.min.js"></script>
 
 
-@* weight graph *@
 <script>
     // Get the chart context
     var ctx = document.getElementById('weightChart').getContext('2d');
 
-    // Get dates and weights from the server
+    // Get dates and weights from server
     var dates = @Html.Raw(Json.Serialize(Model.WeightData.Select(w => w.Date.ToString("dd-MM-yyyy"))));
     var weights = @Html.Raw(Json.Serialize(Model.WeightData.Select(w => w.Weight)));
 
-    // Create a line chart with a slight curve
+    // line chart 
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -502,7 +490,7 @@
                 pointHoverRadius: 8,
                 borderWidth: 2,
                 fill: true,
-                lineTension: 0.3 // Adjust the line tension for the curve
+                lineTension: 0.3 
             }]
         },
         options: {
@@ -531,8 +519,6 @@
         }
     });
 
-
-
     // Function to create gradient fill
     function gradientFill(ctx, startColor, endColor) {
         var gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -540,7 +526,5 @@
         gradient.addColorStop(1, endColor);
         return gradient;
     }
-
-
 </script>
 
